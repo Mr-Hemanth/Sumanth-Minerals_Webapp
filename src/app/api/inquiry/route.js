@@ -39,7 +39,10 @@ export async function POST(req) {
         <p><strong>Company:</strong> ${data.company}</p>
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>WhatsApp:</strong> ${data.whatsapp}</p>
+        <p><strong>Industry:</strong> ${data.industry}</p>
+        <p><strong>Preferred Size:</strong> ${data.preferredSize}</p>
         <p><strong>Quantity:</strong> ${data.quantity}</p>
+        <p><strong>Packaging:</strong> ${data.packaging}</p>
         <p><strong>Country:</strong> ${data.country}</p>
         <p><strong>Message:</strong> ${data.message}</p>
         <br/>

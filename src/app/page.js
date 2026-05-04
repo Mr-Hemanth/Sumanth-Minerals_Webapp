@@ -55,6 +55,7 @@ export default function Home() {
             className={styles.heroContent}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8 }}
           >
             <motion.span 
@@ -96,6 +97,7 @@ export default function Home() {
             className={styles.trustGrid}
             initial="initial"
             whileInView="animate"
+            viewport={{ once: false, amount: 0.2 }}
             variants={staggerContainer}
           >
             {[
@@ -117,22 +119,22 @@ export default function Home() {
       {/* Industrial Applications Section */}
       <section className={styles.applicationsSection}>
         <div className="container">
-          <motion.div className="section-title" {...fadeInUp}>
+          <motion.div className="section-title" {...fadeInUp} viewport={{ once: false, amount: 0.2 }}>
             <h2>Industry-Specific Solutions</h2>
             <p>Our high-purity quartz is the foundational material for the world's most demanding sectors.</p>
           </motion.div>
           <div className={styles.appGrid}>
-            <motion.div className={styles.appCard} {...fadeInUp}>
+            <motion.div className={styles.appCard} {...fadeInUp} viewport={{ once: false, amount: 0.2 }}>
               <Zap size={32} />
               <h3>Solar & Semi-conductors</h3>
               <p>Ultra-low iron content makes our quartz ideal for high-transparency solar glass and silicon wafers.</p>
             </motion.div>
-            <motion.div className={styles.appCard} {...fadeInUp} transition={{ delay: 0.1 }}>
+            <motion.div className={styles.appCard} {...fadeInUp} transition={{ delay: 0.1 }} viewport={{ once: false, amount: 0.2 }}>
               <Layers size={32} />
               <h3>Engineered Stone</h3>
               <p>Consistent whiteness and hardness (Mohs 7) for premium kitchen countertops and surfaces.</p>
             </motion.div>
-            <motion.div className={styles.appCard} {...fadeInUp} transition={{ delay: 0.2 }}>
+            <motion.div className={styles.appCard} {...fadeInUp} transition={{ delay: 0.2 }} viewport={{ once: false, amount: 0.2 }}>
               <Droplets size={32} />
               <h3>Advanced Ceramics</h3>
               <p>High thermal stability for sanitaryware, tiles, and specialized electrical insulators.</p>
@@ -144,7 +146,7 @@ export default function Home() {
       {/* Products Overview */}
       <section className={styles.productsOverview}>
         <div className="container">
-          <motion.div className="section-title" {...fadeInUp}>
+          <motion.div className="section-title" {...fadeInUp} viewport={{ once: false, amount: 0.2 }}>
             <h2>Our Quartz Grades</h2>
             <p>Meticulously graded minerals for diverse industrial applications.</p>
           </motion.div>
@@ -154,7 +156,7 @@ export default function Home() {
               { size: '12–30 mm', icon: <Factory size={60} />, desc: 'Medium grade quartz ideal for ceramics and glass manufacturing.' },
               { size: '30–80 mm', icon: <Mountain size={60} />, desc: 'Large grade quartz for heavy industrial processes and metallurgy.' }
             ].map((p, i) => (
-              <motion.div key={i} className={styles.productCard} {...fadeInUp}>
+              <motion.div key={i} className={styles.productCard} {...fadeInUp} viewport={{ once: false, amount: 0.2 }}>
                 <div className={styles.productVisual}>
                   {p.icon}
                   <div className={styles.visualOverlay}></div>
@@ -174,7 +176,7 @@ export default function Home() {
       <section className={styles.globalReach}>
         <div className="container">
           <div className={styles.reachGrid}>
-            <motion.div className={styles.reachContent} {...fadeInUp}>
+            <motion.div className={styles.reachContent} {...fadeInUp} viewport={{ once: false, amount: 0.2 }}>
               <h2>Gateway to Global Markets</h2>
               <p>Strategically positioned in Andhra Pradesh, we leverage India's most efficient logistics corridor.</p>
               <div className={styles.portList}>
@@ -196,6 +198,7 @@ export default function Home() {
               className={styles.reachVisual}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
             >
               <div className={styles.worldMap}>
                 <Globe size={180} strokeWidth={1} />
@@ -214,6 +217,7 @@ export default function Home() {
               className={styles.whyImage}
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.8 }}
             >
               <div className={styles.visualBox}>
@@ -226,6 +230,7 @@ export default function Home() {
               className={styles.whyContent}
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.8 }}
             >
               <h2 className={styles.accentTitle}>The Kanaka Advantage</h2>
@@ -252,6 +257,7 @@ export default function Home() {
             className={styles.ctaBox}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
             <h2>Empowering Global Industries with Premium Silica.</h2>

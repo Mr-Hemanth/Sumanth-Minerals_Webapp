@@ -25,6 +25,15 @@ const InquirySchema = new mongoose.Schema({
   message: {
     type: String,
   },
+  industry: {
+    type: String,
+  },
+  preferredSize: {
+    type: String,
+  },
+  packaging: {
+    type: String,
+  },
   type: {
     type: String,
     enum: ['Inquiry', 'Sample Request'],

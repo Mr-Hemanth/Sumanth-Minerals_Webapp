@@ -1,12 +1,16 @@
+'use client';
 import { ShieldCheck, FileText, Activity, Microscope } from 'lucide-react';
 import styles from './quality.module.css';
-
-export const metadata = {
-  title: 'Quality & Certifications | Kanaka Minerals',
-  description: 'View our 99% silica quartz lab test reports and chemical composition details. We maintain international standards for industrial quartz.',
-};
+import { motion } from 'framer-motion';
 
 export default function Quality() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: false, amount: 0.2 },
+    transition: { duration: 0.6 }
+  };
+
   const chemicalComposition = [
     { component: 'Silica (SiO2)', percentage: '99.27%' },
     { component: 'Iron Oxide (Fe2O3)', percentage: '0.30%' },
@@ -22,15 +26,15 @@ export default function Quality() {
     <div className={styles.qualityPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <h1>Quality Assurance</h1>
-          <p>Uncompromising standards for 99% silica purity.</p>
+          <motion.h1 {...fadeInUp}>Quality Assurance</motion.h1>
+          <motion.p {...fadeInUp} transition={{ delay: 0.1 }}>Uncompromising standards for 99% silica purity.</motion.p>
         </div>
       </section>
 
       <section className={styles.testing}>
         <div className="container">
           <div className={styles.grid}>
-            <div className={styles.textContent}>
+            <motion.div className={styles.textContent} {...fadeInUp}>
               <h2>Rigorous Testing Protocols</h2>
               <p>At Kanaka Minerals, quality is not just a department—it's our core identity. Every batch of quartz undergoes systematic testing at multiple stages of the mining and processing workflow.</p>
               
@@ -57,8 +61,14 @@ export default function Quality() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.compositionBox}>
+            </motion.div>
+            <motion.div 
+              className={styles.compositionBox}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
+            >
               <h3>Typical Chemical Composition</h3>
               <div className={styles.table}>
                 {chemicalComposition.map((item, i) => (
@@ -69,44 +79,49 @@ export default function Quality() {
                 ))}
               </div>
               <p className={styles.disclaimer}>*Tested and certified by <strong>Lucid Laboratories Pvt. Ltd.</strong> (Nov 2025). Full reports available on request.</p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <section className={styles.reports}>
         <div className="container">
-          <div className="section-title">
+          <motion.div className="section-title" {...fadeInUp}>
             <h2>Lab Test Reports</h2>
             <p>Transparency is key to building global trust. Download our representative lab reports.</p>
-          </div>
+          </motion.div>
           <div className={styles.reportGrid}>
-            <div className={styles.reportCard}>
+            <motion.div className={styles.reportCard} {...fadeInUp} transition={{ delay: 0.1 }}>
               <FileText size={40} />
               <h4>Chemical Analysis Report</h4>
               <p>Comprehensive breakdown of mineral components and silica purity.</p>
               <button className="btn btn-outline btn-sm">View Sample PDF</button>
-            </div>
-            <div className={styles.reportCard}>
+            </motion.div>
+            <motion.div className={styles.reportCard} {...fadeInUp} transition={{ delay: 0.2 }}>
               <Activity size={40} />
               <h4>Particle Size Distribution</h4>
               <p>Detailed analysis of grading accuracy for all sizes (0-80mm).</p>
               <button className="btn btn-outline btn-sm">View Sample PDF</button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <section className={styles.certifications}>
         <div className="container">
-          <div className={styles.certBanner}>
+          <motion.div 
+            className={styles.certBanner}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+          >
             <h2>Industry Certifications</h2>
             <div className={styles.certLogos}>
               <div className={styles.logoBox}>ISO 9001:2015</div>
               <div className={styles.logoBox}>MSME REGISTERED</div>
               <div className={styles.logoBox}>EXPORT CERTIFIED</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

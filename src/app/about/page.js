@@ -7,6 +7,7 @@ export default function About() {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
+    viewport: { once: false, amount: 0.2 },
     transition: { duration: 0.6 }
   };
 
@@ -45,7 +46,7 @@ export default function About() {
               className={styles.missionStats}
               initial="initial"
               whileInView="animate"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
             >
               {stats.map((stat, i) => (
