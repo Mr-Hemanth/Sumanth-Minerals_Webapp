@@ -1,0 +1,156 @@
+.pageHeader {
+  background: var(--primary);
+  color: var(--white);
+  padding: 120px 0 60px;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.pageHeader p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.blogList {
+  padding: 80px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.postCard {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.postImage {
+  height: 200px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.postImage span {
+  background: var(--primary);
+  color: var(--white);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.postContent {
+  padding: 25px;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-bottom: 15px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 50%;
+}
+
+.postContent h3 {
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.postContent p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.readMore {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.newsletter {
+  background: var(--accent);
+}
+
+.newsletterBox {
+  background: var(--white);
+  padding: 60px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.newsletterBox h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.newsletterBox p {
+  color: var(--text-light);
+  margin-bottom: 35px;
+}
+
+.nForm {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.nForm input {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nForm {
+    flex-direction: column;
+  }
+}
