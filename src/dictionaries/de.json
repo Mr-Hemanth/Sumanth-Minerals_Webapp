@@ -1,0 +1,58 @@
+{
+  "common": {
+    "bulk_inquiry": "Großhandelsanfrage",
+    "request_sample": "Muster anfordern",
+    "contact_sales": "Vertrieb kontaktieren",
+    "learn_more": "Mehr erfahren",
+    "send_inquiry": "Anfrage senden"
+  },
+  "hero": {
+    "badge": "GEGRÜNDET 2025 • LAKSHYAMPALLI, INDIEN",
+    "title": "Unübertroffene Reinheit. Globaler Industriemaßstab.",
+    "subtitle": "Direkte Lieferung von 99% reinem Siliziumquarz von der Mine zum Hersteller. Strategisch günstig in der Nähe wichtiger Versandzentren für den nahtlosen weltweiten Export gelegen.",
+    "stat_silica": "Siliziumdioxid (SiO2)",
+    "stat_production": "Tonnen / Monat",
+    "stat_ports": "Globale Häfen"
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "products": "Produkte",
+    "quality": "Qualität",
+    "export": "Export",
+    "sustainability": "Nachhaltigkeit",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "samples": "Muster",
+    "quote": "Angebot"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie unser Team",
+    "subtitle": "Erhalten Sie ein individuelles Angebot für Ihren Quarzbedarf in großen Mengen.",
+    "sales_office": "Globales Verkaufsbüro",
+    "sales_desc": "Kontaktieren Sie unsere Exportexperten, um technische Spezifikationen und Logistik zu besprechen.",
+    "registered_office": "Eingetragener Sitz",
+    "instant_assist": "Sofortige Hilfe",
+    "chat_wa": "Chatten Sie mit uns auf WhatsApp",
+    "request_quote": "Großhandelsangebot anfordern",
+    "full_name": "Vollständiger Name",
+    "company_name": "Unternehmensname",
+    "email_addr": "E-Mail-Adresse",
+    "wa_num": "WhatsApp-Nummer",
+    "industry": "Branche / Anwendung",
+    "preferred_size": "Bevorzugte Quarzgröße",
+    "quantity": "Benötigte Menge (Tonnen)",
+    "dest_port": "Zielhafen / Land",
+    "packaging": "Verpackungsanforderung",
+    "message": "Zusätzliche Nachricht",
+    "sending": "Wird gesendet...",
+    "success": "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet."
+  },
+  "footer": {
+    "desc": "Führender Produzent und Exporteur von hochreinem Quarz aus Indien.",
+    "company": "Unternehmen",
+    "resources": "Ressourcen",
+    "get_in_touch": "Kontakt aufnehmen",
+    "rights": "Alle Rechte vorbehalten."
+  }
+}

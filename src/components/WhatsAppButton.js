@@ -1,10 +1,10 @@
 import { MessageCircle } from 'lucide-react';
 import styles from './WhatsAppButton.module.css';
+import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '919876543210'; // Replace with actual number
-  const message = 'Hello Kanaka Minerals, I am interested in your Quartz products.';
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const message = 'Hello Sumanth Minerals, I am interested in your Quartz products.';
+  const url = whatsappUrl(message);
 
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className={styles.button}>

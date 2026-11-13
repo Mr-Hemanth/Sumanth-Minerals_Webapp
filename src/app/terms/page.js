@@ -1,8 +1,8 @@
 import styles from './legal.module.css';
 
 export const metadata = {
-  title: 'Terms of Service | Kanaka Minerals',
-  description: 'Terms of service for using Kanaka Minerals website and services.',
+  title: 'Terms of Service | Sumanth Minerals',
+  description: 'Terms of service for using Sumanth Minerals website and services.',
 };
 
 export default function Terms() {

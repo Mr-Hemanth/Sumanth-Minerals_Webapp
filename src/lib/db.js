@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-// Move the check inside the function to avoid breaking builds
-
 let cached = global.mongoose;
-
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
@@ -15,21 +12,20 @@ async function dbConnect() {
     console.warn('MONGODB_URI is missing. Database operations will fail.');
     return null;
   }
-  
-  if (cached.conn) {
-    return cached.conn;
-  }
+  if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    const opts = {
+    cached.promise = mongoose.connect(MONGODB_URI, {
       bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
+      serverSelectionTimeoutMS: 8000, // fail fast instead of hanging the form for 30s
     });
   }
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    cached.promise = null; // allow a retry on the next request instead of caching the failure forever
+    throw err;
+  }
   return cached.conn;
 }
 

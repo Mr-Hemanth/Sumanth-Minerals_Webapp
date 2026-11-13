@@ -4,9 +4,9 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin', '/api/'],
+        disallow: ['/adminsumanth', '/api/'],
       },
     ],
-    sitemap: 'https://kanakaminerals.com/sitemap.xml',
+    sitemap: 'https://sumanthminerals.com/sitemap.xml',
   }
 }

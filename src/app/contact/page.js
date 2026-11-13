@@ -2,8 +2,11 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
 import styles from './contact.module.css';
+import { useLanguage } from '@/context/LanguageContext';
+import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
 
 export default function Contact() {
+  const { dict } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -11,7 +14,11 @@ export default function Contact() {
     whatsapp: '',
     quantity: '',
     country: '',
-    message: ''
+    message: '',
+    industry: '',
+    preferredSize: '',
+    packaging: 'Jumbo Bags',
+    fax: '' // honeypot — must stay empty
   });
 
   const [status, setStatus] = useState({ type: '', message: '' });
@@ -34,7 +41,7 @@ export default function Contact() {
       });
 
       if (res.ok) {
-        setStatus({ type: 'success', message: 'Thank you! Your inquiry has been sent successfully.' });
+        setStatus({ type: 'success', message: dict?.contact?.success || 'Thank you! Your inquiry has been sent successfully.' });
         setFormData({
           name: '',
           company: '',
@@ -42,10 +49,15 @@ export default function Contact() {
           whatsapp: '',
           quantity: '',
           country: '',
-          message: ''
+          message: '',
+          industry: '',
+          preferredSize: '',
+          packaging: 'Jumbo Bags',
+          fax: ''
         });
       } else {
-        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
+        const result = await res.json().catch(() => ({}));
+        setStatus({ type: 'error', message: result.error || 'Something went wrong. Please try again.' });
       }
     } catch (error) {
       setStatus({ type: 'error', message: 'An error occurred. Please check your connection.' });
@@ -58,8 +70,8 @@ export default function Contact() {
     <div className={styles.contactPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <h1>Contact Our Team</h1>
-          <p>Get a customized quote for your bulk quartz requirements.</p>
+          <h1>{dict?.contact?.title || 'Contact Our Team'}</h1>
+          <p>{dict?.contact?.subtitle || 'Get a customized quote for your bulk quartz requirements.'}</p>
         </div>
       </section>
 
@@ -67,31 +79,31 @@ export default function Contact() {
         <div className="container">
           <div className={styles.contactGrid}>
             <div className={styles.contactInfo}>
-              <h2>Global Sales Office</h2>
-              <p>Connect with our export experts to discuss technical specifications and logistics.</p>
+              <h2>{dict?.contact?.sales_office || 'Global Sales Office'}</h2>
+              <p>{dict?.contact?.sales_desc || 'Connect with our export experts to discuss technical specifications and logistics.'}</p>
 
               <div className={styles.infoItems}>
                 <div className={styles.infoItem}>
                   <MapPin size={24} />
                   <div>
-                    <h4>Registered Office</h4>
-                    <p>Lakshayampalli, Tadipatri Mandal, Ananthapur, Andhra Pradesh - 515411, India</p>
+                    <h4>{dict?.contact?.registered_office || 'Mine & Registered Office'}</h4>
+                    <p>Lakshyampalli, Peddavaduguru Mandal, Anantapur District, Andhra Pradesh - 515411, India</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
                   <Phone size={24} />
                   <div>
-                    <h4>Phone & WhatsApp</h4>
-                    <p>+91 98765 43210 (Sales)</p>
-                    <p>+91 98765 01234 (Exports)</p>
+                    <h4>{dict?.nav?.contact || 'Phone & WhatsApp'}</h4>
+                    <p><a href={`tel:${PHONE_PRIMARY.tel}`}>{PHONE_PRIMARY.display}</a> (Sales & WhatsApp)</p>
+                    <p><a href={`tel:${PHONE_SECONDARY.tel}`}>{PHONE_SECONDARY.display}</a></p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
                   <Mail size={24} />
                   <div>
-                    <h4>Email Inquiries</h4>
-                    <p>sales@kanakaminerals.com</p>
-                    <p>exports@kanakaminerals.com</p>
+                    <h4>{dict?.contact?.email_addr || 'Email Inquiries'}</h4>
+                    <p>sales@sumanthminerals.com</p>
+                    <p>exports@sumanthminerals.com</p>
                   </div>
                 </div>
               </div>
@@ -99,36 +111,37 @@ export default function Contact() {
               <div className={styles.whatsappBox}>
                 <MessageSquare size={24} />
                 <div>
-                  <h4>Instant Assistance</h4>
-                  <p>Chat with us on WhatsApp for quick responses.</p>
-                  <a href="https://wa.me/919876543210" className={styles.waLink}>Start Chat</a>
+                  <h4>{dict?.contact?.instant_assist || 'Instant Assistance'}</h4>
+                  <p>{dict?.contact?.chat_wa || 'Chat with us on WhatsApp for quick responses.'}</p>
+                  <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={styles.waLink}>Start Chat</a>
                 </div>
               </div>
             </div>
 
             <div className={styles.formContainer}>
               <form className={styles.form} onSubmit={handleSubmit}>
-                <h3>Request a Bulk Quote</h3>
+                <input type="text" name="fax" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} value={formData.fax} onChange={(e) => setFormData({ ...formData, fax: e.target.value })} />
+                <h3>{dict?.contact?.request_quote || 'Request a Bulk Quote'}</h3>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
-                    <label>Full Name *</label>
+                    <label>{dict?.contact?.full_name || 'Full Name'} *</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Enter your name" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Company Name *</label>
+                    <label>{dict?.contact?.company_name || 'Company Name'} *</label>
                     <input type="text" name="company" value={formData.company} onChange={handleChange} required placeholder="Company / Organization" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Email Address *</label>
+                    <label>{dict?.contact?.email_addr || 'Email Address'} *</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="email@example.com" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>WhatsApp Number *</label>
+                    <label>{dict?.contact?.wa_num || 'WhatsApp Number'} *</label>
                     <input type="text" name="whatsapp" value={formData.whatsapp} onChange={handleChange} required placeholder="+1 234 567 890" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Industry / Application *</label>
-                    <select name="industry" required onChange={handleChange} className={styles.select}>
+                    <label>{dict?.contact?.industry || 'Industry / Application'} *</label>
+                    <select name="industry" required value={formData.industry} onChange={handleChange} className={styles.select}>
                       <option value="">Select Industry</option>
                       <option value="Glass">Glass Manufacturing</option>
                       <option value="Ceramics">Ceramics & Sanitaryware</option>
@@ -138,8 +151,8 @@ export default function Contact() {
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Preferred Quartz Size *</label>
-                    <select name="preferredSize" required onChange={handleChange} className={styles.select}>
+                    <label>{dict?.contact?.preferred_size || 'Preferred Quartz Size'} *</label>
+                    <select name="preferredSize" required value={formData.preferredSize} onChange={handleChange} className={styles.select}>
                       <option value="">Select Size</option>
                       <option value="0-12mm">0-12 mm (Fine)</option>
                       <option value="12-30mm">12-30 mm (Medium)</option>
@@ -148,16 +161,16 @@ export default function Contact() {
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Required Quantity (Tons) *</label>
+                    <label>{dict?.contact?.quantity || 'Required Quantity (Tons)'} *</label>
                     <input type="text" name="quantity" value={formData.quantity} onChange={handleChange} required placeholder="e.g. 500 Tons" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Destination Port / Country *</label>
+                    <label>{dict?.contact?.dest_port || 'Destination Port / Country'} *</label>
                     <input type="text" name="country" value={formData.country} onChange={handleChange} required placeholder="e.g. United Arab Emirates" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Packaging Requirement</label>
-                    <select name="packaging" onChange={handleChange} className={styles.select}>
+                    <label>{dict?.contact?.packaging || 'Packaging Requirement'}</label>
+                    <select name="packaging" value={formData.packaging} onChange={handleChange} className={styles.select}>
                       <option value="Jumbo Bags">Jumbo Bags (1-1.25 Ton)</option>
                       <option value="Small Bags">50kg Bags (Palletized)</option>
                       <option value="Loose Bulk">Loose Bulk</option>
@@ -165,7 +178,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>Additional Message</label>
+                  <label>{dict?.contact?.message || 'Additional Message'}</label>
                   <textarea name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Specific chemical requirements or delivery timelines..."></textarea>
                 </div>
                 
@@ -176,7 +189,7 @@ export default function Contact() {
                 )}
 
                 <button type="submit" className="btn btn-primary" disabled={loading}>
-                  {loading ? 'Sending...' : 'Send Inquiry'} <Send size={18} style={{ marginLeft: '10px' }} />
+                  {loading ? (dict?.contact?.sending || 'Sending...') : (dict?.common?.send_inquiry || 'Send Inquiry')} <Send size={18} style={{ marginLeft: '10px' }} />
                 </button>
               </form>
             </div>

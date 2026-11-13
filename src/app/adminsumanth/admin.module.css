@@ -142,12 +142,28 @@
   font-size: 0.85rem;
 }
 
-.statusTag {
-  padding: 4px 10px;
+.statusTag, .statusSelect {
+  padding: 6px 12px;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.new { background: #FFF3E0; color: #E65100; }
+.contacted { background: #E8F5E9; color: #2E7D32; }
+.samplesent { background: #E1F5FE; color: #0288D1; }
+.resolved { background: #F3E5F5; color: #7B1FA2; }
+
+.statusSelect {
+  width: 130px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
 }
 
 .highLead {
@@ -176,8 +192,6 @@
   color: var(--text-light);
 }
 
-.samplesent { background: #E1F5FE; color: #0288D1; }
-
 .actions {
   display: flex;
   gap: 10px;
@@ -193,8 +207,76 @@
 .actionBtn:hover { color: #2E7D32; background: #E8F5E9; }
 .deleteBtn:hover { color: #C62828; background: #FFEBEE; }
 
+.loginLogo h2 span {
+  color: var(--primary);
+}
+
+.loginError {
+  background: #FFEBEE;
+  color: #C62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.inputGroup {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.logoutBtn:hover {
+  background: #F8F9FA;
+  color: #C62828;
+  border-color: #C62828;
+}
+
 .loading {
   text-align: center;
   padding: 50px;
   color: var(--text-light);
 }
+
+.jobTitle {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.webLink {
+  font-size: 0.75rem;
+  color: var(--primary);
+  text-decoration: underline;
+  display: block;
+}
+
+.addressLine {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

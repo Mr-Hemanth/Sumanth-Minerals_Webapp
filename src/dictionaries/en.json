@@ -1,0 +1,58 @@
+{
+  "common": {
+    "bulk_inquiry": "Bulk Inquiry",
+    "request_sample": "Request Sample",
+    "contact_sales": "Contact Sales",
+    "learn_more": "Learn More",
+    "send_inquiry": "Send Inquiry"
+  },
+  "hero": {
+    "badge": "ESTABLISHED 2025 • LAKSHYAMPALLI, INDIA",
+    "title": "Unmatched Purity. Global Industrial Scale.",
+    "subtitle": "Direct mine-to-manufacturer supply of 99% pure silica quartz. Strategically located near major shipping hubs for seamless global export.",
+    "stat_silica": "Silica (SiO2)",
+    "stat_production": "Tons / Month",
+    "stat_ports": "Global Ports"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "quality": "Quality",
+    "export": "Export",
+    "sustainability": "Sustainability",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "samples": "Samples",
+    "quote": "Quote"
+  },
+  "contact": {
+    "title": "Contact Our Team",
+    "subtitle": "Get a customized quote for your bulk quartz requirements.",
+    "sales_office": "Global Sales Office",
+    "sales_desc": "Connect with our export experts to discuss technical specifications and logistics.",
+    "registered_office": "Registered Office",
+    "instant_assist": "Instant Assistance",
+    "chat_wa": "Chat with us on WhatsApp",
+    "request_quote": "Request a Bulk Quote",
+    "full_name": "Full Name",
+    "company_name": "Company Name",
+    "email_addr": "Email Address",
+    "wa_num": "WhatsApp Number",
+    "industry": "Industry / Application",
+    "preferred_size": "Preferred Quartz Size",
+    "quantity": "Required Quantity (Tons)",
+    "dest_port": "Destination Port / Country",
+    "packaging": "Packaging Requirement",
+    "message": "Additional Message",
+    "sending": "Sending...",
+    "success": "Thank you! Your inquiry has been sent successfully."
+  },
+  "footer": {
+    "desc": "Leading producer and exporter of high-purity Quartz from India.",
+    "company": "Company",
+    "resources": "Resources",
+    "get_in_touch": "Get in Touch",
+    "rights": "All rights reserved. | GST: 37ABZFS7102H1ZN"
+  }
+}

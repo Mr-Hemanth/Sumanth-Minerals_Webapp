@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://kanakaminerals.com';
+  const baseUrl = 'https://sumanthminerals.com';
   
   const routes = [
     '',

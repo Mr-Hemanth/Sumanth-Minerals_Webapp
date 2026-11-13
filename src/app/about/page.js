@@ -7,8 +7,21 @@ export default function About() {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: false, amount: 0.2 },
-    transition: { duration: 0.6 }
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+  };
+
+  // Child variants must expose an `animate` key — otherwise staggered groups
+  // inherit the label, find nothing, and stay stuck at opacity 0.
+  const staggerItem = {
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+  };
+
+  const staggerContainer = {
+    initial: {},
+    animate: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } }
   };
 
   const stats = [
@@ -22,7 +35,7 @@ export default function About() {
     <div className={styles.aboutPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <motion.h1 {...fadeInUp}>The Kanaka Story</motion.h1>
+          <motion.h1 {...fadeInUp}>The Sumanth Minerals Story</motion.h1>
           <motion.p {...fadeInUp} transition={{ delay: 0.1 }}>
             Engineering the future of high-purity minerals from the heart of Andhra Pradesh.
           </motion.p>
@@ -36,7 +49,7 @@ export default function About() {
               <div className={styles.accent}>OUR VISION</div>
               <h2>Global Leadership in Silica Purity</h2>
               <p>
-                Founded in 2025, Kanaka Minerals was established to bridge the gap between high-demand industrial sectors and raw mineral quality. Located in Tadipatri, Anantapur—a region globally renowned for its high-grade quartz deposits—we have rapidly scaled our operations to become a premier supplier for international markets.
+                Founded in 2025, Sumanth Minerals was established to bridge the gap between high-demand industrial sectors and raw mineral quality. With our flagship mines located in Lakshyampalli, Anantapur—a region globally renowned for its high-grade quartz deposits—we have rapidly scaled our operations to become a premier supplier for international markets.
               </p>
               <p>
                 Our mission is to provide the most consistent, high-purity silica quartz while maintaining a zero-carbon-footprint vision for our mining and processing facilities.
@@ -46,11 +59,11 @@ export default function About() {
               className={styles.missionStats}
               initial="initial"
               whileInView="animate"
-              viewport={{ once: false, amount: 0.2 }}
-              variants={{ animate: { transition: { staggerChildren: 0.1 } } }}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
             >
               {stats.map((stat, i) => (
-                <motion.div key={i} className={styles.statBox} variants={fadeInUp}>
+                <motion.div key={i} className={styles.statBox} variants={staggerItem}>
                   <h3>{stat.value}</h3>
                   <p>{stat.label}</p>
                 </motion.div>
@@ -134,8 +147,8 @@ export default function About() {
       <section className={styles.infrastructure}>
         <div className="container">
           <motion.div className={styles.infraBox} {...fadeInUp}>
-            <h2>State-of-the-Art Infrastructure</h2>
-            <p>Our Tadipatri processing unit is equipped with high-intensity magnetic separators and custom-built vibratory screens capable of processing 500 tons of material per day.</p>
+            <h2>Strategic Infrastructure</h2>
+            <p>Our Anantapur processing unit is equipped with high-intensity magnetic separators and custom-built vibratory screens capable of processing 500 tons of material per day, ensuring that the purity extracted from our Lakshyampalli mines is preserved until it reaches the buyer.</p>
             <div className={styles.infraGrid}>
               <div className={styles.infraItem}>
                 <Award size={32} />

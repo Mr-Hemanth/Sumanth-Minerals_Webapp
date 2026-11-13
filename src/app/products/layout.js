@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Quartz Grades & Technical Specifications | Kanaka Minerals',
-  description: 'Explore our range of quartz grades (0-80mm) with 99.27% SiO2 purity. Technical data sheets and lab reports for industrial manufacturers.',
+  title: 'Quartz Products | Sumanth Minerals',
+  description: 'Industrial-grade silica quartz in various sizes (0–80mm) for glass, ceramics, and metallurgy.',
 };
 
 export default function ProductsLayout({ children }) {

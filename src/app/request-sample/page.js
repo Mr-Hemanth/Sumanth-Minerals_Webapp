@@ -2,24 +2,53 @@
 import { useState } from 'react';
 import { Package, Truck, CheckCircle, Info } from 'lucide-react';
 import styles from './sample.module.css';
+import ParticleSizeVisualizer from '@/components/ParticleSizeVisualizer';
+import RapidRFQModal from '@/components/RapidRFQModal';
 
 export default function RequestSample() {
   const [formData, setFormData] = useState({
     name: '',
+    jobTitle: '',
     company: '',
+    website: '',
     email: '',
     whatsapp: '',
-    grade: '12-30mm',
+    industry: 'Glass',
+    monthlyRequirement: '',
+    preferredSize: '12-30mm',
     country: '',
-    address: ''
+    address: '',
+    fax: '' // honeypot — must stay empty
   });
 
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
+  const [rfqOpen, setRfqOpen] = useState(false);
+  const [rfqSeed, setRfqSeed] = useState({ industry: '', size: '' });
+
+  const openRFQ = (industry = '', size = '') => {
+    setRfqSeed({ industry, size });
+    setRfqOpen(true);
+  };
+
+  const gradeIds = ['0-12mm', '12-30mm', '30-80mm'];
+
+  const pickFraction = (gradeId, gradeName) => {
+    if (gradeIds.includes(gradeId)) {
+      setFormData((prev) => ({ ...prev, preferredSize: gradeId }));
+      setStatus({ type: 'success', message: `${gradeName} selected for sampling.` });
+      return;
+    }
+    setStatus({
+      type: 'notice',
+      message: 'Raw boulder run (100–400 mm) is quoted on request — mention it in your requirements and we will confirm sample availability.',
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus({ type: '', message: '' });
     try {
       const res = await fetch('/api/inquiry', {
         method: 'POST',
@@ -28,7 +57,14 @@ export default function RequestSample() {
       });
       if (res.ok) {
         setStatus({ type: 'success', message: 'Sample request submitted! Our logistics team will contact you for shipping details.' });
-        setFormData({ name: '', company: '', email: '', whatsapp: '', grade: '12-30mm', country: '', address: '' });
+        setFormData({ 
+          name: '', jobTitle: '', company: '', website: '', 
+          email: '', whatsapp: '', industry: 'Glass', 
+          monthlyRequirement: '', preferredSize: '12-30mm', country: '', address: '', fax: ''
+        });
+      } else {
+        const result = await res.json().catch(() => ({}));
+        setStatus({ type: 'error', message: result.error || 'Submission failed. Please try again.' });
       }
     } catch (err) {
       setStatus({ type: 'error', message: 'Submission failed. Please try again.' });
@@ -39,10 +75,16 @@ export default function RequestSample() {
 
   return (
     <div className={styles.samplePage}>
+      <RapidRFQModal
+        isOpen={rfqOpen}
+        onClose={() => setRfqOpen(false)}
+        initialIndustry={rfqSeed.industry}
+        initialSize={rfqSeed.size}
+      />
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Request a Product Sample</h1>
-          <p>Evaluate Kanaka Minerals' 99% silica quartz purity in your own laboratory.</p>
+          <p>Evaluate Sumanth Minerals' certified 99.27% silica quartz purity in your own laboratory.</p>
         </div>
       </section>
 
@@ -80,29 +122,75 @@ export default function RequestSample() {
 
             <div className={styles.formBox}>
               <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.formGroup}>
-                  <label>Full Name</label>
-                  <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                <input type="text" name="fax" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} value={formData.fax} onChange={(e) => setFormData({ ...formData, fax: e.target.value })} />
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label>Full Name</label>
+                    <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Job Title / Designation</label>
+                    <input type="text" required value={formData.jobTitle} onChange={(e) => setFormData({...formData, jobTitle: e.target.value})} placeholder="Purchase Manager" />
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label>Company Name</label>
-                  <input type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} />
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label>Company Name</label>
+                    <input type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} placeholder="Company Ltd" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Company Website</label>
+                    <input type="url" value={formData.website} onChange={(e) => setFormData({...formData, website: e.target.value})} placeholder="https://www.company.com" />
+                  </div>
                 </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label>Business Email</label>
+                    <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="john@company.com" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>WhatsApp / Phone</label>
+                    <input type="tel" required value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} placeholder="+1 234 567 890" />
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label>Industry</label>
+                    <select value={formData.industry} onChange={(e) => setFormData({...formData, industry: e.target.value})}>
+                      <option value="Glass">Glass Manufacturing</option>
+                      <option value="Electronics">Electronics / Semiconductors</option>
+                      <option value="Countertops">Engineered Stone / Countertops</option>
+                      <option value="Ceramics">Ceramics & Sanitaryware</option>
+                      <option value="Foundry">Foundry & Casting</option>
+                      <option value="Other">Other Industrial Use</option>
+                    </select>
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Monthly Requirement (Tons)</label>
+                    <input type="text" value={formData.monthlyRequirement} onChange={(e) => setFormData({...formData, monthlyRequirement: e.target.value})} placeholder="e.g. 500 Tons" />
+                  </div>
+                </div>
+
                 <div className={styles.formGroup}>
                   <label>Quartz Grade Required</label>
-                  <select value={formData.grade} onChange={(e) => setFormData({...formData, grade: e.target.value})}>
+                  <select value={formData.preferredSize} onChange={(e) => setFormData({...formData, preferredSize: e.target.value})}>
                     <option value="0-12mm">0-12mm (Fine)</option>
                     <option value="12-30mm">12-30mm (Medium)</option>
                     <option value="30-80mm">30-80mm (Lump)</option>
                   </select>
                 </div>
+
                 <div className={styles.formGroup}>
-                  <label>Shipping Address</label>
-                  <textarea required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3"></textarea>
+                  <label>Shipping Address (Complete with PIN/ZIP)</label>
+                  <textarea required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3" placeholder="Full delivery address..."></textarea>
                 </div>
+
                 <div className={styles.formGroup}>
                   <label>Country</label>
-                  <input type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} />
+                  <input type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} placeholder="United States" />
                 </div>
                 
                 {status.message && (
@@ -115,6 +203,12 @@ export default function RequestSample() {
               </form>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.sizeInspector}>
+        <div className="container">
+          <ParticleSizeVisualizer onSelectGrade={pickFraction} onOpenRFQ={openRFQ} />
         </div>
       </section>
     </div>

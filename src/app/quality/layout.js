@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Quality & Certifications | Kanaka Minerals',
-  description: 'View our 99% silica quartz lab test reports and chemical composition details. We maintain international standards for industrial quartz.',
+  title: 'Quality Assurance | Sumanth Minerals',
+  description: 'Technical specifications and lab-certified purity reports for our high-grade silica quartz.',
 };
 
 export default function QualityLayout({ children }) {

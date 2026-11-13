@@ -1,6 +1,6 @@
-# Kanaka Minerals Web Application
+# Sumanth Minerals Web Application
 
-A premium, production-ready B2B industrial web application for Kanaka Minerals, built with Next.js.
+A premium, production-ready B2B industrial web application for Sumanth Minerals, built with Next.js.
 
 ## Tech Stack
 - **Frontend:** Next.js 14 (App Router, JavaScript)
@@ -26,7 +26,7 @@ A premium, production-ready B2B industrial web application for Kanaka Minerals, 
 - Add Environment Variables in Vercel Dashboard.
 
 ### 4. Domain Setup
-- Purchase `kanakaminerals.com` from Namecheap or GoDaddy.
+- Purchase `sumanthminerals.com` from Namecheap or GoDaddy.
 - Point DNS to Vercel (Vercel provides a step-by-step guide).
 - SSL is automatically handled by Vercel.
 

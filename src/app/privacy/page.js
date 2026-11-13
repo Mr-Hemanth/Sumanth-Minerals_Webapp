@@ -1,8 +1,8 @@
 import styles from './legal.module.css';
 
 export const metadata = {
-  title: 'Privacy Policy | Kanaka Minerals',
-  description: 'Privacy policy for Kanaka Minerals web application and inquiry processing.',
+  title: 'Privacy Policy | Sumanth Minerals',
+  description: 'Privacy policy for Sumanth Minerals web application and inquiry processing.',
 };
 
 export default function Privacy() {

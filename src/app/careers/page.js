@@ -2,8 +2,8 @@ import { Briefcase, MapPin, Clock } from 'lucide-react';
 import styles from './careers.module.css';
 
 export const metadata = {
-  title: 'Careers | Join Kanaka Minerals Team',
-  description: 'Explore career opportunities at Kanaka Minerals in mining, engineering, and logistics in Andhra Pradesh.',
+  title: 'Careers | Join Sumanth Minerals Team',
+  description: 'Explore career opportunities at Sumanth Minerals in mining, engineering, and logistics in Andhra Pradesh.',
 };
 
 const jobs = [
@@ -15,7 +15,7 @@ const jobs = [
   },
   {
     title: 'Quality Control Lab Technician',
-    location: 'Lakshayampalli Office',
+    location: 'Lakshyampalli Office',
     type: 'Full-Time',
     dept: 'Quality Assurance'
   },
@@ -40,8 +40,8 @@ export default function Careers() {
       <section className={styles.whyJoin}>
         <div className="container">
           <div className={styles.introBox}>
-            <h2>Why Kanaka Minerals?</h2>
-            <p>We provide a safe, innovative, and growth-oriented work environment. At Kanaka, you’re not just an employee; you’re a key player in the global industrial supply chain.</p>
+            <h2>Why Sumanth Minerals?</h2>
+            <p>We provide a safe, innovative, and growth-oriented work environment. At Sumanth, you’re not just an employee; you’re a key player in the global industrial supply chain.</p>
           </div>
           <div className={styles.benefits}>
             <div className={styles.benefit}>
@@ -77,7 +77,12 @@ export default function Careers() {
                     <span><Briefcase size={16} /> {job.dept}</span>
                   </div>
                 </div>
-                <button className="btn btn-primary">Apply Now</button>
+                <a
+                  className="btn btn-primary"
+                  href={`mailto:sales@sumanthminerals.com?subject=${encodeURIComponent(`Job application: ${job.title}`)}`}
+                >
+                  Apply Now
+                </a>
               </div>
             ))}
           </div>
@@ -88,7 +93,7 @@ export default function Careers() {
         <div className="container">
           <div className={styles.cvBox}>
             <h3>Don’t see a matching role?</h3>
-            <p>Send your CV to <strong>hr@kanakaminerals.com</strong> and we’ll contact you when a suitable position opens.</p>
+            <p>Send your CV to <strong>hr@sumanthminerals.com</strong> and we’ll contact you when a suitable position opens.</p>
           </div>
         </div>
       </section>

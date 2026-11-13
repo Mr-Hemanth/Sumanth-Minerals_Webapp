@@ -1,28 +1,23 @@
 import styles from './news.module.css';
 
 export const metadata = {
-  title: 'Company News & Press Releases | Kanaka Minerals',
-  description: 'Stay updated with the latest news from Kanaka Minerals, including mine expansions and new export partnerships.',
+  title: 'Company News & Press Releases | Sumanth Minerals',
+  description: 'Stay updated with the latest news from Sumanth Minerals, including mine expansions and new export partnerships.',
 };
 
 const newsItems = [
   {
-    date: 'May 02, 2024',
-    title: 'Kanaka Minerals Expands Export Capacity to 15,000 Tons',
-    desc: 'With the addition of two new processing plants, we have significantly boosted our monthly output to meet rising demand from Europe.',
-    category: 'Expansion'
+    id: 1,
+    date: 'March 15, 2024',
+    title: 'Mine Operations Optimized at Lakshyampalli',
+    desc: 'Implementation of new screening technologies has improved our output consistency for the 0-12mm fine grade quartz.',
+    category: 'Operations'
   },
   {
-    date: 'April 15, 2024',
-    title: 'New Sustainability Benchmarks Achieved at Tadipatri Mine',
-    desc: 'We have successfully reached our goal of 100% backfilling for our primary mining site ahead of schedule.',
-    category: 'Sustainability'
-  },
-  {
-    date: 'March 20, 2024',
-    title: 'Successful Participation in Dubai Global Mineral Expo',
-    desc: 'Our 99% silica quartz received overwhelming interest from leading ceramic manufacturers in the Middle East.',
-    category: 'Events'
+    date: 'April 05, 2024',
+    title: 'Quality Report: 99.27% SiO2 Purity Confirmed',
+    desc: 'Latest batch analysis from Lucid Laboratories reaffirms our position as a provider of high-purity silica quartz in the Anantapur region.',
+    category: 'Quality'
   }
 ];
 

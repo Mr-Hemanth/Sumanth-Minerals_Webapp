@@ -1,38 +1,70 @@
 .pageHeader {
-  background: var(--primary);
+  background: var(--grad-hero);
   color: var(--white);
-  padding: 120px 0 60px;
+  padding: 165px 0 75px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
+.pageHeader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 75% 25%, rgba(200, 168, 75, 0.10) 0%, transparent 55%);
+}
+
+.pageHeader > * {
+  position: relative;
+  z-index: 2;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 500;
+}
+
+.breadcrumb a:hover { color: var(--gold-light); }
+
 .pageHeader h1 {
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   margin-bottom: 15px;
+  color: var(--white);
 }
 
 .pageHeader p {
   font-size: 1.2rem;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .processGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 60px 0;
+  gap: 24px;
+  padding: 20px 0 0;
 }
 
 .processStep {
   text-align: center;
   position: relative;
+  padding: 0 0.5rem;
 }
 
 .stepIcon {
   width: 70px;
   height: 70px;
-  background: var(--accent);
+  background: var(--primary-glass);
   color: var(--primary);
-  border-radius: 50%;
+  border: 1px solid rgba(0, 51, 102, 0.12);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,6 +77,8 @@
 .processStep:hover .stepIcon {
   background: var(--primary);
   color: var(--white);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-primary);
 }
 
 .stepLine {
@@ -64,6 +98,7 @@
 .processStep h4 {
   font-size: 1.1rem;
   margin-bottom: 15px;
+  color: var(--primary);
 }
 
 .processStep p {
@@ -72,7 +107,7 @@
 }
 
 .packaging {
-  background: var(--accent);
+  background: var(--snow);
 }
 
 .packagingGrid {
@@ -108,37 +143,72 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--primary);
+  color: var(--gold-dark);
   font-weight: 800;
 }
 
-.placeholderImg {
-  height: 400px;
-  background: #FFF;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: #DDD;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+.packagingImage {
+  height: 420px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.packagingImage img {
+  object-fit: cover;
+}
+
+.imageCaption {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  background: rgba(0, 31, 64, 0.78);
+  backdrop-filter: blur(8px);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.transitSection {
+  background: var(--white);
 }
 
 .marketBanner {
-  background: var(--text-dark);
+  background: var(--grad-hero);
   color: var(--white);
-  padding: 80px;
-  border-radius: 12px;
+  padding: 70px 60px;
+  border-radius: var(--radius-xl);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.marketBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.marketBanner > * {
+  position: relative;
+  z-index: 2;
 }
 
 .marketBanner h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   margin-bottom: 15px;
+  color: var(--white);
 }
 
 .marketBanner p {
-  color: #AAA;
+  color: rgba(255, 255, 255, 0.72);
   margin-bottom: 40px;
 }
 
@@ -160,7 +230,17 @@
 
 .countryGrid span:hover {
   background: var(--primary);
-  border-color: var(--primary);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+.bannerActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
 }
 
 @media (max-width: 1200px) {

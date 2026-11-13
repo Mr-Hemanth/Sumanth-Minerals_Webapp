@@ -1,0 +1,272 @@
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 25, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 840px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  overflow: hidden;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #002244 0%, #003366 100%);
+  color: #ffffff;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.badgeIcon {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.headerTitle h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.headerTitle p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0.2rem 0 0 0;
+}
+
+.closeBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(90deg);
+}
+
+.body {
+  padding: 1.75rem 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.certMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.metaBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+}
+
+.metaBadge svg {
+  color: #0284c7;
+}
+
+.tableWrapper {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table td {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.highlightRow {
+  background: #f0fdf4 !important;
+}
+
+.highlightRow td {
+  border-bottom-color: #bbf7d0 !important;
+}
+
+.paramCell strong {
+  color: #0f172a;
+}
+
+.resultCell {
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.resultBadge {
+  background: #0284c7;
+  color: #ffffff;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+}
+
+.highlightRow .resultBadge {
+  background: #16a34a;
+}
+
+.methodCell {
+  color: #64748b;
+  font-size: 0.82rem;
+}
+
+.unitCell {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
+
+.previewBox {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.previewInfo h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.previewInfo p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.pdfBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #003366;
+  color: #ffffff;
+  padding: 0.75rem 1.35rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pdfBtn:hover {
+  background: #004d99;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 51, 102, 0.25);
+}
+
+.footer {
+  padding: 1.25rem 2rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerText {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.actionBtn {
+  background: #e2e8f0;
+  color: #1e293b;
+  padding: 0.55rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: #cbd5e1;
+}
+
+@media (max-width: 640px) {
+  .previewBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pdfBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

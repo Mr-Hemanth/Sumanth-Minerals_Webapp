@@ -6,39 +6,46 @@ import BackToTop from '@/components/BackToTop';
 import PageTransition from '@/components/PageTransition';
 
 export const metadata = {
-  title: 'Kanaka Minerals | High Purity Quartz Supplier India',
-  description: 'Kanaka Minerals is a leading producer and exporter of 99% silica high-purity quartz from Anantapur, Andhra Pradesh, India. Capacity of 10,000 tons/month.',
-  keywords: 'Quartz supplier India, High purity quartz export, Quartz mine in Andhra Pradesh, Silica quartz 99% supplier, Industrial quartz minerals',
+  title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
+  description: 'Sumanth Minerals is a direct quarry owner and processor of certified 99.27% pure silica vein quartz from Tadipatri, Andhra Pradesh, India. NABL accredited lab verified for global solar, glass, ceramic, and engineered stone manufacturing.',
+  keywords: 'Sumanth Minerals, Quartz supplier India, High purity quartz export, Tadipatri quartz mine Andhra Pradesh, Silica quartz 99% supplier, 99.27% SiO2 quartz, Industrial quartz grains, Lucid Laboratories quartz report',
   openGraph: {
-    title: 'Kanaka Minerals | High Purity Quartz Supplier India',
+    title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
     description: 'Premier supplier of 99% pure silica quartz for glass, ceramics, and silicon industries.',
-    url: 'https://kanakaminerals.com',
-    siteName: 'Kanaka Minerals',
+    url: 'https://sumanthminerals.com',
+    siteName: 'Sumanth Minerals',
     locale: 'en_US',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://kanakaminerals.com',
+    canonical: 'https://sumanthminerals.com',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kanaka Minerals | High Purity Quartz Supplier India',
+    title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
     description: 'Premier supplier of 99% pure silica quartz for glass, ceramics, and silicon industries.',
-    creator: '@kanakaminerals',
+    creator: '@sumanthminerals',
   },
 };
+
+import { LanguageProvider } from '@/context/LanguageContext';
+import Preloader from '@/components/Preloader';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <PageTransition>
-          <main>{children}</main>
-        </PageTransition>
-        <Footer />
-        <WhatsAppButton />
-        <BackToTop />
+        <Preloader />
+        <LanguageProvider>
+          <a href="#main-content" className="skip-link">Skip to content</a>
+          <Navbar />
+          <PageTransition>
+            <main id="main-content" tabIndex={-1}>{children}</main>
+          </PageTransition>
+          <Footer />
+          <WhatsAppButton />
+          <BackToTop />
+        </LanguageProvider>
       </body>
     </html>
   );

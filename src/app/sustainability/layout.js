@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Sustainability & ESG | Kanaka Minerals',
-  description: 'Our commitment to responsible mining, environmental stewardship, and community development in Anantapur, Andhra Pradesh.',
+  title: 'Sustainability & ESG | Sumanth Minerals',
+  description: 'Our commitment to responsible mining, environmental stewardship, and community development in the Tadipatri mining cluster of Andhra Pradesh.',
 };
 
 export default function SustainabilityLayout({ children }) {

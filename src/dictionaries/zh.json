@@ -1,0 +1,58 @@
+{
+  "common": {
+    "bulk_inquiry": "大宗查询",
+    "request_sample": "申请样品",
+    "contact_sales": "联系销售",
+    "learn_more": "了解更多",
+    "send_inquiry": "发送查询"
+  },
+  "hero": {
+    "badge": "成立于2025年 • 印度拉克舒姆帕里",
+    "title": "无与伦比的纯度。全球工业规模。",
+    "subtitle": "直接从矿山向制造商供应纯度达99%的硅石英。战略性地位于主要货运枢纽附近，实现无缝全球出口。",
+    "stat_silica": "二氧化硅 (SiO2)",
+    "stat_production": "吨 / 月",
+    "stat_ports": "全球港口"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "products": "产品中心",
+    "quality": "品质保证",
+    "export": "出口物流",
+    "sustainability": "可持续发展",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "samples": "样品申请",
+    "quote": "获取报价"
+  },
+  "contact": {
+    "title": "联系我们的团队",
+    "subtitle": "为您的大宗石英需求获取定制报价。",
+    "sales_office": "全球销售办公室",
+    "sales_desc": "联系我们的出口专家，讨论技术规格和物流。",
+    "registered_office": "注册办事处",
+    "instant_assist": "即时协助",
+    "chat_wa": "通过 WhatsApp 与我们聊天",
+    "request_quote": "索取大宗报价",
+    "full_name": "全名",
+    "company_name": "公司名称",
+    "email_addr": "电子邮件地址",
+    "wa_num": "WhatsApp 号码",
+    "industry": "行业 / 应用",
+    "preferred_size": "首选石英尺寸",
+    "quantity": "所需数量（吨）",
+    "dest_port": "目的地港口 / 国家",
+    "packaging": "包装要求",
+    "message": "附加信息",
+    "sending": "发送中...",
+    "success": "谢谢！您的查询已成功发送。"
+  },
+  "footer": {
+    "desc": "印度领先的高纯度石英生产商和出口商。",
+    "company": "公司",
+    "resources": "资源",
+    "get_in_touch": "保持联系",
+    "rights": "版权所有。"
+  }
+}

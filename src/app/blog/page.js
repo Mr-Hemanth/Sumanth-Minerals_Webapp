@@ -2,34 +2,26 @@ import Link from 'next/link';
 import styles from './blog.module.css';
 
 export const metadata = {
-  title: 'Blog & Industrial Insights | Kanaka Minerals',
-  description: 'Industrial insights into quartz mining, uses of 99% silica, and the global quartz export market from India.',
+  title: 'Blog & Industrial Insights | Sumanth Minerals',
+  description: 'Technical insights into quartz mining, processing, and industrial applications by Sumanth Minerals experts.',
 };
 
 const posts = [
   {
     id: 1,
-    title: 'Top 5 Industrial Uses of High-Purity Quartz',
-    excerpt: 'From semiconductor manufacturing to high-end glassware, discover why 99% silica quartz is the backbone of modern industry.',
+    title: 'Industrial Applications of High-Purity Quartz',
+    excerpt: 'Exploring the role of 99%+ silica quartz in glass, ceramic, and metallurgical sectors.',
     date: 'May 10, 2024',
     category: 'Industrial',
     slug: 'industrial-uses-of-quartz'
   },
   {
     id: 2,
-    title: 'Why 99% Silica Matters in Ceramic Production',
-    excerpt: 'Understanding the chemical significance of silica purity and its impact on the structural integrity of ceramic products.',
+    title: 'Maintaining Silica Purity in Processing',
+    excerpt: 'How our zero-contamination screening process preserves the high purity of our Anantapur quartz.',
     date: 'April 25, 2024',
     category: 'Quality',
-    slug: 'silica-purity-in-ceramics'
-  },
-  {
-    id: 3,
-    title: 'The Future of Quartz Export from India',
-    excerpt: 'An analysis of India’s growing role in the global mineral supply chain and the strategic importance of the Andhra region.',
-    date: 'April 12, 2024',
-    category: 'Export',
-    slug: 'quartz-export-from-india'
+    slug: 'silica-purity-processing'
   }
 ];
 
@@ -59,8 +51,9 @@ export default function Blog() {
                   </div>
                   <h3>{post.title}</h3>
                   <p>{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`} className={styles.readMore}>
-                    Read Full Article &rarr;
+                  {/* Article pages (/blog/[slug]) don't exist yet — link to sales until they do. */}
+                  <Link href="/contact" className={styles.readMore}>
+                    Ask our team about this &rarr;
                   </Link>
                 </div>
               </article>
@@ -73,11 +66,8 @@ export default function Blog() {
         <div className="container">
           <div className={styles.newsletterBox}>
             <h2>Stay Updated</h2>
-            <p>Subscribe to our quarterly mineral market report and industry updates.</p>
-            <form className={styles.nForm}>
-              <input type="email" placeholder="Your work email" required />
-              <button type="submit" className="btn btn-primary">Subscribe</button>
-            </form>
+            <p>Want stock availability, pricing updates, and new lab reports? Tell us what you buy and we will keep you posted.</p>
+            <Link href="/contact" className="btn btn-primary">Contact Our Sales Desk</Link>
           </div>
         </div>
       </section>
