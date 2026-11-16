@@ -891,3 +891,16 @@ main { overflow-x: clip; position: relative; }
     transform: none !important;
   }
 }
+
+/* Touch screens: give small text links a comfortable thumb-sized hit area.
+   Padding on inline links enlarges the tappable box without moving the text. */
+@media (pointer: coarse) {
+  footer li a,
+  footer [class*="bottom"] a { display: inline-block; padding-block: 0.6rem; }
+  main a[class*="certLink"],
+  main a[class*="productCta"],
+  main [class*="industriesCta"] a,
+  main [class*="productsFootnote"] a,
+  main [class*="whatsappBox"] a,
+  main nav[aria-label*="readcrumb" i] a { padding-block: 0.7rem; }
+}

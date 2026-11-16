@@ -301,7 +301,7 @@
 
 .certBadge span,
 .productionBadge span {
-  font-size: 0.73rem;
+  font-size: 0.75rem;
   opacity: 0.7;
   display: block;
   margin: 0;
@@ -432,7 +432,7 @@
   margin-left: auto;
   background: rgba(16,185,129,0.25);
   color: #4ade80;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
@@ -973,7 +973,7 @@
 
 .exportStat span,
 .exportStat2 span {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
@@ -1083,7 +1083,7 @@
 
 .ctaLabel {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -1130,7 +1130,7 @@
 
 .ctaStat { text-align: center; padding: 0 1.5rem; }
 .ctaStat strong { display: block; color: var(--white); font-size: 1.1rem; font-weight: 800; }
-.ctaStat span { font-size: 0.72rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.5px; }
+.ctaStat span { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.5px; }
 
 .ctaStatDivider {
   width: 1px;

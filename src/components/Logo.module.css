@@ -29,7 +29,7 @@ a:focus-visible > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
 
 .sub {
   font-family: var(--font-display), sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -42,7 +42,7 @@ a:focus-visible > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
 
 @media (max-width: 480px) {
   .name { font-size: 1.2rem; }
-  .sub { font-size: 0.66rem; letter-spacing: 0.28em; }
+  .sub { font-size: 0.75rem; letter-spacing: 0.28em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
