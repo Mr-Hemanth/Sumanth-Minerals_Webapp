@@ -29,6 +29,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   session: { strategy: "jwt", maxAge: 8 * 60 * 60 }, // 8-hour admin sessions
+  // Trust the Host header set by the platform (Vercel sets this automatically;
+  // needed for `next start` / other hosts, otherwise every auth route returns 500).
+  trustHost: true,
   pages: {
     signIn: "/adminsumanth/login",
   },

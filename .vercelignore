@@ -1,0 +1,9 @@
+# Never upload secrets or local artefacts to Vercel
+.env*
+!.env.local.example
+.playwright-mcp
+.qoder
+.next
+node_modules
+inquiries_fallback.json
+Sumanth Minerals.pdf
