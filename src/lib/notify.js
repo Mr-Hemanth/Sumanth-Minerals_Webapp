@@ -79,9 +79,10 @@ export async function sendBuyerConfirmation(lead) {
   const ref = leadRef(lead);
   try {
     await transporter.sendMail({
-      from: `"Sumanth Minerals" <${process.env.EMAIL_USER}>`,
+      // Buyers see the company address. sales@ is a verified "Send mail as" alias of the
+      // Gmail account, so Gmail sends it as-is (an unverified alias would be rewritten).
+      from: `"Sumanth Minerals" <${process.env.EMAIL_FROM || EMAIL_SALES}>`,
       to: lead.email,
-      // Buyer replies go to the sales address (routed to the team inbox), not the sending Gmail.
       replyTo: EMAIL_SALES,
       subject: `We received your ${typePhrase(lead.type)} (ref ${ref}) — Sumanth Minerals`,
       html: `<div style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#0E2238;max-width:560px">
