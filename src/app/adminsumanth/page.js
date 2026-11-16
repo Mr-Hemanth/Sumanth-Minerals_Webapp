@@ -97,8 +97,10 @@ export default function SalesDesk() {
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data fetch
   useEffect(() => { load(); }, [load]);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- restore saved view after hydration
     try { const v = localStorage.getItem('desk-view'); if (VIEWS.some((x) => x.id === v)) setView(v); } catch {}
   }, []);
   const changeView = (v) => { setView(v); try { localStorage.setItem('desk-view', v); } catch {} };
@@ -152,6 +154,7 @@ export default function SalesDesk() {
       open,
       openTonnes: open.reduce((a, l) => a + tonnes(l), 0),
       due, fresh,
+      // eslint-disable-next-line react-hooks/purity -- "this week" is relative to now by design
       newThisWeek: leads.filter((l) => Date.now() - new Date(l.createdAt) < 7 * 864e5).length,
       wonThisMonth: leads.filter((l) => l.status === 'Won' && new Date(l.updatedAt || l.createdAt) >= monthStart).length,
       winRate: won + lost ? Math.round((won / (won + lost)) * 100) : null,

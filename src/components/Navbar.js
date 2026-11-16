@@ -52,6 +52,7 @@ const Navbar = () => {
 
   // Close everything on route change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset UI when the route changes
     setIsOpen(false);
     setLangOpen(false);
     setMoreOpen(false);

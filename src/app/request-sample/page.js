@@ -56,7 +56,7 @@ export default function RequestSample() {
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Request a Product Sample</h1>
-          <p>Evaluate Sumanth Minerals' certified 99.27% silica quartz purity in your own laboratory.</p>
+          <p>Evaluate Sumanth Minerals&rsquo; certified 99.27% silica quartz purity in your own laboratory.</p>
         </div>
       </section>
 

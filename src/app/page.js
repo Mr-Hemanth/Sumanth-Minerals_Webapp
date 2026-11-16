@@ -560,7 +560,7 @@ export default function Home() {
               <span className="section-label">Global Reach</span>
               <h2>Gateway to World Markets</h2>
               <p>
-                Strategically located in Andhra Pradesh, we leverage India's most efficient mineral export corridor. Our proximity to four major ports enables seamless bulk shipping to industrial hubs worldwide.
+                Our mine has road access to four major ports on India&rsquo;s east coast, so bulk orders can ship worldwide in containers or break-bulk.
               </p>
 
               <div className={styles.portsList}>

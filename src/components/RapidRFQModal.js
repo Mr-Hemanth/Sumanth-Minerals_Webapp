@@ -29,6 +29,7 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
   const [error, setError] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- pre-fill from the button that opened the modal
     if (initialIndustry) setFormData(prev => ({ ...prev, industry: initialIndustry }));
     if (initialSize) setFormData(prev => ({ ...prev, preferredSize: initialSize }));
   }, [initialIndustry, initialSize]);

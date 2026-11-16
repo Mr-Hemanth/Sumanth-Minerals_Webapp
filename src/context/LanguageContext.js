@@ -20,21 +20,21 @@ const applyDocumentLang = (lang) => {
 
 export const LanguageProvider = ({ children }) => {
   const [lang, setLang] = useState('en');
-  const [dict, setDict] = useState(en);
+  // Loaded non-English dictionaries; English is always available without state.
+  const [loaded, setLoaded] = useState({});
+  const dict = lang === 'en' ? en : loaded[lang] || en;
 
   useEffect(() => {
     let cancelled = false;
-    if (lang === 'en') {
-      setDict(en);
+    if (lang === 'en' || !loaders[lang]) {
       applyDocumentLang('en');
       return;
     }
     const load = loaders[lang];
-    if (!load) { setLang('en'); return; }
     load()
       .then((mod) => {
         if (cancelled) return;
-        setDict(mod.default);
+        setLoaded((prev) => ({ ...prev, [lang]: mod.default }));
         applyDocumentLang(lang);
       })
       .catch((error) => {
@@ -48,6 +48,7 @@ export const LanguageProvider = ({ children }) => {
   useEffect(() => {
     try {
       const saved = localStorage.getItem('preferredLang');
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- restore saved language after hydration
       if (saved && saved !== 'en' && loaders[saved]) setLang(saved);
     } catch {}
   }, []);
