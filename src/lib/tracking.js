@@ -10,8 +10,8 @@ export const newTrackingToken = () => randomBytes(18).toString('base64url');
 // often left as http://localhost:3000 when .env.local is copied to the host.
 export const siteUrl = () =>
   (process.env.SITE_URL ||
-    (process.env.NODE_ENV === 'production' ? 'https://sumanthminerals.com' : process.env.NEXTAUTH_URL) ||
-    'https://sumanthminerals.com').replace(/\/$/, '');
+    (process.env.NODE_ENV === 'production' ? 'https://www.sumanthminerals.com' : process.env.NEXTAUTH_URL) ||
+    'https://www.sumanthminerals.com').replace(/\/$/, '');
 
 export const trackingUrl = (token) => `${siteUrl()}/track/${token}`;
 

@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/adminsumanth', '/api/'],
       },
     ],
-    sitemap: 'https://sumanthminerals.com/sitemap.xml',
+    sitemap: 'https://www.sumanthminerals.com/sitemap.xml',
   }
 }

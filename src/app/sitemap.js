@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://sumanthminerals.com';
+  const baseUrl = 'https://www.sumanthminerals.com';
   
   const routes = [
     '',

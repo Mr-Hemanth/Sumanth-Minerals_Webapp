@@ -9,20 +9,20 @@ import MobileActionBar from '@/components/MobileActionBar';
 import PageTransition from '@/components/PageTransition';
 
 export const metadata = {
-  metadataBase: new URL('https://sumanthminerals.com'),
+  metadataBase: new URL('https://www.sumanthminerals.com'),
   title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
   description: 'Sumanth Minerals is a direct mine owner supplying 99.27% SiO2 silica vein quartz (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Andhra Pradesh, India. Independently lab-tested by Lucid Laboratories for glass, ceramic, ferro-alloy and engineered stone use.',
   keywords: 'Sumanth Minerals, quartz lumps supplier, quartz grit, quartz for ferrosilicon, quartz lumps for silicon metal, quartz for ferroalloys, quartz for refractories, quartz for ceramic tiles, quartz for glass, foundry quartz, quartz for quartz powder plants, silica sand raw material, Quartz supplier India, High purity quartz export, Anantapur quartz mine Andhra Pradesh, Silica quartz 99% supplier, 99.27% SiO2 quartz, Industrial quartz grains, Lucid Laboratories quartz report',
   openGraph: {
     title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
     description: 'Direct mine supplier of 99.27% SiO2 silica quartz for glass, ceramics and ferro-alloy industries.',
-    url: 'https://sumanthminerals.com',
+    url: 'https://www.sumanthminerals.com',
     siteName: 'Sumanth Minerals',
     locale: 'en_US',
     type: 'website',
   },
   alternates: {
-    canonical: 'https://sumanthminerals.com',
+    canonical: 'https://www.sumanthminerals.com',
   },
   twitter: {
     card: 'summary_large_image',
