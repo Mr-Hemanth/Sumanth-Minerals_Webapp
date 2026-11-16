@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /* ============================================================
    SUMANTH MINERALS — PREMIUM DESIGN SYSTEM v2.0
@@ -158,7 +157,7 @@ html {
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--text-primary);
   background: var(--white);
   line-height: 1.65;
@@ -170,7 +169,7 @@ body {
    TYPOGRAPHY
 ───────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display), sans-serif;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
@@ -289,7 +288,7 @@ section {
   padding: 0.875rem 2rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display), sans-serif;
   font-size: 0.9rem;
   letter-spacing: 0.01em;
   transition: var(--transition);
@@ -400,7 +399,7 @@ section {
 ───────────────────────────────────────── */
 .section-label {
   display: block;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display), sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0;
@@ -545,7 +544,7 @@ section {
   padding: 0.875rem 1.1rem;
   border: 1.5px solid var(--border-light);
   border-radius: var(--radius-sm);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 0.95rem;
   color: var(--text-primary);
   background: var(--white);
@@ -692,7 +691,7 @@ section {
   color: var(--white);
   padding: 0.75rem 1.25rem;
   text-align: left;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display), sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -711,14 +710,14 @@ section {
 }
 
 .spec-value {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-weight: 600;
   color: var(--primary);
   font-size: 0.9rem;
 }
 
 .spec-value-highlight {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-weight: 800;
   color: var(--success);
   font-size: 1rem;
@@ -861,6 +860,15 @@ section {
 /* Side-entry animations (x offsets) must never create a horizontal scrollbar on phones.
    `clip` (unlike `hidden`) does not create a scroll container, so sticky elements keep working. */
 main { overflow-x: clip; position: relative; }
+
+/* Above-the-fold entrance: transform only, never opacity 0, so text is visible on the
+   very first paint (good LCP) and the motion runs before JavaScript loads.
+   Stagger with style={{ "--rise-delay": "0.2s" }}. */
+.rise { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--rise-delay, 0s) both; }
+@keyframes rise {
+  from { transform: translateY(18px); }
+  to   { transform: none; }
+}
 
 /* Route change: quick fade, pure CSS so it runs before hydration */
 .page-enter { animation: pageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }

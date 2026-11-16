@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Globe, Package, Truck, ShieldCheck, Clock, ChevronRight, ArrowRight } from 'lucide-react';
 import styles from './export.module.css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import RapidRFQModal from '@/components/RapidRFQModal';
 
 const STEPS = [
@@ -66,21 +66,21 @@ export default function Export() {
             <ChevronRight size={14} />
             <span>Export</span>
           </nav>
-          <motion.h1 {...fadeUp}>Global Export Operations</motion.h1>
-          <motion.p {...fadeUp} transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+          <h1 className="rise">Global Export Operations</h1>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>
             From pit-head in Andhra Pradesh to the berth — one team owns every step of the shipment.
-          </motion.p>
+          </p>
         </div>
       </section>
 
       <section className={styles.process}>
         <div className="container">
-          <motion.div className="section-title" {...fadeUp}>
+          <m.div className="section-title" {...fadeUp}>
             <span className="section-label">Workflow</span>
             <h2>Our Export Process</h2>
             <p>A streamlined sequence built for international trade efficiency — no trader in the middle.</p>
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             className={styles.processGrid}
             initial="initial"
             whileInView="animate"
@@ -88,21 +88,21 @@ export default function Export() {
             variants={staggerContainer}
           >
             {STEPS.map((step, i) => (
-              <motion.div key={i} className={styles.processStep} variants={staggerItem}>
+              <m.div key={i} className={styles.processStep} variants={staggerItem}>
                 <div className={styles.stepIcon}>{step.icon}</div>
                 <div className={styles.stepLine} aria-hidden="true" />
                 <h4>{`${String(i + 1).padStart(2, '0')} · ${step.title}`}</h4>
                 <p>{step.desc}</p>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className={styles.packaging}>
         <div className="container">
           <div className={styles.packagingGrid}>
-            <motion.div
+            <m.div
               className={styles.packagingText}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -122,8 +122,8 @@ export default function Export() {
               <button type="button" className="btn btn-primary" onClick={() => openRFQ('Export Bulk RFQ', '12–30 mm')}>
                 Request Freight Quote <ArrowRight size={16} />
               </button>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               className={styles.packagingImage}
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -137,14 +137,14 @@ export default function Export() {
                 sizes="(max-width: 992px) 100vw, 45vw"
               />
               <span className={styles.imageCaption}>12–30 mm quartz grit, ready for packing</span>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
 
       <section className={styles.markets}>
         <div className="container">
-          <motion.div
+          <m.div
             className={styles.marketBanner}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -161,7 +161,7 @@ export default function Export() {
                 Export Documentation Pack
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </div>

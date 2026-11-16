@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Youtube, ArrowRight, 
 import styles from './Footer.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
+import Logo from '@/components/Logo';
 
 const Footer = () => {
   const { dict } = useLanguage();
@@ -34,8 +35,7 @@ const Footer = () => {
             {/* Brand Column */}
             <div className={styles.brand}>
               <Link href="/" className={styles.logo}>
-                <span className={styles.logoMark}>S</span>
-                <span className={styles.logoText}>UMANTH <span>MINERALS</span></span>
+                <Logo tone="light" />
               </Link>
               <p className={styles.brandDesc}>
                 {dict?.footer?.desc || 'Premier producer and exporter of 99.27% high-purity silica quartz from our owned mine at Lakshupalli, Anantapur District. We serve global glass, ceramic, and metallurgical industries with uncompromising quality.'}

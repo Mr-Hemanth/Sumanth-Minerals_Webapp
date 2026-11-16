@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { m, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
 // Buttons lean slightly toward the cursor. Uses motion values, so mouse moves never
 // re-render React; does nothing on touch screens or with "reduce motion" on.
@@ -19,8 +19,8 @@ export default function Magnetic({ children }) {
   const reset = () => { x.set(0); y.set(0); };
 
   return (
-    <motion.div ref={ref} style={{ position: 'relative', x, y }} onPointerMove={onMove} onPointerLeave={reset}>
+    <m.div ref={ref} style={{ position: 'relative', x, y }} onPointerMove={onMove} onPointerLeave={reset}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

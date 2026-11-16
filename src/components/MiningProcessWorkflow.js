@@ -1,8 +1,9 @@
 'use client';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { Mountain, Pickaxe, Filter, Truck } from 'lucide-react';
 import styles from './MiningProcessWorkflow.module.css';
+import plantImg from '../../public/mine-plant.jpg';
 
 // Only steps the business has confirmed: own mine, lumps + 3 grit sizes,
 // weighbridge at the mine (visible in the site photos), truck dispatch.
@@ -51,7 +52,8 @@ export default function MiningProcessWorkflow() {
 
       <div className={styles.photo}>
         <Image
-          src="/mine-plant.jpg"
+          src={plantImg}
+          placeholder="blur"
           alt="Crushing and screening plant with conveyors and quartz stockpiles at the Sumanth Minerals mine, Lakshupalli"
           fill
           sizes="(max-width: 1240px) 100vw, 1176px"
@@ -61,7 +63,7 @@ export default function MiningProcessWorkflow() {
       </div>
 
       <ol className={styles.timeline}>
-        <motion.span
+        <m.span
           className={styles.track}
           aria-hidden="true"
           initial={reduce ? false : { scaleX: 0 }}
@@ -70,14 +72,14 @@ export default function MiningProcessWorkflow() {
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         />
         {steps.map((s, i) => (
-          <motion.li key={s.title} className={styles.step} {...reveal(i)}>
+          <m.li key={s.title} className={styles.step} {...reveal(i)}>
             <span className={styles.marker}>
               {s.icon}
               <span className={styles.num}>{i + 1}</span>
             </span>
             <h3>{s.title}</h3>
             <p>{s.desc}</p>
-          </motion.li>
+          </m.li>
         ))}
       </ol>
     </div>

@@ -3,7 +3,7 @@ import { Leaf, Recycle, ShieldCheck, Heart, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './sustainability.module.css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export default function Sustainability() {
   const fadeInUp = {
@@ -35,48 +35,48 @@ export default function Sustainability() {
     <div className={styles.sustainabilityPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <motion.h1 {...fadeInUp}>Sustainability &amp; ESG</motion.h1>
-          <motion.p {...fadeInUp} transition={{ delay: 0.1 }}>Mining with responsibility for a better future.</motion.p>
+          <m.h1 {...fadeInUp}>Sustainability &amp; ESG</m.h1>
+          <m.p {...fadeInUp} transition={{ delay: 0.1 }}>Mining with responsibility for a better future.</m.p>
         </div>
       </section>
 
       <section className={styles.intro}>
         <div className="container">
-          <motion.div className={styles.introContent} {...fadeInUp}>
+          <m.div className={styles.introContent} {...fadeInUp}>
             <span className="section-label">Our Framework</span>
             <h2>Responsible Mining</h2>
             <p>At Sumanth Minerals, industrial growth and environmental preservation are planned together. Our ESG framework is written into every stage of the operation — from vein selection at Lakshupalli to final dispatch at port.</p>
-          </motion.div>
-          <motion.div 
+          </m.div>
+          <m.div 
             className={styles.pillars}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true, amount: 0.15 }}
             variants={staggerContainer}
           >
-            <motion.div className={styles.pillar} variants={staggerItem}>
+            <m.div className={styles.pillar} variants={staggerItem}>
               <Leaf size={40} />
               <h3>Environmental Stewardship</h3>
               <p>Efficient bench mining, dust suppression, and land restoration programs keep the surrounding landscape intact.</p>
-            </motion.div>
-            <motion.div className={styles.pillar} variants={staggerItem}>
+            </m.div>
+            <m.div className={styles.pillar} variants={staggerItem}>
               <Heart size={40} />
               <h3>Social Impact</h3>
               <p>Local employment, health camps, and school infrastructure support for communities around Lakshupalli.</p>
-            </motion.div>
-            <motion.div className={styles.pillar} variants={staggerItem}>
+            </m.div>
+            <m.div className={styles.pillar} variants={staggerItem}>
               <ShieldCheck size={40} />
               <h3>Ethical Governance</h3>
               <p>Transparent supply chain, third-party audit trail, and adherence to international safety standards.</p>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
       </section>
 
       <section className={styles.restoration}>
         <div className="container">
           <div className={styles.restoreGrid}>
-            <motion.div 
+            <m.div 
               className={styles.restoreImage}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -90,8 +90,8 @@ export default function Sustainability() {
                 sizes="(max-width: 992px) 100vw, 45vw"
               />
               <span className={styles.imageCaption}>Tadipatri bench — progressive reclamation in cycle</span>
-            </motion.div>
-            <motion.div 
+            </m.div>
+            <m.div 
               className={styles.restoreText}
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -111,14 +111,14 @@ export default function Sustainability() {
               <Link href="/gallery" className={`${styles.restoreCta} btn btn-outline btn-sm`}>
                 See the site in pictures
               </Link>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
 
       <section className={styles.water}>
         <div className="container">
-          <motion.div 
+          <m.div 
             className={styles.waterBox}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export default function Sustainability() {
             <Recycle size={50} />
             <h2>Zero Water Discharge</h2>
             <p>Advanced recycling treats 95% of the water used in quartz washing inside the same cycle, so local water resources are drawn on minimally and returned clean.</p>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </div>

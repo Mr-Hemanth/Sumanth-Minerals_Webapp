@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { X, ZoomIn, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import styles from './gallery.module.css';
 
 const categories = ['All', 'Mine', 'Grades', 'Reports'];
@@ -97,10 +97,10 @@ export default function Gallery() {
             })}
           </div>
 
-          <motion.div layout className={styles.imageGrid}>
+          <m.div layout className={styles.imageGrid}>
             <AnimatePresence mode="popLayout">
               {visible.map((img) => (
-                <motion.figure
+                <m.figure
                   layout
                   key={img.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -129,10 +129,10 @@ export default function Gallery() {
                       <span className={styles.zoomHint}><ZoomIn size={15} /> View</span>
                     </span>
                   </button>
-                </motion.figure>
+                </m.figure>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
 
           <p className={styles.galleryNote}>
             Need recent photographs of a specific lot? <Link href="/contact">Ask our export desk</Link> — we share batch photos with the certificate of analysis.
@@ -154,7 +154,7 @@ export default function Gallery() {
 
       <AnimatePresence>
         {lightbox && (
-          <motion.div
+          <m.div
             className={styles.lightbox}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -167,7 +167,7 @@ export default function Gallery() {
             <button type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Close image">
               <X size={22} />
             </button>
-            <motion.div
+            <m.div
               className={styles.lightboxInner}
               initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -187,8 +187,8 @@ export default function Gallery() {
                 <h4>{lightbox.title}</h4>
                 <p>{lightbox.note}</p>
               </figcaption>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

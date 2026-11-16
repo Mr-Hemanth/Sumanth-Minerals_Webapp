@@ -5,6 +5,7 @@ import styles from './contact.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
 import { INDUSTRIES } from '@/data/industries';
+import MapEmbed from '@/components/MapEmbed';
 
 export default function Contact() {
   const { dict } = useLanguage();
@@ -214,15 +215,7 @@ export default function Contact() {
       </section>
 
       <section className={styles.mapSection}>
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5228.136085202641!2d77.72241779895305!3d15.027798327013643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1777921676226!5m2!1sen!2sin" 
-          width="100%" 
-          height="450" 
-          style={{ border: 0, display: 'block' }} 
-          allowFullScreen="" 
-          loading="lazy" 
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <MapEmbed />
       </section>
     </div>
   );

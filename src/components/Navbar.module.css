@@ -36,37 +36,6 @@
   flex-shrink: 0;
 }
 
-.logoMark {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #003366 0%, #1a5fa8 100%);
-  color: white;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
-  flex-shrink: 0;
-}
-
-.logoText {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #003366;
-  letter-spacing: 1px;
-  line-height: 1;
-}
-
-.logoText span {
-  font-weight: 300;
-  color: var(--text-muted);
-}
-
 /* ─── Desktop Nav Links ─── */
 .links {
   display: flex;
@@ -390,7 +359,7 @@
 }
 
 .drawerLogo {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display), sans-serif;
   font-size: 1.4rem;
   font-weight: 800;
   color: #003366;
@@ -399,7 +368,6 @@
   display: block;
 }
 
-.drawerLogo span { font-weight: 300; color: #718096; }
 
 .drawerDivider {
   height: 1px;

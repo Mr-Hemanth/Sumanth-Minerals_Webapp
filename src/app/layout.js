@@ -1,4 +1,6 @@
 import './globals.css';
+import { Inter, Outfit } from 'next/font/google';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -31,12 +33,19 @@ export const metadata = {
 
 import { LanguageProvider } from '@/context/LanguageContext';
 import HideOnAdmin from '@/components/HideOnAdmin';
+import MotionProvider from '@/components/MotionProvider';
+
+// Self-hosted at build time: no request to Google, preloaded, and size-adjusted
+// fallbacks so text does not jump when the web font arrives.
+const inter = Inter({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
+const outfit = Outfit({ subsets: ['latin'], display: 'swap', variable: '--font-display' });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body>
         <LanguageProvider>
+          <MotionProvider>
           <a href="#main-content" className="skip-link">Skip to content</a>
           <HideOnAdmin><Navbar /></HideOnAdmin>
           <PageTransition>
@@ -48,6 +57,7 @@ export default function RootLayout({ children }) {
             <BackToTop />
             <MobileActionBar />
           </HideOnAdmin>
+          </MotionProvider>
         </LanguageProvider>
       </body>
     </html>

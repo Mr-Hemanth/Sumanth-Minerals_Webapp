@@ -3,15 +3,9 @@ import { useState } from "react";
 import { ShieldCheck, FileText, Activity, Microscope, Download, Award } from "lucide-react";
 import Link from "next/link";
 import styles from "./quality.module.css";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import CertificateModal from "@/components/CertificateModal";
 import RapidRFQModal from "@/components/RapidRFQModal";
-
-const headVariant = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-};
 
 const inView = {
   initial: { opacity: 0, y: 30 },
@@ -79,35 +73,24 @@ export default function Quality() {
             <span aria-hidden="true">/</span>
             <span>Quality</span>
           </nav>
-          <motion.h1 variants={headVariant} initial="initial" animate="animate">
+          <h1 className="rise">
             Quality Assurance & Lab Analysis
-          </motion.h1>
-          <motion.p
-            variants={headVariant}
-            initial="initial"
-            animate="animate"
-            transition={{ delay: 0.12 }}
-          >
+          </h1>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>
             Certified 99.27% silica by Lucid Laboratories Pvt. Ltd. — the same report sheet travels with your container.
-          </motion.p>
-          <motion.div
-            className={styles.headerChips}
-            variants={headVariant}
-            initial="initial"
-            animate="animate"
-            transition={{ delay: 0.2 }}
-          >
+          </p>
+          <div className={`${styles.headerChips} rise`} style={{ "--rise-delay": "0.2s" }}>
             <span>IS 1917 Methods</span>
             <span>ICP-OES Spectrometry</span>
             <span>SGS / Intertek on request</span>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       <section className={styles.testing}>
         <div className="container">
           <div className={styles.grid}>
-            <motion.div className={styles.textContent} {...inView}>
+            <m.div className={styles.textContent} {...inView}>
               <span className="section-label">Mine to dispatch</span>
               <h2>How we check quality</h2>
               <p>
@@ -125,9 +108,9 @@ export default function Quality() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               className={styles.compositionBox}
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -169,19 +152,19 @@ export default function Quality() {
               <p className={styles.disclaimer}>
                 *Tested and certified by Lucid Laboratories Pvt. Ltd., Balanagar, Hyderabad (Authorized Signatory: A.L. Kanta Rao).
               </p>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
 
       <section className={styles.reports}>
         <div className="container">
-          <motion.div className="section-title" {...inView}>
+          <m.div className="section-title" {...inView}>
             <h2>Official technical documentation</h2>
             <p>Direct mine-to-buyer transparency. Download signed analytical data sheets.</p>
-          </motion.div>
+          </m.div>
           <div className={styles.reportGrid}>
-            <motion.div className={styles.reportCard} {...inView} transition={{ delay: 0.1 }}>
+            <m.div className={styles.reportCard} {...inView} transition={{ delay: 0.1 }}>
               <FileText size={36} />
               <h4>Certified chemical analysis report</h4>
               <p>Full spectrum breakdown of silica, iron, alumina, LOI, and trace alkali oxides verified by ICP-OES.</p>
@@ -202,9 +185,9 @@ export default function Quality() {
                   <Download size={14} /> PDF
                 </a>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div className={styles.reportCard} {...inView} transition={{ delay: 0.2 }}>
+            <m.div className={styles.reportCard} {...inView} transition={{ delay: 0.2 }}>
               <Activity size={36} />
               <h4>Complimentary lab test sample</h4>
               <p>Verify our 99.27% silica quartz directly in your plant laboratory before placing commercial bulk orders.</p>
@@ -216,7 +199,7 @@ export default function Quality() {
                   Ask about testing →
                 </button>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>

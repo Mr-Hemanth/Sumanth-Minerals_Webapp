@@ -8,13 +8,19 @@ import {
   Star, CheckCircle, ArrowRight, FlaskConical, FileText, Users,
   Flame, BrickWall, Hammer, Cog, Pickaxe, Ship
 } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import styles from './page.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import Magnetic from '@/components/Magnetic';
 import MiningProcessWorkflow from '@/components/MiningProcessWorkflow';
 import RapidRFQModal from '@/components/RapidRFQModal';
 import CountUp from '@/components/CountUp';
+// Static imports: hashed file names (cached forever) and a built-in blur placeholder.
+import heroImg from '../../public/hero-stockpile.jpg';
+import lumpsImg from '../../public/quartz_lumps.jpg';
+import fineImg from '../../public/quartz_0_12.jpg';
+import mediumImg from '../../public/quartz_12_30.jpg';
+import coarseImg from '../../public/quartz_30_80.jpg';
 import { CHEMISTRY as C } from '@/data/specs';
 import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from "@/data/contact";
 
@@ -89,7 +95,7 @@ export default function Home() {
     {
       size: 'Lumps',
       type: 'Quartz Lumps — size as required',
-      image: '/quartz_lumps.jpg',
+      image: lumpsImg,
       tone: 'toneLump',
       specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, `LOI: ${C.LOI}`],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Crushing Feed'],
@@ -97,7 +103,7 @@ export default function Home() {
     {
       size: '0–12 mm',
       type: 'Quartz Grit — Fine',
-      image: '/quartz_0_12.jpg',
+      image: fineImg,
       tone: 'toneFine',
       specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, 'Mohs: 7.0'],
       uses: ['Container Glass', 'Industrial Fillers', 'Foundry Sand', 'Investment Casting'],
@@ -105,7 +111,7 @@ export default function Home() {
     {
       size: '12–30 mm',
       type: 'Quartz Grit — Medium',
-      image: '/quartz_12_30.jpg',
+      image: mediumImg,
       tone: 'toneCeramic',
       specs: [`SiO₂: ${C.SiO2}`, `Al₂O₃: ${C.Al2O3}`, 'Mohs: 7.0'],
       uses: ['Vitrified Tiles', 'Sanitaryware', 'Artistic Glass', 'Silicon Carbide'],
@@ -113,7 +119,7 @@ export default function Home() {
     {
       size: '30–80 mm',
       type: 'Quartz Grit — Coarse',
-      image: '/quartz_30_80.jpg',
+      image: coarseImg,
       tone: 'toneCoarse',
       specs: [`SiO₂: ${C.SiO2}`, 'Fusion Pt: 1713°C', `LOI: ${C.LOI}`],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Water Filtration'],
@@ -173,58 +179,42 @@ export default function Home() {
       ════════════════════════════════════════ */}
       <section className={styles.hero} ref={heroRef}>
         {/* Background with parallax */}
-        <motion.div className={styles.heroBg} style={{ y: heroY }}>
+        <m.div className={styles.heroBg} style={{ y: heroY }}>
           <Image
-            src="/hero-stockpile.jpg"
+            src={heroImg}
             alt="Stockpiles of graded quartz with conveyor stackers at the Sumanth Minerals mine"
             fill
             priority
-            sizes="100vw"
+            quality={50}
+            placeholder="blur"
+            // The photo sits under a dark overlay, so phones do not need full-DPR detail.
+            sizes="(max-width: 768px) 75vw, 100vw"
             className={styles.heroImg}
           />
           <div className={styles.heroOverlay} />
-        </motion.div>
+        </m.div>
         <div className={styles.heroStrata} aria-hidden="true" />
 
-        <motion.div className={styles.heroContent} style={{ opacity: heroOpacity }}>
+        <m.div className={styles.heroContent} style={{ opacity: heroOpacity }}>
           <div className="container">
-            <motion.span
-              className={styles.heroBadge}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <span className={`${styles.heroBadge} rise`} style={{ "--rise-delay": "0.05s" }}>
               <span className={styles.badgeDot} />
               {dict?.hero?.badge || 'DIRECT MINE OWNER · ANDHRA PRADESH, INDIA'}
-            </motion.span>
+            </span>
 
             <div className={styles.heroTitle}>
-              <motion.h1
-                initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5, ease: [0.76, 0, 0.24, 1] }}
-              >
+              <h1 className="rise" style={{ "--rise-delay": "0.12s" }}>
                 {dict?.hero?.title || (
                   <>Unmatched Purity.<br /><span className={styles.heroTitleAccent}>Global Industrial Scale.</span></>
                 )}
-              </motion.h1>
+              </h1>
             </div>
 
-            <motion.p
-              className={styles.heroSubtitle}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.0, duration: 0.8 }}
-            >
+            <p className={`${styles.heroSubtitle} rise`} style={{ "--rise-delay": "0.2s" }}>
               {dict?.hero?.subtitle || 'Direct mine-to-manufacturer supply of 99.27% pure silica quartz from our mine at Lakshupalli, Anantapur District. Lab-certified, precision-graded, and export-ready for global industrial manufacturers.'}
-            </motion.p>
+            </p>
 
-            <motion.div
-              className={styles.heroCtas}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-            >
+            <div className={`${styles.heroCtas} rise`} style={{ "--rise-delay": "0.28s" }}>
               <Magnetic>
                 <Link href="/contact" className="btn btn-gold btn-lg">
                   Get a quote <ArrowRight size={18} />
@@ -239,41 +229,36 @@ export default function Home() {
                 <FlaskConical size={16} />
                 View Lab Certificate
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className={styles.heroStats}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.8 }}
-            >
+            <div className={`${styles.heroStats} rise`} style={{ "--rise-delay": "0.36s" }}>
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={99.27} decimals={2} suffix="%" delay={1.4} /></div>
+                <div className={styles.statNumber}><CountUp to={99.27} decimals={2} suffix="%" delay={0.5} /></div>
                 <div className={styles.statLabel}>SiO₂, lab-tested</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={15000} suffix=" MT" delay={1.5} /></div>
+                <div className={styles.statNumber}><CountUp to={15000} suffix=" MT" delay={0.6} /></div>
                 <div className={styles.statLabel}>Mined per month</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={40000} suffix=" MT" delay={1.6} /></div>
+                <div className={styles.statNumber}><CountUp to={40000} suffix=" MT" delay={0.7} /></div>
                 <div className={styles.statLabel}>Ready to dispatch</div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Scroll Indicator */}
-        <motion.div
+        <m.div
           className={styles.scrollIndicator}
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <div className={styles.scrollLine} />
           <span>Scroll</span>
-        </motion.div>
+        </m.div>
       </section>
 
       {/* ════════════════════════════════════════
@@ -281,9 +266,9 @@ export default function Home() {
       ════════════════════════════════════════ */}
       <section className={styles.trustStrip}>
         <div className="container">
-          <motion.div className={styles.trustGrid} {...fadeUp}>
+          <m.div className={styles.trustGrid} {...fadeUp}>
             {trustPoints.map((item, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 className={styles.trustCard}
                 {...stagger(i * 0.1)}
@@ -294,9 +279,9 @@ export default function Home() {
                   <h4>{item.title}</h4>
                   <p>{item.desc}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -306,7 +291,7 @@ export default function Home() {
       <section className={styles.aboutSection}>
         <div className="container">
           <div className={styles.aboutGrid}>
-            <motion.div
+            <m.div
               className={styles.aboutVisual}
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -314,7 +299,7 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className={styles.aboutImageBox}>
-                <Image src="/quartz_lumps.jpg" alt="Quartz lumps at the Sumanth Minerals mine" fill sizes="(max-width: 992px) 100vw, 560px" className={styles.aboutPhoto} />
+                <Image src={lumpsImg} placeholder="blur" alt="Quartz lumps at the Sumanth Minerals mine" fill sizes="(max-width: 992px) 100vw, 560px" className={styles.aboutPhoto} />
                 <div className={styles.aboutImageOverlay}>
                   <div className={styles.certBadge}>
                     <FlaskConical size={20} />
@@ -333,9 +318,9 @@ export default function Home() {
                 </div>
                 <div className={styles.mineTag}>Lakshupalli mine</div>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               className={styles.aboutContent}
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -350,10 +335,10 @@ export default function Home() {
 
               <ul className={styles.featureList}>
                 {features.map((f, i) => (
-                  <motion.li key={i} {...stagger(i * 0.07)}>
+                  <m.li key={i} {...stagger(i * 0.07)}>
                     <CheckCircle size={18} className={styles.checkIcon} />
                     <span>{f}</span>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
 
@@ -365,7 +350,7 @@ export default function Home() {
                   Lab Reports
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -376,7 +361,7 @@ export default function Home() {
       <section className={styles.chemSection}>
         <div className="container">
           <div className={styles.chemGrid}>
-            <motion.div className={styles.chemContent} {...fadeUp}>
+            <m.div className={styles.chemContent} {...fadeUp}>
               <span className="section-label">Verified Lab Data</span>
               <h2>Lab-tested chemistry</h2>
               <p>
@@ -404,9 +389,9 @@ export default function Home() {
                   Download TDS
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               className={styles.chemTable}
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -419,7 +404,7 @@ export default function Home() {
                 <span className={styles.certTag}>Lab-tested</span>
               </div>
               {chemicalData.map((row, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   className={`${styles.tableRow} ${row.highlight ? styles.rowHighlight : ''}`}
                   initial={{ opacity: 0, x: 20 }}
@@ -433,7 +418,7 @@ export default function Home() {
                   </span>
                   {row.highlight && (
                     <div className={styles.purityBar}>
-                      <motion.div
+                      <m.div
                         className={styles.purityFill}
                         initial={{ width: 0 }}
                         whileInView={{ width: '99.27%' }}
@@ -442,12 +427,12 @@ export default function Home() {
                       />
                     </div>
                   )}
-                </motion.div>
+                </m.div>
               ))}
               <div className={styles.tableFooter}>
                 * Tested by Lucid Laboratories Pvt. Ltd. | Report No: LL/25-26/009401/1
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -458,17 +443,17 @@ export default function Home() {
       <section className={styles.productsSection}>
         <div className="container">
 
-          <motion.div className="section-title section-title--left" {...fadeUp}>
+          <m.div className="section-title section-title--left" {...fadeUp}>
             <span className="section-label">Our Products</span>
             <h2>Precision-Graded Quartz</h2>
             <p>
               Quartz lumps and quartz grit in three sizes, all from the same vein at 99.27% SiO₂ (Lucid Laboratories).
             </p>
-          </motion.div>
+          </m.div>
 
           <div className={styles.productGrid}>
             {products.map((p, i) => (
-              <motion.article
+              <m.article
                 key={p.size}
                 className={`${styles.productCard} ${styles[p.tone]}`}
                 {...stagger(i * 0.12)}
@@ -476,6 +461,7 @@ export default function Home() {
                 <div className={styles.productImageBox}>
                   <Image
                     src={p.image}
+                    placeholder="blur"
                     alt={`${p.size} quartz — ${p.type}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
@@ -515,7 +501,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
 
@@ -531,14 +517,14 @@ export default function Home() {
       ════════════════════════════════════════ */}
       <section className={styles.industriesSection}>
         <div className="container">
-          <motion.div className="section-title section-title--left" {...fadeUp}>
+          <m.div className="section-title section-title--left" {...fadeUp}>
             <span className="section-label">Industries We Serve</span>
             <h2>Find your application</h2>
             <p>We supply manufacturers, processors and traders. Here is the size each sector usually buys.</p>
-          </motion.div>
+          </m.div>
           <div className={styles.industriesGrid}>
             {industries.map((ind, i) => (
-              <motion.div
+              <m.div
                 key={ind.name}
                 className={styles.industryCard}
                 {...stagger((i % 3) * 0.08)}
@@ -550,13 +536,13 @@ export default function Home() {
                   <span>Recommended</span>
                   {ind.grade}
                 </Link>
-              </motion.div>
+              </m.div>
             ))}
-            <motion.div className={styles.industriesCta} {...stagger(0.48)}>
+            <m.div className={styles.industriesCta} {...stagger(0.48)}>
               <h3>Not seeing your process?</h3>
               <p>We blend and screen to buyer specifications — share your sieve analysis or furnace notes and we will match a grade.</p>
               <Link href="/contact">Talk to our technical team <ArrowRight size={15} /></Link>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -567,7 +553,7 @@ export default function Home() {
       <section className={styles.exportSection}>
         <div className="container">
           <div className={styles.exportGrid}>
-            <motion.div
+            <m.div
               className={styles.exportContent}
               {...fadeUp}
             >
@@ -579,7 +565,7 @@ export default function Home() {
 
               <div className={styles.portsList}>
                 {ports.map((port, i) => (
-                  <motion.div
+                  <m.div
                     key={i}
                     className={styles.portItem}
                     {...stagger(i * 0.1)}
@@ -590,13 +576,13 @@ export default function Home() {
                       <span>{port.route}</span>
                     </div>
                     <div className={styles.portDistance}>{port.distance}</div>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               className={styles.exportVisual}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -616,7 +602,7 @@ export default function Home() {
                   <span>25–28 Tons</span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -635,7 +621,7 @@ export default function Home() {
       ════════════════════════════════════════ */}
       <section className={styles.ctaSection}>
         <div className="container">
-          <motion.div
+          <m.div
             className={styles.ctaBox}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -643,13 +629,13 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             <div className={styles.ctaContent}>
-              <motion.h2 {...stagger(0.1)}>
+              <m.h2 {...stagger(0.1)}>
                 Get a price for your quartz
-              </motion.h2>
-              <motion.p {...stagger(0.2)}>
+              </m.h2>
+              <m.p {...stagger(0.2)}>
                 Tell us the size and quantity you need. We reply with price, availability and dispatch dates, and can send a sample with the lab report first.
-              </motion.p>
-              <motion.div className={styles.ctaActions} {...stagger(0.3)}>
+              </m.p>
+              <m.div className={styles.ctaActions} {...stagger(0.3)}>
                 <Magnetic>
                   <button type="button" className="btn btn-white btn-lg" onClick={() => openRFQ()}>
                     Get a Quote in 60 Seconds <ArrowRight size={18} />
@@ -660,9 +646,9 @@ export default function Home() {
                     Request Free Sample
                   </Link>
                 </Magnetic>
-              </motion.div>
+              </m.div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

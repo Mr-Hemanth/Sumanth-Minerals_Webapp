@@ -2,11 +2,12 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { m, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, PhoneCall, Globe, ChevronDown, ArrowRight } from 'lucide-react';
 import styles from './Navbar.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
+import Logo from '@/components/Logo';
 
 const PRIMARY_LINKS = [
   { name: 'nav.home', fallback: 'Home', href: '/' },
@@ -96,8 +97,7 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link href="/" className={styles.logo}>
-              <span className={styles.logoMark}>S</span>
-              <span className={styles.logoText}>UMANTH <span>MINERALS</span></span>
+              <Logo />
             </Link>
 
             {/* Desktop Nav */}
@@ -121,7 +121,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   className={`${styles.moreBtn} ${RESOURCE_LINKS.some(l => isActive(l.href)) ? styles.moreBtnActive : ''}`}
-                  onClick={() => setMoreOpen(v => !v)}
+                  onClick={(e) => setMoreOpen(v => (e.detail === 0 ? !v : true))} // mouse: hover already opened it, so a click must not close it; keyboard (detail 0) toggles
                   onMouseDown={(e) => e.preventDefault()}
                   aria-expanded={moreOpen}
                   aria-haspopup="true"
@@ -156,7 +156,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   className={styles.langBtn}
-                  onClick={() => setLangOpen(v => !v)}
+                  onClick={(e) => setLangOpen(v => (e.detail === 0 ? !v : true))}
                   aria-label="Change language"
                   aria-expanded={langOpen}
                   aria-haspopup="true"
@@ -208,7 +208,7 @@ const Navbar = () => {
         </div>
 
         {/* Reading progress */}
-        <motion.div className={styles.progressBar} style={{ scaleX: progress }} aria-hidden="true" />
+        <m.div className={styles.progressBar} style={{ scaleX: progress }} aria-hidden="true" />
       </nav>
 
       {/* Mobile Overlay */}
@@ -218,7 +218,7 @@ const Navbar = () => {
       <div className={`${styles.mobileDrawer} ${isOpen ? styles.drawerOpen : ''}`} aria-hidden={!isOpen}>
         <div className={styles.drawerContent}>
           <Link href="/" className={styles.drawerLogo}>
-            SUMANTH <span>MINERALS</span>
+            <Logo size={34} />
           </Link>
           <div className={styles.drawerDivider} />
           <nav className={styles.drawerNav}>

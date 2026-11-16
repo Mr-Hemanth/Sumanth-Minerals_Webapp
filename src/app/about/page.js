@@ -2,7 +2,8 @@
 import Image from 'next/image';
 import { Award, Users, Globe, Target, ShieldCheck, Factory, History, TrendingUp } from 'lucide-react';
 import styles from './about.module.css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
+import mediumImg from '../../../public/quartz_12_30.jpg';
 
 export default function About() {
   const fadeInUp = {
@@ -36,27 +37,27 @@ export default function About() {
     <div className={styles.aboutPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <motion.h1 {...fadeInUp}>The Sumanth Minerals Story</motion.h1>
-          <motion.p {...fadeInUp} transition={{ delay: 0.1 }}>
+          <h1 className="rise">The Sumanth Minerals Story</h1>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>
             Engineering the future of high-purity minerals from the heart of Andhra Pradesh.
-          </motion.p>
+          </p>
         </div>
       </section>
 
       <section className={styles.mission}>
         <div className="container">
           <div className={styles.missionGrid}>
-            <motion.div className={styles.missionContent} {...fadeInUp}>
-              <div className={styles.accent}>OUR VISION</div>
-              <h2>Global Leadership in Silica Purity</h2>
+            <div className={`${styles.missionContent} rise`} style={{ "--rise-delay": "0.15s" }}>
+              <div className={styles.accent}>Our story</div>
+              <h2>A mine-owning quartz supplier from Andhra Pradesh</h2>
               <p>
-                Founded in 2025, Sumanth Minerals was established to bridge the gap between high-demand industrial sectors and raw mineral quality. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
+                Sumanth Minerals was founded in 2025. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
               </p>
               <p>
-                Our mission is to provide the most consistent, high-purity silica quartz, graded to size and backed by independent lab analysis.
+                We supply quartz lumps and graded grit straight from our own mine, backed by independent lab analysis.
               </p>
-            </motion.div>
-            <motion.div 
+            </div>
+            <m.div 
               className={styles.missionStats}
               initial="initial"
               whileInView="animate"
@@ -64,12 +65,12 @@ export default function About() {
               variants={staggerContainer}
             >
               {stats.map((stat, i) => (
-                <motion.div key={i} className={styles.statBox} variants={staggerItem}>
+                <m.div key={i} className={styles.statBox} variants={staggerItem}>
                   <h3>{stat.value}</h3>
                   <p>{stat.label}</p>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -77,35 +78,35 @@ export default function About() {
       {/* Mining Lifecycle Section (NEW) */}
       <section className={styles.lifecycle}>
         <div className="container">
-          <motion.div className="section-title" {...fadeInUp}>
+          <m.div className="section-title" {...fadeInUp}>
             <h2>Direct Mine-to-Market Model</h2>
             <p>We control every stage of the lifecycle to ensure absolute purity and supply chain stability.</p>
-          </motion.div>
+          </m.div>
           <div className={styles.lifecycleGrid}>
-            <motion.div className={styles.step} {...fadeInUp}>
+            <m.div className={styles.step} {...fadeInUp}>
               <div className={styles.stepNumber}>01</div>
               <History size={40} />
               <h3>Exploration</h3>
               <p>Rigorous geological surveying to identify high-yield quartz veins with &gt;99% silica potential.</p>
-            </motion.div>
-            <motion.div className={styles.step} {...fadeInUp} transition={{ delay: 0.1 }}>
+            </m.div>
+            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.1 }}>
               <div className={styles.stepNumber}>02</div>
               <TrendingUp size={40} />
               <h3>Extraction</h3>
               <p>Systematic open-cast mining using advanced machinery to minimize waste and ensure worker safety.</p>
-            </motion.div>
-            <motion.div className={styles.step} {...fadeInUp} transition={{ delay: 0.2 }}>
+            </m.div>
+            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.2 }}>
               <div className={styles.stepNumber}>03</div>
               <Factory size={40} />
               <h3>Processing</h3>
               <p>Multi-stage crushing, magnetic separation, and screening to achieve precise industrial grades.</p>
-            </motion.div>
-            <motion.div className={styles.step} {...fadeInUp} transition={{ delay: 0.3 }}>
+            </m.div>
+            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.3 }}>
               <div className={styles.stepNumber}>04</div>
               <Globe size={40} />
               <h3>Logistics</h3>
               <p>Seamless transport to international ports for bulk shipping to global industrial hubs.</p>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -114,10 +115,10 @@ export default function About() {
       <section className={styles.values}>
         <div className="container">
           <div className={styles.valuesGrid}>
-            <motion.div className={styles.valueImage} {...fadeInUp}>
-              <Image src="/quartz_12_30.jpg" alt="12–30 mm graded quartz from the Sumanth Minerals mine" width={800} height={600} sizes="(max-width: 900px) 100vw, 50vw" style={{ width: '100%', height: 'auto', borderRadius: 20 }} />
-            </motion.div>
-            <motion.div className={styles.valueContent} {...fadeInUp}>
+            <m.div className={styles.valueImage} {...fadeInUp}>
+              <Image src={mediumImg} placeholder="blur" alt="12–30 mm graded quartz from the Sumanth Minerals mine" width={800} height={600} sizes="(max-width: 900px) 100vw, 50vw" style={{ width: '100%', height: 'auto', borderRadius: 20 }} />
+            </m.div>
+            <m.div className={styles.valueContent} {...fadeInUp}>
               <h2>Built on Industrial Integrity</h2>
               <div className={styles.valueItem}>
                 <ShieldCheck size={24} />
@@ -140,14 +141,14 @@ export default function About() {
                   <p>We hire locally from the villages around our Peddavaduguru mine.</p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
 
       <section className={styles.infrastructure}>
         <div className="container">
-          <motion.div className={styles.infraBox} {...fadeInUp}>
+          <m.div className={styles.infraBox} {...fadeInUp}>
             <h2>Strategic Infrastructure</h2>
             <p>With 15,000 MT of monthly capacity and 40,000 MT of ready stock, material from our Lakshupalli mine is crushed, screened and graded to size before dispatch.</p>
             <div className={styles.infraGrid}>
@@ -164,7 +165,7 @@ export default function About() {
                 <h4>Lab Verified</h4>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </div>

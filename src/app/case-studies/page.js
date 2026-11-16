@@ -2,7 +2,7 @@
 
 import styles from './cases.module.css';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const cases = [
   {
@@ -37,16 +37,16 @@ export default function CaseStudies() {
     <div className={styles.casesPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <motion.h1 variants={headVariant} initial="initial" animate="animate">Industrial Success Stories</motion.h1>
-          <motion.p variants={headVariant} initial="initial" animate="animate" transition={{ delay: 0.12 }}>
+          <m.h1 variants={headVariant} initial="initial" animate="animate">Industrial Success Stories</m.h1>
+          <m.p variants={headVariant} initial="initial" animate="animate" transition={{ delay: 0.12 }}>
             Real-world impact of Sumanth Minerals purity and reliability.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
       <section className={styles.casesList}>
         <div className="container">
-          <motion.div
+          <m.div
             className={styles.grid}
             variants={staggerContainer}
             initial="initial"
@@ -54,7 +54,7 @@ export default function CaseStudies() {
             viewport={{ once: true, amount: 0.15 }}
           >
             {cases.map((item, idx) => (
-              <motion.article key={idx} className={styles.caseCard} variants={headVariant}>
+              <m.article key={idx} className={styles.caseCard} variants={headVariant}>
                 <div className={styles.cardHeader}>
                   <span className={styles.client}>{item.client}</span>
                   <h2>{item.title}</h2>
@@ -76,9 +76,9 @@ export default function CaseStudies() {
                 <Link href="/contact" className={styles.cardCta}>
                   Request a similar quote <span aria-hidden="true">&rarr;</span>
                 </Link>
-              </motion.article>
+              </m.article>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

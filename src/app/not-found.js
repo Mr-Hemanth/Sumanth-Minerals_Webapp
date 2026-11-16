@@ -1,13 +1,13 @@
 'use client';
 import Link from 'next/link';
 import { Home, ArrowLeft, Search } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import styles from './not-found.module.css';
 
 export default function NotFound() {
   return (
     <div className={styles.notFoundContainer}>
-      <motion.div 
+      <m.div 
         className={styles.content}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -28,7 +28,7 @@ export default function NotFound() {
             Contact Support
           </Link>
         </div>
-      </motion.div>
+      </m.div>
       
       <div className={styles.background}>
         <div className={styles.circle1}></div>

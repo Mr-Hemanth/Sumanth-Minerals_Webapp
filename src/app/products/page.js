@@ -5,16 +5,20 @@ import Image from 'next/image';
 import styles from './products.module.css';
 import { CHEMISTRY as C, PHYSICAL as P } from '@/data/specs';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import RapidRFQModal from '@/components/RapidRFQModal';
 import CertificateModal from '@/components/CertificateModal';
+import lumpsImg from '../../../public/quartz_lumps.jpg';
+import fineImg from '../../../public/quartz_0_12.jpg';
+import mediumImg from '../../../public/quartz_12_30.jpg';
+import coarseImg from '../../../public/quartz_30_80.jpg';
 
 const products = [
   {
     id: 0,
     name: 'Quartz Lumps',
     type: 'Lump Quartz / Run-of-Mine',
-    image: '/quartz_lumps.jpg',
+    image: lumpsImg,
     description: 'Natural vein quartz lumps direct from our Lakshupalli mine, supplied in sizes to suit your furnace or crushing plant. With 99.27% SiO₂ and low LOI (0.10%), they suit ferro-silicon, silicomanganese and refractory production, or further crushing at your end.',
     specifications: [
       { label: 'Size Range', value: 'As per buyer requirement' },
@@ -36,7 +40,7 @@ const products = [
     id: 1,
     name: 'Quartz Grit 0–12 mm',
     type: 'Fine Grit / Industrial Filler',
-    image: '/quartz_0_12.jpg',
+    image: fineImg,
     description: 'Fine quartz grit, screened on vibrating sieves to keep oversize out. Suited to coloured glass batches, industrial fillers and foundry use where consistent particle size matters.',
     specifications: [
       { label: 'Size Range', value: '0–12 mm' },
@@ -58,7 +62,7 @@ const products = [
     id: 2,
     name: 'Quartz Grit 12–30 mm',
     type: 'Medium Grit / Ceramic Grade',
-    image: '/quartz_12_30.jpg',
+    image: mediumImg,
     description: 'Our standard grit size for ceramic and glass manufacturing. The 12–30 mm fraction balances handling, purity (99.27% SiO₂) and thermal stability for kilns and furnaces.',
     specifications: [
       { label: 'Size Range', value: '12–30 mm' },
@@ -81,7 +85,7 @@ const products = [
     id: 3,
     name: 'Quartz Grit 30–80 mm',
     type: 'Coarse Grit / Metallurgical Grade',
-    image: '/quartz_30_80.jpg',
+    image: coarseImg,
     description: 'Coarse quartz grit for metallurgical use. Its 99.27% SiO₂ content and low LOI (0.10%) suit ferro-silicon, silicomanganese and refractory production in electric arc and submerged arc furnaces.',
     specifications: [
       { label: 'Size Range', value: '30–80 mm' },
@@ -162,15 +166,15 @@ export default function Products() {
               <ChevronRight size={14} />
               <span>Products</span>
             </nav>
-            <motion.h1 {...fadeUp}>High-Purity Quartz Grades</motion.h1>
-            <motion.p {...fadeUp} transition={{ delay: 0.1 }}>
+            <h1 className="rise">High-Purity Quartz Grades</h1>
+            <p className="rise" style={{ "--rise-delay": "0.1s" }}>
               Quartz lumps and quartz grit in three sizes (0–12, 12–30 and 30–80 mm), direct from our own mine.
-            </motion.p>
-            <motion.div className={styles.headerBadges} {...fadeUp} transition={{ delay: 0.2 }}>
+            </p>
+            <div className={`${styles.headerBadges} rise`} style={{ "--rise-delay": "0.2s" }}>
               <span className={styles.hBadge}><FlaskConical size={13} /> 99.27% SiO₂</span>
               <span className={styles.hBadge}><ShieldCheck size={13} /> Lab Certified</span>
               <span className={styles.hBadge}><Factory size={13} /> 15,000 MT/Month</span>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -179,7 +183,7 @@ export default function Products() {
       <section className={styles.productList}>
         <div className="container">
           {products.map((product, index) => (
-            <motion.div
+            <m.div
               key={product.id}
               className={`${styles.productRow} ${index % 2 !== 0 ? styles.reverse : ''}`}
               initial={{ opacity: 0, y: 50 }}
@@ -192,6 +196,7 @@ export default function Products() {
                 <div className={styles.productImageBox}>
                   <Image
                     src={product.image}
+                    placeholder="blur"
                     alt={`${product.name} — ${product.type}`}
                     fill
                     sizes="(max-width: 992px) 100vw, 45vw"
@@ -259,7 +264,7 @@ export default function Products() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>
@@ -267,12 +272,12 @@ export default function Products() {
       {/* Comparison Table */}
       <section className={styles.comparisonSection}>
         <div className="container">
-          <motion.div className="section-title" {...fadeUp}>
+          <m.div className="section-title" {...fadeUp}>
             <span className="section-label">Grade Comparison</span>
             <h2>Side-by-Side Specifications</h2>
             <p>Lumps and all three grit sizes come from the same vein, analysed at 99.27% SiO₂ by Lucid Laboratories.</p>
-          </motion.div>
-          <motion.div className={styles.tableWrap} {...fadeUp}>
+          </m.div>
+          <m.div className={styles.tableWrap} {...fadeUp}>
             <table className={styles.compareTable}>
               <thead>
                 <tr>
@@ -304,14 +309,14 @@ export default function Products() {
                 ))}
               </tbody>
             </table>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       {/* Custom Orders Banner */}
       <section className={styles.customSection}>
         <div className="container">
-          <motion.div
+          <m.div
             className={styles.customBox}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -346,14 +351,14 @@ export default function Products() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       {/* Quality Banner */}
       <section className={styles.qualityBanner}>
         <div className="container">
-          <motion.div
+          <m.div
             className={styles.qualityBox}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -372,7 +377,7 @@ export default function Products() {
                 Request Certified Sample
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
