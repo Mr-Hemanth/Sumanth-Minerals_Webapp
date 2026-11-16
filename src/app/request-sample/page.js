@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import { Package, Truck, CheckCircle, Info } from 'lucide-react';
 import styles from './sample.module.css';
-import ParticleSizeVisualizer from '@/components/ParticleSizeVisualizer';
-import RapidRFQModal from '@/components/RapidRFQModal';
+import { INDUSTRIES } from '@/data/industries';
 
 export default function RequestSample() {
   const [formData, setFormData] = useState({
@@ -13,7 +12,7 @@ export default function RequestSample() {
     website: '',
     email: '',
     whatsapp: '',
-    industry: 'Glass',
+    industry: INDUSTRIES[0],
     monthlyRequirement: '',
     preferredSize: '12-30mm',
     country: '',
@@ -23,28 +22,6 @@ export default function RequestSample() {
 
   const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
-  const [rfqOpen, setRfqOpen] = useState(false);
-  const [rfqSeed, setRfqSeed] = useState({ industry: '', size: '' });
-
-  const openRFQ = (industry = '', size = '') => {
-    setRfqSeed({ industry, size });
-    setRfqOpen(true);
-  };
-
-  const gradeIds = ['0-12mm', '12-30mm', '30-80mm'];
-
-  const pickFraction = (gradeId, gradeName) => {
-    if (gradeIds.includes(gradeId)) {
-      setFormData((prev) => ({ ...prev, preferredSize: gradeId }));
-      setStatus({ type: 'success', message: `${gradeName} selected for sampling.` });
-      return;
-    }
-    setStatus({
-      type: 'notice',
-      message: 'Raw boulder run (100–400 mm) is quoted on request — mention it in your requirements and we will confirm sample availability.',
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -56,10 +33,11 @@ export default function RequestSample() {
         body: JSON.stringify({ ...formData, type: 'Sample Request' }),
       });
       if (res.ok) {
-        setStatus({ type: 'success', message: 'Sample request submitted! Our logistics team will contact you for shipping details.' });
+        const result = await res.json().catch(() => ({}));
+        setStatus({ type: 'success', message: 'Sample request submitted! Our logistics team will contact you for shipping details.', trackPath: result.trackPath });
         setFormData({ 
           name: '', jobTitle: '', company: '', website: '', 
-          email: '', whatsapp: '', industry: 'Glass', 
+          email: '', whatsapp: '', industry: INDUSTRIES[0], 
           monthlyRequirement: '', preferredSize: '12-30mm', country: '', address: '', fax: ''
         });
       } else {
@@ -75,12 +53,6 @@ export default function RequestSample() {
 
   return (
     <div className={styles.samplePage}>
-      <RapidRFQModal
-        isOpen={rfqOpen}
-        onClose={() => setRfqOpen(false)}
-        initialIndustry={rfqSeed.industry}
-        initialSize={rfqSeed.size}
-      />
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Request a Product Sample</h1>
@@ -160,12 +132,7 @@ export default function RequestSample() {
                   <div className={styles.formGroup}>
                     <label>Industry</label>
                     <select value={formData.industry} onChange={(e) => setFormData({...formData, industry: e.target.value})}>
-                      <option value="Glass">Glass Manufacturing</option>
-                      <option value="Electronics">Electronics / Semiconductors</option>
-                      <option value="Countertops">Engineered Stone / Countertops</option>
-                      <option value="Ceramics">Ceramics & Sanitaryware</option>
-                      <option value="Foundry">Foundry & Casting</option>
-                      <option value="Other">Other Industrial Use</option>
+                      {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
                   </div>
                   <div className={styles.formGroup}>
@@ -177,9 +144,10 @@ export default function RequestSample() {
                 <div className={styles.formGroup}>
                   <label>Quartz Grade Required</label>
                   <select value={formData.preferredSize} onChange={(e) => setFormData({...formData, preferredSize: e.target.value})}>
-                    <option value="0-12mm">0-12mm (Fine)</option>
-                    <option value="12-30mm">12-30mm (Medium)</option>
-                    <option value="30-80mm">30-80mm (Lump)</option>
+                    <option value="Lumps">Quartz Lumps</option>
+                    <option value="0-12mm">Quartz Grit 0–12 mm</option>
+                    <option value="12-30mm">Quartz Grit 12–30 mm</option>
+                    <option value="30-80mm">Quartz Grit 30–80 mm</option>
                   </select>
                 </div>
 
@@ -194,7 +162,12 @@ export default function RequestSample() {
                 </div>
                 
                 {status.message && (
-                  <div className={`${styles.status} ${styles[status.type]}`}>{status.message}</div>
+                  <div className={`${styles.status} ${styles[status.type]}`} role="status">
+                    {status.message}
+                    {status.trackPath && (
+                      <> <a href={status.trackPath} style={{ fontWeight: 700, textDecoration: 'underline' }}>Track your request</a> (we have also emailed you this link).</>
+                    )}
+                  </div>
                 )}
 
                 <button type="submit" className="btn btn-primary" disabled={loading}>
@@ -206,11 +179,6 @@ export default function RequestSample() {
         </div>
       </section>
 
-      <section className={styles.sizeInspector}>
-        <div className="container">
-          <ParticleSizeVisualizer onSelectGrade={pickFraction} onOpenRFQ={openRFQ} />
-        </div>
-      </section>
     </div>
   );
 }

@@ -66,7 +66,7 @@
 
 .headerTitle p {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin: 0.2rem 0 0 0;
 }
 
@@ -178,12 +178,12 @@
 }
 
 .methodCell {
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 0.82rem;
 }
 
 .unitCell {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.82rem;
 }
 
@@ -208,7 +208,7 @@
 .previewInfo p {
   margin: 0.25rem 0 0 0;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .pdfBtn {
@@ -243,7 +243,7 @@
 
 .footerText {
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .actionBtn {

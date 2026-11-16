@@ -15,8 +15,28 @@
   /* ─── Gold / Mineral Accent ─── */
   --gold:             #c8a84b;   /* Rich Gold */
   --gold-light:       #e2c97e;   /* Warm Gold */
-  --gold-dark:        #9c7a2e;   /* Deep Gold */
+  --gold-dark:        #85661c;   /* Deep Gold */
   --gold-glass:       rgba(200, 168, 75, 0.12);
+
+  /* ─── Mine palette (taken from the Lakshupalli site photos) ───
+     Laterite = iron-oxide soil of the quartz hills → primary action colour.
+     Sky      = Deccan sky → links and interactive accents.
+     Scrub    = bench vegetation → positive data (purity, checks).
+     Sand     = laterite dust → warm alternating section surface.
+     All text-on-white pairs below meet WCAG AA (≥ 4.5:1). */
+  --laterite:         #b5401c;
+  --laterite-dark:    #8f3013;
+  --laterite-light:   #e0734d;
+  --laterite-glass:   rgba(181, 64, 28, 0.10);
+  --sky:              #1f6ac2;
+  --sky-light:        #5aa0ee;
+  --sky-glass:        rgba(31, 106, 194, 0.10);
+  --scrub:            #2f7a3b;
+  --scrub-light:      #6fbf73;
+  --scrub-glass:      rgba(47, 122, 59, 0.10);
+  --sand:             #fbf1ea;
+  --sand-deep:        #f4e1d3;
+  --grad-strata:      linear-gradient(90deg, var(--laterite) 0 34%, #d98b5f 34% 52%, var(--sand-deep) 52% 70%, #ffffff 70% 100%);
 
   /* ─── Mineral Whites / Silica Tones ─── */
   --white:            #ffffff;
@@ -28,13 +48,13 @@
   /* ─── Text Hierarchy ─── */
   --text-primary:     #0a0f1c;   /* Near-black, refined */
   --text-secondary:   #2d3748;
-  --text-muted:       #718096;
-  --text-subtle:      #a0aec0;
+  --text-muted:       #55657a;
+  --text-subtle:      #5f6e82;
   --text-white:       #ffffff;
   --text-on-dark:     #e2e8f0;
 
   /* ─── Semantic Colors ─── */
-  --success:          #10b981;
+  --success:          #2f7a3b;
   --success-bg:       #ecfdf5;
   --warning:          #f59e0b;
   --warning-bg:       #fffbeb;
@@ -130,6 +150,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
+  position: relative; /* framer-motion useScroll measures against the root */
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
 }
@@ -153,13 +174,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--text-primary);
+  color: inherit; /* inherit so headings on dark sections turn white automatically */
   text-wrap: balance;
 }
 
 p {
   line-height: 1.75;
-  color: var(--text-secondary);
+  color: inherit;
   text-wrap: pretty;
 }
 
@@ -194,7 +215,7 @@ img {
    FOCUS & ACCESSIBILITY BASELINE
 ───────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 3px solid var(--sky);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -270,8 +291,7 @@ section {
   font-weight: 700;
   font-family: 'Outfit', sans-serif;
   font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.01em;
   transition: var(--transition);
   cursor: pointer;
   white-space: nowrap;
@@ -319,18 +339,18 @@ section {
   box-shadow: var(--shadow-primary);
 }
 
-/* Gold Accent */
+/* Laterite action button — the main call to action on every page */
 .btn-gold {
-  background: var(--grad-gold);
-  color: var(--primary-dark);
+  background: var(--laterite);
+  color: var(--white);
   border: none;
-  box-shadow: var(--shadow-gold);
+  box-shadow: 0 8px 24px rgba(181, 64, 28, 0.32);
 }
 
 .btn-gold:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(200, 168, 75, 0.45);
-  filter: brightness(1.05);
+  background: var(--laterite-dark);
+  box-shadow: 0 12px 32px rgba(181, 64, 28, 0.42);
 }
 
 /* White (on dark backgrounds) */
@@ -370,7 +390,7 @@ section {
 .btn-lg {
   padding: 1.1rem 2.5rem;
   font-size: 1rem;
-  letter-spacing: 1px;
+
 }
 
 .btn:active { transform: scale(0.97); }
@@ -379,13 +399,12 @@ section {
    SECTION TITLE
 ───────────────────────────────────────── */
 .section-label {
-  display: inline-block;
+  display: block;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--gold);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--laterite);
   margin-bottom: 1rem;
   position: relative;
 }
@@ -393,10 +412,12 @@ section {
 .section-label::before {
   content: '';
   display: inline-block;
-  width: 24px;
-  height: 2px;
-  background: var(--gold);
-  vertical-align: middle;
+  width: 9px;
+  height: 9px;
+  background: var(--laterite);
+  transform: rotate(45deg);
+  border-radius: 1px;
+  vertical-align: 0.1em;
   margin-right: 0.6rem;
 }
 
@@ -435,9 +456,9 @@ section {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 3px;
-  background: var(--grad-gold);
+  width: 64px;
+  height: 4px;
+  background: var(--grad-strata);
   border-radius: 2px;
 }
 
@@ -592,7 +613,7 @@ section {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.60);
+  color: rgba(255,255,255, 0.78);
   font-weight: 500;
   letter-spacing: 0.5px;
 }
@@ -837,6 +858,17 @@ section {
 /* ─────────────────────────────────────────
    REDUCED MOTION — honours the visitor's OS setting
 ───────────────────────────────────────── */
+/* Side-entry animations (x offsets) must never create a horizontal scrollbar on phones.
+   `clip` (unlike `hidden`) does not create a scroll container, so sticky elements keep working. */
+main { overflow-x: clip; position: relative; }
+
+/* Route change: quick fade, pure CSS so it runs before hydration */
+.page-enter { animation: pageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 

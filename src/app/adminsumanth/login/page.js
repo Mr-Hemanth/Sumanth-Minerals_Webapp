@@ -23,7 +23,7 @@ export default function AdminLogin() {
     });
 
     if (res?.error) {
-      setError('Invalid username or password');
+      setError('That email and password do not match. Check both and try again.');
       setLoading(false);
     } else {
       router.push('/adminsumanth');
@@ -35,11 +35,12 @@ export default function AdminLogin() {
     <div className={styles.loginPage}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.loginLogo}>
-          <h2>SUMANTH <span>ADMIN</span></h2>
+          <span className={styles.mark} aria-hidden="true" />
+          <h2>Sumanth Minerals <span>Sales desk</span></h2>
         </div>
-        <p>Access the Lead Intelligence Dashboard</p>
+        <p>Sign in to see today&apos;s calls, deals and buyer requests.</p>
         
-        {error && <div className={styles.loginError}>{error}</div>}
+        {error && <div className={styles.loginError} role="alert">{error}</div>}
         
         <div className={styles.inputGroup}>
           <label>Email</label>
@@ -65,8 +66,8 @@ export default function AdminLogin() {
           />
         </div>
         
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? 'Authenticating...' : 'Secure Login'}
+        <button type="submit" className={styles.loginBtn} disabled={loading}>
+          {loading ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
     </div>

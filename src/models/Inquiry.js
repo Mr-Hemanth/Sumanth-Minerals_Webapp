@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
 
 export const INQUIRY_TYPES = ['Inquiry', 'Sample Request', 'Bulk RFQ'];
-export const INQUIRY_STATUSES = ['New', 'Contacted', 'Sample Sent', 'Quoted', 'Won', 'Lost', 'Resolved'];
+// Order matters: this is the sales pipeline, left to right.
+export const PIPELINE = ['New', 'Contacted', 'Sample Sent', 'Quoted', 'Won', 'Lost'];
+// 'Resolved' is kept so leads saved before the pipeline existed stay valid.
+export const INQUIRY_STATUSES = [...PIPELINE, 'Resolved'];
+export const INCOTERMS = ['EXW', 'FCA', 'FOB', 'CFR', 'CIF', 'DAP'];
+export const CURRENCIES = ['USD', 'INR', 'EUR', 'AED'];
 
 const str = (max) => ({ type: String, trim: true, maxlength: max });
 
@@ -21,24 +26,34 @@ const InquirySchema = new mongoose.Schema({
   preferredSize: str(60),
   packaging: str(120),
   deliveryPort: str(160),
-  type: {
-    type: String,
-    enum: INQUIRY_TYPES,
-    default: 'Inquiry',
+  type: { type: String, enum: INQUIRY_TYPES, default: 'Inquiry' },
+  leadScore: { type: Number, default: 0 },
+  status: { type: String, enum: INQUIRY_STATUSES, default: 'New' },
+  statusHistory: [{ status: String, at: { type: Date, default: Date.now }, _id: false }],
+
+  // ── Sales desk (internal) ──
+  followUpAt: Date,
+  notes: [{ text: str(2000), at: { type: Date, default: Date.now } }],
+
+  // ── Shared with the buyer on their tracking page ──
+  trackingToken: { type: String, index: { unique: true, sparse: true } },
+  quote: {
+    pricePerMT: { type: Number, min: 0 },
+    currency: { type: String, enum: CURRENCIES },
+    incoterm: { type: String, enum: INCOTERMS },
+    port: str(120),
+    validUntil: Date,
+    terms: str(1000),
   },
-  leadScore: {
-    type: Number,
-    default: 0,
+  sample: {
+    courier: str(80),
+    trackingNumber: str(80),
+    dispatchedAt: Date,
   },
-  status: {
-    type: String,
-    enum: INQUIRY_STATUSES,
-    default: 'New',
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  buyerMessage: str(1500),
+
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.models.Inquiry || mongoose.model('Inquiry', InquirySchema);

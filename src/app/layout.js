@@ -3,15 +3,17 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import BackToTop from '@/components/BackToTop';
+import MobileActionBar from '@/components/MobileActionBar';
 import PageTransition from '@/components/PageTransition';
 
 export const metadata = {
+  metadataBase: new URL('https://sumanthminerals.com'),
   title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-  description: 'Sumanth Minerals is a direct quarry owner and processor of certified 99.27% pure silica vein quartz from Tadipatri, Andhra Pradesh, India. NABL accredited lab verified for global solar, glass, ceramic, and engineered stone manufacturing.',
-  keywords: 'Sumanth Minerals, Quartz supplier India, High purity quartz export, Tadipatri quartz mine Andhra Pradesh, Silica quartz 99% supplier, 99.27% SiO2 quartz, Industrial quartz grains, Lucid Laboratories quartz report',
+  description: 'Sumanth Minerals is a direct mine owner supplying 99.27% SiO2 silica vein quartz (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Andhra Pradesh, India. Independently lab-tested by Lucid Laboratories for glass, ceramic, ferro-alloy and engineered stone use.',
+  keywords: 'Sumanth Minerals, quartz lumps supplier, quartz grit, quartz for ferrosilicon, quartz lumps for silicon metal, quartz for ferroalloys, quartz for refractories, quartz for ceramic tiles, quartz for glass, foundry quartz, quartz for quartz powder plants, silica sand raw material, Quartz supplier India, High purity quartz export, Anantapur quartz mine Andhra Pradesh, Silica quartz 99% supplier, 99.27% SiO2 quartz, Industrial quartz grains, Lucid Laboratories quartz report',
   openGraph: {
     title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-    description: 'Premier supplier of 99% pure silica quartz for glass, ceramics, and silicon industries.',
+    description: 'Direct mine supplier of 99.27% SiO2 silica quartz for glass, ceramics and ferro-alloy industries.',
     url: 'https://sumanthminerals.com',
     siteName: 'Sumanth Minerals',
     locale: 'en_US',
@@ -23,28 +25,29 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-    description: 'Premier supplier of 99% pure silica quartz for glass, ceramics, and silicon industries.',
-    creator: '@sumanthminerals',
+    description: 'Direct mine supplier of 99.27% SiO2 silica quartz for glass, ceramics and ferro-alloy industries.',
   },
 };
 
 import { LanguageProvider } from '@/context/LanguageContext';
-import Preloader from '@/components/Preloader';
+import HideOnAdmin from '@/components/HideOnAdmin';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Preloader />
         <LanguageProvider>
           <a href="#main-content" className="skip-link">Skip to content</a>
-          <Navbar />
+          <HideOnAdmin><Navbar /></HideOnAdmin>
           <PageTransition>
             <main id="main-content" tabIndex={-1}>{children}</main>
           </PageTransition>
-          <Footer />
-          <WhatsAppButton />
-          <BackToTop />
+          <HideOnAdmin>
+            <Footer />
+            <WhatsAppButton />
+            <BackToTop />
+            <MobileActionBar />
+          </HideOnAdmin>
         </LanguageProvider>
       </body>
     </html>

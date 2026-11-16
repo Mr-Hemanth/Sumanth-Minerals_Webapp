@@ -15,7 +15,7 @@ const jobs = [
   },
   {
     title: 'Quality Control Lab Technician',
-    location: 'Lakshyampalli Office',
+    location: 'Lakshupalli Office',
     type: 'Full-Time',
     dept: 'Quality Assurance'
   },

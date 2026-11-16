@@ -6,17 +6,38 @@ import styles from './products.module.css';
 import { CHEMISTRY as C, PHYSICAL as P } from '@/data/specs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import InteractiveGradeMatcher from '@/components/InteractiveGradeMatcher';
 import RapidRFQModal from '@/components/RapidRFQModal';
 import CertificateModal from '@/components/CertificateModal';
 
 const products = [
   {
+    id: 0,
+    name: 'Quartz Lumps',
+    type: 'Lump Quartz / Run-of-Mine',
+    image: '/quartz_lumps.jpg',
+    description: 'Natural vein quartz lumps direct from our Lakshupalli mine, supplied in sizes to suit your furnace or crushing plant. With 99.27% SiO₂ and low LOI (0.10%), they suit ferro-silicon, silicomanganese and refractory production, or further crushing at your end.',
+    specifications: [
+      { label: 'Size Range', value: 'As per buyer requirement' },
+      { label: 'SiO₂ Purity', value: C.SiO2 },
+      { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
+      { label: 'Al₂O₃', value: C.Al2O3 },
+      { label: 'LOI', value: C.LOI },
+      { label: 'Fusion Point', value: '1713°C' },
+    ],
+    applications: [
+      { label: 'Ferro-Silicon', desc: 'Silica source for ferro-silicon smelting' },
+      { label: 'Silicomanganese', desc: 'Alloy production for special steels' },
+      { label: 'Refractories', desc: 'Silica feed for refractory manufacture' },
+      { label: 'Crushing & Grinding', desc: 'Feedstock for your own sizing or quartz powder plant' },
+    ],
+    tone: 'toneLump',
+  },
+  {
     id: 1,
-    name: 'Quartz 0–12 mm',
-    type: 'Fine Grade / Industrial Filler',
+    name: 'Quartz Grit 0–12 mm',
+    type: 'Fine Grit / Industrial Filler',
     image: '/quartz_0_12.jpg',
-    description: 'High-purity fine grade quartz, meticulously screened through vibrating sieves to ensure zero oversize. Ideal for specialized glass manufacturing, silicon metal production, and industrial fillers where particle consistency is paramount.',
+    description: 'Fine quartz grit, screened on vibrating sieves to keep oversize out. Suited to coloured glass batches, industrial fillers and foundry use where consistent particle size matters.',
     specifications: [
       { label: 'Size Range', value: '0–12 mm' },
       { label: 'SiO₂ Purity', value: C.SiO2 },
@@ -24,33 +45,28 @@ const products = [
       { label: 'Al₂O₃', value: C.Al2O3 },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
-      { label: 'Moisture', value: '< 0.5%' },
-      { label: 'Whiteness', value: '94%+' },
     ],
     applications: [
-      { label: 'Precision Glassware', desc: 'High-transparency glass requiring minimal iron' },
+      { label: 'Container Glass', desc: 'Green and amber bottle and jar glass' },
       { label: 'Industrial Fillers', desc: 'Paints, coatings, and rubber compounding' },
-      { label: 'Silicon Metal', desc: 'Precursor for metallurgical silicon production' },
+      { label: 'Foundry Sand', desc: 'Moulding and core sand applications' },
       { label: 'Investment Casting', desc: 'Shell mold and ceramic mold applications' },
-      { label: 'Optical Glass', desc: 'Ultra-clear optical and specialty glass manufacturing' },
     ],
     tone: 'toneFine',
   },
   {
     id: 2,
-    name: 'Quartz 12–30 mm',
-    type: 'Medium Grade / Ceramic Grade',
+    name: 'Quartz Grit 12–30 mm',
+    type: 'Medium Grit / Ceramic Grade',
     image: '/quartz_12_30.jpg',
-    description: 'The industry-standard for premium ceramic and glass manufacturing. Our 12–30mm grade offers the perfect balance of surface area, purity, and thermal stability for high-temperature kilns and glass furnaces, trusted by manufacturers across Asia and Europe.',
+    description: 'Our standard grit size for ceramic and glass manufacturing. The 12–30 mm fraction balances handling, purity (99.27% SiO₂) and thermal stability for kilns and furnaces.',
     specifications: [
       { label: 'Size Range', value: '12–30 mm' },
       { label: 'SiO₂ Purity', value: C.SiO2 },
       { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
       { label: 'Al₂O₃', value: C.Al2O3 },
-      { label: 'Whiteness', value: '95%+' },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
-      { label: 'Moisture', value: '< 0.5%' },
     ],
     applications: [
       { label: 'Vitrified Tiles', desc: 'Floor and wall tiles requiring uniform firing' },
@@ -63,10 +79,10 @@ const products = [
   },
   {
     id: 3,
-    name: 'Quartz 30–80 mm',
-    type: 'Large Grade / Lump Quartz',
+    name: 'Quartz Grit 30–80 mm',
+    type: 'Coarse Grit / Metallurgical Grade',
     image: '/quartz_30_80.jpg',
-    description: 'Premier lump quartz for metallurgical applications. Its high thermal shock resistance and ultra-low impurity profile make it the preferred choice for ferro-alloy, silicon metal, and high-temperature refractory production in electric arc and submerged arc furnaces.',
+    description: 'Coarse quartz grit for metallurgical use. Its 99.27% SiO₂ content and low LOI (0.10%) suit ferro-silicon, silicomanganese and refractory production in electric arc and submerged arc furnaces.',
     specifications: [
       { label: 'Size Range', value: '30–80 mm' },
       { label: 'SiO₂ Purity', value: C.SiO2 },
@@ -82,9 +98,8 @@ const products = [
       { label: 'Silicomanganese', desc: 'Alloy production for special steels' },
       { label: 'High-Temp Refractories', desc: 'Furnace lining and crucible construction' },
       { label: 'Water Filtration', desc: 'Industrial water treatment filter media' },
-      { label: 'Silicon Metal', desc: 'Grade 553 / 441 silicon metal smelting' },
     ],
-    tone: 'toneLump',
+    tone: 'toneCeramic',
   }
 ];
 
@@ -149,21 +164,14 @@ export default function Products() {
             </nav>
             <motion.h1 {...fadeUp}>High-Purity Quartz Grades</motion.h1>
             <motion.p {...fadeUp} transition={{ delay: 0.1 }}>
-              Engineered for precision. Certified for performance. Three standard grades serving the world's most demanding industrial sectors.
+              Quartz lumps and quartz grit in three sizes (0–12, 12–30 and 30–80 mm), direct from our own mine.
             </motion.p>
             <motion.div className={styles.headerBadges} {...fadeUp} transition={{ delay: 0.2 }}>
               <span className={styles.hBadge}><FlaskConical size={13} /> 99.27% SiO₂</span>
               <span className={styles.hBadge}><ShieldCheck size={13} /> Lab Certified</span>
-              <span className={styles.hBadge}><Factory size={13} /> 10,000 MT/Month</span>
+              <span className={styles.hBadge}><Factory size={13} /> 15,000 MT/Month</span>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Grade Matcher */}
-      <section className={styles.matcherSection}>
-        <div className="container">
-          <InteractiveGradeMatcher onOpenRFQ={openRFQ} onOpenCert={() => setCertOpen(true)} />
         </div>
       </section>
 
@@ -262,35 +270,36 @@ export default function Products() {
           <motion.div className="section-title" {...fadeUp}>
             <span className="section-label">Grade Comparison</span>
             <h2>Side-by-Side Specifications</h2>
-            <p>All three grades maintain our certified 99.27% SiO₂ purity standard.</p>
+            <p>Lumps and all three grit sizes come from the same vein, analysed at 99.27% SiO₂ by Lucid Laboratories.</p>
           </motion.div>
           <motion.div className={styles.tableWrap} {...fadeUp}>
             <table className={styles.compareTable}>
               <thead>
                 <tr>
                   <th>Parameter</th>
-                  <th>0–12 mm Fine</th>
-                  <th>12–30 mm Ceramic</th>
-                  <th>30–80 mm Lump</th>
+                  <th>Lumps</th>
+                  <th>Grit 0–12 mm</th>
+                  <th>Grit 12–30 mm</th>
+                  <th>Grit 30–80 mm</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  ['SiO₂ Purity', C.SiO2, C.SiO2, C.SiO2],
-                  ['Fe₂O₃', C.Fe2O3, C.Fe2O3, C.Fe2O3],
-                  ['Al₂O₃', C.Al2O3, C.Al2O3, C.Al2O3],
-                  ['Whiteness', '94%+', '95%+', '—'],
-                  ['Fusion Point', P.fusionPoint, P.fusionPoint, P.fusionPoint],
-                  ['LOI', C.LOI, C.LOI, C.LOI],
-                  ['Hardness (Mohs)', '7.0', '7.0', '7.0'],
-                  ['Specific Gravity', '2.65', '2.65', '2.65'],
-                  ['MOQ (FCL)', '25–28 MT', '25–28 MT', '25–28 MT'],
+                  ['Size', 'As required', '0–12 mm', '12–30 mm', '30–80 mm'],
+                  ['SiO₂ Purity', C.SiO2, C.SiO2, C.SiO2, C.SiO2],
+                  ['Fe₂O₃', C.Fe2O3, C.Fe2O3, C.Fe2O3, C.Fe2O3],
+                  ['Al₂O₃', C.Al2O3, C.Al2O3, C.Al2O3, C.Al2O3],
+                  ['Fusion Point', P.fusionPoint, P.fusionPoint, P.fusionPoint, P.fusionPoint],
+                  ['LOI', C.LOI, C.LOI, C.LOI, C.LOI],
+                  ['Hardness (Mohs)', '7.0', '7.0', '7.0', '7.0'],
+                  ['Specific Gravity', '2.65', '2.65', '2.65', '2.65'],
+                  ['MOQ (FCL)', '25–28 MT', '25–28 MT', '25–28 MT', '25–28 MT'],
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? styles.evenRow : ''}>
                     <td className={styles.paramCell}>{row[0]}</td>
-                    <td className={row[1].includes('99.27') ? styles.highlightCell : ''}>{row[1]}</td>
-                    <td className={row[2].includes('99.27') ? styles.highlightCell : ''}>{row[2]}</td>
-                    <td className={row[3].includes('99.27') ? styles.highlightCell : ''}>{row[3]}</td>
+                    {row.slice(1).map((v, j) => (
+                      <td key={j} className={v.includes('99.27') ? styles.highlightCell : ''}>{v}</td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -353,7 +362,7 @@ export default function Products() {
             <FlaskConical size={48} className={styles.qualIcon} />
             <h2>Every Batch. Certified & Documented.</h2>
             <p>
-              Sumanth Minerals accompanies every shipment with a <strong>Certificate of Analysis (CoA)</strong> from our in-house lab, verified by <strong>Lucid Laboratories Pvt. Ltd.</strong> Third-party inspection via SGS or Intertek is available upon buyer request.
+              Sumanth Minerals has its quartz independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad, and shares the full report with buyers Third-party inspection via SGS or Intertek is available upon buyer request.
             </p>
             <div className={styles.qualCtas}>
               <Link href="/quality" className="btn btn-white">

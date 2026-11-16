@@ -37,3 +37,8 @@
   opacity: 1;
   visibility: visible;
 }
+
+/* Phones use the bottom action bar instead */
+@media (max-width: 768px) {
+  .button { display: none; }
+}

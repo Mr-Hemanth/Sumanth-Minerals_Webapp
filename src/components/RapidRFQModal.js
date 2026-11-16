@@ -4,23 +4,28 @@ import { X, Send, MessageCircle, CheckCircle, ShieldCheck, Truck, Package } from
 import styles from "./RapidRFQModal.module.css";
 import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
 
+import { INDUSTRIES as INDUSTRY_OPTIONS } from "@/data/industries";
+
+const SIZE_OPTIONS = ["Lumps", "0–12 mm", "12–30 mm", "30–80 mm", "Custom Screened"];
+
 export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", initialSize = "" }) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
     email: "",
     whatsapp: "",
-    industry: initialIndustry || "Solar & Glass",
+    industry: initialIndustry || INDUSTRY_OPTIONS[0],
     preferredSize: initialSize || "12–30 mm",
     quantity: "500",
     packaging: "1 Ton Jumbo Bags (FIBC)",
-    deliveryPort: "Ex-Mine Pithead (Tadipatri, AP)",
+    deliveryPort: "Ex-Mine Pithead (Lakshupalli, AP)",
     message: "",
     fax: "" // honeypot — must stay empty
   });
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [trackPath, setTrackPath] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -43,6 +48,8 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
       });
 
       if (res.ok) {
+        const result = await res.json().catch(() => ({}));
+        setTrackPath(result.trackPath || null);
         setSuccess(true);
       } else {
         const result = await res.json().catch(() => ({}));
@@ -73,7 +80,7 @@ Please share your commercial terms and sample dispatch schedule.`;
         <div className={styles.header}>
           <div>
             <h3>Industrial Bulk RFQ & Commercial Terms</h3>
-            <p>Direct Mine Supply • Sumanth Minerals (Tadipatri, Andhra Pradesh)</p>
+            <p>Direct Mine Supply • Sumanth Minerals (Lakshupalli, Andhra Pradesh)</p>
           </div>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <X size={22} />
@@ -86,6 +93,9 @@ Please share your commercial terms and sample dispatch schedule.`;
               <CheckCircle size={56} className={styles.successIcon} />
               <h3>RFQ Successfully Received!</h3>
               <p>Our commercial desk at Sumanth Minerals will verify stock availability and prepare your official quotation with laboratory COA within 2 hours.</p>
+              {trackPath && (
+                <p><a href={trackPath} style={{ fontWeight: 700, textDecoration: 'underline' }}>Track your request</a>: see your quotation and sample status as they are updated. We have also emailed you this link.</p>
+              )}
               
               <div className={styles.whatsappFollowUp}>
                 <p>Need urgent pricing for an ongoing tender or immediate factory shipment?</p>
@@ -160,13 +170,11 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.industry}
                     onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                   >
-                    <option value="Solar & Photovoltaic Glass">Solar & Photovoltaic Glass</option>
-                    <option value="Engineered Quartz Slabs">Engineered Quartz Slabs & Countertops</option>
-                    <option value="Float & Container Glass">Float & Container Glass</option>
-                    <option value="Ceramics & Sanitaryware">Ceramics & Sanitaryware</option>
-                    <option value="Ferro-Silicon & Metallurgy">Ferro-Silicon & Metallurgy</option>
-                    <option value="Refractory & Foundry">Refractory & Foundry</option>
-                    <option value="Other / Processing">Other Specialized Use</option>
+                    {/* Buttons elsewhere can pre-fill context like "Freight Route: Rotterdam"; show it so the select matches what is submitted. */}
+                    {formData.industry && !INDUSTRY_OPTIONS.includes(formData.industry) && (
+                      <option value={formData.industry}>{formData.industry}</option>
+                    )}
+                    {INDUSTRY_OPTIONS.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                   </select>
                 </div>
 
@@ -176,10 +184,13 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.preferredSize}
                     onChange={(e) => setFormData({ ...formData, preferredSize: e.target.value })}
                   >
-                    <option value="0–12 mm">0–12 mm (Grit / Fine Filler)</option>
-                    <option value="12–30 mm">12–30 mm (Glass & Ceramic Standard)</option>
-                    <option value="30–80 mm">30–80 mm (Lump Quartz / Metallurgical)</option>
-                    <option value="Run-of-Mine Boulders">Run-of-Mine (ROM Boulders)</option>
+                    {formData.preferredSize && !SIZE_OPTIONS.includes(formData.preferredSize) && (
+                      <option value={formData.preferredSize}>{formData.preferredSize}</option>
+                    )}
+                    <option value="Lumps">Quartz Lumps (size as required)</option>
+                    <option value="0–12 mm">Quartz Grit 0–12 mm</option>
+                    <option value="12–30 mm">Quartz Grit 12–30 mm</option>
+                    <option value="30–80 mm">Quartz Grit 30–80 mm</option>
                     <option value="Custom Screened">Custom Mesh / Tailored Fraction</option>
                   </select>
                 </div>
@@ -204,7 +215,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.deliveryPort}
                     onChange={(e) => setFormData({ ...formData, deliveryPort: e.target.value })}
                   >
-                    <option value="Ex-Mine Pithead (Tadipatri, AP)">Ex-Mine Pithead (Tadipatri, Andhra Pradesh)</option>
+                    <option value="Ex-Mine Pithead (Lakshupalli, AP)">Ex-Mine Pithead (Lakshupalli, Andhra Pradesh)</option>
                     <option value="FOB Krishnapatnam Port">FOB Krishnapatnam Port (Deep-Water Export)</option>
                     <option value="FOB Chennai Port">FOB Chennai Port</option>
                     <option value="CIF International Port">CIF International Port (Specify below)</option>

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Globe, Package, Truck, ShieldCheck, Clock, ChevronRight, ArrowRight } from 'lucide-react';
 import styles from './export.module.css';
 import { motion } from 'framer-motion';
-import PortTransitEstimator from '@/components/PortTransitEstimator';
 import RapidRFQModal from '@/components/RapidRFQModal';
 
 const STEPS = [
@@ -23,7 +22,6 @@ const PACKAGING_NOTES = [
   { label: 'Port Access', desc: 'Short road transit to Krishnapatnam, Chennai, Ennore and Vizag.' },
 ];
 
-const MARKETS = ['South East Asia', 'Middle East', 'Europe', 'North America', 'East Asia'];
 
 const fadeUp = {
   initial: { opacity: 0, y: 26 },
@@ -101,13 +99,6 @@ export default function Export() {
         </div>
       </section>
 
-      {/* Interactive transit estimator — real buyer utility */}
-      <section className={styles.transitSection}>
-        <div className="container">
-          <PortTransitEstimator onOpenRFQ={openRFQ} />
-        </div>
-      </section>
-
       <section className={styles.packaging}>
         <div className="container">
           <div className={styles.packagingGrid}>
@@ -140,12 +131,12 @@ export default function Export() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
-                src="/quartz_grain_grades.jpg"
-                alt="Screened quartz grain grades prepared for jumbo bag packing"
+                src="/quartz_12_30.jpg"
+                alt="12–30 mm quartz grit from the Sumanth Minerals mine"
                 fill
                 sizes="(max-width: 992px) 100vw, 45vw"
               />
-              <span className={styles.imageCaption}>Sized, washed and screened before bagging</span>
+              <span className={styles.imageCaption}>12–30 mm quartz grit, ready for packing</span>
             </motion.div>
           </div>
         </div>
@@ -160,13 +151,8 @@ export default function Export() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2>Serving Global Industries</h2>
-            <p>Regions where Sumanth Minerals quartz is currently running in production lines:</p>
-            <div className={styles.countryGrid}>
-              {MARKETS.map((m, i) => (
-                <span key={i}>{m}</span>
-              ))}
-            </div>
+            <h2>Planning a shipment?</h2>
+            <p>Tell us your destination port and quantity. We quote with dispatch dates and the documents your customs team needs.</p>
             <div className={styles.bannerActions}>
               <Link href="/contact" className="btn btn-white">
                 Contact Sales Team <ArrowRight size={16} />

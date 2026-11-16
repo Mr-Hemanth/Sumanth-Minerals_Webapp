@@ -9,7 +9,7 @@ const newsItems = [
   {
     id: 1,
     date: 'March 15, 2024',
-    title: 'Mine Operations Optimized at Lakshyampalli',
+    title: 'Mine Operations Optimized at Lakshupalli',
     desc: 'Implementation of new screening technologies has improved our output consistency for the 0-12mm fine grade quartz.',
     category: 'Operations'
   },

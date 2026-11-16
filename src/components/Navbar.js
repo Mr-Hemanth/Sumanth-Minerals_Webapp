@@ -17,13 +17,9 @@ const PRIMARY_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { name: 'nav.sustainability', fallback: 'Sustainability', href: '/sustainability' },
   { name: 'nav.faq', fallback: 'FAQ', href: '/faq' },
   { name: 'downloads', fallback: 'Downloads', href: '/downloads' },
   { name: 'gallery', fallback: 'Photo Gallery', href: '/gallery' },
-  { name: 'case_studies', fallback: 'Case Studies', href: '/case-studies' },
-  { name: 'blog', fallback: 'Industry Insights', href: '/blog' },
-  { name: 'careers', fallback: 'Careers', href: '/careers' },
 ];
 
 const LANGUAGES = [

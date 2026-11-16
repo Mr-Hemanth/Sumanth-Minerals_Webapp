@@ -28,8 +28,8 @@ export default function CertificateModal({ isOpen, onClose }) {
           <div className={styles.headerTitle}>
             <Award className={styles.badgeIcon} size={28} />
             <div>
-              <h3>Certified NABL Laboratory Analysis</h3>
-              <p>Lucid Laboratories Pvt. Ltd. • Sample Tested: Natural Quartz Vein</p>
+              <h3>Independent Laboratory Analysis</h3>
+              <p>Lucid Laboratories Pvt. Ltd. • Sample: Quartz</p>
             </div>
           </div>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
@@ -41,7 +41,7 @@ export default function CertificateModal({ isOpen, onClose }) {
           <div className={styles.certMeta}>
             <div className={styles.metaBadge}>
               <CheckCircle2 size={16} />
-              <span>NABL Accredited Testing Facility</span>
+              <span>Report No. LL/25-26/009401/1</span>
             </div>
             <div className={styles.metaBadge}>
               <FileCheck size={16} />

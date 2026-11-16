@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { Award, Users, Globe, Target, ShieldCheck, Factory, History, TrendingUp } from 'lucide-react';
 import styles from './about.module.css';
 import { motion } from 'framer-motion';
@@ -26,9 +27,9 @@ export default function About() {
 
   const stats = [
     { label: 'Founded', value: '2025' },
-    { label: 'Production', value: '10k Tons/Mo' },
-    { label: 'Mining Area', value: '50+ Acres' },
-    { label: 'Global Clients', value: 'Industrial' }
+    { label: 'Production', value: '15,000 MT/Mo' },
+    { label: 'Ready Stock', value: '40,000 MT' },
+    { label: 'SiO₂ (Lab-Tested)', value: '99.27%' }
   ];
 
   return (
@@ -49,10 +50,10 @@ export default function About() {
               <div className={styles.accent}>OUR VISION</div>
               <h2>Global Leadership in Silica Purity</h2>
               <p>
-                Founded in 2025, Sumanth Minerals was established to bridge the gap between high-demand industrial sectors and raw mineral quality. With our flagship mines located in Lakshyampalli, Anantapur—a region globally renowned for its high-grade quartz deposits—we have rapidly scaled our operations to become a premier supplier for international markets.
+                Founded in 2025, Sumanth Minerals was established to bridge the gap between high-demand industrial sectors and raw mineral quality. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
               </p>
               <p>
-                Our mission is to provide the most consistent, high-purity silica quartz while maintaining a zero-carbon-footprint vision for our mining and processing facilities.
+                Our mission is to provide the most consistent, high-purity silica quartz, graded to size and backed by independent lab analysis.
               </p>
             </motion.div>
             <motion.div 
@@ -114,7 +115,7 @@ export default function About() {
         <div className="container">
           <div className={styles.valuesGrid}>
             <motion.div className={styles.valueImage} {...fadeInUp}>
-              <div className={styles.placeholderImg}>CORPORATE EXCELLENCE</div>
+              <Image src="/quartz_12_30.jpg" alt="12–30 mm graded quartz from the Sumanth Minerals mine" width={800} height={600} sizes="(max-width: 900px) 100vw, 50vw" style={{ width: '100%', height: 'auto', borderRadius: 20 }} />
             </motion.div>
             <motion.div className={styles.valueContent} {...fadeInUp}>
               <h2>Built on Industrial Integrity</h2>
@@ -136,7 +137,7 @@ export default function About() {
                 <Users size={24} />
                 <div>
                   <h4>Local Empowerment</h4>
-                  <p>Over 80% of our workforce is sourced from the local Tadipatri and Anantapur regions.</p>
+                  <p>We hire locally from the villages around our Peddavaduguru mine.</p>
                 </div>
               </div>
             </motion.div>
@@ -148,15 +149,15 @@ export default function About() {
         <div className="container">
           <motion.div className={styles.infraBox} {...fadeInUp}>
             <h2>Strategic Infrastructure</h2>
-            <p>Our Anantapur processing unit is equipped with high-intensity magnetic separators and custom-built vibratory screens capable of processing 500 tons of material per day, ensuring that the purity extracted from our Lakshyampalli mines is preserved until it reaches the buyer.</p>
+            <p>With 15,000 MT of monthly capacity and 40,000 MT of ready stock, material from our Lakshupalli mine is crushed, screened and graded to size before dispatch.</p>
             <div className={styles.infraGrid}>
               <div className={styles.infraItem}>
                 <Award size={32} />
-                <h4>ISO Certified</h4>
+                <h4>GST Registered</h4>
               </div>
               <div className={styles.infraItem}>
                 <Globe size={32} />
-                <h4>Export Licensed</h4>
+                <h4>Export-Ready</h4>
               </div>
               <div className={styles.infraItem}>
                 <Target size={32} />

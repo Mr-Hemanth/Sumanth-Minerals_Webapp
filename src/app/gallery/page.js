@@ -6,36 +6,44 @@ import { X, ZoomIn, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './gallery.module.css';
 
-const categories = ['All', 'Mine', 'Grades', 'Plant', 'Reports'];
+const categories = ['All', 'Mine', 'Grades', 'Reports'];
 
 const images = [
   {
     id: 1,
-    src: '/quartz_mine_aerial.jpg',
+    src: '/mine-site-hillside-v3.jpg',
     category: 'Mine',
-    title: 'Open-cast quarry, Tadipatri belt',
-    note: 'Bench extraction across the licensed 50+ acre lease area.',
+    title: 'Mine site, Lakshupalli',
+    note: 'Quartz-bearing hillside and working benches at our Peddavaduguru mine.',
     span: 'wide',
   },
   {
     id: 2,
-    src: '/quartz_crystal_hero.jpg',
+    src: '/mine-site-bench.jpg',
     category: 'Mine',
-    title: 'Hydrothermal quartz vein',
-    note: 'White vein quartz selected before crushing.',
+    title: 'Working bench',
+    note: 'Haul road and exposed vein outcrop on the bench face.',
+    span: 'tall',
+  },
+  {
+    id: 8,
+    src: '/quartz_lumps.jpg',
+    category: 'Grades',
+    title: 'Quartz lumps',
+    note: 'Natural vein quartz lumps at the mine, before sizing.',
   },
   {
     id: 3,
     src: '/quartz_0_12.jpg',
     category: 'Grades',
-    title: '0–12 mm fine grade',
+    title: 'Quartz grit 0–12 mm',
     note: 'Screened fraction for glass and filler use.',
   },
   {
     id: 4,
     src: '/quartz_12_30.jpg',
     category: 'Grades',
-    title: '12–30 mm ceramic grade',
+    title: 'Quartz grit 12–30 mm',
     note: 'Standard fraction for tiles and sanitaryware.',
     span: 'tall',
   },
@@ -43,23 +51,15 @@ const images = [
     id: 5,
     src: '/quartz_30_80.jpg',
     category: 'Grades',
-    title: '30–80 mm lump grade',
-    note: 'Lump quartz for ferro-alloy smelting.',
-  },
-  {
-    id: 6,
-    src: '/quartz_grain_grades.jpg',
-    category: 'Plant',
-    title: 'Sieve classification',
-    note: 'Multi-deck vibratory screening output.',
-    span: 'wide',
+    title: 'Quartz grit 30–80 mm',
+    note: 'Coarse grit for ferro-alloy smelting.',
   },
   {
     id: 7,
     src: '/lab-certificate.png',
     category: 'Reports',
     title: 'Certificate of analysis',
-    note: 'Lot certificate issued with every dispatch.',
+    note: 'Lucid Laboratories analysis, Report LL/25-26/009401/1 (Nov 2025).',
   },
 ];
 
@@ -74,7 +74,7 @@ export default function Gallery() {
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Mine, plant and product</h1>
-          <p>Photographs from our Tadipatri quarry, screening plant and quality lab — the same material that ships to you.</p>
+          <p>Photographs of our graded quartz and lab report — the same material that ships to you.</p>
         </div>
       </section>
 
@@ -144,7 +144,7 @@ export default function Gallery() {
         <div className="container">
           <div className={styles.ctaBox}>
             <h2>Visit the mine and plant</h2>
-            <p>We welcome buyers and their inspection agencies to Tadipatri. Tell us your dates and we will arrange the site round.</p>
+            <p>We welcome buyers and their inspection agencies to our Lakshupalli mine. Tell us your dates and we will arrange the site round.</p>
             <Link href="/contact" className="btn btn-primary">
               Schedule a Visit <ArrowRight size={16} />
             </Link>

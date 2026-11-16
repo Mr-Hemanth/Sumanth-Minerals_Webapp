@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, FileText } from 'lucide-react';
 import styles from './contact.module.css';
 import { useLanguage } from '@/context/LanguageContext';
-import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
+import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
+import { INDUSTRIES } from '@/data/industries';
 
 export default function Contact() {
   const { dict } = useLanguage();
@@ -41,7 +42,8 @@ export default function Contact() {
       });
 
       if (res.ok) {
-        setStatus({ type: 'success', message: dict?.contact?.success || 'Thank you! Your inquiry has been sent successfully.' });
+        const result = await res.json().catch(() => ({}));
+        setStatus({ type: 'success', message: dict?.contact?.success || 'Thank you! Your inquiry has been sent successfully.', trackPath: result.trackPath });
         setFormData({
           name: '',
           company: '',
@@ -86,8 +88,15 @@ export default function Contact() {
                 <div className={styles.infoItem}>
                   <MapPin size={24} />
                   <div>
-                    <h4>{dict?.contact?.registered_office || 'Mine & Registered Office'}</h4>
-                    <p>Lakshyampalli, Peddavaduguru Mandal, Anantapur District, Andhra Pradesh - 515411, India</p>
+                    <h4>Office</h4>
+                    <p>Saroja Skyland, 402, Maruthi Nagar, Ananthapur Road, Gooty – 515401, Andhra Pradesh, India</p>
+                  </div>
+                </div>
+                <div className={styles.infoItem}>
+                  <MapPin size={24} />
+                  <div>
+                    <h4>Mine</h4>
+                    <p>Lakshupalli, Medimakula Palli, Peddavaduguru, Andhra Pradesh – 515405, India</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
@@ -104,6 +113,13 @@ export default function Contact() {
                     <h4>{dict?.contact?.email_addr || 'Email Inquiries'}</h4>
                     <p>sales@sumanthminerals.com</p>
                     <p>exports@sumanthminerals.com</p>
+                  </div>
+                </div>
+                <div className={styles.infoItem}>
+                  <FileText size={24} />
+                  <div>
+                    <h4>GST Number</h4>
+                    <p>{GSTIN}</p>
                   </div>
                 </div>
               </div>
@@ -143,20 +159,17 @@ export default function Contact() {
                     <label>{dict?.contact?.industry || 'Industry / Application'} *</label>
                     <select name="industry" required value={formData.industry} onChange={handleChange} className={styles.select}>
                       <option value="">Select Industry</option>
-                      <option value="Glass">Glass Manufacturing</option>
-                      <option value="Ceramics">Ceramics & Sanitaryware</option>
-                      <option value="Silicon">Silicon & Ferro-Alloys</option>
-                      <option value="Foundry">Foundry / Castings</option>
-                      <option value="Other">Other Industrial Use</option>
+                      {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
                   </div>
                   <div className={styles.formGroup}>
                     <label>{dict?.contact?.preferred_size || 'Preferred Quartz Size'} *</label>
                     <select name="preferredSize" required value={formData.preferredSize} onChange={handleChange} className={styles.select}>
                       <option value="">Select Size</option>
-                      <option value="0-12mm">0-12 mm (Fine)</option>
-                      <option value="12-30mm">12-30 mm (Medium)</option>
-                      <option value="30-80mm">30-80 mm (Lumps)</option>
+                      <option value="Lumps">Quartz Lumps</option>
+                      <option value="0-12mm">Quartz Grit 0–12 mm</option>
+                      <option value="12-30mm">Quartz Grit 12–30 mm</option>
+                      <option value="30-80mm">Quartz Grit 30–80 mm</option>
                       <option value="Custom">Custom Grading</option>
                     </select>
                   </div>
@@ -183,8 +196,11 @@ export default function Contact() {
                 </div>
                 
                 {status.message && (
-                  <div className={`${styles.status} ${styles[status.type]}`}>
+                  <div className={`${styles.status} ${styles[status.type]}`} role="status">
                     {status.message}
+                    {status.trackPath && (
+                      <> <a href={status.trackPath} style={{ fontWeight: 700, textDecoration: 'underline' }}>Track your request</a> (we have also emailed you this link).</>
+                    )}
                   </div>
                 )}
 

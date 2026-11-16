@@ -5,7 +5,8 @@ import dbConnect from "@/lib/db";
 import Inquiry, { INQUIRY_TYPES } from "@/models/Inquiry";
 import { requireAdmin } from "@/lib/auth";
 import { scoreLead } from "@/lib/leadScore";
-import { notifyNewLead } from "@/lib/notify";
+import { notifyNewLead, sendBuyerConfirmation } from "@/lib/notify";
+import { newTrackingToken } from "@/lib/tracking";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 // Only these fields are accepted from the public forms. Anything else
@@ -61,6 +62,8 @@ export async function POST(req) {
   const invalid = validate(lead);
   if (invalid) return NextResponse.json({ success: false, error: invalid }, { status: 400 });
   lead.leadScore = scoreLead(lead);
+  lead.trackingToken = newTrackingToken();
+  lead.statusHistory = [{ status: "New", at: new Date() }];
 
   let saved = false;
   let conn = null;
@@ -72,7 +75,8 @@ export async function POST(req) {
 
   if (conn) {
     try {
-      await Inquiry.create(lead);
+      const doc = await Inquiry.create(lead);
+      lead._id = doc._id;
       saved = true;
     } catch (err) {
       // A validation error is a bug or bad input — fail loudly, don't hide it in a fallback file.
@@ -98,7 +102,11 @@ export async function POST(req) {
   }
 
   // Email the sales desk either way — if storage failed, the email is the backup copy.
-  const emailed = await notifyNewLead(lead);
+  const trackPath = saved ? `/track/${lead.trackingToken}` : null;
+  const [emailed] = await Promise.all([
+    notifyNewLead(lead),
+    saved ? sendBuyerConfirmation(lead) : Promise.resolve(false),
+  ]);
 
   if (!saved && !emailed) {
     return NextResponse.json(
@@ -106,7 +114,7 @@ export async function POST(req) {
       { status: 503 }
     );
   }
-  return NextResponse.json({ success: true }, { status: 201 });
+  return NextResponse.json({ success: true, trackPath }, { status: 201 });
 }
 
 export async function GET() {

@@ -5,17 +5,18 @@ import Image from 'next/image';
 import {
   ChevronRight, Award, ShieldCheck, Truck, BarChart, Zap, Globe,
   Layers, Droplets, Mountain, Factory, Activity, Microscope, Leaf,
-  Star, CheckCircle, ArrowRight, FlaskConical, FileText, Users
+  Star, CheckCircle, ArrowRight, FlaskConical, FileText, Users,
+  Flame, BrickWall, Hammer, Cog, Pickaxe, Ship
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './page.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import Magnetic from '@/components/Magnetic';
-import LiveMineStatusTicker from '@/components/LiveMineStatusTicker';
 import MiningProcessWorkflow from '@/components/MiningProcessWorkflow';
 import RapidRFQModal from '@/components/RapidRFQModal';
+import CountUp from '@/components/CountUp';
 import { CHEMISTRY as C } from '@/data/specs';
-import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
+import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from "@/data/contact";
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -55,65 +56,77 @@ export default function Home() {
   ];
 
   const industries = [
-    { icon: <Zap size={28} />, name: 'Solar Glass & PV', grade: '0–12 mm', desc: 'Ultra-low Fe₂O₃ content maximizes light transmittance for solar panels and photovoltaic glass.' },
-    { icon: <Layers size={28} />, name: 'Engineered Stone', grade: '12–30 mm', desc: 'Consistent whiteness (95%+) and Mohs 7 hardness for premium quartz countertops and surfaces.' },
-    { icon: <Droplets size={28} />, name: 'Advanced Ceramics', grade: '12–30 mm', desc: 'Superior thermal stability for vitrified tiles, sanitaryware, and electrical insulators.' },
-    { icon: <Activity size={28} />, name: 'Metallurgy', grade: '30–80 mm', desc: 'High fusion point (1713°C) lump quartz for ferro-silicon and silicomanganese smelting.' },
-    { icon: <Microscope size={28} />, name: 'Silicon Metal', grade: '0–12 mm / 30–80 mm', desc: 'Purity-grade quartz as precursor material in silicon metal and semiconductor production.' },
-    { icon: <Mountain size={28} />, name: 'Water Filtration', grade: '30–80 mm', desc: 'Graded filter media for industrial water treatment and purification systems.' },
+    { icon: <Flame size={28} />, name: 'Ferrosilicon', grade: 'Lumps / 30–80 mm', desc: 'Quartz lumps and coarse grit as the silica source for ferrosilicon smelting.' },
+    { icon: <Microscope size={28} />, name: 'Silicon Metal', grade: 'Lumps', desc: 'Lump quartz for silicon metal smelting. We share full chemistry so you can check it against your furnace spec.' },
+    { icon: <Activity size={28} />, name: 'Ferroalloys', grade: 'Lumps / 30–80 mm', desc: 'Silica feed for silicomanganese and other ferroalloy production.' },
+    { icon: <BrickWall size={28} />, name: 'Refractories', grade: '12–30 / 30–80 mm', desc: '99.27% SiO₂ and a 1713°C fusion point for silica bricks and furnace linings.' },
+    { icon: <Droplets size={28} />, name: 'Ceramics & Vitrified Tiles', grade: '0–12 / 12–30 mm', desc: 'Silica for tile bodies, glazes and sanitaryware.' },
+    { icon: <Layers size={28} />, name: 'Glass Manufacturing', grade: '0–12 mm', desc: 'Batch silica for container and coloured glass.' },
+    { icon: <Hammer size={28} />, name: 'Foundry & Steel Casting', grade: '0–12 mm', desc: 'Quartz grit for moulding, core and investment casting.' },
+    { icon: <Cog size={28} />, name: 'Quartz Powder & Silica Processing', grade: 'Lumps / Grit', desc: 'Consistent feedstock for grinding into quartz powder and micronised silica.' },
+    { icon: <Pickaxe size={28} />, name: 'Industrial Mineral Processing', grade: 'Lumps / Grit', desc: 'Raw quartz in the size your crushing or beneficiation plant needs.' },
+    { icon: <Mountain size={28} />, name: 'Silica Sand Manufacturing', grade: 'Lumps / 0–12 mm', desc: 'Feed for crushing and washing into graded silica sand.' },
+    { icon: <Ship size={28} />, name: 'Quartz Exporters', grade: 'All sizes', desc: 'Mine-direct supply with 40,000 MT of ready stock to fill your export orders.' },
+    { icon: <Truck size={28} />, name: 'Traders & Distributors', grade: 'All sizes', desc: 'Steady volumes of up to 15,000 MT a month, direct from the mine, for resale.' },
   ];
 
   const trustPoints = [
-    { icon: <ShieldCheck size={36} />, title: 'Certified 99.27% Purity', desc: 'Lab-certified by Lucid Laboratories Pvt. Ltd. with comprehensive batch reports.' },
-    { icon: <BarChart size={36} />, title: '10,000 Tons / Month', desc: 'Large-scale mining rights across 50+ acres ensuring uninterrupted industrial supply.' },
-    { icon: <Award size={36} />, title: 'Precision Graded', desc: 'Three standard grades: 0–12 mm, 12–30 mm, 30–80 mm. Custom sizes available.' },
+    { icon: <Mountain size={36} />, title: 'Our own mine', desc: 'Quartz comes straight from our mine at Lakshupalli, Peddavaduguru. No traders in between.' },
+    { icon: <FlaskConical size={36} />, title: 'Lab report shared', desc: 'Full Lucid Laboratories analysis (Report LL/25-26/009401/1) available to download.' },
+    { icon: <Award size={36} />, title: 'Lumps & Graded Grit', desc: 'Quartz lumps plus grit in 0–12 mm, 12–30 mm and 30–80 mm. Custom sizes available.' },
     { icon: <Truck size={36} />, title: 'Port-Ready Export', desc: 'Chennai, Krishnapatnam, Ennore & Vizag ports within efficient trucking distance.' },
   ];
 
   const features = [
-    'Direct ownership of 50+ acres of high-yield quartz mines',
-    'In-house washing, crushing, and precision screening facility',
-    'Zero-contamination magnetic separation process',
-    'Dedicated ISO 9001:2015 certified quality control laboratory',
-    'MSME registered & Export certified organization',
-    'Custom grading available for bulk orders (500+ tons)',
+    'Our own mine at Lakshupalli, Peddavaduguru — no traders in between',
+    '15,000 MT mined every month',
+    '40,000 MT of ready stock available for dispatch',
+    'Lumps sized to your requirement, plus 0–12, 12–30 and 30–80 mm grit',
+    'GST-registered firm, office in Gooty, Andhra Pradesh',
   ];
 
   const products = [
     {
+      size: 'Lumps',
+      type: 'Quartz Lumps — size as required',
+      image: '/quartz_lumps.jpg',
+      tone: 'toneLump',
+      specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, `LOI: ${C.LOI}`],
+      uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Crushing Feed'],
+    },
+    {
       size: '0–12 mm',
-      type: 'Fine / Industrial Filler Grade',
+      type: 'Quartz Grit — Fine',
       image: '/quartz_0_12.jpg',
       tone: 'toneFine',
       specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, 'Mohs: 7.0'],
-      uses: ['Precision Glassware', 'Industrial Fillers', 'Silicon Metal', 'Investment Casting'],
+      uses: ['Container Glass', 'Industrial Fillers', 'Foundry Sand', 'Investment Casting'],
     },
     {
       size: '12–30 mm',
-      type: 'Medium / Ceramic Grade',
+      type: 'Quartz Grit — Medium',
       image: '/quartz_12_30.jpg',
       tone: 'toneCeramic',
-      specs: ['SiO₂: 99.27%', 'Whiteness: 95%+', 'Moisture: <0.5%'],
+      specs: [`SiO₂: ${C.SiO2}`, `Al₂O₃: ${C.Al2O3}`, 'Mohs: 7.0'],
       uses: ['Vitrified Tiles', 'Sanitaryware', 'Artistic Glass', 'Silicon Carbide'],
     },
     {
       size: '30–80 mm',
-      type: 'Large Lump Grade',
+      type: 'Quartz Grit — Coarse',
       image: '/quartz_30_80.jpg',
-      tone: 'toneLump',
+      tone: 'toneCoarse',
       specs: [`SiO₂: ${C.SiO2}`, 'Fusion Pt: 1713°C', `LOI: ${C.LOI}`],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Water Filtration'],
     },
   ];
 
   const ports = [
-    { name: 'Chennai Port', route: 'South East Asia & Europe Gateway', distance: '~340 km' },
-    { name: 'Krishnapatnam Port', route: 'Deep-water bulk vessel hub', distance: '~180 km' },
-    { name: 'Ennore Port', route: 'North Indian & Middle East route', distance: '~320 km' },
-    { name: 'Vizag (VOPT)', route: 'East Asian industrial zones', distance: '~400 km' },
+    { name: 'Chennai Port', route: 'South East Asia & Europe Gateway', distance: '~400 km by road' },
+    { name: 'Krishnapatnam Port', route: 'Deep-water bulk vessel hub', distance: '~330 km by road' },
+    { name: 'Ennore Port', route: 'North Indian & Middle East route', distance: '~390 km by road' },
+    { name: 'Vizag (VOPT)', route: 'East Asian industrial zones', distance: '~800 km by road' },
   ];
 
-  const exportCountries = ['UAE', 'Germany', 'China', 'Vietnam', 'South Korea', 'Saudi Arabia', 'Netherlands', 'Bangladesh'];
 
   return (
     <div className={styles.home}>
@@ -129,14 +142,15 @@ export default function Home() {
             "@id": "https://sumanthminerals.com",
             "url": "https://sumanthminerals.com",
             "telephone": PHONE_PRIMARY.tel,
+            "taxID": GSTIN,
             "email": "sales@sumanthminerals.com",
-            "description": "Premier producer and exporter of 99.27% pure silica quartz from Lakshyampalli, Anantapur, Andhra Pradesh, India.",
+            "description": "Mine owner and supplier of 99.27% SiO₂ silica quartz from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India.",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Lakshyampalli, Peddavaduguru Mandal",
-              "addressLocality": "Anantapur",
+              "streetAddress": "Saroja Skyland, 402, Maruthi Nagar, Ananthapur Road",
+              "addressLocality": "Gooty",
               "addressRegion": "Andhra Pradesh",
-              "postalCode": "515411",
+              "postalCode": "515401",
               "addressCountry": "IN"
             },
             "geo": { "@type": "GeoCoordinates", "latitude": 15.027, "longitude": 77.722 },
@@ -144,9 +158,10 @@ export default function Home() {
               "@type": "OfferCatalog",
               "name": "High-Purity Quartz Products",
               "itemListElement": [
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz 0–12 mm Fine Grade" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz 12–30 mm Ceramic Grade" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz 30–80 mm Lump Grade" }}
+                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Lumps" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 0–12 mm" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 12–30 mm" }},
+                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 30–80 mm" }}
               ]
             }
           })
@@ -159,19 +174,17 @@ export default function Home() {
       <section className={styles.hero} ref={heroRef}>
         {/* Background with parallax */}
         <motion.div className={styles.heroBg} style={{ y: heroY }}>
+          <Image
+            src="/hero-stockpile.jpg"
+            alt="Stockpiles of graded quartz with conveyor stackers at the Sumanth Minerals mine"
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroImg}
+          />
           <div className={styles.heroOverlay} />
-          <div className={styles.heroParticles}>
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className={styles.particle}
-                animate={{ y: [0, -30, 0], opacity: [0.03, 0.12, 0.03] }}
-                transition={{ duration: 5 + i * 1.2, repeat: Infinity, delay: i * 0.8, ease: 'easeInOut' }}
-                style={{ left: `${10 + i * 16}%`, top: `${20 + (i % 3) * 25}%` }}
-              />
-            ))}
-          </div>
         </motion.div>
+        <div className={styles.heroStrata} aria-hidden="true" />
 
         <motion.div className={styles.heroContent} style={{ opacity: heroOpacity }}>
           <div className="container">
@@ -182,7 +195,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <span className={styles.badgeDot} />
-              {dict?.hero?.badge || 'DIRECT MINE OWNER · LAKSHYAMPALLI, ANANTAPUR, INDIA'}
+              {dict?.hero?.badge || 'DIRECT MINE OWNER · ANDHRA PRADESH, INDIA'}
             </motion.span>
 
             <div className={styles.heroTitle}>
@@ -203,7 +216,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.0, duration: 0.8 }}
             >
-              {dict?.hero?.subtitle || 'Direct mine-to-manufacturer supply of 99.27% pure silica quartz from our mines in Lakshyampalli, Anantapur. Lab-certified, precision-graded, and export-ready for global industrial manufacturers.'}
+              {dict?.hero?.subtitle || 'Direct mine-to-manufacturer supply of 99.27% pure silica quartz from our mine at Lakshupalli, Anantapur District. Lab-certified, precision-graded, and export-ready for global industrial manufacturers.'}
             </motion.p>
 
             <motion.div
@@ -214,12 +227,12 @@ export default function Home() {
             >
               <Magnetic>
                 <Link href="/contact" className="btn btn-gold btn-lg">
-                  {dict?.nav?.quote || 'Bulk Inquiry'} <ArrowRight size={18} />
+                  Get a quote <ArrowRight size={18} />
                 </Link>
               </Magnetic>
               <Magnetic>
                 <Link href="/request-sample" className="btn btn-outline-white btn-lg">
-                  {dict?.nav?.samples || 'Request Sample'}
+                  Request a sample
                 </Link>
               </Magnetic>
               <Link href="/quality" className={styles.certLink}>
@@ -235,23 +248,18 @@ export default function Home() {
               transition={{ delay: 1.4, duration: 0.8 }}
             >
               <div className={styles.statItem}>
-                <div className={styles.statNumber}>99.27%</div>
-                <div className={styles.statLabel}>{dict?.hero?.stat_silica || 'Silica Purity (SiO₂)'}</div>
+                <div className={styles.statNumber}><CountUp to={99.27} decimals={2} suffix="%" delay={1.4} /></div>
+                <div className={styles.statLabel}>SiO₂, lab-tested</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}>10,000+</div>
-                <div className={styles.statLabel}>{dict?.hero?.stat_production || 'Tons / Month Capacity'}</div>
+                <div className={styles.statNumber}><CountUp to={15000} suffix=" MT" delay={1.5} /></div>
+                <div className={styles.statLabel}>Mined per month</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}>50+</div>
-                <div className={styles.statLabel}>Acres Mining Area</div>
-              </div>
-              <div className={styles.statDivider} />
-              <div className={styles.statItem}>
-                <div className={styles.statNumber}>4</div>
-                <div className={styles.statLabel}>{dict?.hero?.stat_ports || 'Export Ports Access'}</div>
+                <div className={styles.statNumber}><CountUp to={40000} suffix=" MT" delay={1.6} /></div>
+                <div className={styles.statLabel}>Ready to dispatch</div>
               </div>
             </motion.div>
           </div>
@@ -267,8 +275,6 @@ export default function Home() {
           <span>Scroll</span>
         </motion.div>
       </section>
-
-      <LiveMineStatusTicker />
 
       {/* ════════════════════════════════════════
           TRUST STRIP
@@ -308,12 +314,12 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className={styles.aboutImageBox}>
-                <div className={styles.mineralPattern} />
+                <Image src="/quartz_lumps.jpg" alt="Quartz lumps at the Sumanth Minerals mine" fill sizes="(max-width: 992px) 100vw, 560px" className={styles.aboutPhoto} />
                 <div className={styles.aboutImageOverlay}>
                   <div className={styles.certBadge}>
                     <FlaskConical size={20} />
                     <div>
-                      <strong>Lucid Laboratories Certified</strong>
+                      <strong>Tested by Lucid Laboratories</strong>
                       <span>Report No: LL/25-26/009401/1</span>
                     </div>
                   </div>
@@ -321,11 +327,11 @@ export default function Home() {
                     <Factory size={18} />
                     <div>
                       <strong>Active Mining Operations</strong>
-                      <span>Tadipatri, Andhra Pradesh</span>
+                      <span>Lakshupalli, Andhra Pradesh</span>
                     </div>
                   </div>
                 </div>
-                <div className={styles.mineTag}>TADIPATRI MINING HUB</div>
+                <div className={styles.mineTag}>Lakshupalli mine</div>
               </div>
             </motion.div>
 
@@ -337,9 +343,9 @@ export default function Home() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="section-label">The Sumanth Advantage</span>
-              <h2>Scale, Purity &<br />Performance</h2>
+              <h2>Why buy from Sumanth Minerals</h2>
               <p>
-                As a <strong>direct mine owner</strong> in Lakshyampalli near Anantapur, Sumanth Minerals eliminates all middlemen. Our vertical integration from extraction at our Anantapur mines to global export ensures you receive the highest quality silica quartz at competitive B2B rates with guaranteed supply continuity.
+                We own the mine at Lakshupalli (Peddavaduguru Mandal, Anantapur District), so you buy <strong>straight from the source</strong>, with no traders adding cost or mixing material.
               </p>
 
               <ul className={styles.featureList}>
@@ -372,22 +378,22 @@ export default function Home() {
           <div className={styles.chemGrid}>
             <motion.div className={styles.chemContent} {...fadeUp}>
               <span className="section-label">Verified Lab Data</span>
-              <h2>Certified Chemical Composition</h2>
+              <h2>Lab-tested chemistry</h2>
               <p>
-                Every batch undergoes rigorous testing at our in-house laboratory, verified by <strong>Lucid Laboratories Pvt. Ltd.</strong> (IS 1917 Standard). Our 99.27% SiO₂ purity is consistently maintained across all product grades.
+                Our quartz has been independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad (IS 1917 methods and ICP-OES), confirming 99.27% SiO₂. The full report is available to download.
               </p>
               <div className={styles.certDetails}>
                 <div className={styles.certItem}>
                   <Star size={15} className={styles.starIcon} />
-                  <span>ISO 9001:2015 Certified</span>
+                  <span>Report No. LL/25-26/009401/1</span>
                 </div>
                 <div className={styles.certItem}>
                   <Star size={15} className={styles.starIcon} />
-                  <span>MSME Registered</span>
+                  <span>IS 1917 Test Methods</span>
                 </div>
                 <div className={styles.certItem}>
                   <Star size={15} className={styles.starIcon} />
-                  <span>Export Certified</span>
+                  <span>GST Registered</span>
                 </div>
               </div>
               <div className={styles.chemActions}>
@@ -410,7 +416,7 @@ export default function Home() {
               <div className={styles.tableHeader}>
                 <FlaskConical size={18} />
                 <span>Chemical Analysis Report</span>
-                <span className={styles.certTag}>Certified</span>
+                <span className={styles.certTag}>Lab-tested</span>
               </div>
               {chemicalData.map((row, i) => (
                 <motion.div
@@ -456,7 +462,7 @@ export default function Home() {
             <span className="section-label">Our Products</span>
             <h2>Precision-Graded Quartz</h2>
             <p>
-              Three standard grades engineered for diverse industrial applications, all maintaining 99%+ SiO₂ purity.
+              Quartz lumps and quartz grit in three sizes, all from the same vein at 99.27% SiO₂ (Lucid Laboratories).
             </p>
           </motion.div>
 
@@ -472,7 +478,7 @@ export default function Home() {
                     src={p.image}
                     alt={`${p.size} quartz — ${p.type}`}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
                     className={styles.productImage}
                   />
                   <span className={styles.sizeBadge}>{p.size}</span>
@@ -515,7 +521,7 @@ export default function Home() {
 
           <div className={styles.productsFootnote}>
             <span>Need a non-standard fraction?</span>
-            <Link href="/contact">Talk to a metallurgist →</Link>
+            <Link href="/contact">Talk to our sales team →</Link>
           </div>
         </div>
       </section>
@@ -528,14 +534,14 @@ export default function Home() {
           <motion.div className="section-title section-title--left" {...fadeUp}>
             <span className="section-label">Industries We Serve</span>
             <h2>Find your application</h2>
-            <p>Each sector runs on a different size fraction. Here is where our three grades are used most.</p>
+            <p>We supply manufacturers, processors and traders. Here is the size each sector usually buys.</p>
           </motion.div>
           <div className={styles.industriesGrid}>
             {industries.map((ind, i) => (
               <motion.div
                 key={ind.name}
-                className={`${styles.industryCard} ${i === 0 ? styles.industryFeatured : ''}`}
-                {...stagger(i * 0.08)}
+                className={styles.industryCard}
+                {...stagger((i % 3) * 0.08)}
               >
                 <div className={styles.industryIcon}>{ind.icon}</div>
                 <h3>{ind.name}</h3>
@@ -588,14 +594,6 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className={styles.exportCountries}>
-                <p className={styles.exportsLabel}>Currently exporting to:</p>
-                <div className={styles.countryTags}>
-                  {exportCountries.map((c, i) => (
-                    <span key={i} className={styles.countryTag}>{c}</span>
-                  ))}
-                </div>
-              </div>
             </motion.div>
 
             <motion.div
@@ -610,8 +608,8 @@ export default function Home() {
                 <div className={styles.globeRing} />
                 <div className={styles.globePing} />
                 <div className={styles.exportStat}>
-                  <strong>15+</strong>
-                  <span>Countries</span>
+                  <strong>40,000 MT</strong>
+                  <span>Ready Stock</span>
                 </div>
                 <div className={styles.exportStat2}>
                   <strong>FCL</strong>
@@ -633,32 +631,6 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════
-          COMPLIANCE & COMMUNITY
-      ════════════════════════════════════════ */}
-      <section className={styles.complianceStrip}>
-        <div className="container">
-          <motion.div className={styles.complianceGrid} {...fadeUp}>
-            {[
-              { icon: <Leaf size={22} />, title: 'Rehabilitated benches', note: 'Pit backfilling and native plantation alongside active extraction.' },
-              { icon: <Users size={22} />, title: '150+ local jobs', note: 'Direct employment drawn from the Tadipatri mining belt.' },
-              { icon: <ShieldCheck size={22} />, title: 'ISO 9001:2015', note: 'Documented quality control with third-party audit trail.' },
-            ].map((item) => (
-              <div key={item.title} className={styles.complianceItem}>
-                <span className={styles.complianceIcon}>{item.icon}</span>
-                <div>
-                  <strong>{item.title}</strong>
-                  <p>{item.note}</p>
-                </div>
-              </div>
-            ))}
-            <Link href="/sustainability" className={styles.complianceLink}>
-              Read the sustainability report <ArrowRight size={15} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════
           CALL TO ACTION
       ════════════════════════════════════════ */}
       <section className={styles.ctaSection}>
@@ -671,14 +643,11 @@ export default function Home() {
             transition={{ duration: 0.7 }}
           >
             <div className={styles.ctaContent}>
-              <motion.span className={styles.ctaLabel} {...stagger(0)}>
-                Ready to Partner?
-              </motion.span>
               <motion.h2 {...stagger(0.1)}>
-                Empower Your Production with<br />Premium Indian Silica Quartz
+                Get a price for your quartz
               </motion.h2>
               <motion.p {...stagger(0.2)}>
-                Join our global network of manufacturers. Request a certified lab sample today — shipped via DHL/FedEx, accompanied by our full analysis report.
+                Tell us the size and quantity you need. We reply with price, availability and dispatch dates, and can send a sample with the lab report first.
               </motion.p>
               <motion.div className={styles.ctaActions} {...stagger(0.3)}>
                 <Magnetic>
@@ -692,13 +661,6 @@ export default function Home() {
                   </Link>
                 </Magnetic>
               </motion.div>
-              <div className={styles.ctaStats}>
-                <div className={styles.ctaStat}><strong>24–48h</strong><span>Quote Turnaround</span></div>
-                <div className={styles.ctaStatDivider} />
-                <div className={styles.ctaStat}><strong>10–15 Days</strong><span>Port Delivery</span></div>
-                <div className={styles.ctaStatDivider} />
-                <div className={styles.ctaStat}><strong>25–28 MT</strong><span>FCL Capacity</span></div>
-              </div>
             </div>
           </motion.div>
         </div>

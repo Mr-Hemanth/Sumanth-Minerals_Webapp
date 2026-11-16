@@ -26,7 +26,7 @@
   justify-content: center;
   gap: 0.4rem;
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255, 0.78);
   margin-bottom: 1.5rem;
 }
 
@@ -199,7 +199,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #718096;
+  color: var(--text-muted);
   margin-bottom: 0.75rem;
   background: #f0f4f8;
   padding: 0.3rem 0.75rem;
@@ -293,7 +293,7 @@
 
 .appItem span {
   font-size: 0.78rem;
-  color: #718096;
+  color: var(--text-muted);
 }
 
 /* Actions */
@@ -375,7 +375,7 @@
 .highlightCell {
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 800 !important;
-  color: #10b981 !important;
+  color: var(--scrub) !important;
   font-size: 0.95rem !important;
 }
 

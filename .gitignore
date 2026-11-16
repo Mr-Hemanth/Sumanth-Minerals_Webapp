@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local lead fallback (contains customer data)
 inquiries_fallback.json
+.playwright-mcp/

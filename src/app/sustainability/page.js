@@ -45,7 +45,7 @@ export default function Sustainability() {
           <motion.div className={styles.introContent} {...fadeInUp}>
             <span className="section-label">Our Framework</span>
             <h2>Responsible Mining</h2>
-            <p>At Sumanth Minerals, industrial growth and environmental preservation are planned together. Our ESG framework is written into every stage of the operation — from vein selection at Lakshyampalli to final dispatch at port.</p>
+            <p>At Sumanth Minerals, industrial growth and environmental preservation are planned together. Our ESG framework is written into every stage of the operation — from vein selection at Lakshupalli to final dispatch at port.</p>
           </motion.div>
           <motion.div 
             className={styles.pillars}
@@ -62,7 +62,7 @@ export default function Sustainability() {
             <motion.div className={styles.pillar} variants={staggerItem}>
               <Heart size={40} />
               <h3>Social Impact</h3>
-              <p>Local employment, health camps, and school infrastructure support for communities around Lakshyampalli.</p>
+              <p>Local employment, health camps, and school infrastructure support for communities around Lakshupalli.</p>
             </motion.div>
             <motion.div className={styles.pillar} variants={staggerItem}>
               <ShieldCheck size={40} />
@@ -84,7 +84,7 @@ export default function Sustainability() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <Image
-                src="/quartz_mine_aerial.jpg"
+                src="/mine-site-hillside-v3.jpg"
                 alt="Aerial view of the Sumanth Minerals open-cast quartz bench at Tadipatri, Andhra Pradesh"
                 fill
                 sizes="(max-width: 992px) 100vw, 45vw"

@@ -1,34 +1,25 @@
 'use client';
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
+// Buttons lean slightly toward the cursor. Uses motion values, so mouse moves never
+// re-render React; does nothing on touch screens or with "reduce motion" on.
 export default function Magnetic({ children }) {
   const ref = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const reduce = useReducedMotion();
+  const x = useSpring(useMotionValue(0), { stiffness: 150, damping: 15, mass: 0.1 });
+  const y = useSpring(useMotionValue(0), { stiffness: 150, damping: 15, mass: 0.1 });
 
-  const handleMouse = (e) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.3, y: middleY * 0.3 });
+  const onMove = (e) => {
+    if (reduce || e.pointerType !== 'mouse' || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    x.set((e.clientX - (r.left + r.width / 2)) * 0.3);
+    y.set((e.clientY - (r.top + r.height / 2)) * 0.3);
   };
-
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const { x, y } = position;
+  const reset = () => { x.set(0); y.set(0); };
 
   return (
-    <motion.div
-      style={{ position: "relative" }}
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-    >
+    <motion.div ref={ref} style={{ position: 'relative', x, y }} onPointerMove={onMove} onPointerLeave={reset}>
       {children}
     </motion.div>
   );

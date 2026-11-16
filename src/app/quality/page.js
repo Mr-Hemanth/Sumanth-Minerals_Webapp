@@ -6,7 +6,6 @@ import styles from "./quality.module.css";
 import { motion } from "framer-motion";
 import CertificateModal from "@/components/CertificateModal";
 import RapidRFQModal from "@/components/RapidRFQModal";
-import PurityComparisonSimulator from "@/components/PurityComparisonSimulator";
 
 const headVariant = {
   initial: { opacity: 0, y: 24 },
@@ -38,18 +37,18 @@ const chemicalComposition = [
 const controlSteps = [
   {
     icon: <Microscope size={22} />,
-    title: "Vein Source Assay",
-    desc: "Geological mapping and diamond core drilling at our Lakshyampalli mines (Anantapur) to select pure white hydrothermal quartz veins prior to bench extraction."
+    title: "Clean quartz selected at the mine",
+    desc: "Quartz is picked from the vein at our Lakshupalli mine, keeping host rock and soil out of your material."
   },
   {
     icon: <Activity size={22} />,
-    title: "Multi-Stage Magnetic Beneficiation",
-    desc: "High-gradient magnetic separation removes trace iron filings and tramp metals after primary and secondary crushing."
+    title: "Independent lab analysis",
+    desc: "Lucid Laboratories, Hyderabad, measured 99.27% SiO₂ and 0.30% Fe₂O₃ (Report LL/25-26/009401/1). The full report is free to download."
   },
   {
     icon: <ShieldCheck size={22} />,
-    title: "Certified Batch Testing",
-    desc: "Composite sampling from each 1,000 MT heap lot sent for ICP-OES spectrometry and loss-on-ignition verification."
+    title: "Batch testing on request",
+    desc: "Want proof for your own lot? We can have a sample from your batch tested at an independent lab before dispatch."
   }
 ];
 
@@ -81,7 +80,7 @@ export default function Quality() {
             <span>Quality</span>
           </nav>
           <motion.h1 variants={headVariant} initial="initial" animate="animate">
-            Quality Assurance & NABL Analysis
+            Quality Assurance & Lab Analysis
           </motion.h1>
           <motion.p
             variants={headVariant}
@@ -110,9 +109,9 @@ export default function Quality() {
           <div className={styles.grid}>
             <motion.div className={styles.textContent} {...inView}>
               <span className="section-label">Mine to dispatch</span>
-              <h2>Three checkpoints, every lot</h2>
+              <h2>How we check quality</h2>
               <p>
-                Chemical purity and sizing consistency form the foundation of our buyer relationships. Every consignment is sampled and cross-verified against IS 1917 Bureau of Indian Standards and international ASTM glass and ceramic guidelines.
+                Our chemistry comes from an independent lab report, not from our own claims. Download it, then test a sample in your own plant before you order.
               </p>
 
               <div className={styles.steps}>
@@ -172,12 +171,6 @@ export default function Quality() {
               </p>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      <section className={styles.simulatorSection}>
-        <div className="container">
-          <PurityComparisonSimulator onOpenRFQ={openRFQ} />
         </div>
       </section>
 

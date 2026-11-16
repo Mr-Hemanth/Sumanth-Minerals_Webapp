@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Youtube, ArrowRight, FlaskConical, Shield } from 'lucide-react';
 import styles from './Footer.module.css';
 import { useLanguage } from '@/context/LanguageContext';
-import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
+import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
 
 const Footer = () => {
   const { dict } = useLanguage();
@@ -38,21 +38,18 @@ const Footer = () => {
                 <span className={styles.logoText}>UMANTH <span>MINERALS</span></span>
               </Link>
               <p className={styles.brandDesc}>
-                {dict?.footer?.desc || 'Premier producer and exporter of 99.27% high-purity silica quartz from our owned mines in Lakshyampalli, Anantapur. We serve global glass, ceramic, and metallurgical industries with uncompromising quality.'}
+                {dict?.footer?.desc || 'Premier producer and exporter of 99.27% high-purity silica quartz from our owned mine at Lakshupalli, Anantapur District. We serve global glass, ceramic, and metallurgical industries with uncompromising quality.'}
               </p>
               <div className={styles.gstNo} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', marginBottom: '1rem' }}>
-                GST No: 37ABZFS7102H1ZN
+                GST No: {GSTIN}
               </div>
 
               <div className={styles.certBadges}>
                 <span className={styles.certBadge}>
-                  <Shield size={13} /> ISO 9001:2015
+                  <Shield size={13} /> Lab-Tested 99.27% SiO₂
                 </span>
                 <span className={styles.certBadge}>
-                  <Shield size={13} /> MSME Registered
-                </span>
-                <span className={styles.certBadge}>
-                  <Shield size={13} /> Export Certified
+                  <Shield size={13} /> GST Registered
                 </span>
               </div>
 
@@ -68,10 +65,6 @@ const Footer = () => {
               <h3>{dict?.footer?.company || 'Company'}</h3>
               <ul>
                 <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/sustainability">Sustainability & ESG</Link></li>
-                <li><Link href="/careers">Careers</Link></li>
-                <li><Link href="/news">News & Media</Link></li>
-                <li><Link href="/case-studies">Case Studies</Link></li>
                 <li><Link href="/gallery">Photo Gallery</Link></li>
               </ul>
             </div>
@@ -86,7 +79,6 @@ const Footer = () => {
                 <li><Link href="/faq">FAQ</Link></li>
                 <li><Link href="/downloads">Technical Downloads</Link></li>
                 <li><Link href="/request-sample">Request Sample</Link></li>
-                <li><Link href="/blog">Industry Insights</Link></li>
               </ul>
             </div>
 
@@ -97,8 +89,15 @@ const Footer = () => {
                 <li>
                   <MapPin size={16} />
                   <div>
-                    <strong>Mine & Registered Office</strong>
-                    <span>Lakshyampalli, Peddavaduguru Mandal,<br />Anantapur District, Andhra Pradesh - 515411, India</span>
+                    <strong>Office</strong>
+                    <span>Saroja Skyland, 402, Maruthi Nagar,<br />Ananthapur Road, Gooty – 515401,<br />Andhra Pradesh, India</span>
+                  </div>
+                </li>
+                <li>
+                  <MapPin size={16} />
+                  <div>
+                    <strong>Mine</strong>
+                    <span>Lakshupalli, Medimakula Palli,<br />Peddavaduguru, Andhra Pradesh – 515405</span>
                   </div>
                 </li>
                 <li>
@@ -134,7 +133,7 @@ const Footer = () => {
           <div className={styles.bottom}>
             <p>
               &copy; {currentYear} Sumanth Minerals. {dict?.footer?.rights || 'All rights reserved.'}
-              <span className={styles.tagline}> | Powered by Purity</span>
+
             </p>
             <div className={styles.legal}>
               <Link href="/privacy">Privacy Policy</Link>

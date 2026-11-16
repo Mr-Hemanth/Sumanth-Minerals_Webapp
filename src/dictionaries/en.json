@@ -7,9 +7,9 @@
     "send_inquiry": "Send Inquiry"
   },
   "hero": {
-    "badge": "ESTABLISHED 2025 • LAKSHYAMPALLI, INDIA",
-    "title": "Unmatched Purity. Global Industrial Scale.",
-    "subtitle": "Direct mine-to-manufacturer supply of 99% pure silica quartz. Strategically located near major shipping hubs for seamless global export.",
+    "badge": "ESTABLISHED 2025 • ANDHRA PRADESH, INDIA",
+    "title": "Quartz lumps and grit, direct from our mine.",
+    "subtitle": "99.27% SiO₂ silica quartz from Lakshupalli, Andhra Pradesh. 15,000 MT mined a month and 40,000 MT ready to dispatch.",
     "stat_silica": "Silica (SiO2)",
     "stat_production": "Tons / Month",
     "stat_ports": "Global Ports"
@@ -49,7 +49,7 @@
     "success": "Thank you! Your inquiry has been sent successfully."
   },
   "footer": {
-    "desc": "Leading producer and exporter of high-purity Quartz from India.",
+    "desc": "Mine-direct supplier of quartz lumps and quartz grit (99.27% SiO₂) from Lakshupalli, Andhra Pradesh.",
     "company": "Company",
     "resources": "Resources",
     "get_in_touch": "Get in Touch",

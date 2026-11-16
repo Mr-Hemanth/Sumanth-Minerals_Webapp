@@ -15,5 +15,7 @@ export const PHONE_SECONDARY = {
 
 export const EMAIL_SALES = 'sales@sumanthminerals.com';
 
+export const GSTIN = '37ABZFS7102H1ZN';
+
 export const whatsappUrl = (text = '') =>
   `https://wa.me/${PHONE_PRIMARY.wa}${text ? `?text=${encodeURIComponent(text)}` : ''}`;

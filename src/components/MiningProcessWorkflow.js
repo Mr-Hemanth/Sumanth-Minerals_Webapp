@@ -1,91 +1,85 @@
 'use client';
-import { useState } from "react";
-import Image from "next/image";
-import { Pickaxe, Mountain, Magnet, Filter, Droplets, Scale, CheckCircle2 } from "lucide-react";
-import styles from "./MiningProcessWorkflow.module.css";
+import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Mountain, Pickaxe, Filter, Truck } from 'lucide-react';
+import styles from './MiningProcessWorkflow.module.css';
 
+// Only steps the business has confirmed: own mine, lumps + 3 grit sizes,
+// weighbridge at the mine (visible in the site photos), truck dispatch.
 const steps = [
   {
-    step: "01",
-    title: "Vein Mapping & Controlled Bench Extraction",
-    icon: <Mountain size={24} />,
-    desc: "Targeting pure white hydrothermal quartz veins in the Tadipatri mineral belt with diamond-core assay before systematic bench extraction."
+    title: 'Mined at Lakshupalli',
+    icon: <Mountain size={22} />,
+    desc: 'Quartz is extracted from the vein at our own mine in Peddavaduguru, Andhra Pradesh.',
   },
   {
-    step: "02",
-    title: "Pit-Head Boulder Sorting",
-    icon: <Pickaxe size={24} />,
-    desc: "Heavy hydraulic excavators and rock-breakers select clean, unweathered vein boulders while discarding host country rock and clay."
+    title: 'Sorted at the pit',
+    icon: <Pickaxe size={22} />,
+    desc: 'Lumps are sorted to keep the quartz clean of host rock and soil.',
   },
   {
-    step: "03",
-    title: "Two-Stage Low-Attrition Crushing",
-    icon: <Filter size={24} />,
-    desc: "Primary jaw and secondary cone crushers calibrated to maintain cubic grain morphology, minimizing friable dust generation."
+    title: 'Sized to order',
+    icon: <Filter size={22} />,
+    desc: 'Supplied as lumps, or crushed and screened to 0–12, 12–30 or 30–80 mm grit.',
   },
   {
-    step: "04",
-    title: "High-Gradient Magnetic Beneficiation",
-    icon: <Magnet size={24} />,
-    desc: "Rare-earth neodymium cross-belt magnetic separators continuously extract microscopic tramp iron particles to safeguard 0.30% Fe2O3 purity."
+    title: 'Weighed and dispatched',
+    icon: <Truck size={22} />,
+    desc: 'Each load is weighed on our weighbridge at the mine and trucked to your plant or port.',
   },
-  {
-    step: "05",
-    title: "Multi-Deck Vibratory Sizing & Dust Washing",
-    icon: <Droplets size={24} />,
-    desc: "High-frequency screening decks classify material precisely into 0–12mm, 12–30mm, and 30–80mm with pressurized de-dusting sprays."
-  },
-  {
-    step: "06",
-    title: "Electronic Weighbridge & Lot COA Certification",
-    icon: <Scale size={24} />,
-    desc: "Certified digital weighbridge gross-tare measurement and lot sampling for NABL testing before stuffing in 1 MT UV Jumbo Bags."
-  }
 ];
 
 export default function MiningProcessWorkflow() {
-  const [activeStep, setActiveStep] = useState(0);
+  const reduce = useReducedMotion();
+  const reveal = (i) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.4 },
+          transition: { duration: 0.55, delay: 0.25 + i * 0.15, ease: [0.22, 1, 0.36, 1] },
+        };
 
   return (
-    <div className={styles.workflowContainer}>
-      <div className={styles.workflowHeader}>
-        <div className={styles.badgeTag}>BENCH-TO-PORT QUALITY PIPELINE</div>
-        <h2>Integrated Mining & Beneficiation Workflow</h2>
-        <p>Direct mine-to-plant control ensures that every shipment meets verified 99.27% SiO₂ standards with zero intermediate handling contamination.</p>
+    <div className={styles.workflow}>
+      <div className={styles.header}>
+        <span className="section-label">From our mine to your plant</span>
+        <h2>How your quartz is supplied</h2>
+        <p>Everything starts at our own mine, so you deal with one supplier from pit to delivery.</p>
       </div>
 
-      <div className={styles.aerialBox}>
-        <div className={styles.aerialWrapper}>
-          <Image
-            src="/quartz_mine_aerial.jpg"
-            alt="Sumanth Minerals Tadipatri open-cast quartz quarry bench face"
-            fill
-            priority
-            sizes="(max-width: 992px) 100vw, 900px"
-            className={styles.aerialImg}
-          />
-          <div className={styles.aerialTag}>
-            <span>Direct Pit-Head Extraction: Tadipatri Quartz Belt, Andhra Pradesh</span>
-          </div>
-        </div>
+      <div className={styles.photo}>
+        <Image
+          src="/mine-plant.jpg"
+          alt="Crushing and screening plant with conveyors and quartz stockpiles at the Sumanth Minerals mine, Lakshupalli"
+          fill
+          sizes="(max-width: 1240px) 100vw, 1176px"
+          className={styles.photoImg}
+        />
+        <span className={styles.photoTag}>Our mine at Lakshupalli, Peddavaduguru</span>
       </div>
 
-      <div className={styles.stepGrid}>
-        {steps.map((s, idx) => (
-          <div 
-            key={idx} 
-            className={`${styles.stepCard} ${activeStep === idx ? styles.activeCard : ""}`}
-            onClick={() => setActiveStep(idx)}
-          >
-            <div className={styles.stepCardHeader}>
-              <span className={styles.stepNum}>{s.step}</span>
-              <div className={styles.stepIconBox}>{s.icon}</div>
-            </div>
-            <h4>{s.title}</h4>
+      <ol className={styles.timeline}>
+        <motion.span
+          className={styles.track}
+          aria-hidden="true"
+          initial={reduce ? false : { scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        />
+        {steps.map((s, i) => (
+          <motion.li key={s.title} className={styles.step} {...reveal(i)}>
+            <span className={styles.marker}>
+              {s.icon}
+              <span className={styles.num}>{i + 1}</span>
+            </span>
+            <h3>{s.title}</h3>
             <p>{s.desc}</p>
-          </div>
+          </motion.li>
         ))}
-      </div>
+      </ol>
     </div>
   );
 }
