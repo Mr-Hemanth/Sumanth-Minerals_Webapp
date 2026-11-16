@@ -93,7 +93,7 @@ export default function Careers() {
         <div className="container">
           <div className={styles.cvBox}>
             <h3>Don’t see a matching role?</h3>
-            <p>Send your CV to <strong>hr@sumanthminerals.com</strong> and we’ll contact you when a suitable position opens.</p>
+            <p>Send your CV to <strong>info@sumanthminerals.com</strong> and we’ll contact you when a suitable position opens.</p>
           </div>
         </div>
       </section>

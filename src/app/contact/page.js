@@ -113,7 +113,7 @@ export default function Contact() {
                   <div>
                     <h4>{dict?.contact?.email_addr || 'Email Inquiries'}</h4>
                     <p>sales@sumanthminerals.com</p>
-                    <p>exports@sumanthminerals.com</p>
+                    <p>export@sumanthminerals.com</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>

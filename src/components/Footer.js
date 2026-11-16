@@ -113,7 +113,7 @@ const Footer = () => {
                   <div>
                     <strong>Email</strong>
                     <a href="mailto:sales@sumanthminerals.com">sales@sumanthminerals.com</a>
-                    <a href="mailto:exports@sumanthminerals.com">exports@sumanthminerals.com</a>
+                    <a href="mailto:export@sumanthminerals.com">export@sumanthminerals.com</a>
                   </div>
                 </li>
               </ul>

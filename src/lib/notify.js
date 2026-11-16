@@ -1,3 +1,4 @@
+import { EMAIL_SALES } from "@/data/contact";
 import nodemailer from "nodemailer";
 import { trackingUrl, leadRef, typePhrase } from "@/lib/tracking";
 
@@ -80,7 +81,8 @@ export async function sendBuyerConfirmation(lead) {
     await transporter.sendMail({
       from: `"Sumanth Minerals" <${process.env.EMAIL_USER}>`,
       to: lead.email,
-      replyTo: process.env.LEAD_NOTIFY_TO || process.env.EMAIL_USER,
+      // Buyer replies go to the sales address (routed to the team inbox), not the sending Gmail.
+      replyTo: EMAIL_SALES,
       subject: `We received your ${typePhrase(lead.type)} (ref ${ref}) — Sumanth Minerals`,
       html: `<div style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#0E2238;max-width:560px">
         <p>Dear ${esc(lead.name)},</p>
