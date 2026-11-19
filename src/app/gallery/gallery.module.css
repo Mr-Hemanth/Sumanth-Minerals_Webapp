@@ -1,3 +1,8 @@
+/* ═══════════════════════════════════════════════════════════
+   Gallery — base styles are the desktop tier (1281–1599px).
+   Device tiers follow at the bottom of the file.
+   ═══════════════════════════════════════════════════════════ */
+
 /* ─── Header ─── */
 .pageHeader {
   background: var(--grad-hero);
@@ -16,6 +21,17 @@
     radial-gradient(circle at 20% 25%, rgba(200, 168, 75, 0.12) 0%, transparent 50%),
     radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 0);
   background-size: 100% 100%, 26px 26px;
+}
+
+/* Strata band along the bottom edge of the header */
+.pageHeader::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--grad-strata);
 }
 
 .pageHeader > * {
@@ -51,8 +67,6 @@
   gap: 10px;
   margin-bottom: 44px;
   flex-wrap: wrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .filterBar button {
@@ -60,6 +74,7 @@
   align-items: center;
   gap: 8px;
   background: var(--white);
+  min-height: 44px;
   padding: 10px 20px;
   border-radius: var(--radius-full);
   font-weight: 600;
@@ -69,13 +84,7 @@
   border: 1px solid var(--border-light);
   cursor: pointer;
   white-space: nowrap;
-  transition: var(--transition-fast);
-}
-
-.filterBar button:hover {
-  color: var(--primary);
-  border-color: var(--primary-light);
-  transform: translateY(-1px);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .filterBar button:focus-visible {
@@ -109,27 +118,21 @@
 .imageGrid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
   grid-auto-rows: 260px;
+  grid-auto-flow: dense;
+  gap: 20px;
 }
 
+/* The figure is moved by framer-motion (layout), so the hover lift lives on
+   the inner button — the two transforms never fight. */
 .imageCard {
   position: relative;
   grid-column: span 2;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--primary-dark);
-  box-shadow: var(--shadow-sm);
   margin: 0;
 }
 
-.cardWide {
-  grid-column: span 4;
-}
-
-.cardTall {
-  grid-row: span 2;
-}
+.cardWide { grid-column: span 4; }
+.cardTall { grid-row: span 2; }
 
 .imageButton {
   position: absolute;
@@ -138,29 +141,21 @@
   height: 100%;
   padding: 0;
   border: 0;
-  background: none;
-  cursor: pointer;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-sm);
+  cursor: zoom-in;
   display: block;
 }
 
 .imageButton:focus-visible {
   outline: 3px solid var(--gold);
-  outline-offset: -3px;
+  outline-offset: 3px;
 }
 
 .gridImage {
   object-fit: cover;
-  transition: transform 0.7s var(--ease-spring), filter 0.45s ease;
-}
-
-.imageButton:hover .gridImage,
-.imageButton:focus-visible .gridImage {
-  transform: scale(1.05);
-  filter: saturate(1.08);
-}
-
-.imageButton:active .gridImage {
-  transform: scale(1.02);
 }
 
 .imageOverlay {
@@ -178,10 +173,7 @@
   transition: opacity 0.4s var(--ease-spring);
 }
 
-.imageButton:hover .imageOverlay,
-.imageButton:focus-visible .imageOverlay {
-  opacity: 1;
-}
+.imageButton:focus-visible .imageOverlay { opacity: 1; }
 
 .imageOverlay h4 {
   color: var(--white);
@@ -227,17 +219,17 @@
   color: var(--text-muted);
 }
 
-.galleryNote a {
+.noteLink {
+  position: relative;
   color: var(--primary);
   font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 1px;
-  transition: var(--transition-fast);
-}
-
-.galleryNote a:hover {
-  color: var(--primary-light);
+  padding-bottom: 2px;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  transition: color 0.25s ease, background-size 0.35s var(--ease-spring);
 }
 
 /* ─── Visit CTA ─── */
@@ -279,10 +271,8 @@
 .ctaBox p {
   font-size: 1.02rem;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
   max-width: 620px;
-  margin-left: auto;
-  margin-right: auto;
   text-wrap: pretty;
 }
 
@@ -291,21 +281,20 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  background: rgba(0, 15, 32, 0.92);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 15, 32, 0.94);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(16px, 4vw, 48px);
+  padding: clamp(16px, 4vw, 48px) clamp(72px, 7vw, 110px);
   cursor: zoom-out;
+  overscroll-behavior: contain;
 }
 
-.lightboxClose {
+.lightboxClose,
+.lightboxNav {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
   border-radius: var(--radius-full);
@@ -313,37 +302,54 @@
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
-  transition: var(--transition-fast);
-  z-index: 2;
+  z-index: 3;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, scale 0.15s ease;
 }
 
-.lightboxClose:hover {
-  background: var(--gold);
-  color: var(--primary-dark);
-  border-color: var(--gold);
+.lightboxClose {
+  top: max(20px, env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+}
+
+.lightboxNav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightboxPrev { left: max(16px, env(safe-area-inset-left)); }
+.lightboxNext { right: max(16px, env(safe-area-inset-right)); }
+
+.lightboxClose:focus-visible,
+.lightboxNav:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .lightboxInner {
   max-width: 1100px;
   width: 100%;
-  max-height: 86vh;
+  max-height: 88vh;
+  max-height: 88dvh;
   display: flex;
   flex-direction: column;
-  gap: 0;
   background: var(--white);
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: default;
   box-shadow: var(--shadow-xl);
+  touch-action: pan-y;
 }
 
 .lightboxImage {
   width: 100%;
   height: auto;
-  max-height: 62vh;
+  max-height: 64vh;
+  max-height: 64dvh;
   object-fit: contain;
   background: var(--snow);
   display: block;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .lightboxCaption {
@@ -353,6 +359,18 @@
   align-items: flex-start;
   gap: 7px;
   border-top: 1px solid var(--border-light);
+}
+
+.captionTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lightboxCount {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 .lightboxCaption h4 {
@@ -367,66 +385,248 @@
   margin: 0;
 }
 
-/* ─── Responsive ─── */
-@media (max-width: 992px) {
+/* ═══════════════════════════ Device tiers ═══════════════════════════ */
+
+/* Tier: large desktop (≥1600px) — five-column bento that packs the full set
+   into two tall rows with no gaps */
+@media (min-width: 1600px) {
+  .pageHeader { padding: 180px 0 90px; }
+  .pageHeader h1 { font-size: 3.6rem; }
+  .pageHeader p { font-size: 1.2rem; max-width: 760px; }
+  .galleryContent { padding: 100px 0 90px; }
+
   .imageGrid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 240px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 300px;
+    gap: 24px;
   }
+  .imageCard { grid-column: span 1; }
+  .cardWide { grid-column: span 2; }
+  .cardTall { order: -1; } /* tall photos lead, so the full set packs 5×2 */
+  .imageOverlay { padding: 30px; }
+  .imageOverlay h4 { font-size: 1.2rem; }
+  .imageOverlay p { font-size: 0.92rem; }
 
-  .imageCard,
-  .cardWide {
-    grid-column: span 1;
-  }
+  .ctaBox { padding: 72px 80px; }
+  .lightboxInner { max-width: 1320px; }
+  .lightboxImage { max-height: 70vh; max-height: 70dvh; }
+}
 
-  .cardWide {
-    grid-column: span 2;
-  }
+/* Tier: laptop (≤1280px) */
+@media (max-width: 1280px) {
+  .pageHeader { padding: 150px 0 64px; }
+  .imageGrid { grid-auto-rows: 230px; gap: 18px; }
+}
 
-  .cardTall {
-    grid-row: span 1;
+/* Tier: tablet (≤1024px) — four-column bento, captions always visible */
+@media (max-width: 1024px) {
+  .pageHeader { padding: 136px 0 60px; }
+  .galleryContent { padding: 64px 0 60px; }
+  .filterBar { margin-bottom: 32px; }
+
+  .imageGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 210px;
+    gap: 16px;
   }
+  .imageCard { grid-column: span 2; }
+  .cardWide { grid-column: span 4; }
+  .cardTall { grid-row: span 2; }
 
   .imageOverlay {
     opacity: 1;
+    padding: 18px;
+    background: linear-gradient(180deg, rgba(0, 26, 51, 0) 50%, rgba(0, 20, 40, 0.85) 100%);
   }
+  .imageOverlay p { display: none; }
+  .zoomHint { display: none; }
+
+  .ctaBox { padding: 48px 40px; }
 }
 
+/* Tier: large phone / small portrait tablet (≤768px) — two-column masonry,
+   swipeable filter chips */
 @media (max-width: 768px) {
-  .pageHeader {
-    padding: 130px 0 56px;
-  }
-
-  .galleryContent {
-    padding: 56px 0 50px;
-  }
+  .pageHeader { padding: 124px 0 52px; }
+  .galleryContent { padding: 48px 0 44px; }
 
   .filterBar {
     justify-content: flex-start;
     flex-wrap: nowrap;
-    padding-bottom: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1.25rem 24px;
+    padding: 2px 1.25rem 6px;
   }
+  .filterBar::-webkit-scrollbar { display: none; }
+  .filterBar button { scroll-snap-align: start; flex-shrink: 0; }
 
-  .ctaBox {
-    padding: 44px 26px;
+  .imageGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+    gap: 12px;
+  }
+  .imageCard { grid-column: span 1; }
+  .cardWide { grid-column: span 2; }
+  .cardTall { grid-row: span 2; }
+
+  .imageOverlay { padding: 12px; gap: 6px; }
+  .imageOverlay h4 { font-size: 0.92rem; line-height: 1.3; }
+  .categoryTag { font-size: 0.75rem; letter-spacing: 1px; padding: 2px 8px; }
+
+  .galleryNote { margin-top: 28px; }
+
+  .ctaBox { padding: 40px 24px; border-radius: var(--radius-md); }
+  .ctaBox p { margin-bottom: 24px; }
+
+  /* Lightbox: photo on top, controls along the bottom within thumb reach */
+  .lightbox { padding: 64px 12px 84px; }
+  .lightboxInner { max-height: 100%; }
+  .lightboxImage { max-height: 58vh; max-height: 58dvh; }
+  .lightboxCaption { padding: 14px 16px 16px; }
+  .lightboxNav {
+    top: auto;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    transform: none;
+  }
+  .lightboxPrev { left: calc(50% - 60px); }
+  .lightboxNext { right: calc(50% - 60px); }
+  .lightboxClose { top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); }
+}
+
+/* Tier: phone (≤576px) */
+@media (max-width: 576px) {
+  .pageHeader { padding: 112px 0 44px; }
+  .pageHeader p { font-size: 1rem; }
+  .filterBar { margin: 0 -1rem 20px; padding: 2px 1rem 6px; scroll-padding-inline: 1rem; }
+  .filterBar button { padding: 8px 16px; font-size: 0.88rem; }
+
+  .imageGrid { grid-auto-rows: 150px; gap: 10px; }
+  .imageButton { border-radius: var(--radius-sm); }
+}
+
+/* Tier: small phone (≤380px, 320 wide) */
+@media (max-width: 380px) {
+  .filterBar { margin: 0 -0.875rem 18px; padding: 2px 0.875rem 6px; scroll-padding-inline: 0.875rem; }
+  .imageGrid { grid-auto-rows: 128px; gap: 8px; }
+  .imageOverlay { padding: 10px; }
+  .imageOverlay h4 { font-size: 0.85rem; }
+  .categoryTag { display: none; }
+  .ctaBox { padding: 32px 18px; }
+}
+
+/* Tier: landscape phone — short header, four-column strip, side-by-side lightbox */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pageHeader { padding: 92px 0 32px; }
+  .pageHeader h1 { font-size: 1.9rem; margin-bottom: 8px; }
+  .pageHeader p { font-size: 0.95rem; }
+  .galleryContent { padding: 32px 0; }
+  .filterBar { margin-bottom: 20px; }
+
+  .imageGrid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 150px;
+    gap: 10px;
+  }
+  .imageCard { grid-column: span 1; }
+  .cardWide { grid-column: span 2; }
+  .cardTall { grid-row: span 2; }
+  .imageOverlay { padding: 10px; }
+  .imageOverlay h4 { font-size: 0.88rem; }
+
+  .lightbox {
+    padding: 12px max(76px, calc(env(safe-area-inset-right) + 64px)) 12px max(76px, calc(env(safe-area-inset-left) + 64px));
+  }
+  .lightboxInner {
+    flex-direction: row;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+  .lightboxImage {
+    width: auto;
+    max-width: 66%;
+    /* height:100% can't resolve against a max-height parent, so cap it directly */
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+    height: auto;
+    object-fit: contain;
+    flex: 1 1 66%;
+  }
+  .lightboxCaption {
+    flex: 0 0 34%;
+    border-top: 0;
+    border-left: 1px solid var(--border-light);
+    justify-content: center;
+    overflow-y: auto;
+  }
+  .lightboxNav { top: 50%; bottom: auto; transform: translateY(-50%); }
+  .lightboxPrev { left: max(12px, env(safe-area-inset-left)); }
+  .lightboxNext { right: max(12px, env(safe-area-inset-right)); }
+  .lightboxClose { top: 12px; right: max(12px, env(safe-area-inset-right)); }
+}
+
+/* Tier: touch — tap targets and press feedback instead of hover */
+@media (hover: none) {
+  .imageOverlay { opacity: 1; }
+  .imageButton { transition: transform 0.12s ease; }
+  .imageButton:active { transform: scale(0.97); }
+  .filterBar button:active { transform: scale(0.96); }
+
+  /* Inline link becomes a proper tap block */
+  .noteLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 6px 4px;
+    padding: 0 18px;
+    border: 1px solid var(--gold);
+    border-radius: var(--radius-full);
+    background: var(--white);
+    background-image: none;
+  }
+  .noteLink:active { transform: scale(0.97); }
+  /* `scale`, not transform, so the nav buttons keep their centring offset */
+  .lightboxNav:active, .lightboxClose:active { scale: 0.92; }
+}
+
+/* Tier: mouse — lift + image zoom on tiles, chip nudge, link underline grow */
+@media (hover: hover) and (pointer: fine) {
+  .imageButton {
+    transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease;
+  }
+  .gridImage { transition: transform 0.9s var(--ease-spring); }
+
+  .imageButton:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .imageButton:hover .gridImage,
+  .imageButton:focus-visible .gridImage { transform: scale(1.07); }
+  .imageButton:hover .imageOverlay { opacity: 1; }
+
+  .imageButton:hover .zoomHint { transform: translateX(4px); }
+  .zoomHint { transition: transform 0.35s var(--ease-spring); }
+
+  .filterBar button:hover {
+    color: var(--primary);
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+  }
+  .filterBar .activeFilter:hover { color: var(--white); }
+
+  .noteLink:hover { color: var(--primary-light); background-size: 100% 2px; }
+
+  .lightboxClose:hover,
+  .lightboxNav:hover {
+    background: var(--gold);
+    color: var(--primary-dark);
+    border-color: var(--gold);
   }
 }
 
-@media (max-width: 576px) {
-  .imageGrid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 260px;
-    gap: 16px;
-  }
-
-  .imageCard,
-  .cardWide,
-  .cardTall {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-
-  .zoomHint {
-    display: none;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .imageButton, .gridImage, .zoomHint, .filterBar button { transition: none; }
 }

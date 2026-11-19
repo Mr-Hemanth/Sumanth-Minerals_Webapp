@@ -9,9 +9,6 @@
   flex-shrink: 0;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* small lift on hover of the surrounding link */
-a:hover > .logo .mark,
-a:focus-visible > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
 
 .words {
   display: flex;
@@ -40,10 +37,37 @@ a:focus-visible > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
 .light .name { color: var(--white); }
 .light .sub { color: var(--laterite-light); }
 
-@media (max-width: 480px) {
-  .name { font-size: 1.2rem; }
-  .sub { font-size: 0.75rem; letter-spacing: 0.28em; }
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .name { font-size: 1.45rem; }
 }
+
+/* ═══ Tier: phone (≤576px) ═══ */
+@media (max-width: 576px) {
+  .name { font-size: 1.2rem; }
+  .sub { letter-spacing: 0.28em; }
+}
+
+/* ═══ Tier: small phone (≤380px) ═══ */
+@media (max-width: 380px) {
+  .logo { gap: 0.45rem; }
+  .mark { width: 34px; height: 34px; }
+  .name { font-size: 1.1rem; }
+  .sub { letter-spacing: 0.22em; }
+}
+
+/* ═══ Tier: landscape phone — shorter header ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .mark { width: 32px; height: 32px; }
+  .name { font-size: 1.1rem; }
+  .words { gap: 0.12rem; }
+}
+
+/* ═══ Mouse: crystal tilts when its link is hovered ═══ */
+@media (hover: hover) and (pointer: fine) {
+  a:hover > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
+}
+a:focus-visible > .logo .mark { transform: translateY(-2px) rotate(-4deg); }
 
 @media (prefers-reduced-motion: reduce) {
   .mark { transition: none; }

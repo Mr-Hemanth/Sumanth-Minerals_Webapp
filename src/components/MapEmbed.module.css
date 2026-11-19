@@ -3,7 +3,9 @@
   width: 100%;
   height: 100%;
   border: 0;
+  animation: mapFade 0.4s ease both;
 }
+@keyframes mapFade { from { opacity: 0; } to { opacity: 1; } }
 
 .placeholder {
   height: 100%;
@@ -21,6 +23,24 @@
     var(--light-bg);
 }
 
+.placeholder > svg { color: var(--laterite); }
+
+/* Pin drops in once when the block scrolls into view */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .placeholder > svg {
+      animation: pinDrop linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 40%;
+    }
+  }
+}
+@keyframes pinDrop {
+  0%   { transform: translateY(-18px); opacity: 0; }
+  70%  { transform: translateY(3px); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+
 .title { font-family: var(--font-display), sans-serif; font-weight: 700; font-size: 1.15rem; margin: 0.4rem 0 0; }
 .sub { color: var(--text-muted); margin: 0; }
 
@@ -30,4 +50,30 @@
   justify-content: center;
   gap: 0.75rem;
   margin-top: 1rem;
+}
+
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .title { font-size: 1.3rem; }
+}
+
+/* ═══ Tier: phone (≤576px) — stacked full-width buttons ═══ */
+@media (max-width: 576px) {
+  .placeholder { padding: 1.5rem 1rem; }
+  .title { font-size: 1.05rem; }
+  .actions { flex-direction: column; align-self: stretch; }
+  .actions > * { width: 100%; justify-content: center; }
+}
+
+/* ═══ Tier: small phone (≤380px) ═══ */
+@media (max-width: 380px) {
+  .placeholder { padding: 1.25rem 0.75rem; }
+  .placeholder > svg { width: 28px; height: 28px; }
+}
+
+/* ═══ Tier: landscape phone — little height: buttons side by side, less padding ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .placeholder { padding: 1rem; gap: 0.2rem; }
+  .actions { flex-direction: row; margin-top: 0.6rem; }
+  .actions > * { width: auto; }
 }

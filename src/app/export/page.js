@@ -87,10 +87,10 @@ export default function Export() {
             viewport={{ once: true, amount: 0.15 }}
             variants={staggerContainer}
           >
+            <span className={styles.processTrack} aria-hidden="true" />
             {STEPS.map((step, i) => (
               <m.div key={i} className={styles.processStep} variants={staggerItem}>
                 <div className={styles.stepIcon}>{step.icon}</div>
-                <div className={styles.stepLine} aria-hidden="true" />
                 <h4>{`${String(i + 1).padStart(2, '0')} · ${step.title}`}</h4>
                 <p>{step.desc}</p>
               </m.div>
@@ -112,7 +112,7 @@ export default function Export() {
               <span className="section-label">Packaging & Logistics</span>
               <h2>Purity Protected End to End</h2>
               <p>Mineral purity only counts if it survives the voyage. Our packaging standards are specified for long-distance international transit.</p>
-              <ul className={styles.packList}>
+              <ul className={`${styles.packList} stagger`}>
                 {PACKAGING_NOTES.map((note, i) => (
                   <li key={i}>
                     <strong>{note.label}:</strong> {note.desc}
@@ -124,7 +124,7 @@ export default function Export() {
               </button>
             </m.div>
             <m.div
-              className={styles.packagingImage}
+              className={`${styles.packagingImage} img-zoom`}
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -134,7 +134,7 @@ export default function Export() {
                 src="/quartz_12_30.jpg"
                 alt="12–30 mm quartz grit from the Sumanth Minerals mine"
                 fill
-                sizes="(max-width: 992px) 100vw, 45vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 45vw"
               />
               <span className={styles.imageCaption}>12–30 mm quartz grit, ready for packing</span>
             </m.div>

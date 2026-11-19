@@ -31,6 +31,16 @@ export const metadata = {
   },
 };
 
+// viewportFit 'cover' lets the layout use env(safe-area-inset-*) around iPhone notches
+// and the home indicator; themeColor tints the mobile browser bar in the brand navy.
+// Pinch-zoom stays enabled for accessibility.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#003366',
+};
+
 import { LanguageProvider } from '@/context/LanguageContext';
 import HideOnAdmin from '@/components/HideOnAdmin';
 import MotionProvider from '@/components/MotionProvider';

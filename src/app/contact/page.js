@@ -73,8 +73,8 @@ export default function Contact() {
     <div className={styles.contactPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <h1>{dict?.contact?.title || 'Contact Our Team'}</h1>
-          <p>{dict?.contact?.subtitle || 'Get a customized quote for your bulk quartz requirements.'}</p>
+          <h1 className="rise">{dict?.contact?.title || 'Contact Our Team'}</h1>
+          <p className="rise" style={{ '--rise-delay': '0.1s' }}>{dict?.contact?.subtitle || 'Get a customized quote for your bulk quartz requirements.'}</p>
         </div>
       </section>
 
@@ -85,7 +85,7 @@ export default function Contact() {
               <h2>{dict?.contact?.sales_office || 'Global Sales Office'}</h2>
               <p>{dict?.contact?.sales_desc || 'Connect with our export experts to discuss technical specifications and logistics.'}</p>
 
-              <div className={styles.infoItems}>
+              <div className={`${styles.infoItems} stagger`}>
                 <div className={styles.infoItem}>
                   <MapPin size={24} />
                   <div>
@@ -125,7 +125,7 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className={styles.whatsappBox}>
+              <div className={`${styles.whatsappBox} reveal`}>
                 <MessageSquare size={24} />
                 <div>
                   <h4>{dict?.contact?.instant_assist || 'Instant Assistance'}</h4>

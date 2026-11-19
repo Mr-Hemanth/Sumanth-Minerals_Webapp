@@ -67,12 +67,12 @@ export default function Downloads() {
             <span className={styles.labelNote}>No sign-up required</span>
           </div>
 
-          <div className={styles.grid}>
+          <div className={`${styles.grid} stagger`}>
             {available.map((item) => {
               const Icon = item.icon;
               return (
-                <article key={item.title} className={styles.card}>
-                  <div className={styles.iconBox}><Icon size={26} /></div>
+                <article key={item.title} className={`${styles.card} lift`}>
+                  <div className={`${styles.iconBox} icon-pop`}><Icon size={26} /></div>
                   <div className={styles.content}>
                     <h3>{item.title}</h3>
                     <p>{item.desc}</p>
@@ -105,11 +105,11 @@ export default function Downloads() {
             <span className={styles.labelNote}>Typically within 24 hours</span>
           </div>
 
-          <div className={styles.requestGrid}>
+          <div className={`${styles.requestGrid} stagger`}>
             {onRequest.map((item) => {
               const Icon = item.icon;
               return (
-                <Link key={item.title} href="/contact" className={styles.requestCard}>
+                <Link key={item.title} href="/contact" className={`${styles.requestCard} lift`}>
                   <Icon size={20} className={styles.requestIcon} />
                   <div>
                     <h3>{item.title}</h3>
@@ -125,7 +125,7 @@ export default function Downloads() {
 
       <section className={styles.request}>
         <div className="container">
-          <div className={styles.requestBox}>
+          <div className={`${styles.requestBox} reveal-zoom`}>
             <h2>Need a batch-specific report?</h2>
             <p>We arrange SGS or Intertek analysis against your own specification, and share the sample retention policy before you commit to a consignment.</p>
             <div className={styles.boxActions}>

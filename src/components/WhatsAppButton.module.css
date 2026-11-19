@@ -1,3 +1,4 @@
+/* ─── Floating WhatsApp button (desktop base) ─── */
 .button {
   position: fixed;
   bottom: 30px;
@@ -11,18 +12,14 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  z-index: 1000;
-  transition: var(--transition);
-}
-
-.button:hover {
-  transform: scale(1.1);
+  z-index: var(--z-float);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
 }
 
 .tooltip {
   position: absolute;
-  right: 70px;
-  background: var(--text-dark);
+  right: calc(100% + 12px);
+  background: var(--primary-dark);
   color: white;
   padding: 5px 12px;
   border-radius: 4px;
@@ -30,15 +27,55 @@
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition);
+  transform: translateX(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  pointer-events: none;
 }
 
-.button:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
+/* Pops in once after load; transform/opacity only, always ends visible */
+@media (prefers-reduced-motion: no-preference) {
+  .button { animation: waIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both; }
+}
+@keyframes waIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: none; } }
+
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .button { width: 64px; height: 64px; bottom: 36px; right: 36px; }
 }
 
-/* Phones use the bottom action bar instead */
+/* ═══ Tier: tablet (≤1024px) — slightly smaller, closer to the edge ═══ */
+@media (max-width: 1024px) {
+  .button {
+    width: 56px; height: 56px;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    right: max(20px, env(safe-area-inset-right));
+  }
+  .button svg { width: 28px; height: 28px; }
+}
+
+/* ═══ Tier: ≤768px — phones use the bottom action bar instead ═══ */
 @media (max-width: 768px) {
   .button { display: none; }
+}
+
+/* ═══ Tier: landscape phone — small, clear of the notch and home indicator ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .button {
+    width: 48px; height: 48px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    right: calc(12px + env(safe-area-inset-right));
+  }
+  .button svg { width: 24px; height: 24px; }
+}
+
+/* ═══ Touch: press feedback, no tooltip ═══ */
+@media (hover: none) {
+  .tooltip { display: none; }
+  .button:active { transform: scale(0.92); transition-duration: 0.08s; }
+}
+
+/* ═══ Mouse: hover grow + tooltip ═══ */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { transform: scale(1.08); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35); }
+  .button:hover .tooltip { opacity: 1; visibility: visible; transform: none; }
 }

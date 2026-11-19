@@ -44,20 +44,20 @@ export default function MiningProcessWorkflow() {
 
   return (
     <div className={styles.workflow}>
-      <div className={styles.header}>
+      <div className={`${styles.header} reveal`}>
         <span className="section-label">From our mine to your plant</span>
         <h2>How your quartz is supplied</h2>
         <p>Everything starts at our own mine, so you deal with one supplier from pit to delivery.</p>
       </div>
 
-      <div className={styles.photo}>
+      <div className={`${styles.photo} reveal-zoom`}>
         <Image
           src={plantImg}
           placeholder="blur"
           alt="Crushing and screening plant with conveyors and quartz stockpiles at the Sumanth Minerals mine, Lakshupalli"
           fill
-          sizes="(max-width: 1240px) 100vw, 1176px"
-          className={styles.photoImg}
+          sizes="(max-width: 1240px) 100vw, (min-width: 1600px) 1376px, 1176px"
+          className={`${styles.photoImg} parallax-img`}
         />
         <span className={styles.photoTag}>Our mine at Lakshupalli, Peddavaduguru</span>
       </div>

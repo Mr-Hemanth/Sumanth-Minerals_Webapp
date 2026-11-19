@@ -1,8 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ZoomIn, ArrowRight } from 'lucide-react';
+import { X, ZoomIn, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 import styles from './gallery.module.css';
 
@@ -66,15 +66,70 @@ const images = [
 export default function Gallery() {
   const [active, setActive] = useState('All');
   const [lightbox, setLightbox] = useState(null);
+  const touchStartX = useRef(null);
+  const dialogRef = useRef(null);
+  const closeRef = useRef(null);
 
   const visible = active === 'All' ? images : images.filter((img) => img.category === active);
+  const lightboxIndex = lightbox ? visible.findIndex((img) => img.id === lightbox.id) : -1;
+
+  const step = useCallback((dir) => {
+    if (lightboxIndex < 0 || visible.length < 2) return;
+    setLightbox(visible[(lightboxIndex + dir + visible.length) % visible.length]);
+  }, [lightboxIndex, visible]);
+
+  // Keyboard: Esc closes, arrow keys browse
+  useEffect(() => {
+    if (!lightbox) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(null);
+      else if (e.key === 'ArrowRight') step(1);
+      else if (e.key === 'ArrowLeft') step(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox, step]);
+
+  // While open: lock page scroll, move focus into the dialog, keep Tab inside it,
+  // and hand focus back to the photo that opened it on close.
+  const isOpen = Boolean(lightbox);
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const opener = document.activeElement;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeRef.current?.focus();
+    const trap = (e) => {
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+      const els = dialogRef.current.querySelectorAll('button');
+      if (!els.length) return;
+      const first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    window.addEventListener('keydown', trap);
+    return () => {
+      window.removeEventListener('keydown', trap);
+      document.body.style.overflow = prevOverflow;
+      if (opener instanceof HTMLElement) opener.focus();
+    };
+  }, [isOpen]);
+
+  // Touch: swipe left / right on the photo to browse
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  };
 
   return (
     <div className={styles.galleryPage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <h1>Mine, plant and product</h1>
-          <p>Photographs of our graded quartz and lab report — the same material that ships to you.</p>
+          <h1 className="rise">Mine, plant and product</h1>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>Photographs of our graded quartz and lab report — the same material that ships to you.</p>
         </div>
       </section>
 
@@ -119,7 +174,7 @@ export default function Gallery() {
                       src={img.src}
                       alt={img.title}
                       fill
-                      sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 33vw"
+                      sizes="(max-width: 1024px) 50vw, (max-width: 1599px) 33vw, 20vw"
                       className={styles.gridImage}
                     />
                     <span className={styles.imageOverlay}>
@@ -134,15 +189,15 @@ export default function Gallery() {
             </AnimatePresence>
           </m.div>
 
-          <p className={styles.galleryNote}>
-            Need recent photographs of a specific lot? <Link href="/contact">Ask our export desk</Link> — we share batch photos with the certificate of analysis.
+          <p className={`${styles.galleryNote} reveal`}>
+            Need recent photographs of a specific lot? <Link href="/contact" className={styles.noteLink}>Ask our export desk</Link> — we share batch photos with the certificate of analysis.
           </p>
         </div>
       </section>
 
       <section className={styles.cta}>
         <div className="container">
-          <div className={styles.ctaBox}>
+          <div className={`${styles.ctaBox} reveal-zoom`}>
             <h2>Visit the mine and plant</h2>
             <p>We welcome buyers and their inspection agencies to our Lakshupalli mine. Tell us your dates and we will arrange the site round.</p>
             <Link href="/contact" className="btn btn-primary">
@@ -160,19 +215,33 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightbox(null)}
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label={lightbox.title}
           >
-            <button type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Close image">
+            <button ref={closeRef} type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Close image">
               <X size={22} />
             </button>
+            {visible.length > 1 && (
+              <>
+                <button type="button" className={`${styles.lightboxNav} ${styles.lightboxPrev}`} onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous image">
+                  <ChevronLeft size={24} />
+                </button>
+                <button type="button" className={`${styles.lightboxNav} ${styles.lightboxNext}`} onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next image">
+                  <ChevronRight size={24} />
+                </button>
+              </>
+            )}
             <m.div
+              key={lightbox.id}
               className={styles.lightboxInner}
               initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
             >
               <Image
                 src={lightbox.src}
@@ -183,7 +252,12 @@ export default function Gallery() {
                 priority
               />
               <figcaption className={styles.lightboxCaption}>
-                <span className={styles.categoryTag}>{lightbox.category}</span>
+                <span className={styles.captionTop}>
+                  <span className={styles.categoryTag}>{lightbox.category}</span>
+                  {visible.length > 1 && (
+                    <span className={styles.lightboxCount}>{lightboxIndex + 1} / {visible.length}</span>
+                  )}
+                </span>
                 <h4>{lightbox.title}</h4>
                 <p>{lightbox.note}</p>
               </figcaption>

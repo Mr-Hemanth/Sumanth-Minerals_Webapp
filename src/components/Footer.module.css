@@ -1,8 +1,19 @@
-/* ─── Footer Top Banner ─── */
+/* ─── Footer Top Banner (desktop base) ─── */
 .footerTop {
   background: linear-gradient(135deg, #001220 0%, #002040 100%);
   border-bottom: 1px solid rgba(200, 168, 75, 0.25);
   padding: 0.875rem 0;
+  position: relative;
+}
+
+/* Thin strata line (laterite → sand → white) across the top of the footer */
+.footerTop::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-strata);
+  opacity: 0.85;
 }
 
 .topBanner {
@@ -21,34 +32,32 @@
   color: rgba(255,255,255,0.70);
 }
 
-.bannerText strong { color: #c8a84b; }
+.bannerText strong { color: var(--gold); }
 
-.bannerIcon { color: #c8a84b; flex-shrink: 0; }
+.bannerIcon { color: var(--gold); flex-shrink: 0; }
 
 .bannerCta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: #c8a84b;
+  color: var(--gold);
   border: 1px solid rgba(200,168,75,0.35);
-  padding: 0.35rem 0.85rem;
+  padding: 0.5rem 1rem;
+  min-height: 40px;
   border-radius: 4px;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.12s ease;
   flex-shrink: 0;
 }
-
-.bannerCta:hover {
-  background: rgba(200,168,75,0.12);
-  border-color: #c8a84b;
-}
+.bannerCta svg { transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
 
 /* ─── Footer Main ─── */
 .footer {
   background: #0a0f1c;
-  color: #e2e8f0;
+  color: var(--text-on-dark);
 }
 
 .footerMain { padding: 70px 0 50px; }
@@ -60,10 +69,8 @@
 }
 
 /* ─── Brand Column ─── */
-.brand { }
-
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 1.25rem;
@@ -101,8 +108,8 @@
 .socials { display: flex; gap: 0.6rem; }
 
 .socials a {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 8px;
@@ -110,14 +117,7 @@
   align-items: center;
   justify-content: center;
   color: rgba(255,255,255, 0.78);
-  transition: all 0.2s ease;
-}
-
-.socials a:hover {
-  background: #003366;
-  color: white;
-  border-color: #1a5fa8;
-  transform: translateY(-2px);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 /* ─── Link Columns ─── */
@@ -139,8 +139,9 @@
   left: 0;
   width: 28px;
   height: 2px;
-  background: linear-gradient(90deg, #c8a84b, transparent);
+  background: linear-gradient(90deg, var(--gold), transparent);
   border-radius: 1px;
+  transform-origin: left;
 }
 
 .linkCol ul, .contactCol ul {
@@ -153,13 +154,8 @@
 .linkCol a {
   font-size: 0.875rem;
   color: rgba(255,255,255, 0.78);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   display: inline-block;
-}
-
-.linkCol a:hover {
-  color: white;
-  padding-left: 5px;
 }
 
 /* ─── Contact Column ─── */
@@ -173,10 +169,11 @@
   align-items: flex-start;
   gap: 0.85rem;
   color: rgba(255,255,255, 0.78);
+  min-width: 0;
 }
 
 .contactCol li svg {
-  color: #c8a84b;
+  color: var(--gold);
   flex-shrink: 0;
   margin-top: 3px;
 }
@@ -185,6 +182,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .contactCol strong {
@@ -202,6 +200,7 @@
   color: rgba(255,255,255,0.70);
   transition: color 0.2s ease;
   display: block;
+  overflow-wrap: anywhere;
 }
 
 .contactCol span {
@@ -209,28 +208,23 @@
   line-height: 1.55;
 }
 
-.contactCol a:hover { color: #c8a84b; }
-
 .contactBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
-  background: #003366;
+  min-height: 44px;
+  background: var(--primary);
   color: white;
   font-size: 0.82rem;
   font-weight: 700;
   padding: 0.65rem 1.2rem;
   border-radius: 6px;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
-.contactBtn:hover {
-  background: #004080;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,51,102,0.35);
-}
+.contactBtn svg { transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
 
 /* ─── Footer Bottom ─── */
 .footerBottom {
@@ -253,29 +247,136 @@
   margin: 0;
 }
 
-.tagline { color: rgba(200,168,75,0.5); }
-
 .legal {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
 }
 
 .legal a {
-  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
   color: rgba(255,255,255, 0.78);
   transition: color 0.2s ease;
 }
 
-.legal a:hover { color: rgba(255,255,255,0.75); }
+/* Column headings draw their gold underline as the footer scrolls in */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .linkCol h3::after, .contactCol h3::after {
+      animation: footRule linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+  }
+}
+@keyframes footRule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* ─── Responsive ─── */
-@media (max-width: 1200px) {
-  .grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .footerMain { padding: 90px 0 64px; }
+  .grid { grid-template-columns: 2fr 1fr 1fr 1.6fr; gap: 72px; }
+  .brandDesc { font-size: 0.95rem; max-width: 46ch; }
+  .linkCol a, .contactCol a, .contactCol span { font-size: 0.93rem; }
+  .bannerText { font-size: 0.9rem; }
 }
 
-@media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; gap: 35px; }
-  .bottom { flex-direction: column; text-align: center; }
-  .legal { justify-content: center; }
-  .topBanner { flex-direction: column; align-items: flex-start; }
+/* ═══ Tier: laptop (≤1280px) — keep 4 columns, tighter gaps.
+   Reserve room on the right of the bottom bar for the floating WhatsApp button. ═══ */
+@media (max-width: 1280px) {
+  .grid { grid-template-columns: 1.5fr 1fr 1fr 1.4fr; gap: 36px; }
+  .bottom { padding-right: 72px; }
+}
+
+/* ═══ Tier: tablet (≤1024px) — brand row on top, then 3 columns ═══ */
+@media (max-width: 1024px) {
+  .footerMain { padding: 56px 0 40px; }
+  .grid { grid-template-columns: 1fr 1fr 1.4fr; gap: 36px 32px; }
+  .brand {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 2rem;
+    align-items: start;
+  }
+  .brand > * { grid-column: 1; justify-self: start; }
+  .brand .socials { grid-column: 2; grid-row: 1; justify-self: end; }
+  .brandDesc { max-width: 62ch; }
+}
+
+/* ═══ Tier: large phone / small tablet (≤768px) — two link columns side by side, contact full width ═══ */
+@media (max-width: 768px) {
+  .footerMain { padding: 48px 0 32px; }
+  .grid { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
+  .contactCol { grid-column: 1 / -1; }
+  .contactCol ul { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem; }
+  .topBanner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .bannerText { align-items: flex-start; }
+  .bottom { padding-right: 0; }
+}
+
+/* ═══ Tier: phone (≤576px) ═══ */
+@media (max-width: 576px) {
+  .footerMain { padding: 40px 0 28px; }
+  .brand { display: block; }
+  .brand .socials { margin-top: 0; }
+  .linkCol h3, .contactCol h3 { margin-bottom: 1rem; }
+  .contactCol ul { grid-template-columns: 1fr; gap: 1.1rem; }
+  .contactBtn { width: 100%; }
+  .bannerCta { width: 100%; }
+  .bannerText { font-size: 0.8rem; }
+  .bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+  .legal { justify-content: center; gap: 0 1.25rem; }
+}
+
+/* ═══ Tier: small phone (≤380px) — single column, nothing clips ═══ */
+@media (max-width: 380px) {
+  .grid { grid-template-columns: 1fr; gap: 28px; }
+  .bannerCta { white-space: normal; text-align: center; }
+  .legal { gap: 0 1rem; }
+}
+
+/* ═══ Tier: landscape phone — compact, 3 columns, clear of notches ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .footerMain { padding: 32px 0 24px; }
+  .grid { grid-template-columns: 1fr 1fr 1.5fr; gap: 24px 28px; }
+  .brand {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 2rem;
+  }
+  .brand > * { grid-column: 1; justify-self: start; }
+  .brand .socials { grid-column: 2; grid-row: 1; }
+  .brandDesc { margin-bottom: 1rem; }
+  .certBadges { margin-bottom: 0; }
+  .contactCol { grid-column: auto; }
+  .contactCol ul { display: flex; gap: 0.9rem; margin-bottom: 1.25rem; }
+  .linkCol h3, .contactCol h3 { margin-bottom: 0.9rem; }
+  .topBanner { flex-direction: row; align-items: center; }
+  /* floating WhatsApp button sits bottom-right: keep the legal links clear of it */
+  .bottom { padding-right: calc(64px + env(safe-area-inset-right)); padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ═══ Touch screens: 44px targets ═══ */
+@media (hover: none) {
+  .bannerCta { min-height: 44px; }
+  .logo { min-height: 44px; }
+  .bannerCta:active, .contactBtn:active, .socials a:active { transform: scale(0.96); }
+  .footer .legal a { min-height: 44px; }
+  .footer .linkCol a { min-height: 44px; display: inline-flex; align-items: center; padding-block: 0; }
+  .footer .contactCol a { min-height: 44px; display: flex; align-items: center; padding-block: 0; }
+  .linkCol ul { gap: 0; }
+}
+
+/* ═══ Mouse: hover effects ═══ */
+@media (hover: hover) and (pointer: fine) {
+  .bannerCta:hover { background: rgba(200,168,75,0.12); border-color: var(--gold); }
+  .bannerCta:hover svg, .contactBtn:hover svg { transform: translateX(4px); }
+  .socials a:hover { background: var(--primary); color: white; border-color: var(--primary-light); transform: translateY(-2px); }
+  .linkCol a:hover { color: white; transform: translateX(5px); }
+  .contactCol a:hover { color: var(--gold); }
+  .contactBtn:hover { background: var(--primary-mid); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,51,102,0.35); }
+  .legal a:hover { color: white; }
 }

@@ -918,3 +918,186 @@ main { overflow-x: clip; position: relative; }
   main [class*="whatsappBox"] a,
   main nav[aria-label*="readcrumb" i] a { padding-block: 0.7rem; }
 }
+
+/* ═════════════════════════════════════════════════════════════════════
+   DEVICE TIERS — every component file uses these same breakpoints:
+     ≥1600px          large desktop / TV
+     1281–1599px      desktop (base styles)
+     1025–1280px      laptop          @media (max-width: 1280px)
+     769–1024px       tablet          @media (max-width: 1024px)
+     577–768px        large phone / small tablet portrait  (max-width: 768px)
+     381–576px        phone           @media (max-width: 576px)
+     ≤380px           small phone     @media (max-width: 380px)
+     landscape phone  @media (max-height: 500px) and (orientation: landscape)
+     touch screens    @media (hover: none)        mouse: (hover: hover) and (pointer: fine)
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* Taps: no grey flash, no double-tap zoom delay */
+a, button, [role="button"], summary, label, input, select, textarea { touch-action: manipulation; }
+html { -webkit-tap-highlight-color: transparent; }
+img, video, iframe, svg { max-width: 100%; }
+
+/* Large desktop: use the extra room instead of a narrow column in the middle */
+@media (min-width: 1600px) {
+  .container { max-width: 1440px; }
+  .container-sm { max-width: 980px; }
+  section { padding: 120px 0; }
+  body { font-size: 1.0625rem; }
+}
+
+/* Laptop */
+@media (max-width: 1280px) {
+  .container { padding: 0 1.75rem; }
+  section { padding: 88px 0; }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  section { padding: 72px 0; }
+  .section-title { margin-bottom: 40px; }
+}
+
+/* Phone */
+@media (max-width: 576px) {
+  .container, .container-sm { padding: 0 1rem; }
+  section { padding: 48px 0; }
+  h1 { font-size: clamp(1.9rem, 8.5vw, 2.4rem); }
+  h2 { font-size: clamp(1.5rem, 6.5vw, 1.9rem); }
+  .section-title { margin-bottom: 28px; }
+  .btn-lg { padding: 0.9rem 1.4rem; font-size: 1rem; }
+}
+
+/* Small phone (iPhone SE 1st gen, small Androids) */
+@media (max-width: 380px) {
+  .container, .container-sm { padding: 0 0.875rem; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.45rem; }
+  .btn { padding: 0.75rem 1.1rem; font-size: 0.9rem; white-space: normal; text-align: center; }
+  .page-header { padding: 112px 0 48px; }
+}
+
+/* Landscape phone: very little height, so trim vertical padding and let notches breathe */
+@media (max-height: 500px) and (orientation: landscape) {
+  html { scroll-padding-top: 72px; }
+  section { padding: 44px 0; }
+  .page-header { padding: 96px 0 40px; }
+  .container {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+  .section-title { margin-bottom: 24px; }
+}
+
+/* Touch screens: 44px targets for every button, and no "stuck" hover lift after a tap */
+@media (hover: none) {
+  .btn, .btn-sm { min-height: 44px; }
+  .card:hover, .btn:hover, .lift:hover { transform: none; }
+  .btn:active, .card:active, .lift:active, .press:active { transform: scale(0.97); transition-duration: 0.08s; }
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   MOTION KIT — opt-in classes, pure CSS (no JavaScript cost).
+   Scroll reveals use scroll-driven animations where the browser supports
+   them; elsewhere content is simply shown. Nothing ever starts hidden
+   without a guaranteed way back, and "reduce motion" turns it all off.
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* (The scroll-progress bar lives in Navbar.module.css.) */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal, .reveal-left, .reveal-right, .reveal-zoom, .stagger > * {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+    .reveal-left  { animation-name: revealLeft; }
+    .reveal-right { animation-name: revealRight; }
+    .reveal-zoom  { animation-name: revealZoom; }
+    .stagger > *:nth-child(3n+2) { animation-range: entry 8% entry 78%; }
+    .stagger > *:nth-child(3n+3) { animation-range: entry 16% entry 86%; }
+
+    /* Accent underline under section headings draws itself in */
+    .section-title h2::after {
+      animation: drawLine linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 35%;
+    }
+
+    /* Slow parallax drift for decorative / hero images */
+    .parallax-img {
+      animation: parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes revealUp    { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes revealLeft  { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+@keyframes revealRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes revealZoom  { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes drawLine    { from { scale: 0 1; } to { scale: 1 1; } } /* `scale`, not transform: keeps the translateX(-50%) centring */
+@keyframes parallax    { from { transform: translateY(-6%) scale(1.12); } to { transform: translateY(6%) scale(1.12); } }
+
+/* Phones: shorter travel so reveals feel snappy, and no sideways slides */
+@media (max-width: 768px) {
+  @keyframes revealLeft  { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes revealRight { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes revealUp    { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+}
+
+/* Light sweep across primary / gold buttons on hover (mouse only) */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .btn-primary::after, .btn-gold::after, .shine::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: -60%;
+    width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-primary:hover::after, .btn-gold:hover::after, .shine:hover::after { left: 120%; }
+
+  /* Hover lift with deeper shadow */
+  /* `translate`, not transform: a scroll-reveal animation holds `transform` with fill-mode both,
+     which would cancel a transform-based hover on the same element. */
+  .lift { transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease; }
+  .lift:hover { translate: 0 -6px; box-shadow: var(--shadow-lg); }
+
+  /* Photo zooms gently inside its frame */
+  .img-zoom img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .img-zoom:hover img { transform: scale(1.06); }
+
+  /* Icon nudges when its card is hovered */
+  .lift:hover .icon-pop, .icon-pop:hover { transform: translateY(-3px) rotate(-6deg) scale(1.08); }
+}
+.icon-pop { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.shine { position: relative; overflow: hidden; }
+.img-zoom { overflow: hidden; } /* all devices: keeps rounded corners clipping the photo */
+
+/* Gold text that catches the light once as it scrolls in */
+.text-shimmer {
+  background: linear-gradient(100deg, var(--gold-dark) 20%, var(--gold-light) 45%, #fff6d8 50%, var(--gold-light) 55%, var(--gold-dark) 80%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .text-shimmer { animation: shimmerText linear both; animation-timeline: view(); animation-range: entry 30% cover 50%; }
+  }
+}
+@keyframes shimmerText { to { background-position: 0% 0; } }
+
+/* Soft live dot (e.g. "Dispatching now") — transform/opacity only, cheap on phones */
+.pulse-dot { position: relative; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--scrub); }
+.pulse-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulseDot 2s ease-out infinite; }
+@keyframes pulseDot { from { transform: scale(1); opacity: 0.7; } to { transform: scale(3); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot::after { animation: none; }
+  .text-shimmer { background-position: 50% 0; }
+}

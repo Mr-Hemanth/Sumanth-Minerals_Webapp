@@ -30,7 +30,7 @@ const Footer = () => {
       {/* Main Footer */}
       <div className={styles.footerMain}>
         <div className="container">
-          <div className={styles.grid}>
+          <div className={`${styles.grid} stagger`}>
 
             {/* Brand Column */}
             <div className={styles.brand}>

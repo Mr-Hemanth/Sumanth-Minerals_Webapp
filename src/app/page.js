@@ -266,22 +266,18 @@ export default function Home() {
       ════════════════════════════════════════ */}
       <section className={styles.trustStrip}>
         <div className="container">
-          <m.div className={styles.trustGrid} {...fadeUp}>
+          {/* CSS scroll reveal (global .stagger) instead of framer, so the hover lift and reveal never fight */}
+          <div className={`${styles.trustGrid} stagger`}>
             {trustPoints.map((item, i) => (
-              <m.div
-                key={i}
-                className={styles.trustCard}
-                {...stagger(i * 0.1)}
-                whileHover={{ y: -6 }}
-              >
+              <div key={i} className={styles.trustCard}>
                 <div className={styles.trustIcon}>{item.icon}</div>
                 <div>
                   <h4>{item.title}</h4>
                   <p>{item.desc}</p>
                 </div>
-              </m.div>
+              </div>
             ))}
-          </m.div>
+          </div>
         </div>
       </section>
 
@@ -298,8 +294,8 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className={styles.aboutImageBox}>
-                <Image src={lumpsImg} placeholder="blur" alt="Quartz lumps at the Sumanth Minerals mine" fill sizes="(max-width: 992px) 100vw, 560px" className={styles.aboutPhoto} />
+              <div className={`${styles.aboutImageBox} img-zoom`}>
+                <Image src={lumpsImg} placeholder="blur" alt="Quartz lumps at the Sumanth Minerals mine" fill sizes="(max-width: 1024px) 100vw, (min-width: 1600px) 720px, 560px" className={styles.aboutPhoto} />
                 <div className={styles.aboutImageOverlay}>
                   <div className={styles.certBadge}>
                     <FlaskConical size={20} />
@@ -413,7 +409,7 @@ export default function Home() {
                   transition={{ delay: i * 0.07, duration: 0.5 }}
                 >
                   <span className={styles.rowLabel}>{row.label}</span>
-                  <span className={`${styles.rowValue} ${row.highlight ? styles.valueHighlight : ''}`}>
+                  <span className={`${styles.rowValue} ${row.highlight ? `${styles.valueHighlight} text-shimmer` : ''}`}>
                     {row.value}
                   </span>
                   {row.highlight && (
@@ -454,12 +450,11 @@ export default function Home() {
           <p className={styles.swipeHint} aria-hidden="true">
             Swipe to see all {products.length} sizes <ArrowRight size={15} />
           </p>
-          <div className={styles.productGrid}>
-            {products.map((p, i) => (
-              <m.article
+          <div className={`${styles.productGrid} stagger`}>
+            {products.map((p) => (
+              <article
                 key={p.size}
                 className={`${styles.productCard} ${styles[p.tone]}`}
-                {...stagger(i * 0.12)}
               >
                 <div className={styles.productImageBox}>
                   <Image
@@ -467,7 +462,7 @@ export default function Home() {
                     placeholder="blur"
                     alt={`${p.size} quartz — ${p.type}`}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 25vw"
+                    sizes="(max-width: 576px) 86vw, (max-width: 1024px) 50vw, (min-width: 1600px) 340px, 25vw"
                     className={styles.productImage}
                   />
                   <span className={styles.sizeBadge}>{p.size}</span>
@@ -504,11 +499,11 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-              </m.article>
+              </article>
             ))}
           </div>
 
-          <div className={styles.productsFootnote}>
+          <div className={`${styles.productsFootnote} reveal`}>
             <span>Need a non-standard fraction?</span>
             <Link href="/contact">Talk to our sales team →</Link>
           </div>
@@ -525,13 +520,9 @@ export default function Home() {
             <h2>Find your application</h2>
             <p>We supply manufacturers, processors and traders. Here is the size each sector usually buys.</p>
           </m.div>
-          <div className={styles.industriesGrid}>
-            {industries.map((ind, i) => (
-              <m.div
-                key={ind.name}
-                className={styles.industryCard}
-                {...stagger((i % 3) * 0.08)}
-              >
+          <div className={`${styles.industriesGrid} stagger`}>
+            {industries.map((ind) => (
+              <div key={ind.name} className={styles.industryCard}>
                 <div className={styles.industryIcon}>{ind.icon}</div>
                 <h3>{ind.name}</h3>
                 <p>{ind.desc}</p>
@@ -539,13 +530,13 @@ export default function Home() {
                   <span>Recommended</span>
                   {ind.grade}
                 </Link>
-              </m.div>
+              </div>
             ))}
-            <m.div className={styles.industriesCta} {...stagger(0.48)}>
+            <div className={styles.industriesCta}>
               <h3>Not seeing your process?</h3>
               <p>We blend and screen to buyer specifications — share your sieve analysis or furnace notes and we will match a grade.</p>
               <Link href="/contact">Talk to our technical team <ArrowRight size={15} /></Link>
-            </m.div>
+            </div>
           </div>
         </div>
       </section>

@@ -55,8 +55,8 @@ export default function RequestSample() {
     <div className={styles.samplePage}>
       <section className={styles.pageHeader}>
         <div className="container">
-          <h1>Request a Product Sample</h1>
-          <p>Evaluate Sumanth Minerals&rsquo; certified 99.27% silica quartz purity in your own laboratory.</p>
+          <h1 className="rise">Request a Product Sample</h1>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>Evaluate Sumanth Minerals&rsquo; certified 99.27% silica quartz purity in your own laboratory.</p>
         </div>
       </section>
 
@@ -64,6 +64,7 @@ export default function RequestSample() {
         <div className="container">
           <div className={styles.grid}>
             <div className={styles.info}>
+              <div className={`${styles.steps} stagger`}>
               <div className={styles.step}>
                 <Package size={24} />
                 <div>
@@ -85,8 +86,9 @@ export default function RequestSample() {
                   <p>Every sample includes a matching lab analysis certificate.</p>
                 </div>
               </div>
-              
-              <div className={styles.alert}>
+              </div>
+
+              <div className={`${styles.alert} reveal`}>
                 <Info size={20} />
                 <p>Sample requests are only processed for registered businesses and verified industrial inquiries.</p>
               </div>
@@ -97,53 +99,53 @@ export default function RequestSample() {
                 <input type="text" name="fax" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }} value={formData.fax} onChange={(e) => setFormData({ ...formData, fax: e.target.value })} />
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
-                    <label>Full Name</label>
-                    <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
+                    <label htmlFor="rs-name">Full Name</label>
+                    <input id="rs-name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Job Title / Designation</label>
-                    <input type="text" required value={formData.jobTitle} onChange={(e) => setFormData({...formData, jobTitle: e.target.value})} placeholder="Purchase Manager" />
-                  </div>
-                </div>
-
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label>Company Name</label>
-                    <input type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} placeholder="Company Ltd" />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label>Company Website</label>
-                    <input type="url" value={formData.website} onChange={(e) => setFormData({...formData, website: e.target.value})} placeholder="https://www.company.com" />
+                    <label htmlFor="rs-job">Job Title / Designation</label>
+                    <input id="rs-job" type="text" required value={formData.jobTitle} onChange={(e) => setFormData({...formData, jobTitle: e.target.value})} placeholder="Purchase Manager" />
                   </div>
                 </div>
 
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
-                    <label>Business Email</label>
-                    <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="john@company.com" />
+                    <label htmlFor="rs-company">Company Name</label>
+                    <input id="rs-company" type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} placeholder="Company Ltd" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>WhatsApp / Phone</label>
-                    <input type="tel" required value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} placeholder="+1 234 567 890" />
+                    <label htmlFor="rs-website">Company Website</label>
+                    <input id="rs-website" type="url" value={formData.website} onChange={(e) => setFormData({...formData, website: e.target.value})} placeholder="https://www.company.com" />
                   </div>
                 </div>
 
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
-                    <label>Industry</label>
-                    <select value={formData.industry} onChange={(e) => setFormData({...formData, industry: e.target.value})}>
+                    <label htmlFor="rs-email">Business Email</label>
+                    <input id="rs-email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="john@company.com" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="rs-phone">WhatsApp / Phone</label>
+                    <input id="rs-phone" type="tel" required value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} placeholder="+1 234 567 890" />
+                  </div>
+                </div>
+
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="rs-industry">Industry</label>
+                    <select id="rs-industry" value={formData.industry} onChange={(e) => setFormData({...formData, industry: e.target.value})}>
                       {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Monthly Requirement (Tons)</label>
-                    <input type="text" value={formData.monthlyRequirement} onChange={(e) => setFormData({...formData, monthlyRequirement: e.target.value})} placeholder="e.g. 500 Tons" />
+                    <label htmlFor="rs-monthly">Monthly Requirement (Tons)</label>
+                    <input id="rs-monthly" type="text" value={formData.monthlyRequirement} onChange={(e) => setFormData({...formData, monthlyRequirement: e.target.value})} placeholder="e.g. 500 Tons" />
                   </div>
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Quartz Grade Required</label>
-                  <select value={formData.preferredSize} onChange={(e) => setFormData({...formData, preferredSize: e.target.value})}>
+                  <label htmlFor="rs-grade">Quartz Grade Required</label>
+                  <select id="rs-grade" value={formData.preferredSize} onChange={(e) => setFormData({...formData, preferredSize: e.target.value})}>
                     <option value="Lumps">Quartz Lumps</option>
                     <option value="0-12mm">Quartz Grit 0–12 mm</option>
                     <option value="12-30mm">Quartz Grit 12–30 mm</option>
@@ -152,13 +154,13 @@ export default function RequestSample() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Shipping Address (Complete with PIN/ZIP)</label>
-                  <textarea required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3" placeholder="Full delivery address..."></textarea>
+                  <label htmlFor="rs-address">Shipping Address (Complete with PIN/ZIP)</label>
+                  <textarea id="rs-address" required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3" placeholder="Full delivery address..."></textarea>
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Country</label>
-                  <input type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} placeholder="United States" />
+                  <label htmlFor="rs-country">Country</label>
+                  <input id="rs-country" type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} placeholder="United States" />
                 </div>
                 
                 {status.message && (
@@ -170,7 +172,7 @@ export default function RequestSample() {
                   </div>
                 )}
 
-                <button type="submit" className="btn btn-primary" disabled={loading}>
+                <button type="submit" className={`btn btn-primary ${styles.submit}`} disabled={loading}>
                   {loading ? 'Processing...' : 'Request Sample Packet'}
                 </button>
               </form>

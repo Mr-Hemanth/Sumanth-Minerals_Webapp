@@ -84,6 +84,8 @@
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   display: flex;
   gap: 28px;
   padding: 32px;
@@ -93,12 +95,6 @@
   align-items: flex-start;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(200, 168, 75, 0.4);
-  box-shadow: var(--shadow-lg);
 }
 
 .iconBox {
@@ -113,11 +109,6 @@
   justify-content: center;
   flex-shrink: 0;
   transition: var(--transition);
-}
-
-.card:hover .iconBox {
-  background: var(--primary);
-  color: var(--white);
 }
 
 .content {
@@ -171,18 +162,12 @@
   gap: 8px;
   background: var(--primary);
   color: var(--white);
+  min-height: 44px;
   padding: 0.6rem 1.15rem;
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
   font-weight: 600;
   transition: var(--transition);
-}
-
-.dlBtn:hover {
-  background: var(--primary-mid);
-  color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-primary);
 }
 
 .requestGrid {
@@ -200,12 +185,6 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   transition: var(--transition);
-}
-
-.requestCard:hover {
-  border-color: var(--primary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
 }
 
 .requestIcon {
@@ -233,10 +212,6 @@
   transition: var(--transition-fast);
 }
 
-.requestCard:hover .requestArrow {
-  color: var(--primary);
-  transform: translate(3px, -3px);
-}
 
 .request {
   padding: 90px 0;
@@ -284,32 +259,136 @@
   flex-wrap: wrap;
 }
 
+/* Gold accent bar that grows down the card's left edge on hover / reveal */
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ═════════════════════════ Motion ═════════════════════════ */
+/* Header lines rise in one after another */
+@media (prefers-reduced-motion: no-preference) {
+  .pageHeader .kicker, .pageHeader h1, .pageHeader p {
+    animation: headerRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .pageHeader h1 { animation-delay: 0.08s; }
+  .pageHeader p { animation-delay: 0.16s; }
+}
+@keyframes headerRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* Mouse: cards lift (via `translate`, so it composes with the scroll reveal) */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover, .requestCard:hover { translate: 0 -4px; }
+  .card:hover { border-color: rgba(200, 168, 75, 0.4); }
+  .card:hover::before { transform: scaleY(1); }
+  .card:hover .iconBox { background: var(--primary); color: var(--white); }
+  .requestCard:hover { border-color: var(--primary); }
+  .requestCard:hover .requestArrow { color: var(--primary); transform: translate(3px, -3px); }
+  .dlBtn:hover {
+    background: var(--primary-mid);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+  }
+}
+
+/* ═════════════════════════ Tiers ═════════════════════════ */
+
+/* Tier: large desktop (≥1600px) — available docs side by side */
+@media (min-width: 1600px) {
+  .pageHeader { padding: 190px 0 95px; }
+  .pageHeader p { max-width: 760px; font-size: 1.22rem; }
+  .resourceSection { padding: 110px 0 50px; }
+  .grid { grid-template-columns: 1fr 1fr; max-width: none; gap: 28px; }
+  .card { padding: 40px; }
+  .requestGrid { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .requestCard { flex-direction: column; padding: 28px; }
+  .requestArrow { margin-left: 0; margin-top: auto; }
+  .requestBox { padding: 80px 90px; }
+}
+
+/* Tier: laptop (≤1280px) */
+@media (max-width: 1280px) {
+  .pageHeader { padding: 150px 0 68px; }
+  .resourceSection { padding: 76px 0 36px; }
+  .request { padding: 76px 0; }
+}
+
+/* Tier: tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .pageHeader { padding: 130px 0 60px; }
+  .grid { max-width: none; }
+  .card { padding: 26px; gap: 22px; }
+  .requestBox { padding: 52px 40px; }
+  .requestSection { padding: 44px 0 72px; }
+}
+
+/* Tier: large phone (≤768px) — stacked cards, full-width 48px buttons */
 @media (max-width: 768px) {
-  .pageHeader {
-    padding: 130px 0 60px;
-  }
+  .pageHeader { padding: 112px 0 52px; }
+  .pageHeader p { font-size: 1rem; }
+  .resourceSection { padding: 52px 0 28px; }
+  .requestSection { padding: 36px 0 52px; }
+  .request { padding: 52px 0; }
+  .sectionLabel { flex-wrap: wrap; gap: 4px 12px; margin-bottom: 22px; }
+  .sectionLabel h2 { font-size: 1.35rem; }
 
-  .card {
-    flex-direction: column;
-    gap: 14px;
-    padding: 20px 18px;
-  }
-
+  .card { flex-direction: column; gap: 14px; padding: 20px 18px; }
   .iconBox { width: 44px; height: 44px; }
-
-  .meta {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
-
+  .meta { flex-direction: column; align-items: stretch; gap: 14px; }
+  .chips { flex-wrap: wrap; }
   .dlBtn { width: 100%; justify-content: center; min-height: 48px; }
 
-  .requestGrid {
-    grid-template-columns: 1fr;
-  }
+  .requestGrid { grid-template-columns: 1fr; gap: 12px; }
+  .requestCard { padding: 18px; }
+  .requestBox { padding: 45px 24px; border-radius: var(--radius-lg); }
+  .requestBox h2 { font-size: 1.6rem; }
+  .boxActions { flex-direction: column; align-items: stretch; }
+}
 
-  .requestBox {
-    padding: 45px 24px;
-  }
+/* Tier: phone (≤576px) */
+@media (max-width: 576px) {
+  .pageHeader { padding: 104px 0 44px; }
+  .content h3 { font-size: 1.1rem; }
+  .content p { font-size: 0.95rem; margin-bottom: 16px; }
+  .requestBox { padding: 36px 18px; }
+}
+
+/* Tier: small phone (≤380px) */
+@media (max-width: 380px) {
+  .pageHeader h1 { font-size: 1.8rem; }
+  .card { padding: 18px 14px; }
+  .requestCard { gap: 12px; padding: 16px 14px; }
+  .requestBox h2 { font-size: 1.4rem; }
+  .boxActions :global(.btn) { white-space: normal; text-align: center; }
+}
+
+/* Tier: landscape phone — short header, cards in two columns */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pageHeader { padding: 92px 0 36px; }
+  .pageHeader h1 { font-size: 2rem; }
+  .resourceSection { padding: 40px 0 24px; }
+  .requestSection, .request { padding: 40px 0; }
+  .grid { grid-template-columns: 1fr 1fr; max-width: none; gap: 16px; }
+  .card { flex-direction: column; gap: 12px; padding: 20px; }
+  .meta { flex-direction: column; align-items: stretch; gap: 12px; }
+  .dlBtn { justify-content: center; }
+  .requestGrid { grid-template-columns: 1fr 1fr; }
+  .requestBox { padding: 36px 28px; }
+  .boxActions { flex-direction: row; }
+  .grid, .requestGrid, .requestBox { margin-left: env(safe-area-inset-left); margin-right: env(safe-area-inset-right); }
+}
+
+/* Tier: touch — 48px download buttons, press feedback */
+@media (hover: none) {
+  .dlBtn { min-height: 48px; }
+  .requestCard:active, .card:active { scale: 0.985; transition-duration: 0.08s; }
 }

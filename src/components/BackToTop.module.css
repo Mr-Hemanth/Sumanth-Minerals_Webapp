@@ -1,7 +1,8 @@
+/* ─── Back-to-top button (desktop base): sits above the WhatsApp button ─── */
 .button {
   position: fixed;
   bottom: 100px;
-  right: 30px;
+  right: 35px;
   width: 50px;
   height: 50px;
   background: var(--primary);
@@ -12,32 +13,50 @@
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow);
-  z-index: 1000;
+  transform: translateY(12px) scale(0.85);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.3s, background 0.2s ease;
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-float);
   border: 2px solid var(--white);
-}
-
-/* Phones have the bottom action bar; the floating button only covered content there. */
-@media (max-width: 768px) {
-  .button { display: none; }
-}
-
-.button:hover {
-  background: var(--primary-light);
-  transform: translateY(-5px);
 }
 
 .visible {
   opacity: 1;
   visibility: visible;
+  transform: none;
 }
 
-@media (max-width: 768px) {
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .button { right: 43px; bottom: 112px; }
+}
+
+/* ═══ Tier: tablet (≤1024px) — stacks above the 56px WhatsApp button ═══ */
+@media (max-width: 1024px) {
   .button {
-    right: 20px;
-    bottom: 90px;
-    width: 45px;
-    height: 45px;
+    width: 46px; height: 46px;
+    right: max(25px, calc(env(safe-area-inset-right) + 5px));
+    bottom: calc(88px + env(safe-area-inset-bottom));
   }
+}
+
+/* ═══ Tier: ≤768px — hidden; the bottom action bar replaces the floating buttons ═══ */
+@media (max-width: 768px) {
+  .button { display: none; }
+}
+
+/* ═══ Tier: landscape phone — hidden: with only ~390px of height, two floating buttons
+   cover too much text. WhatsApp stays; the browser's own scroll gesture is quick here. ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .button { display: none; }
+}
+
+/* ═══ Touch: press feedback ═══ */
+@media (hover: none) {
+  .visible:active { transform: scale(0.9); transition-duration: 0.08s; }
+}
+
+/* ═══ Mouse: hover lift ═══ */
+@media (hover: hover) and (pointer: fine) {
+  .visible:hover { background: var(--primary-light); transform: translateY(-4px); }
 }

@@ -1,10 +1,15 @@
 /* ════════════════════════════════════════
    SUMANTH MINERALS — HOME PAGE STYLES
+   Base styles = desktop (1281–1599px). Device tiers follow at the end of the
+   file in this order: large desktop, laptop, tablet, large phone, phone,
+   small phone, landscape phone, touch, mouse, reduced motion.
 ════════════════════════════════════════ */
 
-/* ─── HERO ─── */
-.home { overflow-x: hidden; }
+/* `clip`, not `hidden`: hidden would make this wrapper a scroll container,
+   which silently disables every scroll-driven reveal (animation-timeline: view()) inside it. */
+.home { overflow-x: clip; }
 
+/* ─── HERO ─── */
 .hero {
   min-height: 100svh;
   display: flex;
@@ -20,6 +25,18 @@
   will-change: transform;
 }
 
+/* Real photo of the Lakshupalli stockpiles; settles in once on load */
+.heroImg {
+  object-fit: cover;
+  object-position: 60% 50%;
+  animation: heroSettle 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroSettle {
+  from { transform: scale(1.08); }
+  to   { transform: none; }
+}
+
 .heroOverlay {
   position: absolute;
   inset: 0;
@@ -28,7 +45,24 @@
     linear-gradient(0deg, rgba(0, 18, 40, 0.55) 0%, transparent 35%);
 }
 
+/* Signature: layered "rock strata" band at the base of the hero —
+   laterite soil, weathered rock, sand, quartz white. */
+.heroStrata {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  z-index: 3;
+  background: var(--grad-strata);
+  transform-origin: left center;
+  animation: strataIn 1.1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 
+@keyframes strataIn {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
 
 .heroContent {
   position: relative;
@@ -43,19 +77,19 @@
   gap: 0.6rem;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(224, 115, 77, 0.55);
-  color: #ffffff;
+  color: var(--white);
   padding: 0.5rem 1.25rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   margin-bottom: 2rem;
-  display: inline-flex;
 }
 
 .badgeDot {
   width: 7px;
   height: 7px;
+  flex-shrink: 0;
   background: var(--laterite-light);
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
@@ -78,7 +112,7 @@
 }
 
 .heroTitleAccent {
-  background: linear-gradient(135deg, #c8a84b 0%, #e2c97e 50%, #c8a84b 100%);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -104,6 +138,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  min-height: 44px;
   color: rgba(255,255,255,0.85);
   font-size: 0.85rem;
   font-weight: 600;
@@ -112,7 +147,7 @@
   transition: color 0.2s ease;
 }
 
-.certLink:hover { color: #c8a84b; }
+.certLink:focus-visible { color: var(--gold); }
 
 /* Hero Stats */
 .heroStats {
@@ -156,13 +191,13 @@
   position: absolute;
   bottom: 2.5rem;
   left: 50%;
-  transform: translateX(-50%);
+  translate: -50% 0; /* `translate`, so framer's bounce on `transform` keeps the centring */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   color: rgba(255,255,255, 0.78);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   z-index: 3;
@@ -187,7 +222,7 @@
   background: var(--white);
   box-shadow: var(--shadow-xl);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  overflow: hidden;
+  overflow: clip; /* not `hidden`: keeps the children's scroll reveals working */
   margin: 0;
   position: relative;
   z-index: 2;
@@ -199,12 +234,10 @@
   gap: 1.25rem;
   padding: 2.25rem 2rem;
   border-right: 1px solid var(--border-light);
-  transition: var(--transition);
+  transition: background-color 0.35s ease;
 }
 
 .trustCard:last-child { border-right: none; }
-
-.trustCard:hover { background: var(--snow); }
 
 .trustIcon {
   width: 56px;
@@ -216,7 +249,13 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
+/* Each trust point picks up a different mine colour */
+.trustCard:nth-child(4n+1) .trustIcon { background: var(--laterite-glass); color: var(--laterite); }
+.trustCard:nth-child(4n+2) .trustIcon { background: var(--sky-glass);      color: var(--sky); }
+.trustCard:nth-child(4n+3) .trustIcon { background: var(--scrub-glass);    color: var(--scrub); }
 
 .trustCard h4 {
   font-size: 1rem;
@@ -232,9 +271,7 @@
 }
 
 /* ─── ABOUT SECTION ─── */
-.aboutSection {
-  background: var(--white);
-}
+.aboutSection { background: var(--white); }
 
 .aboutGrid {
   display: grid;
@@ -245,7 +282,7 @@
 
 .aboutImageBox {
   height: 580px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 60%, #1a5fa8 100%);
+  background: var(--grad-primary);
   border-radius: var(--radius-xl);
   position: relative;
   display: flex;
@@ -254,14 +291,7 @@
   overflow: hidden;
 }
 
-.mineralPattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 30% 40%, rgba(200,168,75,0.12) 0%, transparent 50%),
-    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 100% 100%, 28px 28px;
-}
+.aboutPhoto { object-fit: cover; }
 
 .aboutImageOverlay {
   position: absolute;
@@ -286,11 +316,11 @@
   backdrop-filter: blur(10px);
   padding: 0.7rem 1rem;
   border-radius: var(--radius-md);
-  color: white;
+  color: var(--white);
 }
 
-.certBadge svg { color: #c8a84b; flex-shrink: 0; }
-.productionBadge svg { color: #38bdf8; flex-shrink: 0; }
+.certBadge svg { color: var(--gold); flex-shrink: 0; }
+.productionBadge svg { color: var(--sky-light); flex-shrink: 0; }
 
 .certBadge strong,
 .productionBadge strong {
@@ -302,7 +332,7 @@
 .certBadge span,
 .productionBadge span {
   font-size: 0.75rem;
-  opacity: 0.7;
+  opacity: 0.8;
   display: block;
   margin: 0;
 }
@@ -313,12 +343,12 @@
   right: 2rem;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(8px);
-  color: #ffffff;
+  color: var(--white);
   font-family: var(--font-display), sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0.4rem 0.9rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   border: 1px solid rgba(255,255,255,0.3);
   z-index: 2;
 }
@@ -400,11 +430,11 @@
   color: var(--primary);
   background: var(--primary-glass);
   padding: 0.4rem 0.85rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   border: 1px solid rgba(0,51,102,0.12);
 }
 
-.starIcon { color: #c8a84b; }
+.starIcon { color: var(--gold); }
 
 .chemActions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
@@ -413,7 +443,7 @@
   background: var(--white);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-light);
-  overflow: hidden;
+  overflow: clip; /* not `hidden`, so the 99.27% text-shimmer can track the page scroll */
   box-shadow: var(--shadow-lg);
 }
 
@@ -422,7 +452,7 @@
   align-items: center;
   gap: 0.65rem;
   background: var(--primary);
-  color: white;
+  color: var(--white);
   padding: 1.1rem 1.5rem;
   font-weight: 700;
   font-size: 0.9rem;
@@ -431,13 +461,14 @@
 .certTag {
   margin-left: auto;
   background: rgba(16,185,129,0.25);
-  color: #4ade80;
+  color: var(--scrub-light);
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.65rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .tableRow {
@@ -453,9 +484,7 @@
 
 .tableRow:last-child { border-bottom: none; }
 
-.rowHighlight {
-  background: rgba(0,51,102,0.03);
-}
+.rowHighlight { background: rgba(0,51,102,0.03); }
 
 .rowLabel {
   font-size: 0.88rem;
@@ -470,16 +499,16 @@
   color: var(--text-secondary);
 }
 
+/* The 99.27% figure: bigger, and given the global gold `text-shimmer` in the JSX */
 .valueHighlight {
-  font-size: 1.15rem;
-  color: var(--success) !important;
+  font-size: 1.3rem;
   font-weight: 900;
 }
 
 .purityBar {
   width: 100%;
   height: 4px;
-  background: #e2e8f0;
+  background: var(--border-light);
   border-radius: 2px;
   margin-top: 0.25rem;
   overflow: hidden;
@@ -487,7 +516,7 @@
 
 .purityFill {
   height: 100%;
-  background: linear-gradient(90deg, #003366, #10b981);
+  background: linear-gradient(90deg, var(--primary), var(--scrub-light));
   border-radius: 2px;
 }
 
@@ -503,12 +532,15 @@
 /* ─── PRODUCTS SECTION ─── */
 .productsSection { background: var(--grad-section); }
 
+.swipeHint { display: none; }
+
 .productGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
 }
 
+/* Lift uses `translate`, not `transform`, so it never fights the scroll reveal */
 .productCard {
   background: var(--white);
   border-radius: var(--radius-lg);
@@ -517,13 +549,7 @@
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
-}
-
-.productCard:hover {
-  transform: translateY(-8px);
-  border-color: rgba(0, 51, 102, 0.18);
-  box-shadow: var(--shadow-lg);
+  transition: translate 0.4s var(--ease-spring), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .toneFine    { --tone: var(--sky); }
@@ -540,15 +566,28 @@
 
 .productImage {
   object-fit: cover;
-  transition: transform 0.6s var(--ease-spring);
+  transition: transform 0.8s var(--ease-spring);
 }
 
-.productCard:hover .productImage { transform: scale(1.06); }
+/* Tone-coloured bar that draws across the bottom of the photo on hover */
+.productImageBox::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--tone, var(--primary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-spring);
+}
 
 .sizeBadge {
   position: absolute;
   top: 1rem;
   left: 1rem;
+  z-index: 1;
   background: var(--tone, var(--primary));
   color: var(--white);
   padding: 0.35rem 0.8rem;
@@ -592,7 +631,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.3rem 0.65rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
 .productUses { margin-bottom: 1.5rem; }
@@ -615,51 +654,53 @@
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
+/* "Contact for Price" always gets its own full-width row (order: -1), with
+   "Technical Specs" beneath it, so the longer label is never clipped. */
 .productCardActions {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
   margin-top: auto;
   padding-top: 1.25rem;
   border-top: 1px solid var(--border-light);
 }
 
+.productQuoteBtn {
+  order: -1;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 40px;
+  background: var(--laterite);
+  border: 1px solid var(--laterite);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
 .productCta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
+  min-height: 40px;
   color: var(--sky);
   white-space: nowrap;
   font-weight: 700;
   font-size: 0.85rem;
   transition: gap 0.2s ease;
-}
-
-.productCta:hover { gap: 0.6rem; }
-
-.productQuoteBtn {
-  background: var(--laterite);
-  border: 1px solid var(--laterite);
-  border-radius: var(--radius-sm);
-  color: var(--white);
-  white-space: nowrap;
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  padding: 0.45rem 0.9rem;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.productQuoteBtn:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--white);
 }
 
 .productsFootnote {
@@ -674,45 +715,49 @@
 }
 
 .productsFootnote a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--gold-dark);
   font-weight: 700;
 }
-
-.productsFootnote a:hover { color: var(--primary); }
 
 /* ─── INDUSTRIES ─── */
 .industriesSection { background: var(--sand); }
 
 .industriesGrid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 .industryCard {
-  grid-column: span 2;
+  position: relative;
+  overflow: hidden;
   padding: 2rem;
   border: 1.5px solid var(--border-light);
   border-radius: var(--radius-md);
-  transition: var(--transition);
   background: var(--white);
   display: flex;
   flex-direction: column;
+  transition: translate 0.4s var(--ease-spring), box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
 }
 
-
-.industryCard:hover {
-  border-color: var(--laterite-light);
-  box-shadow: var(--shadow-md);
-  background: var(--snow);
+/* A strata bar grows along the top edge on hover/focus, so the card you are pointing at is obvious */
+.industryCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--grad-strata);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-spring);
 }
 
-.industryFeatured {
-  background: var(--grad-mineral);
-  border-color: rgba(200, 168, 75, 0.35);
-}
-
-.industryFeatured:hover { background: var(--grad-mineral); }
+.industryCard:focus-within::before { transform: scaleX(1); }
 
 .industryIcon {
   width: 56px;
@@ -724,13 +769,16 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1.25rem;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.industryFeatured .industryIcon {
-  background: var(--primary);
+.industryCard:nth-child(3n+1) .industryIcon { background: var(--laterite-glass); color: var(--laterite); }
+.industryCard:nth-child(3n+2) .industryIcon { background: var(--sky-glass);      color: var(--sky); }
+.industryCard:nth-child(3n+3) .industryIcon { background: var(--scrub-glass);    color: var(--scrub); }
+
+.industriesGrid .industryCard:focus-within .industryIcon {
+  background: var(--laterite);
   color: var(--white);
-  width: 64px;
-  height: 64px;
 }
 
 .industryCard h3 {
@@ -738,8 +786,6 @@
   margin-bottom: 0.6rem;
   color: var(--primary);
 }
-
-.industryFeatured h3 { font-size: 1.3rem; }
 
 .industryCard p {
   font-size: 0.875rem;
@@ -754,6 +800,7 @@
   align-items: center;
   gap: 0.5rem;
   align-self: flex-start;
+  min-height: 36px;
   font-family: var(--font-display), sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
@@ -772,13 +819,8 @@
   color: var(--text-muted);
 }
 
-.industryGrade:hover {
-  border-color: var(--gold);
-  background: var(--gold-glass);
-}
-
 .industriesCta {
-  grid-column: span 6;
+  grid-column: 1 / -1;
   background: var(--grad-hero);
   border-radius: var(--radius-md);
   padding: 2rem;
@@ -810,13 +852,14 @@
 .industriesCta a {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  min-height: 44px;
   gap: 0.4rem;
   color: var(--gold-light);
   font-weight: 700;
   font-size: 0.9rem;
+  transition: gap 0.2s ease, color 0.2s ease;
 }
-
-.industriesCta a:hover { color: var(--white); gap: 0.65rem; }
 
 /* ─── EXPORT SECTION ─── */
 .exportSection { background: var(--snow); }
@@ -867,7 +910,7 @@
   box-shadow: 0 0 0 3px rgba(200,168,75,0.2);
 }
 
-.portInfo { flex: 1; }
+.portInfo { flex: 1; min-width: 0; }
 .portInfo strong { display: block; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.15rem; }
 .portInfo span { font-size: 0.8rem; color: var(--text-muted); }
 
@@ -878,29 +921,8 @@
   color: var(--primary);
   background: var(--primary-glass);
   padding: 0.25rem 0.6rem;
-  border-radius: 4px;
-}
-
-.exportsLabel {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-}
-
-.countryTags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-.countryTag {
-  background: var(--white);
-  border: 1px solid var(--border-light);
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.3rem 0.75rem;
-  border-radius: 4px;
-  box-shadow: var(--shadow-xs);
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
 }
 
 .exportVisual { display: flex; justify-content: center; align-items: center; }
@@ -981,75 +1003,7 @@
 }
 
 /* ─── PROCESS SECTION ─── */
-.processSection {
-  background: var(--snow);
-}
-
-/* ─── COMPLIANCE & COMMUNITY ─── */
-.complianceStrip {
-  background: var(--white);
-  padding: 0 0 90px;
-}
-
-.complianceGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) auto;
-  gap: 32px;
-  align-items: center;
-  background: var(--snow);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 2rem 2.25rem;
-}
-
-.complianceItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-}
-
-.complianceIcon {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--white);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  color: var(--primary);
-}
-
-.complianceItem strong {
-  display: block;
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  margin-bottom: 0.2rem;
-}
-
-.complianceItem p {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.complianceLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 700;
-  font-size: 0.88rem;
-  color: var(--primary);
-  white-space: nowrap;
-  padding-left: 1.5rem;
-  border-left: 1px solid var(--border);
-  transition: gap 0.2s ease, color 0.2s ease;
-}
-
-.complianceLink:hover { color: var(--gold-dark); gap: 0.7rem; }
+.processSection { background: var(--snow); }
 
 /* ─── CTA SECTION ─── */
 .ctaSection {
@@ -1075,24 +1029,22 @@
   background-size: 100% 100%, 100% 100%, 30px 30px;
 }
 
+/* Strata band along the top of the closing box (draws in as it scrolls into view) */
+.ctaBox::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--grad-strata);
+  transform-origin: left center;
+}
+
 .ctaContent {
   position: relative;
   padding: 5rem 4rem;
   text-align: center;
-}
-
-.ctaLabel {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #c8a84b;
-  margin-bottom: 1.25rem;
-  background: rgba(200,168,75,0.15);
-  border: 1px solid rgba(200,168,75,0.3);
-  padding: 0.35rem 1rem;
-  border-radius: 999px;
 }
 
 .ctaBox h2 {
@@ -1115,199 +1067,161 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.ctaStats {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-full);
-  padding: 0.75rem 1.5rem;
-}
-
-.ctaStat { text-align: center; padding: 0 1.5rem; }
-.ctaStat strong { display: block; color: var(--white); font-size: 1.1rem; font-weight: 800; }
-.ctaStat span { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.5px; }
-
-.ctaStatDivider {
-  width: 1px;
-  height: 36px;
-  background: rgba(255,255,255,0.12);
 }
 
 /* ════════════════════════════════════════
-   RESPONSIVE
+   SCROLL-DRIVEN EXTRAS (page-specific; the shared reveals come from the
+   global motion kit classes in the JSX). Only where supported and allowed;
+   otherwise everything is simply shown in its final state.
 ════════════════════════════════════════ */
-@media (max-width: 1100px) {
-  .productGrid { grid-template-columns: repeat(2, 1fr); }
-  .industriesGrid { grid-template-columns: repeat(4, 1fr); }
-  .industryCard:nth-child(n) { grid-column: span 2; }
-  .industriesCta { grid-column: span 4; }
-
-  .complianceGrid { grid-template-columns: 1fr 1fr; }
-  .complianceLink {
-    grid-column: 1 / -1;
-    border-left: none;
-    border-top: 1px solid var(--border);
-    padding: 1rem 0 0;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ctaBox::after {
+      animation: strataIn linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 40%;
+    }
   }
 }
 
-@media (max-width: 992px) {
+/* ════════════════════════════════════════
+   Tier: large desktop (≥1600px) — container is 1440px wide
+════════════════════════════════════════ */
+@media (min-width: 1600px) {
+  .heroContent { padding: 170px 0 110px; }
+  .heroTitle h1 { font-size: 6.25rem; }
+  .heroSubtitle { max-width: 760px; font-size: 1.3rem; }
+  .heroCtas { margin-bottom: 4.75rem; }
+  .statItem { padding: 0 2.75rem; }
+  .statNumber { font-size: 3.2rem; }
+  .statLabel { font-size: 1rem; }
+
+  .trustCard { padding: 2.75rem 2.5rem; gap: 1.5rem; }
+  .trustCard h4 { font-size: 1.1rem; }
+  .trustCard p { font-size: 0.92rem; }
+
+  .aboutGrid { grid-template-columns: 1.1fr 1fr; gap: 110px; }
+  .aboutImageBox { height: 660px; }
+  .aboutContent > p { font-size: 1.15rem; }
+  .featureList li { font-size: 1.02rem; }
+
+  .chemGrid { gap: 110px; }
+  .tableRow { padding: 1.15rem 1.75rem; }
+
+  .productGrid { gap: 36px; }
+  .productImageBox { height: 290px; }
+  .productCardBody { padding: 1.85rem; }
+
+  /* 4 across instead of 3: three tidy rows of four, CTA underneath */
+  .industriesGrid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+  .exportGrid { gap: 120px; }
+  .globeBox { width: 440px; height: 440px; }
+  .globeIcon { width: 250px; height: 250px; }
+
+  .ctaSection { padding: 110px 0; }
+  .ctaContent { padding: 6.5rem 6rem; }
+  .ctaBox p { max-width: 680px; font-size: 1.15rem; }
+}
+
+/* ════════════════════════════════════════
+   Tier: laptop (1025–1280px)
+════════════════════════════════════════ */
+@media (max-width: 1280px) {
+  .heroContent { padding: 124px 0 72px; }
+
+  .trustCard { padding: 1.9rem 1.4rem; gap: 1rem; }
+  .trustIcon { width: 48px; height: 48px; }
+
+  .aboutGrid { gap: 56px; }
+  .aboutImageBox { height: 520px; }
+  .chemGrid { gap: 48px; }
+  .exportGrid { gap: 56px; }
+  .globeBox { width: 320px; height: 320px; }
+
+  .productGrid { gap: 20px; }
+  .productImageBox { height: 190px; }
+  .productCardBody { padding: 1.25rem; }
+
+  .industryCard { padding: 1.6rem; }
+
+  .ctaContent { padding: 4rem 3rem; }
+}
+
+/* ════════════════════════════════════════
+   Tier: tablet (769–1024px, portrait and landscape)
+════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero { min-height: min(100svh, 880px); }
+  .heroContent { padding: 120px 0 88px; }
+  .heroSubtitle { max-width: 600px; }
+  .heroCtas { margin-bottom: 3rem; }
+  .statItem { padding: 0 1.5rem; }
+
+  /* Trust strip: 2×2 tiles */
   .trustGrid { grid-template-columns: repeat(2, 1fr); }
-  .trustCard { border-right: none; border-bottom: 1px solid var(--border-light); }
+  .trustCard { border-right: none; border-bottom: 1px solid var(--border-light); padding: 1.75rem 1.5rem; }
   .trustCard:nth-child(odd) { border-right: 1px solid var(--border-light); }
   .trustCard:nth-last-child(-n+2) { border-bottom: none; }
 
-  .aboutGrid,
-  .chemGrid,
-  .exportGrid { grid-template-columns: 1fr; gap: 50px; }
+  /* About: wide photo banner above the copy; checklist in two columns */
+  .aboutGrid { grid-template-columns: 1fr; gap: 44px; }
+  .aboutImageBox { height: auto; aspect-ratio: 16 / 8; }
+  .aboutImageOverlay { flex-direction: row; padding: 1.5rem; }
+  .aboutImageOverlay > * { flex: 1; }
+  .featureList { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem 1.75rem; }
 
-  .aboutImageBox { height: 400px; }
-  .globeBox { width: 280px; height: 280px; }
+  /* Chemistry: copy then a full-width table */
+  .chemGrid { grid-template-columns: 1fr; gap: 40px; }
 
-  .productGrid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-  .industriesGrid { grid-template-columns: 1fr 1fr; }
-  .industryCard:nth-child(n) { grid-column: span 1; }
-  .industriesCta { grid-column: span 2; }
+  /* Products: 2×2 */
+  .productGrid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .productImageBox { height: 230px; }
 
-  .heroStats { gap: 1rem; }
-  .statDivider { display: none; }
-  .statItem { padding: 0; }
+  /* Industries: two columns */
+  .industriesGrid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .industryCard { padding: 1.5rem; }
+
+  /* Export: ports beside a smaller globe */
+  .exportGrid { grid-template-columns: 1.45fr 1fr; gap: 32px; }
+  .globeBox { width: 260px; height: 260px; }
+  .globeIcon { width: 150px; height: 150px; }
+  .exportStat { top: 0.5rem; right: 0; }
+  .exportStat2 { bottom: 0.5rem; left: 0; }
+
+  .ctaSection { padding: 64px 0; }
+  .ctaContent { padding: 3.5rem 2.5rem; }
 }
 
+/* ════════════════════════════════════════
+   Tier: large phone / small portrait tablet (≤768px)
+   Purpose-built for small screens: swipe carousel, compact rows, stacked buttons.
+════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .hero { min-height: 100svh; }
+  .heroContent { padding: 112px 0 64px; }
+  .heroImg { animation-duration: 1.4s; }
+  .heroBadge { font-size: 0.75rem; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem; }
+  .heroTitle { margin-bottom: 1.25rem; }
   .heroTitle h1 { font-size: 2.6rem; }
-  .heroCtas { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%; }
-  .heroCtas .btn { width: 100%; padding-left: 0.75rem; padding-right: 0.75rem; }
-  .heroCtas > :last-child { grid-column: 1 / -1; justify-self: start; }
+  .heroSubtitle { margin-bottom: 1.75rem; }
+
+  /* Two equal buttons, then the certificate link on its own row */
+  .heroCtas { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%; margin-bottom: 2.25rem; }
+  .heroCtas :global(.btn) { width: 100%; padding-left: 0.75rem; padding-right: 0.75rem; }
+  .heroCtas > :last-child { grid-column: 1 / -1; justify-self: stretch; justify-content: center; }
+
   .heroStats { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 0.75rem; }
   .heroStats .statNumber { font-size: 1.45rem; }
   .heroStats .statLabel { font-size: 0.78rem; }
-  .heroBadge { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
   .statDivider { display: none; }
   .statItem { padding: 0; }
+  .scrollIndicator { display: none; } /* the MobileActionBar owns the bottom edge here */
 
-  .trustGrid { grid-template-columns: 1fr; }
-  .trustCard { border-right: none; }
-  .trustCard:nth-child(odd) { border-right: none; }
-  .trustCard:nth-last-child(-n+2) { border-bottom: 1px solid var(--border-light); }
-  .trustCard:last-child { border-bottom: none; }
-
-  .processSection { padding: 60px 0; }
-  .industriesGrid { grid-template-columns: 1fr; }
-  .industryCard:nth-child(n),
-  .industriesCta { grid-column: auto; }
-  .productGrid { max-width: 100%; }
-  .complianceGrid { grid-template-columns: 1fr; padding: 1.75rem; }
-
-  .ctaContent { padding: 3rem 2rem; }
-  .ctaStats {
-    flex-direction: column;
-    border-radius: var(--radius-md);
-    gap: 0.5rem;
-  }
-  .ctaStat { padding: 0.5rem; }
-  .ctaStatDivider { width: 40px; height: 1px; }
-  .ctaActions { flex-direction: column; align-items: center; }
-}
-
-@media (max-width: 480px) {
-  .heroTitle h1 { font-size: 2rem; }
-}
-
-/* ─── Mine palette additions ───────────────────────────────── */
-
-/* Hero: real photo of the Lakshupalli benches */
-.heroImg {
-  object-fit: cover;
-  object-position: 60% 50%;
-}
-
-/* Signature: layered "rock strata" band at the base of the hero —
-   laterite soil, weathered rock, sand, quartz white. */
-.heroStrata {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  z-index: 3;
-  background: var(--grad-strata);
-  transform-origin: left center;
-  animation: strataIn 1.1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes strataIn {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-/* About: the box now holds the real lumps photo */
-.aboutPhoto {
-  object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.aboutImageBox:hover .aboutPhoto { transform: scale(1.04); }
-
-/* Industry cards: a laterite bar grows along the top edge on hover/focus,
-   so the card you are pointing at is obvious. */
-.industryCard { position: relative; overflow: hidden; }
-.industryCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--grad-strata);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.industryCard:hover::before,
-.industryCard:focus-within::before { transform: scaleX(1); }
-.industriesGrid .industryCard:hover .industryIcon,
-.industriesGrid .industryCard:focus-within .industryIcon {
-  background: var(--laterite);
-  color: var(--white);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroStrata { animation: none; }
-  .aboutPhoto, .industryCard::before { transition: none; }
-}
-
-/* Each trust point / industry icon picks up a different mine colour */
-.trustCard:nth-child(4n+1) .trustIcon { background: var(--laterite-glass); color: var(--laterite); }
-.trustCard:nth-child(4n+2) .trustIcon { background: var(--sky-glass);      color: var(--sky); }
-.trustCard:nth-child(4n+3) .trustIcon { background: var(--scrub-glass);    color: var(--scrub); }
-.industryCard:nth-child(3n+1) .industryIcon { background: var(--laterite-glass); color: var(--laterite); }
-.industryCard:nth-child(3n+2) .industryIcon { background: var(--sky-glass);      color: var(--sky); }
-.industryCard:nth-child(3n+3) .industryIcon { background: var(--scrub-glass);    color: var(--scrub); }
-.industryIcon { transition: background-color 0.3s ease, color 0.3s ease; }
-
-/* ════════════════════════════════════════
-   PHONE LAYOUTS
-   Purpose-built for small screens rather than the desktop grid stacked into
-   one column. Kept last so it wins over the generic responsive rules above.
-════════════════════════════════════════ */
-.swipeHint { display: none; }
-
-@media (max-width: 768px) {
-  /* Hero: two equal buttons, certificate link as a proper tap target */
-  .heroCtas > :last-child { justify-self: stretch; }
-  .certLink { min-height: 44px; display: inline-flex; align-items: center; }
-
-  /* Trust strip: 2×2 tiles instead of four tall rows */
-  .trustGrid { grid-template-columns: 1fr 1fr; }
+  /* Trust strip: 2×2 stacked tiles (icon above text) */
   .trustCard,
   .trustCard:nth-child(odd),
-  .trustCard:nth-last-child(-n+2),
-  .trustCard:last-child {
+  .trustCard:nth-last-child(-n+2) {
     flex-direction: column;
     gap: 0.6rem;
     padding: 1.1rem 1rem;
@@ -1317,18 +1231,27 @@
   .trustCard:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
   .trustIcon { width: 40px; height: 40px; }
   .trustIcon svg { width: 20px; height: 20px; }
-  .trustCard h3 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .trustCard h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
   .trustCard p { font-size: 0.8rem; line-height: 1.45; }
 
-  /* About: shorter photo, full-width stacked buttons */
-  .aboutGrid, .chemGrid, .exportGrid { gap: 32px; }
-  .aboutImageBox { height: 260px; }
+  /* About: shorter photo, one-column checklist, full-width stacked buttons */
+  .aboutGrid, .chemGrid { gap: 32px; }
+  .aboutImageBox { aspect-ratio: 4 / 3; max-height: 340px; width: 100%; }
+  .aboutImageOverlay { flex-direction: column; padding: 1.1rem; gap: 0.5rem; }
+  .certBadge, .productionBadge { padding: 0.55rem 0.8rem; }
+  .mineTag { top: 1rem; right: 1rem; }
+  .featureList { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
   .aboutActions, .chemActions, .ctaActions {
     flex-direction: column;
     align-items: stretch;
     gap: 0.75rem;
   }
-  .aboutActions > *, .chemActions > *, .ctaActions > *, .ctaActions .btn { width: 100%; }
+  .aboutActions > *, .chemActions > *, .ctaActions > *, .ctaActions :global(.btn) { width: 100%; }
+
+  /* Chemistry table: tighter rows */
+  .tableHeader { padding: 1rem 1.1rem; flex-wrap: wrap; }
+  .tableRow { padding: 0.85rem 1.1rem; }
+  .tableFooter { padding: 0.8rem 1.1rem; }
 
   /* Products: swipeable cards with the next one peeking in, instead of
      four full-height cards stacked (~2,800px of scrolling). */
@@ -1344,26 +1267,24 @@
   .productGrid {
     display: flex;
     gap: 14px;
-    max-width: none;
     margin: 0 -1.25rem;
     padding: 4px 1.25rem 18px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-left: 1.25rem;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
   }
   .productGrid::-webkit-scrollbar { display: none; }
-  .productCard {
-    flex: 0 0 84%;
-    scroll-snap-align: start;
-  }
-  /* Price button gets its own full-width row so it is never clipped */
-  .productCardActions { flex-direction: column; align-items: stretch; gap: 0.25rem; }
-  .productCta, .productQuoteBtn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  /* Cards sit in a sideways scroller, so a vertical scroll reveal cannot track them */
+  .productsSection .productGrid > * { animation: none; }
+  .productCard { flex: 0 0 62%; scroll-snap-align: start; } /* ~1.5 cards on a portrait tablet; phones widen this below */
+  .productImageBox { height: 200px; }
+  .productCta, .productQuoteBtn { min-height: 44px; }
 
   /* Industries: compact list rows (icon · name · size) instead of 13 big cards */
-  .industriesGrid { gap: 10px; }
+  .industriesGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .industryCard {
     display: grid;
     grid-template-columns: 44px 1fr;
@@ -1381,32 +1302,253 @@
   .industryIcon svg { width: 22px; height: 22px; }
   .industryCard h3 { font-size: 1rem; margin: 0; }
   .industryCard p { font-size: 0.85rem; line-height: 1.5; margin: 0 0 0.4rem; }
-  .industryGrade { margin-top: 0; min-height: 36px; justify-self: start; }
+  .industryGrade { margin-top: 0; min-height: 44px; justify-self: start; }
   .industriesCta { padding: 1.5rem 1.25rem; }
 
   /* Export: port rows only — the decorative globe adds a screen of scrolling */
+  .exportGrid { grid-template-columns: 1fr; }
   .exportVisual { display: none; }
+  .exportContent > p { margin-bottom: 1.5rem; }
+  .portsList { gap: 0.75rem; margin-bottom: 0; }
   .portItem { align-items: flex-start; flex-wrap: wrap; row-gap: 0.4rem; padding: 0.9rem 1rem; }
   .portDot { margin-top: 0.45rem; }
   .portInfo { min-width: 60%; }
 
-  /* Closing call to action */
-  .ctaContent { padding: 2.25rem 1.25rem; }
-  .ctaActions { margin-bottom: 0; }
+  .ctaSection { padding: 48px 0; }
+  .ctaContent { padding: 2.5rem 1.5rem; }
+  .ctaBox { border-radius: var(--radius-lg); }
+  .ctaBox p { font-size: 1rem; margin-bottom: 1.75rem; }
 }
 
-@media (max-width: 768px) {
-  /* Inline text links: full 44px tap height */
+/* ════════════════════════════════════════
+   Tier: phone (≤576px)
+════════════════════════════════════════ */
+@media (max-width: 576px) {
+  .heroContent { padding: 100px 0 56px; }
+  .heroTitle h1 { font-size: clamp(2rem, 9vw, 2.4rem); }
+  .heroSubtitle { font-size: 1rem; line-height: 1.65; }
+  .heroStats .statNumber { font-size: 1.3rem; }
+  .heroStats .statLabel { font-size: 0.75rem; }
+
+  .trustCard,
+  .trustCard:nth-child(odd),
+  .trustCard:nth-last-child(-n+2) { padding: 1rem 0.85rem; }
+
+  .aboutImageBox { aspect-ratio: 1 / 1; max-height: 300px; border-radius: var(--radius-lg); }
+  .mineTag { font-size: 0.75rem; }
+
+  .productGrid { margin: 0 -1rem; padding: 4px 1rem 16px; scroll-padding-left: 1rem; gap: 12px; }
+  .productCard { flex-basis: 86%; }
+  .industriesGrid { grid-template-columns: 1fr; }
+  .productImageBox { height: 180px; }
+  .productCardBody { padding: 1.1rem; }
+
+  .ctaContent { padding: 2.25rem 1.1rem; }
+}
+
+/* ════════════════════════════════════════
+   Tier: small phone (≤380px, 320px wide) — nothing may clip; buttons may wrap
+════════════════════════════════════════ */
+@media (max-width: 380px) {
+  .heroBadge { white-space: normal; line-height: 1.35; }
+  .heroCtas { grid-template-columns: 1fr; }
+  .heroStats .statNumber { font-size: 1.12rem; }
+
+  /* Trust strip: single column of compact rows (icon left) — 2×2 is too tight at 320px */
+  .trustGrid { grid-template-columns: 1fr; }
+  .trustCard,
+  .trustCard:nth-child(odd),
+  .trustCard:nth-last-child(-n+2) {
+    flex-direction: row;
+    gap: 0.85rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .trustCard:last-child { border-bottom: none; }
+
+  .certBadge strong, .productionBadge strong { font-size: 0.8rem; }
+
+  .productCard { flex-basis: 90%; }
+  .productQuoteBtn { white-space: normal; }
+
+  .industryCard { grid-template-columns: 40px 1fr; column-gap: 0.75rem; padding: 0.9rem; }
+  .industryIcon { width: 40px; height: 40px; }
+  .industryGrade { flex-wrap: wrap; row-gap: 0; }
+
+  .portDistance { white-space: normal; }
+}
+
+/* ════════════════════════════════════════
+   Tier: landscape phone (e.g. 844×390, 667×375) — height is precious.
+   Placed after the width tiers so it overrides them. No 100vh hero; two
+   columns where it helps; notches cleared via the global .container padding.
+════════════════════════════════════════ */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Hero: copy on the left, stats stacked on the right, sized to its content */
+  .hero { min-height: 0; }
+  .heroContent { padding: 84px 0 36px; }
+  .heroContent > :global(.container) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 2.5rem;
+    align-items: center;
+  }
+  .heroContent > :global(.container) > * { grid-column: 1; }
+  .heroBadge { justify-self: start; font-size: 0.75rem; padding: 0.35rem 0.85rem; margin-bottom: 0.9rem; }
+  .heroTitle { margin-bottom: 0.75rem; }
+  .heroTitle h1 { font-size: clamp(1.75rem, 4.4vw, 2.4rem); }
+  .heroSubtitle { font-size: 0.95rem; line-height: 1.55; margin-bottom: 1.1rem; max-width: 560px; }
+  .heroCtas { display: flex; flex-wrap: wrap; gap: 0.6rem 0.75rem; margin-bottom: 0; width: auto; }
+  .heroCtas :global(.btn) { width: auto; padding: 0.7rem 1.1rem; font-size: 0.92rem; min-height: 44px; }
+  .heroCtas > :last-child { grid-column: auto; justify-self: auto; }
+  .heroStats.heroStats {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+  .heroStats .statItem { padding: 0; text-align: left; }
+  .heroStats .statNumber { font-size: 1.6rem; }
+  .heroStats .statLabel { font-size: 0.8rem; }
+  .statDivider, .scrollIndicator { display: none; }
+
+  /* Trust strip: 2×2 compact rows, icon left */
+  .trustGrid { grid-template-columns: repeat(2, 1fr); }
+  .trustCard,
+  .trustCard:nth-child(odd),
+  .trustCard:nth-last-child(-n+2) { flex-direction: row; gap: 0.85rem; padding: 1rem 1.1rem; }
+
+  /* About and chemistry side by side again */
+  .aboutGrid { grid-template-columns: 0.9fr 1.1fr; gap: 32px; align-items: start; }
+  .aboutImageBox { aspect-ratio: auto; height: 300px; max-height: none; position: sticky; top: 80px; }
+  .aboutImageOverlay { padding: 0.9rem; gap: 0.45rem; }
+  .featureList { margin-bottom: 1.5rem; }
+  .aboutActions, .chemActions, .ctaActions { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .aboutActions > *, .chemActions > *, .ctaActions > *, .ctaActions :global(.btn) { width: auto; }
+  .chemGrid { grid-template-columns: 1fr 1.1fr; gap: 28px; }
+
+  /* Products: swipe carousel with two cards in view */
+  .swipeHint {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: -0.5rem 0 0.75rem;
+  }
+  .productGrid {
+    display: flex;
+    gap: 16px;
+    margin: 0 calc(-1 * max(1.25rem, env(safe-area-inset-right))) 0 calc(-1 * max(1.25rem, env(safe-area-inset-left)));
+    padding: 4px max(1.25rem, env(safe-area-inset-right)) 16px max(1.25rem, env(safe-area-inset-left));
+    scroll-padding-left: max(1.25rem, env(safe-area-inset-left));
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .productGrid::-webkit-scrollbar { display: none; }
+  .productsSection .productGrid > * { animation: none; }
+  .productCard { flex: 0 0 calc(50% - 30px); scroll-snap-align: start; }
+  .productImageBox { height: 140px; }
+  .productCardBody { padding: 1rem; }
+  .productType { margin-bottom: 0.6rem; }
+  .productSpecs, .productUses { margin-bottom: 0.9rem; }
+
+  /* Industries: two columns of compact rows */
+  .industriesGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .industryCard {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 0.85rem;
+    row-gap: 0.2rem;
+    align-items: start;
+    padding: 0.95rem;
+  }
+  .industryIcon { grid-row: 1 / span 3; width: 44px; height: 44px; margin: 0; }
+  .industryIcon svg { width: 22px; height: 22px; }
+  .industryCard h3 { font-size: 0.98rem; margin: 0; }
+  .industryCard p { font-size: 0.83rem; line-height: 1.45; margin: 0 0 0.4rem; }
+  .industryGrade { margin-top: 0; justify-self: start; }
+
+  /* Export: ports in a 2×2 grid; globe hidden */
+  .exportGrid { grid-template-columns: 1fr; gap: 0; }
+  .exportVisual { display: none; }
+  .exportContent > p { margin-bottom: 1.25rem; max-width: 640px; }
+  .portsList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 0; }
+
+  .ctaSection { padding: 40px 0; }
+  .ctaContent { padding: 2.25rem 2rem; }
+  .ctaBox h2 { margin-bottom: 0.75rem; }
+  .ctaBox p { margin-bottom: 1.5rem; }
+}
+
+/* ════════════════════════════════════════
+   Tier: touch screens (incl. 1024px tablets on the desktop layout)
+   ≥44px targets; no hover state that sticks after a tap.
+════════════════════════════════════════ */
+@media (hover: none) {
+  .productQuoteBtn,
+  .productCta,
+  .industryGrade,
+  .certLink,
   .productsFootnote a,
-  .industriesCta a { display: inline-flex; align-items: center; min-height: 44px; }
-  .industryGrade { min-height: 40px; }
+  .industriesCta a { min-height: 44px; }
+
+  .productQuoteBtn:active { background: var(--laterite-dark); }
+  .industryGrade:active { border-color: var(--gold); background: var(--gold-glass); }
 }
 
-/* "Contact for Price" is longer than the old label: give it its own full-width
-   row on every screen size so it is never clipped in the 4-column grid. */
-.productCardActions { flex-wrap: wrap; row-gap: 0.5rem; }
-.productQuoteBtn { order: -1; flex: 1 1 100%; justify-content: center; text-align: center; }
-@media (max-width: 768px) {
-  /* In the stacked (column) layout the 100% basis would apply to height */
-  .productQuoteBtn { flex: none; width: 100%; }
+/* ════════════════════════════════════════
+   Tier: mouse / trackpad — rich hover effects live only here
+════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  .certLink:hover { color: var(--gold); }
+
+  .trustCard:hover { background: var(--snow); }
+  .trustCard:hover .trustIcon { transform: translateY(-3px) rotate(-6deg) scale(1.08); }
+
+  .productCard:hover {
+    translate: 0 -8px;
+    border-color: rgba(0, 51, 102, 0.18);
+    box-shadow: var(--shadow-lg);
+  }
+  .productCard:hover .productImage { transform: scale(1.07); }
+  .productCard:hover .productImageBox::after { transform: scaleX(1); }
+  .productCta:hover { gap: 0.6rem; }
+  .productQuoteBtn:hover { background: var(--primary); border-color: var(--primary); color: var(--white); }
+  .productsFootnote a:hover { color: var(--primary); }
+
+  .industryCard:hover {
+    translate: 0 -6px;
+    border-color: var(--laterite-light);
+    box-shadow: var(--shadow-md);
+  }
+  .industryCard:hover::before { transform: scaleX(1); }
+  .industriesGrid .industryCard:hover .industryIcon {
+    background: var(--laterite);
+    color: var(--white);
+    transform: translateY(-3px) rotate(-6deg) scale(1.08);
+  }
+  .industryGrade:hover { border-color: var(--gold); background: var(--gold-glass); }
+  .industriesCta a:hover { color: var(--white); gap: 0.65rem; }
+
+  .portItem { transition: translate 0.3s var(--ease-spring), box-shadow 0.3s ease; }
+  .portItem:hover { translate: 6px 0; box-shadow: var(--shadow-md); }
+}
+
+/* ════════════════════════════════════════
+   Reduced motion: no zooms or lifts; everything stays visible
+════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .heroImg, .heroStrata, .badgeDot, .globeIcon, .globePing::after { animation: none; }
+  .productCard:hover, .industryCard:hover, .portItem:hover { translate: none; }
+  .productCard:hover .productImage,
+  .trustCard:hover .trustIcon,
+  .industriesGrid .industryCard:hover .industryIcon { transform: none; }
 }

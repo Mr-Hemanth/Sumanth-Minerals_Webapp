@@ -150,7 +150,7 @@ export default function Products() {
                 "description": p.description,
                 "brand": { "@type": "Brand", "name": "Sumanth Minerals" },
                 "material": "High-Purity Silica Quartz",
-                "manufacturer": { "@type": "Organization", "name": "Sumanth Minerals" }
+                "manufacturer": { "@type": "Organization", "name": "Sumanth Minerals", "foundingDate": "2019-02-18" }
               }
             }))
           })
@@ -193,7 +193,7 @@ export default function Products() {
             >
               {/* Visual Side */}
               <div className={styles.productVisual}>
-                <div className={styles.productImageBox}>
+                <div className={`${styles.productImageBox} img-zoom lift`}>
                   <Image
                     src={product.image}
                     placeholder="blur"
@@ -205,7 +205,7 @@ export default function Products() {
 
                   <div className={styles.downloadOverlay}>
                     <a
-                      href={product.image}
+                      href={product.image.src} /* static import: .src is the file URL */
                       download={`${product.name.replace(/\s+/g, '_').toLowerCase()}.jpg`}
                       className={styles.downloadImgBtn}
                     >
@@ -225,7 +225,7 @@ export default function Products() {
                 {/* Specifications */}
                 <div className={styles.specs}>
                   <h3><ShieldCheck size={18} /> Chemical & Physical Specifications</h3>
-                  <div className={styles.specGrid}>
+                  <div className={`${styles.specGrid} stagger`}>
                     {product.specifications.map((spec, i) => (
                       <div key={i} className={styles.specItem}>
                         <span className={styles.specLabel}>{spec.label}</span>
@@ -238,7 +238,7 @@ export default function Products() {
                 {/* Applications */}
                 <div className={styles.applications}>
                   <h3><CheckCircle2 size={18} /> Industrial Applications</h3>
-                  <div className={styles.appList}>
+                  <div className={`${styles.appList} stagger`}>
                     {product.applications.map((app, i) => (
                       <div key={i} className={styles.appItem}>
                         <CheckCircle2 size={15} className={styles.appCheck} />
@@ -328,7 +328,7 @@ export default function Products() {
               <p>
                 For bulk orders exceeding 500 tons, we offer custom crushing, grading, and magnetic separation to meet your exact particle size distribution and chemical specifications. Custom sieve analysis reports available on request.
               </p>
-              <div className={styles.customFeatures}>
+              <div className={`${styles.customFeatures} stagger`}>
                 {[
                   'Custom sieve sizes available',
                   'Dedicated batch lab reports',
@@ -364,7 +364,7 @@ export default function Products() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <FlaskConical size={48} className={styles.qualIcon} />
+            <FlaskConical size={48} className={`${styles.qualIcon} icon-pop`} />
             <h2>Every Batch. Certified & Documented.</h2>
             <p>
               Sumanth Minerals has its quartz independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad, and shares the full report with buyers Third-party inspection via SGS or Intertek is available upon buyer request.

@@ -1,9 +1,25 @@
+/* ─── Legal pages (privacy / terms) — desktop base ─── */
 .pageHeader {
-  background: var(--primary);
+  position: relative;
+  background: var(--grad-hero);
   color: var(--white);
-  padding: 100px 0 50px;
+  /* clear the fixed navbar */
+  padding: 150px 0 64px;
   text-align: center;
+  overflow: hidden;
 }
+
+/* strata band along the bottom edge of the header */
+.pageHeader::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 4px;
+  background: var(--grad-strata);
+  transform-origin: left;
+}
+
+.pageHeader h1 { color: inherit; }
 
 .content {
   padding: 80px 0;
@@ -14,15 +30,112 @@
   margin: 0 auto;
 }
 
+.legalText > p:first-child {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  background: var(--light-bg);
+}
+
 .legalText h2 {
+  position: relative;
   margin-top: 40px;
   margin-bottom: 20px;
+  padding-left: 18px;
   color: var(--primary);
   font-size: 1.5rem;
 }
 
+/* gold marker beside each section heading */
+.legalText h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--gold), var(--laterite));
+  transform-origin: top;
+}
+
 .legalText p {
   margin-bottom: 20px;
-  color: var(--text-light);
+  color: inherit;
   line-height: 1.8;
+}
+
+/* Motion: header title rises and the strata band draws on load;
+   section markers grow as they scroll in (where supported). */
+@media (prefers-reduced-motion: no-preference) {
+  .pageHeader h1 { animation: legalRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .pageHeader::after { animation: legalBand 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .legalText h2::before {
+      animation: legalMarker linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+  }
+}
+@keyframes legalRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes legalBand { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes legalMarker { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* ═══ Tier: large desktop (≥1600px) ═══ */
+@media (min-width: 1600px) {
+  .pageHeader { padding: 170px 0 80px; }
+  .content { padding: 100px 0; }
+  .legalText { max-width: 880px; font-size: 1.08rem; }
+  .legalText h2 { font-size: 1.7rem; }
+}
+
+/* ═══ Tier: laptop (≤1280px) ═══ */
+@media (max-width: 1280px) {
+  .pageHeader { padding: 140px 0 56px; }
+  .content { padding: 72px 0; }
+}
+
+/* ═══ Tier: tablet (≤1024px) ═══ */
+@media (max-width: 1024px) {
+  .pageHeader { padding: 124px 0 52px; }
+  .content { padding: 60px 0; }
+  .legalText { max-width: 720px; }
+}
+
+/* ═══ Tier: large phone (≤768px) ═══ */
+@media (max-width: 768px) {
+  .pageHeader { padding: 112px 0 44px; }
+  .content { padding: 48px 0; }
+  .legalText h2 { font-size: 1.3rem; margin-top: 32px; margin-bottom: 14px; }
+  .legalText p { line-height: 1.75; margin-bottom: 16px; }
+}
+
+/* ═══ Tier: phone (≤576px) ═══ */
+@media (max-width: 576px) {
+  .pageHeader { padding: 100px 0 36px; }
+  .content { padding: 36px 0 40px; }
+  .legalText h2 { font-size: 1.2rem; padding-left: 14px; }
+  .legalText p { font-size: 0.97rem; }
+}
+
+/* ═══ Tier: small phone (≤380px) ═══ */
+@media (max-width: 380px) {
+  .pageHeader { padding: 92px 0 30px; }
+  .legalText h2 { font-size: 1.12rem; }
+  .legalText p { font-size: 0.94rem; line-height: 1.7; }
+}
+
+/* ═══ Tier: landscape phone — short header, wider reading column ═══ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pageHeader { padding: 76px 0 24px; }
+  .content { padding: 28px 0 36px; }
+  .legalText { max-width: 760px; }
+  .legalText h2 { margin-top: 24px; margin-bottom: 10px; font-size: 1.2rem; }
+  .legalText p { margin-bottom: 12px; line-height: 1.7; }
 }

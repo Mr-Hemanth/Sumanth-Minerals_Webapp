@@ -97,10 +97,10 @@ export default function Quality() {
                 Our chemistry comes from an independent lab report, not from our own claims. Download it, then test a sample in your own plant before you order.
               </p>
 
-              <div className={styles.steps}>
+              <div className={`${styles.steps} stagger`}>
                 {controlSteps.map((step) => (
                   <div key={step.title} className={styles.step}>
-                    <div className={styles.stepIcon}>{step.icon}</div>
+                    <div className={`${styles.stepIcon} icon-pop`}>{step.icon}</div>
                     <div className={styles.stepText}>
                       <h4>{step.title}</h4>
                       <p>{step.desc}</p>
@@ -129,7 +129,7 @@ export default function Quality() {
                       {item.component}
                       <small className={styles.method}>({item.method})</small>
                     </span>
-                    <strong className={item.key ? styles.silicaValue : undefined}>{item.percentage}</strong>
+                    <strong className={item.key ? `${styles.silicaValue} text-shimmer` : undefined}>{item.percentage}</strong>
                   </div>
                 ))}
               </div>
@@ -163,9 +163,9 @@ export default function Quality() {
             <h2>Official technical documentation</h2>
             <p>Direct mine-to-buyer transparency. Download signed analytical data sheets.</p>
           </m.div>
-          <div className={styles.reportGrid}>
-            <m.div className={styles.reportCard} {...inView} transition={{ delay: 0.1 }}>
-              <FileText size={36} />
+          <div className={`${styles.reportGrid} stagger`}>
+            <div className={`${styles.reportCard} lift`}>
+              <FileText size={36} className="icon-pop" />
               <h4>Certified chemical analysis report</h4>
               <p>Full spectrum breakdown of silica, iron, alumina, LOI, and trace alkali oxides verified by ICP-OES.</p>
               <div className={styles.reportActions}>
@@ -185,10 +185,10 @@ export default function Quality() {
                   <Download size={14} /> PDF
                 </a>
               </div>
-            </m.div>
+            </div>
 
-            <m.div className={styles.reportCard} {...inView} transition={{ delay: 0.2 }}>
-              <Activity size={36} />
+            <div className={`${styles.reportCard} lift`}>
+              <Activity size={36} className="icon-pop" />
               <h4>Complimentary lab test sample</h4>
               <p>Verify our 99.27% silica quartz directly in your plant laboratory before placing commercial bulk orders.</p>
               <div className={styles.reportActions}>
@@ -199,7 +199,7 @@ export default function Quality() {
                   Ask about testing →
                 </button>
               </div>
-            </m.div>
+            </div>
           </div>
         </div>
       </section>

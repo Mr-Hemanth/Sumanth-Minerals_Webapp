@@ -27,7 +27,7 @@ export default function About() {
   };
 
   const stats = [
-    { label: 'Founded', value: '2025' },
+    { label: 'Incorporated', value: '2019' },
     { label: 'Production', value: '15,000 MT/Mo' },
     { label: 'Ready Stock', value: '40,000 MT' },
     { label: 'SiO₂ (Lab-Tested)', value: '99.27%' }
@@ -51,7 +51,7 @@ export default function About() {
               <div className={styles.accent}>Our story</div>
               <h2>A mine-owning quartz supplier from Andhra Pradesh</h2>
               <p>
-                Sumanth Minerals was founded in 2025. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
+                Sumanth Minerals was incorporated on 18 February 2019. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
               </p>
               <p>
                 We supply quartz lumps and graded grit straight from our own mine, backed by independent lab analysis.
@@ -66,7 +66,7 @@ export default function About() {
             >
               {stats.map((stat, i) => (
                 <m.div key={i} className={styles.statBox} variants={staggerItem}>
-                  <h3>{stat.value}</h3>
+                  <h3 className={stat.value === '99.27%' ? 'text-shimmer' : undefined}>{stat.value}</h3>
                   <p>{stat.label}</p>
                 </m.div>
               ))}
@@ -82,31 +82,31 @@ export default function About() {
             <h2>Direct Mine-to-Market Model</h2>
             <p>We control every stage of the lifecycle to ensure absolute purity and supply chain stability.</p>
           </m.div>
-          <div className={styles.lifecycleGrid}>
-            <m.div className={styles.step} {...fadeInUp}>
+          <div className={`${styles.lifecycleGrid} stagger`}>
+            <div className={styles.step}>
               <div className={styles.stepNumber}>01</div>
               <History size={40} />
               <h3>Exploration</h3>
               <p>Rigorous geological surveying to identify high-yield quartz veins with &gt;99% silica potential.</p>
-            </m.div>
-            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.1 }}>
+            </div>
+            <div className={styles.step}>
               <div className={styles.stepNumber}>02</div>
               <TrendingUp size={40} />
               <h3>Extraction</h3>
               <p>Systematic open-cast mining using advanced machinery to minimize waste and ensure worker safety.</p>
-            </m.div>
-            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.2 }}>
+            </div>
+            <div className={styles.step}>
               <div className={styles.stepNumber}>03</div>
               <Factory size={40} />
               <h3>Processing</h3>
               <p>Multi-stage crushing, magnetic separation, and screening to achieve precise industrial grades.</p>
-            </m.div>
-            <m.div className={styles.step} {...fadeInUp} transition={{ delay: 0.3 }}>
+            </div>
+            <div className={styles.step}>
               <div className={styles.stepNumber}>04</div>
               <Globe size={40} />
               <h3>Logistics</h3>
               <p>Seamless transport to international ports for bulk shipping to global industrial hubs.</p>
-            </m.div>
+            </div>
           </div>
         </div>
       </section>
@@ -115,26 +115,26 @@ export default function About() {
       <section className={styles.values}>
         <div className="container">
           <div className={styles.valuesGrid}>
-            <m.div className={styles.valueImage} {...fadeInUp}>
-              <Image src={mediumImg} placeholder="blur" alt="12–30 mm graded quartz from the Sumanth Minerals mine" width={800} height={600} sizes="(max-width: 900px) 100vw, 50vw" style={{ width: '100%', height: 'auto', borderRadius: 20 }} />
+            <m.div className={`${styles.valueImage} img-zoom`} {...fadeInUp}>
+              <Image src={mediumImg} placeholder="blur" alt="12–30 mm graded quartz from the Sumanth Minerals mine" width={800} height={600} sizes="(max-width: 768px) 100vw, 50vw" className={styles.valueImg} />
             </m.div>
             <m.div className={styles.valueContent} {...fadeInUp}>
               <h2>Built on Industrial Integrity</h2>
-              <div className={styles.valueItem}>
+              <div className={`${styles.valueItem} reveal`}>
                 <ShieldCheck size={24} />
                 <div>
                   <h4>Uncompromising Quality</h4>
                   <p>We never dilute our grades. Every shipment is guaranteed to match its technical spec sheet.</p>
                 </div>
               </div>
-              <div className={styles.valueItem}>
+              <div className={`${styles.valueItem} reveal`}>
                 <Target size={24} />
                 <div>
                   <h4>Customer Centricity</h4>
                   <p>Our logistics team works around your production schedule to ensure zero downtime.</p>
                 </div>
               </div>
-              <div className={styles.valueItem}>
+              <div className={`${styles.valueItem} reveal`}>
                 <Users size={24} />
                 <div>
                   <h4>Local Empowerment</h4>
@@ -151,7 +151,7 @@ export default function About() {
           <m.div className={styles.infraBox} {...fadeInUp}>
             <h2>Strategic Infrastructure</h2>
             <p>With 15,000 MT of monthly capacity and 40,000 MT of ready stock, material from our Lakshupalli mine is crushed, screened and graded to size before dispatch.</p>
-            <div className={styles.infraGrid}>
+            <div className={`${styles.infraGrid} stagger`}>
               <div className={styles.infraItem}>
                 <Award size={32} />
                 <h4>GST Registered</h4>

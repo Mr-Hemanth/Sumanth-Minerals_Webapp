@@ -1,3 +1,9 @@
+/* ═══════════════════════════════════════════════════════════
+   Export — base styles are the desktop tier (1281–1599px).
+   Device tiers follow at the bottom of the file.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Header ─── */
 .pageHeader {
   background: var(--grad-hero);
   color: var(--white);
@@ -11,7 +17,20 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 75% 25%, rgba(200, 168, 75, 0.10) 0%, transparent 55%);
+  background-image:
+    radial-gradient(circle at 75% 25%, rgba(200, 168, 75, 0.10) 0%, transparent 55%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 0);
+  background-size: 100% 100%, 26px 26px;
+}
+
+.pageHeader::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--grad-strata);
 }
 
 .pageHeader > * {
@@ -23,19 +42,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.82rem;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.78);
   font-weight: 500;
 }
 
-.breadcrumb a:hover { color: var(--gold-light); }
+/* 44×44 minimum tap area around the short "Home" link */
+.breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 10px;
+  border-radius: var(--radius-full);
+  color: inherit;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.breadcrumb a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 0;
+}
 
 .pageHeader h1 {
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   margin-bottom: 15px;
   color: var(--white);
+  text-wrap: balance;
 }
 
 .pageHeader p {
@@ -43,69 +79,87 @@
   color: rgba(255, 255, 255, 0.78);
   max-width: 680px;
   margin: 0 auto;
+  text-wrap: pretty;
 }
 
+/* ─── Process timeline (horizontal on desktop) ─── */
 .processGrid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   padding: 20px 0 0;
 }
 
+/* One track behind all icons; the gold fill draws in as it scrolls into view */
+.processTrack {
+  position: absolute;
+  top: 55px; /* 20px grid padding + half of the 70px icon */
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+  overflow: hidden;
+}
+
+.processTrack::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--sky));
+  transform-origin: 0 50%;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .processTrack::after {
+      animation: trackDrawX linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 50%;
+    }
+  }
+}
+
+@keyframes trackDrawX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes trackDrawY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
 .processStep {
   text-align: center;
   position: relative;
+  z-index: 1;
   padding: 0 0.5rem;
 }
 
 .stepIcon {
   width: 70px;
   height: 70px;
-  background: var(--primary-glass);
+  background: var(--white);
   color: var(--primary);
-  border: 1px solid rgba(0, 51, 102, 0.12);
+  border: 1px solid rgba(0, 51, 102, 0.14);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 25px;
-  z-index: 2;
   position: relative;
-  transition: var(--transition);
-}
-
-.processStep:hover .stepIcon {
-  background: var(--primary);
-  color: var(--white);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-primary);
-}
-
-.stepLine {
-  position: absolute;
-  top: 35px;
-  left: 50%;
-  width: 100%;
-  height: 2px;
-  background: var(--border);
-  z-index: 1;
-}
-
-.processStep:last-child .stepLine {
-  display: none;
+  box-shadow: 0 0 0 6px var(--white), var(--shadow-sm);
+  transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, translate 0.35s var(--ease-spring);
 }
 
 .processStep h4 {
   font-size: 1.1rem;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   color: var(--primary);
 }
 
 .processStep p {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-light);
+  margin: 0;
 }
 
+/* ─── Packaging ─── */
 .packaging {
   background: var(--snow);
 }
@@ -131,6 +185,7 @@
 
 .packList {
   list-style: none;
+  margin-bottom: 32px;
 }
 
 .packList li {
@@ -163,10 +218,11 @@
   position: absolute;
   left: 1.25rem;
   bottom: 1.25rem;
-  background: rgba(0, 31, 64, 0.78);
-  backdrop-filter: blur(8px);
+  right: 1.25rem;
+  width: fit-content;
+  background: rgba(0, 31, 64, 0.82);
   color: var(--white);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.4px;
   padding: 0.5rem 0.9rem;
@@ -174,10 +230,7 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.transitSection {
-  background: var(--white);
-}
-
+/* ─── Shipment banner ─── */
 .marketBanner {
   background: var(--grad-hero);
   color: var(--white);
@@ -209,30 +262,8 @@
 
 .marketBanner p {
   color: rgba(255, 255, 255, 0.72);
-  margin-bottom: 40px;
-}
-
-.countryGrid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.countryGrid span {
-  background: rgba(255,255,255,0.05);
-  padding: 10px 25px;
-  border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.1);
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.countryGrid span:hover {
-  background: var(--primary);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-  color: var(--white);
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .bannerActions {
@@ -243,30 +274,178 @@
   margin-top: 2.5rem;
 }
 
-@media (max-width: 1200px) {
+/* ═══════════════════════════ Device tiers ═══════════════════════════ */
+
+/* Tier: large desktop (≥1600px) — bigger icons and photo */
+@media (min-width: 1600px) {
+  .pageHeader { padding: 185px 0 95px; }
+  .pageHeader h1 { font-size: 3.8rem; }
+  .pageHeader p { font-size: 1.3rem; max-width: 760px; }
+
+  .processGrid { gap: 36px; }
+  .processTrack { top: 60px; }
+  .stepIcon { width: 80px; height: 80px; }
+  .processStep h4 { font-size: 1.2rem; }
+  .processStep p { font-size: 0.95rem; }
+
+  .packagingGrid { gap: 110px; }
+  .packagingText h2 { font-size: 2.6rem; }
+  .packagingImage { height: 540px; }
+  .marketBanner { padding: 90px 80px; }
+}
+
+/* Tier: laptop (≤1280px) — keep the five-step strip, tighter */
+@media (max-width: 1280px) {
+  .pageHeader { padding: 150px 0 66px; }
+  .processGrid { gap: 16px; }
+  .processStep { padding: 0; }
+  .processStep h4 { font-size: 1rem; }
+  .processStep p { font-size: 0.85rem; }
+  .packagingGrid { gap: 56px; }
+  .packagingImage { height: 380px; }
+}
+
+/* Tier: tablet (≤1024px) — vertical timeline in a centred column;
+   packaging stays two-column */
+@media (max-width: 1024px) {
+  .pageHeader { padding: 136px 0 60px; }
+  .pageHeader p { font-size: 1.1rem; }
+
   .processGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-  
-  .stepLine {
-    display: none;
-  }
-}
-
-@media (max-width: 992px) {
-  .packagingGrid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0;
   }
+  .processTrack {
+    top: 35px;
+    bottom: 35px;
+    left: 34px; /* centre of the 70px icon */
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+  .processTrack::after {
+    background: linear-gradient(180deg, var(--gold-dark), var(--gold), var(--sky));
+    transform-origin: 50% 0;
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .processTrack::after {
+        animation-name: trackDrawY;
+        animation-range: entry 10% cover 60%;
+      }
+    }
+  }
+
+  .processStep {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    grid-template-areas: "icon title" "icon desc";
+    column-gap: 24px;
+    align-items: start;
+    text-align: left;
+  }
+  .stepIcon { grid-area: icon; margin: 0; }
+  .processStep h4 { grid-area: title; margin: 10px 0 6px; font-size: 1.1rem; }
+  .processStep p { grid-area: desc; font-size: 0.95rem; }
+
+  .packagingGrid { gap: 40px; }
+  .packagingText h2 { font-size: 1.9rem; margin-bottom: 18px; }
+  .packagingText p { font-size: 1rem; margin-bottom: 22px; }
+  .packagingImage { height: 100%; min-height: 360px; border-radius: var(--radius-lg); }
+  .marketBanner { padding: 56px 40px; border-radius: var(--radius-lg); }
 }
 
+/* Tier: large phone / small portrait tablet (≤768px) — compact timeline,
+   packaging stacks with the photo first */
 @media (max-width: 768px) {
+  .pageHeader { padding: 124px 0 52px; }
+  .breadcrumb { margin-bottom: 0.5rem; }
+
+  .processGrid { gap: 22px; }
+  .processTrack { left: 25px; top: 26px; bottom: 26px; }
+  .processStep { grid-template-columns: 52px 1fr; column-gap: 16px; }
+  .stepIcon { width: 52px; height: 52px; border-radius: var(--radius-sm); box-shadow: 0 0 0 5px var(--white), var(--shadow-xs); }
+  .stepIcon svg { width: 24px; height: 24px; }
+  .processStep h4 { margin: 4px 0 4px; font-size: 1.02rem; }
+  .processStep p { font-size: 0.92rem; }
+
+  .packagingGrid { grid-template-columns: 1fr; gap: 28px; }
+  .packagingImage { order: -1; height: 280px; min-height: 0; border-radius: var(--radius-md); }
+  .packagingText .btn { width: 100%; }
+
+  .marketBanner { padding: 40px 22px; border-radius: var(--radius-md); }
+  .bannerActions { margin-top: 1.75rem; }
+}
+
+/* Tier: phone (≤576px) */
+@media (max-width: 576px) {
+  .pageHeader { padding: 108px 0 44px; }
+  .pageHeader p { font-size: 1rem; }
+  .packagingImage { height: 230px; }
+  .imageCaption { left: 0.75rem; bottom: 0.75rem; font-size: 0.75rem; }
+  .packList li { margin-bottom: 12px; font-size: 0.95rem; }
+  .bannerActions { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+}
+
+/* Tier: small phone (≤380px, 320 wide) */
+@media (max-width: 380px) {
+  .processStep { grid-template-columns: 44px 1fr; column-gap: 12px; }
+  .processTrack { left: 21px; top: 22px; bottom: 22px; }
+  .stepIcon { width: 44px; height: 44px; }
+  .stepIcon svg { width: 20px; height: 20px; }
+  .processStep h4 { font-size: 0.97rem; margin-top: 2px; }
+  .processStep p { font-size: 0.88rem; }
+  .marketBanner { padding: 32px 16px; }
+}
+
+/* Tier: landscape phone — two-column timeline, side-by-side packaging */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pageHeader { padding: 88px 0 30px; }
+  .pageHeader h1 { font-size: 1.9rem; margin-bottom: 8px; }
+  .pageHeader p { font-size: 0.95rem; }
+  .breadcrumb { margin-bottom: 0.25rem; }
+
   .processGrid {
-    grid-template-columns: 1fr;
+    max-width: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 28px;
   }
-  
-  .marketBanner {
-    padding: 40px 20px;
+  .processTrack { display: none; }
+  .processStep { grid-template-columns: 44px 1fr; column-gap: 12px; }
+  .stepIcon { width: 44px; height: 44px; box-shadow: var(--shadow-xs); }
+  .stepIcon svg { width: 20px; height: 20px; }
+  .processStep h4 { font-size: 0.97rem; margin: 0 0 4px; }
+  .processStep p { font-size: 0.86rem; }
+
+  .packagingGrid { grid-template-columns: 1.1fr 1fr; gap: 28px; }
+  .packagingImage { order: 0; height: 100%; min-height: 240px; }
+  .packagingText h2 { font-size: 1.5rem; }
+  .packagingText .btn { width: auto; }
+
+  .marketBanner { padding: 32px 28px; }
+  .bannerActions { flex-direction: row; justify-content: center; margin-top: 1.25rem; }
+}
+
+/* Tier: touch — press feedback, no sticky hover */
+@media (hover: none) {
+  .breadcrumb a:active { background: rgba(255, 255, 255, 0.12); }
+  .processStep:active .stepIcon { background: var(--primary-glass); }
+}
+
+/* Tier: mouse — icons lift and fill on hover */
+@media (hover: hover) and (pointer: fine) {
+  .breadcrumb a:hover { color: var(--gold-light); background: rgba(255, 255, 255, 0.08); }
+  .processStep:hover .stepIcon {
+    background: var(--primary);
+    color: var(--white);
+    translate: 0 -4px;
+    box-shadow: 0 0 0 6px var(--white), var(--shadow-primary);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stepIcon { transition: none; }
 }
