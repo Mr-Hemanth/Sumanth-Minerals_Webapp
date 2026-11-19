@@ -451,6 +451,9 @@ export default function Home() {
             </p>
           </m.div>
 
+          <p className={styles.swipeHint} aria-hidden="true">
+            Swipe to see all {products.length} sizes <ArrowRight size={15} />
+          </p>
           <div className={styles.productGrid}>
             {products.map((p, i) => (
               <m.article
@@ -497,7 +500,7 @@ export default function Home() {
                       className={styles.productQuoteBtn}
                       onClick={() => openRFQ('', p.size)}
                     >
-                      Get Price
+                      Contact for Price
                     </button>
                   </div>
                 </div>
@@ -630,15 +633,15 @@ export default function Home() {
           >
             <div className={styles.ctaContent}>
               <m.h2 {...stagger(0.1)}>
-                Get a price for your quartz
+                Contact us for pricing
               </m.h2>
               <m.p {...stagger(0.2)}>
-                Tell us the size and quantity you need. We reply with price, availability and dispatch dates, and can send a sample with the lab report first.
+                Prices depend on size, quantity and destination, so we do not publish a price list. Tell us what you need and our sales team will contact you with pricing, availability and dispatch dates. We can send a sample with the lab report first.
               </m.p>
               <m.div className={styles.ctaActions} {...stagger(0.3)}>
                 <Magnetic>
                   <button type="button" className="btn btn-white btn-lg" onClick={() => openRFQ()}>
-                    Get a Quote in 60 Seconds <ArrowRight size={18} />
+                    Contact Sales for Price <ArrowRight size={18} />
                   </button>
                 </Magnetic>
                 <Magnetic>

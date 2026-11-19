@@ -8,7 +8,7 @@ import { m } from 'framer-motion';
 import RapidRFQModal from '@/components/RapidRFQModal';
 
 const STEPS = [
-  { icon: <Clock size={30} />, title: 'Inquiry & Quote', desc: 'Detailed technical discussion and transparent B2B pricing based on volume.' },
+  { icon: <Clock size={30} />, title: 'Inquiry & Quote', desc: 'Technical discussion of your requirement. Contact our sales team for pricing based on size, volume and destination.' },
   { icon: <ShieldCheck size={30} />, title: 'Quality Approval', desc: 'Pre-shipment inspection and lab reports shared for buyer approval.' },
   { icon: <Package size={30} />, title: 'Custom Packaging', desc: 'Jumbo bags or custom packaging options to ensure material integrity.' },
   { icon: <Truck size={30} />, title: 'Logistic Sync', desc: 'Coordination with major ports and shipping lines for timely dispatch.' },

@@ -836,14 +836,15 @@ section {
    RESPONSIVE TYPOGRAPHY
 ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  section { padding: 70px 0; }
+  section { padding: 56px 0; }
 
-  .section-title { margin-bottom: 40px; }
+  .section-title { margin-bottom: 32px; }
   .section-title p { font-size: 1rem; }
 
   .container { padding: 0 1.25rem; }
 
-  .btn { padding: 0.8rem 1.5rem; font-size: 0.85rem; }
+  /* 48px minimum: comfortable thumb target on phones */
+  .btn { padding: 0.8rem 1.5rem; font-size: 0.95rem; min-height: 48px; }
 
   .page-header { padding: 130px 0 70px; }
   .page-header p { font-size: 1.05rem; }
@@ -870,8 +871,21 @@ main { overflow-x: clip; position: relative; }
   to   { transform: none; }
 }
 
+/* iOS Safari zooms the whole page when a field under 16px is focused, which
+   shifts the layout sideways on phones. Keep every form field at 16px there. */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* Route change: quick fade, pure CSS so it runs before hydration */
-.page-enter { animation: pageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+/* `backwards`, not `both`: a fill that keeps the final keyframe leaves a transform on
+   this wrapper, which turns every position:fixed child (modals, popups) into
+   page-relative boxes — they render off-screen and under the mobile action bar. */
+.page-enter { animation: pageEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 @keyframes pageEnter {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }

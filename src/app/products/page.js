@@ -254,7 +254,7 @@ export default function Products() {
                 {/* Actions */}
                 <div className={styles.actions}>
                   <button type="button" className="btn btn-primary" onClick={() => openRFQ('', product.size)}>
-                    Request Quote <ArrowRight size={16} />
+                    Contact for Price <ArrowRight size={16} />
                   </button>
                   <Link href="/request-sample" className="btn btn-outline">
                     Request Sample

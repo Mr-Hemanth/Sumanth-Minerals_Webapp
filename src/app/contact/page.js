@@ -112,8 +112,8 @@ export default function Contact() {
                   <Mail size={24} />
                   <div>
                     <h4>{dict?.contact?.email_addr || 'Email Inquiries'}</h4>
-                    <p>sales@sumanthminerals.com</p>
-                    <p>exports@sumanthminerals.com</p>
+                    <p><a href="mailto:sales@sumanthminerals.com">sales@sumanthminerals.com</a></p>
+                    <p><a href="mailto:exports@sumanthminerals.com">exports@sumanthminerals.com</a></p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>

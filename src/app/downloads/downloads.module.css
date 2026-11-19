@@ -291,14 +291,19 @@
 
   .card {
     flex-direction: column;
-    padding: 26px 22px;
+    gap: 14px;
+    padding: 20px 18px;
   }
+
+  .iconBox { width: 44px; height: 44px; }
 
   .meta {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: stretch;
+    gap: 14px;
   }
+
+  .dlBtn { width: 100%; justify-content: center; min-height: 48px; }
 
   .requestGrid {
     grid-template-columns: 1fr;

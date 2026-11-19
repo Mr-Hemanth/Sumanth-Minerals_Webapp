@@ -1289,3 +1289,124 @@
 .industryCard:nth-child(3n+2) .industryIcon { background: var(--sky-glass);      color: var(--sky); }
 .industryCard:nth-child(3n+3) .industryIcon { background: var(--scrub-glass);    color: var(--scrub); }
 .industryIcon { transition: background-color 0.3s ease, color 0.3s ease; }
+
+/* ════════════════════════════════════════
+   PHONE LAYOUTS
+   Purpose-built for small screens rather than the desktop grid stacked into
+   one column. Kept last so it wins over the generic responsive rules above.
+════════════════════════════════════════ */
+.swipeHint { display: none; }
+
+@media (max-width: 768px) {
+  /* Hero: two equal buttons, certificate link as a proper tap target */
+  .heroCtas > :last-child { justify-self: stretch; }
+  .certLink { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* Trust strip: 2×2 tiles instead of four tall rows */
+  .trustGrid { grid-template-columns: 1fr 1fr; }
+  .trustCard,
+  .trustCard:nth-child(odd),
+  .trustCard:nth-last-child(-n+2),
+  .trustCard:last-child {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.1rem 1rem;
+    border: none;
+  }
+  .trustCard:nth-child(odd) { border-right: 1px solid var(--border-light); }
+  .trustCard:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
+  .trustIcon { width: 40px; height: 40px; }
+  .trustIcon svg { width: 20px; height: 20px; }
+  .trustCard h3 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .trustCard p { font-size: 0.8rem; line-height: 1.45; }
+
+  /* About: shorter photo, full-width stacked buttons */
+  .aboutGrid, .chemGrid, .exportGrid { gap: 32px; }
+  .aboutImageBox { height: 260px; }
+  .aboutActions, .chemActions, .ctaActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .aboutActions > *, .chemActions > *, .ctaActions > *, .ctaActions .btn { width: 100%; }
+
+  /* Products: swipeable cards with the next one peeking in, instead of
+     four full-height cards stacked (~2,800px of scrolling). */
+  .swipeHint {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin: -0.75rem 0 0.75rem;
+  }
+  .productGrid {
+    display: flex;
+    gap: 14px;
+    max-width: none;
+    margin: 0 -1.25rem;
+    padding: 4px 1.25rem 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .productGrid::-webkit-scrollbar { display: none; }
+  .productCard {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+  /* Price button gets its own full-width row so it is never clipped */
+  .productCardActions { flex-direction: column; align-items: stretch; gap: 0.25rem; }
+  .productCta, .productQuoteBtn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* Industries: compact list rows (icon · name · size) instead of 13 big cards */
+  .industriesGrid { gap: 10px; }
+  .industryCard {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 0.9rem;
+    row-gap: 0.2rem;
+    align-items: start;
+    padding: 1rem;
+  }
+  .industryIcon {
+    grid-row: 1 / span 3;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+  }
+  .industryIcon svg { width: 22px; height: 22px; }
+  .industryCard h3 { font-size: 1rem; margin: 0; }
+  .industryCard p { font-size: 0.85rem; line-height: 1.5; margin: 0 0 0.4rem; }
+  .industryGrade { margin-top: 0; min-height: 36px; justify-self: start; }
+  .industriesCta { padding: 1.5rem 1.25rem; }
+
+  /* Export: port rows only — the decorative globe adds a screen of scrolling */
+  .exportVisual { display: none; }
+  .portItem { align-items: flex-start; flex-wrap: wrap; row-gap: 0.4rem; padding: 0.9rem 1rem; }
+  .portDot { margin-top: 0.45rem; }
+  .portInfo { min-width: 60%; }
+
+  /* Closing call to action */
+  .ctaContent { padding: 2.25rem 1.25rem; }
+  .ctaActions { margin-bottom: 0; }
+}
+
+@media (max-width: 768px) {
+  /* Inline text links: full 44px tap height */
+  .productsFootnote a,
+  .industriesCta a { display: inline-flex; align-items: center; min-height: 44px; }
+  .industryGrade { min-height: 40px; }
+}
+
+/* "Contact for Price" is longer than the old label: give it its own full-width
+   row on every screen size so it is never clipped in the 4-column grid. */
+.productCardActions { flex-wrap: wrap; row-gap: 0.5rem; }
+.productQuoteBtn { order: -1; flex: 1 1 100%; justify-content: center; text-align: center; }
+@media (max-width: 768px) {
+  /* In the stacked (column) layout the 100% basis would apply to height */
+  .productQuoteBtn { flex: none; width: 100%; }
+}

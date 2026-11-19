@@ -183,6 +183,31 @@
   }
 }
 
+/* Phones: tappable contact details look tappable, and chat is a real button */
+@media (max-width: 768px) {
+  .infoItem p a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: inline-block;
+    padding: 0.2rem 0;
+  }
+  .waLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 0.75rem;
+    padding: 0 1.25rem;
+    border-radius: var(--radius-sm);
+    background: #1f9d55;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: 700;
+  }
+}
+
 @media (max-width: 576px) {
   .formGrid {
     grid-template-columns: 1fr;

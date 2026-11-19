@@ -58,6 +58,14 @@ const Navbar = () => {
     setMoreOpen(false);
   }, [pathname]);
 
+  // Stop the page scrolling underneath the open mobile menu
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, [isOpen]);
+
   // Escape closes overlays
   useEffect(() => {
     const onKey = (e) => {
@@ -218,9 +226,19 @@ const Navbar = () => {
       {/* Mobile Drawer */}
       <div className={`${styles.mobileDrawer} ${isOpen ? styles.drawerOpen : ''}`} aria-hidden={!isOpen}>
         <div className={styles.drawerContent}>
-          <Link href="/" className={styles.drawerLogo}>
-            <Logo size={34} />
-          </Link>
+          <div className={styles.drawerHeader}>
+            <Link href="/" className={styles.drawerLogo} onClick={() => setIsOpen(false)}>
+              <Logo size={34} />
+            </Link>
+            <button
+              type="button"
+              className={styles.drawerClose}
+              onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
+            >
+              <X size={24} />
+            </button>
+          </div>
           <div className={styles.drawerDivider} />
           <nav className={styles.drawerNav}>
             {PRIMARY_LINKS.map((link) => (

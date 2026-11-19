@@ -18,6 +18,11 @@
   border: 2px solid var(--white);
 }
 
+/* Phones have the bottom action bar; the floating button only covered content there. */
+@media (max-width: 768px) {
+  .button { display: none; }
+}
+
 .button:hover {
   background: var(--primary-light);
   transform: translateY(-5px);

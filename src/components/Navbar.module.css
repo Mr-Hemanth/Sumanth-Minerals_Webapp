@@ -319,13 +319,19 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
-  z-index: 998;
+  /* Above the mobile action bar (--z-float) so the open menu isn't covered. */
+  z-index: calc(var(--z-float) + 1);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  /* Closed overlay is invisible but still full-screen: it must not swallow taps. */
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
 }
 
 .overlayVisible {
   opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 /* ─── Mobile Drawer ─── */
@@ -337,7 +343,8 @@
   height: 100%;
   width: min(85vw, 340px);
   background: white;
-  z-index: 999;
+  z-index: calc(var(--z-float) + 2);
+  overscroll-behavior: contain;
   transform: translateX(100%);
   visibility: hidden;
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.4s;
@@ -358,14 +365,33 @@
   gap: 0;
 }
 
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .drawerLogo {
   font-family: var(--font-display), sans-serif;
   font-size: 1.4rem;
   font-weight: 800;
   color: #003366;
   letter-spacing: 1px;
-  margin-bottom: 1.5rem;
   display: block;
+}
+
+.drawerClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #f0f4f8;
+  color: #003366;
 }
 
 
@@ -508,4 +534,15 @@
   border-color: #003366;
   color: #003366;
   background: rgba(0, 51, 102, 0.05);
+}
+
+/* Phones: header icons at the 44px minimum thumb target */
+@media (max-width: 992px) {
+  .phoneIcon,
+  .menuBtn {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
 }

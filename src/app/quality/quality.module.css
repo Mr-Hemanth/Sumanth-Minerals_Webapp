@@ -353,10 +353,20 @@
   }
 }
 
+/* Phones: test method on its own line under the element name */
+@media (max-width: 768px) {
+  .method { display: block; margin: 0.15rem 0 0; }
+  .tableRow strong { white-space: nowrap; }
+}
+
 @media (max-width: 520px) {
   .compositionActions {
     flex-direction: column;
   }
   .compositionBox { padding: 20px; }
   .reportCard { padding: 24px; }
+}
+
+@media (max-width: 768px) {
+  .textBtn { min-height: 44px; }
 }
