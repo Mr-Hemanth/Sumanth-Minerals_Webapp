@@ -141,17 +141,13 @@ export default function Products() {
             "@context": "https://schema.org/",
             "@type": "ItemList",
             "name": "Sumanth Minerals Quartz Product Range",
+            // Plain list items, not schema.org "Product": Google requires a price, review or
+            // rating on every Product, and prices are deliberately not published.
             "itemListElement": products.map((p, i) => ({
               "@type": "ListItem",
               "position": i + 1,
-              "item": {
-                "@type": "Product",
-                "name": p.name,
-                "description": p.description,
-                "brand": { "@type": "Brand", "name": "Sumanth Minerals" },
-                "material": "High-Purity Silica Quartz",
-                "manufacturer": { "@type": "Organization", "name": "Sumanth Minerals", "foundingDate": "2019-02-18" }
-              }
+              "name": p.name,
+              "description": p.description
             }))
           })
         }}

@@ -70,14 +70,6 @@ export const organizationJsonLd = {
         { '@type': 'ContactPoint', contactType: 'sales', telephone: PHONE_SECONDARY.tel },
       ],
       knowsAbout: ['Quartz lumps', 'Quartz grit', 'Silica quartz', 'Vein quartz', 'Quartz for ferro silicon', 'Quartz for glass and ceramics'],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Silica quartz products',
-        itemListElement: ['Quartz Lumps', 'Quartz Grit 0–12 mm', 'Quartz Grit 12–30 mm', 'Quartz Grit 30–80 mm'].map((name) => ({
-          '@type': 'Offer',
-          itemOffered: { '@type': 'Product', name, url: `${SITE_URL}/products` },
-        })),
-      },
     },
     {
       '@type': 'WebSite',
