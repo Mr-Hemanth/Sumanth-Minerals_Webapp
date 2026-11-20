@@ -1,13 +1,16 @@
 import styles from './legal.module.css';
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy Policy | Sumanth Minerals',
-  description: 'Privacy policy for Sumanth Minerals web application and inquiry processing.',
-};
+export const metadata = pageMetadata({
+  title: "Privacy Policy",
+  description: "How Sumanth Minerals collects, uses and protects the information you send through our enquiry and sample request forms.",
+  path: '/privacy',
+});
 
 export default function Privacy() {
   return (
     <div className={styles.legalPage}>
+      <JsonLd data={breadcrumbJsonLd('Privacy Policy', '/privacy')} />
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Privacy Policy</h1>

@@ -1,9 +1,16 @@
-export const metadata = {
-  title: 'Contact & Bulk Quotes | Sumanth Minerals',
-  description: 'Request a bulk quotation for 99.27% SiO2 vein quartz (0–12, 12–30, 30–80 mm) direct from our Andhra Pradesh mine. FOB Krishnapatnam & Chennai.',
-  alternates: { canonical: 'https://www.sumanthminerals.com/contact' },
-};
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: "Contact Us – Bulk Quartz Enquiries & Quotes",
+  description: "Contact Sumanth Minerals for bulk quartz lumps and quartz grit. Call or WhatsApp +91 91691 66667, email sales@sumanthminerals.com, or send an enquiry and our sales team will reply with pricing.",
+  path: '/contact',
+});
 
 export default function Layout({ children }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={breadcrumbJsonLd("Contact", '/contact')} />
+      {children}
+    </>
+  );
 }

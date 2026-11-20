@@ -7,28 +7,42 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import BackToTop from '@/components/BackToTop';
 import MobileActionBar from '@/components/MobileActionBar';
 import PageTransition from '@/components/PageTransition';
+import { SITE_URL, organizationJsonLd, JsonLd } from '@/lib/seo';
+
+const HOME_TITLE = 'Quartz Lumps & Quartz Grit Supplier in India | 99.27% SiO₂ | Sumanth Minerals';
+const HOME_DESC = 'Mine-owner supplier of 99.27% SiO₂ quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Anantapur, Andhra Pradesh, India. Lab-tested. Bulk supply and export.';
 
 export const metadata = {
-  metadataBase: new URL('https://www.sumanthminerals.com'),
-  title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-  description: 'Sumanth Minerals is a direct mine owner supplying 99.27% SiO2 silica vein quartz (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Andhra Pradesh, India. Independently lab-tested by Lucid Laboratories for glass, ceramic, ferro-alloy and engineered stone use.',
-  keywords: 'Sumanth Minerals, quartz lumps supplier, quartz grit, quartz for ferrosilicon, quartz lumps for silicon metal, quartz for ferroalloys, quartz for refractories, quartz for ceramic tiles, quartz for glass, foundry quartz, quartz for quartz powder plants, silica sand raw material, Quartz supplier India, High purity quartz export, Anantapur quartz mine Andhra Pradesh, Silica quartz 99% supplier, 99.27% SiO2 quartz, Industrial quartz grains, Lucid Laboratories quartz report',
+  metadataBase: new URL(SITE_URL),
+  title: { default: HOME_TITLE, template: '%s | Sumanth Minerals' },
+  description: HOME_DESC,
+  applicationName: 'Sumanth Minerals',
+  keywords: ['quartz supplier India', 'quartz lumps supplier', 'quartz grit supplier', 'silica quartz', 'vein quartz', 'quartz for ferro silicon', 'quartz for glass', 'quartz for ceramics', 'quartz for refractories', 'quartz mine Andhra Pradesh', 'quartz Anantapur', 'high purity quartz exporter India', '99% SiO2 quartz'],
+  authors: [{ name: 'Sumanth Minerals', url: SITE_URL }],
+  creator: 'Sumanth Minerals',
+  publisher: 'Sumanth Minerals',
+  category: 'Industrial minerals',
+  formatDetection: { telephone: true, email: true, address: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
+  // Paste the code from Google Search Console / Bing Webmaster Tools into these env vars on Vercel.
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.BING_SITE_VERIFICATION ? { other: { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } } : {}),
+  },
+  alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-    description: 'Direct mine supplier of 99.27% SiO2 silica quartz for glass, ceramics and ferro-alloy industries.',
-    url: 'https://www.sumanthminerals.com',
+    title: HOME_TITLE,
+    description: HOME_DESC,
+    url: SITE_URL,
     siteName: 'Sumanth Minerals',
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
-  alternates: {
-    canonical: 'https://www.sumanthminerals.com',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Sumanth Minerals | Certified 99.27% SiO2 High Purity Quartz Supplier India',
-    description: 'Direct mine supplier of 99.27% SiO2 silica quartz for glass, ceramics and ferro-alloy industries.',
-  },
+  twitter: { card: 'summary_large_image', title: HOME_TITLE, description: HOME_DESC },
 };
 
 // viewportFit 'cover' lets the layout use env(safe-area-inset-*) around iPhone notches
@@ -54,6 +68,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body>
+        <JsonLd data={organizationJsonLd} />
         <LanguageProvider>
           <MotionProvider>
           <a href="#main-content" className="skip-link">Skip to content</a>

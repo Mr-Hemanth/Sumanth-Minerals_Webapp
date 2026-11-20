@@ -1,13 +1,16 @@
 import styles from './legal.module.css';
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terms of Service | Sumanth Minerals',
-  description: 'Terms of service for using Sumanth Minerals website and services.',
-};
+export const metadata = pageMetadata({
+  title: "Terms of Service",
+  description: "Terms of use for the Sumanth Minerals website and enquiry services.",
+  path: '/terms',
+});
 
 export default function Terms() {
   return (
     <div className={styles.legalPage}>
+      <JsonLd data={breadcrumbJsonLd('Terms of Service', '/terms')} />
       <section className={styles.pageHeader}>
         <div className="container">
           <h1>Terms of Service</h1>

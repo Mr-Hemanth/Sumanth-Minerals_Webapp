@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Youtube, ArrowRight, FlaskConical, Shield } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, FlaskConical, Shield } from 'lucide-react';
 import styles from './Footer.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
@@ -53,11 +53,6 @@ const Footer = () => {
                 </span>
               </div>
 
-              <div className={styles.socials}>
-                <a href="https://linkedin.com/company/sumanth-minerals" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                  <Linkedin size={18} />
-                </a>
-              </div>
             </div>
 
             {/* Company Links */}

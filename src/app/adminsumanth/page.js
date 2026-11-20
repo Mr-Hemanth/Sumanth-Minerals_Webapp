@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import {
   Phone, Mail, MessageCircle, Download, LogOut, RefreshCw, Search, X, Link2,
   Trash2, CalendarClock, Package, FileText, StickyNote, Check, ExternalLink, Flame,
@@ -79,12 +80,13 @@ export default function SalesDesk() {
   const [view, setView] = useState('today');
   const [openId, setOpenId] = useState(null);
   const [toast, setToast] = useState('');
+  const router = useRouter();
 
   const load = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/inquiry', { cache: 'no-store' });
-      if (res.status === 401) { window.location.href = '/adminsumanth/login'; return; }
+      if (res.status === 401) { router.replace('/adminsumanth/login'); return; }
       const r = await res.json();
       if (!r.success) throw new Error(r.error);
       setLeads(r.data.map((l, i) => ({ ...l, _key: l._id || `local-${i}`, status: l.status || 'New' })));
@@ -95,7 +97,7 @@ export default function SalesDesk() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data fetch
   useEffect(() => { load(); }, [load]);

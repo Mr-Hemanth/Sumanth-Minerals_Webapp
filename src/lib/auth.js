@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "@/lib/password";
+import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 // Admin credentials live in .env.local — never in source code:
 //   ADMIN_EMAIL=you@yourdomain.com
@@ -13,7 +14,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         username: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, request) {
+        // Brute-force brake: 8 attempts per 15 minutes per IP address.
+        if (request?.headers && !rateLimit(`login:${clientIp(request)}`, { limit: 8, windowMs: 15 * 60 * 1000 })) {
+          console.warn("Admin login rate-limited for", clientIp(request));
+          return null;
+        }
         const adminEmail = process.env.ADMIN_EMAIL;
         const adminHash = process.env.ADMIN_PASSWORD_HASH;
         if (!adminEmail || !adminHash) {

@@ -22,7 +22,6 @@ import fineImg from '../../public/quartz_0_12.jpg';
 import mediumImg from '../../public/quartz_12_30.jpg';
 import coarseImg from '../../public/quartz_30_80.jpg';
 import { CHEMISTRY as C } from '@/data/specs';
-import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from "@/data/contact";
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -138,41 +137,7 @@ export default function Home() {
     <div className={styles.home}>
 
       {/* ─── Structured Data ─── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Sumanth Minerals",
-            "@id": "https://www.sumanthminerals.com",
-            "url": "https://www.sumanthminerals.com",
-            "telephone": PHONE_PRIMARY.tel,
-            "taxID": GSTIN,
-            "email": "sales@sumanthminerals.com",
-            "description": "Mine owner and supplier of 99.27% SiO₂ silica quartz from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India.",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Saroja Skyland, 402, Maruthi Nagar, Ananthapur Road",
-              "addressLocality": "Gooty",
-              "addressRegion": "Andhra Pradesh",
-              "postalCode": "515401",
-              "addressCountry": "IN"
-            },
-            "geo": { "@type": "GeoCoordinates", "latitude": 15.027, "longitude": 77.722 },
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "High-Purity Quartz Products",
-              "itemListElement": [
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Lumps" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 0–12 mm" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 12–30 mm" }},
-                { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Quartz Grit 30–80 mm" }}
-              ]
-            }
-          })
-        }}
-      />
+      {/* Company structured data is site-wide: see JsonLd in app/layout.js */}
 
       {/* ════════════════════════════════════════
           HERO SECTION

@@ -1,11 +1,13 @@
 import { FileDown, FileText, ClipboardList, ShieldCheck, Truck, Scale, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import styles from './downloads.module.css';
+import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Downloads & Resources | Sumanth Minerals',
-  description: 'Download the Sumanth Minerals lab analysis report, and request technical data sheets, MSDS, and batch-specific third-party certifications for our quartz grades.',
-};
+export const metadata = pageMetadata({
+  title: "Quartz Lab Report & Technical Data Downloads",
+  description: "Download the Sumanth Minerals quartz lab analysis report (99.27% SiO₂) and request technical data sheets, MSDS and batch-specific test certificates for our quartz grades.",
+  path: '/downloads',
+});
 
 const available = [
   {
@@ -52,6 +54,7 @@ const onRequest = [
 export default function Downloads() {
   return (
     <div className={styles.downloadsPage}>
+      <JsonLd data={breadcrumbJsonLd('Downloads', '/downloads')} />
       <section className={styles.pageHeader}>
         <div className="container">
           <span className={styles.kicker}>Technical Resources</span>

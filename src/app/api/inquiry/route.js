@@ -16,7 +16,12 @@ const FIELDS = {
   address: 500, message: 3000, industry: 120, jobTitle: 120, website: 200,
   monthlyRequirement: 60, preferredSize: 60, packaging: 120, deliveryPort: 160,
 };
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// Deliberately strict: plain addresses only. No quotes, comments, angle brackets,
+// commas or semicolons, which email address parsers have historically mis-read
+// into extra or redirected recipients. Real buyer addresses never need them.
+const EMAIL_RE = /^[A-Za-z0-9._%+-]{1,64}@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
+// Reject oversized bodies before parsing (the real forms send well under 10 KB).
+const MAX_BODY_BYTES = 32 * 1024;
 const FALLBACK_PATH = path.join(process.cwd(), "inquiries_fallback.json");
 
 function sanitize(data) {
@@ -40,6 +45,9 @@ function validate(lead) {
 }
 
 export async function POST(req) {
+  if (Number(req.headers.get("content-length") || 0) > MAX_BODY_BYTES) {
+    return NextResponse.json({ success: false, error: "Request too large." }, { status: 413 });
+  }
   let data;
   try {
     data = await req.json();
