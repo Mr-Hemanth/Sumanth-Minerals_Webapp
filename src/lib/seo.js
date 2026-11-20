@@ -47,7 +47,7 @@ export const organizationJsonLd = {
       '@id': `${SITE_URL}/#organization`,
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/apple-icon.png`,
+      logo: `${SITE_URL}/icon-512.png`,
       image: `${SITE_URL}/hero-stockpile.jpg`,
       description:
         'Mine owner and supplier of 99.27% SiO2 silica vein quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India.',
