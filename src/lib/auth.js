@@ -5,7 +5,7 @@ import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 // Admin credentials live in .env.local — never in source code:
 //   ADMIN_EMAIL=you@yourdomain.com
-//   ADMIN_PASSWORD_HASH=<output of: node scripts/hash-password.mjs "password">
+//   ADMIN_PASSWORD_HASH=<output of: node scripts/hash-password.mjs (asks for the password)>
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     CredentialsProvider({
