@@ -164,23 +164,26 @@ export default function Gallery() {
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className={`${styles.imageCard} ${img.span === 'wide' ? styles.cardWide : ''} ${img.span === 'tall' ? styles.cardTall : ''}`}
                 >
+                  {/* The button's name is its visible text (category, title, note, "View"),
+                      so voice-control users can say what they see (WCAG 2.5.3). The image is
+                      alt="" here because the title right below already describes it; the
+                      lightbox shows the same photo with full alt text. */}
                   <button
                     type="button"
                     className={styles.imageButton}
                     onClick={() => setLightbox(img)}
-                    aria-label={`Enlarge image: ${img.title}`}
                   >
                     <Image
                       src={img.src}
-                      alt={img.title}
+                      alt=""
                       fill
                       sizes="(max-width: 1024px) 46vw, (max-width: 1599px) 400px, 20vw"
                       className={styles.gridImage}
                     />
                     <span className={styles.imageOverlay}>
                       <span className={styles.categoryTag}>{img.category}</span>
-                      <h2>{img.title}</h2>
-                      <p>{img.note}</p>
+                      <span className={styles.overlayTitle}>{img.title}</span>
+                      <span className={styles.overlayNote}>{img.note}</span>
                       <span className={styles.zoomHint}><ZoomIn size={15} /> View</span>
                     </span>
                   </button>

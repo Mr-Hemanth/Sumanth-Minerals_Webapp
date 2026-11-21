@@ -461,7 +461,7 @@
 .certTag {
   margin-left: auto;
   background: rgba(16,185,129,0.25);
-  color: var(--scrub-light);
+  color: #b9f0bd; /* 6.4:1 on the dark-teal card (was 3.7:1) */
   font-size: 0.75rem;
   font-weight: 700;
   padding: 0.25rem 0.65rem;

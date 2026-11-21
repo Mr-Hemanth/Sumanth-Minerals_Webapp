@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { m, useScroll, useSpring } from 'framer-motion';
 import { Menu, X, PhoneCall, Globe, ChevronDown, ArrowRight } from 'lucide-react';
 import styles from './Navbar.module.css';
-import { useLanguage } from '@/context/LanguageContext';
+import { useLanguage, ENABLED_LANGS } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
 import Logo from '@/components/Logo';
 
@@ -29,6 +29,8 @@ const LANGUAGES = [
   { code: 'zh', name: '中文', flag: '🇨🇳' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
 ];
+const OFFERED = LANGUAGES.filter(l => ENABLED_LANGS.includes(l.code));
+const SHOW_SWITCHER = OFFERED.length > 1;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -156,8 +158,8 @@ const Navbar = () => {
                 {t('nav.contact', 'Contact')}
               </Link>
 
-              {/* Lang Selector */}
-              <div
+              {/* Lang Selector (hidden while only one language is enabled) */}
+              {SHOW_SWITCHER && <div
                 className={styles.langSelector}
                 onMouseEnter={() => hoverOpen(setLangOpen, closeTimer)}
                 onMouseLeave={() => hoverClose(setLangOpen, closeTimer)}
@@ -171,25 +173,25 @@ const Navbar = () => {
                   aria-haspopup="true"
                 >
                   <Globe size={14} />
-                  <span>{currentLang.flag}</span>
+                  <span aria-hidden="true">{currentLang.flag}</span>
                   <span>{lang.toUpperCase()}</span>
                   <ChevronDown size={13} className={`${styles.chevron} ${langOpen ? styles.chevronOpen : ''}`} />
                 </button>
                 <div className={`${styles.langDropdown} ${langOpen ? styles.langDropdownOpen : ''}`}>
                   <p className={styles.langNote}>Other languages: menu &amp; key sections only</p>
-                  {LANGUAGES.map(l => (
+                  {OFFERED.map(l => (
                     <button
                       key={l.code}
                       type="button"
                       className={`${styles.langOption} ${l.code === lang ? styles.langOptionActive : ''}`}
                       onClick={() => { switchLang(l.code); setLangOpen(false); }}
                     >
-                      <span>{l.flag}</span>
+                      <span aria-hidden="true">{l.flag}</span>
                       <span>{l.name}</span>
                     </button>
                   ))}
                 </div>
-              </div>
+              </div>}
 
               <Link href="/request-sample" className={styles.sampleLink}>
                 {t('nav.samples', 'Samples')} <ArrowRight size={14} />
@@ -270,21 +272,21 @@ const Navbar = () => {
             ))}
           </div>
           <div className={styles.drawerDivider} />
-          <div className={styles.drawerLangs}>
+          {SHOW_SWITCHER && <div className={styles.drawerLangs}>
             <p className={styles.drawerLangLabel}>Language <span className={styles.drawerLangHint}>(menu &amp; key sections)</span></p>
             <div className={styles.drawerLangGrid}>
-              {LANGUAGES.map(l => (
+              {OFFERED.map(l => (
                 <button
                   key={l.code}
                   type="button"
                   className={`${styles.drawerLangBtn} ${l.code === lang ? styles.drawerLangActive : ''}`}
                   onClick={() => { switchLang(l.code); setIsOpen(false); }}
                 >
-                  {l.flag} {l.code.toUpperCase()}
+                  <span aria-hidden="true">{l.flag}</span> {l.code.toUpperCase()}
                 </button>
               ))}
             </div>
-          </div>
+          </div>}
           <div className={styles.drawerActions}>
             <Link href="/request-sample" className="btn btn-outline w-full" style={{ justifyContent: 'center' }} onClick={() => setIsOpen(false)}>
               Request Sample

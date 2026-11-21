@@ -11,6 +11,12 @@ const loaders = {
   de: () => import('@/dictionaries/de.json'),
 };
 
+// Languages offered in the switcher. Only English is complete: the AR/ZH/DE dictionaries
+// cover the menu and a few sections, which left pages mostly English in those modes
+// (audit BUG-02). Add a code back here once its dictionary covers every page; the
+// switcher reappears automatically when more than one language is enabled.
+export const ENABLED_LANGS = ['en'];
+
 const LanguageContext = createContext({ lang: 'en', dict: en, switchLang: () => {} });
 
 // Only the navigation and a few key sections are translated; page bodies stay in English.
@@ -54,7 +60,8 @@ export const LanguageProvider = ({ children }) => {
     try {
       const saved = localStorage.getItem('preferredLang');
       // eslint-disable-next-line react-hooks/set-state-in-effect -- restore saved language after hydration
-      if (saved && saved !== 'en' && loaders[saved]) setLang(saved);
+      if (saved && saved !== 'en' && loaders[saved] && ENABLED_LANGS.includes(saved)) setLang(saved);
+      else if (saved && saved !== 'en') localStorage.removeItem('preferredLang'); // drop a choice that is no longer offered
     } catch {}
   }, []);
 

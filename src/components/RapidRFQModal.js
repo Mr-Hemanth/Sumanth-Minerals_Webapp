@@ -68,9 +68,23 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
         e.preventDefault(); firstEl.focus();
       }
     };
+    // Safety net: Safari skips links when tabbing, so the Tab handler above can miss the
+    // dialog's last element and focus lands on the page behind. Pull it straight back.
+    let lastKeyShift = false;
+    const onKeyTrack = (e) => { if (e.key === 'Tab') lastKeyShift = e.shiftKey; };
+    const onFocusIn = (e) => {
+      const d = dialogRef.current;
+      if (!d || d.contains(e.target)) return;
+      const items = focusables();
+      (lastKeyShift ? items[items.length - 1] : items[0])?.focus();
+    };
     document.addEventListener('keydown', onKey);
+    document.addEventListener('keydown', onKeyTrack, true);
+    document.addEventListener('focusin', onFocusIn);
     return () => {
       document.removeEventListener('keydown', onKey);
+      document.removeEventListener('keydown', onKeyTrack, true);
+      document.removeEventListener('focusin', onFocusIn);
       document.body.style.overflow = prevOverflow;
       if (trigger && typeof trigger.focus === 'function') trigger.focus();
     };
