@@ -174,12 +174,12 @@ export default function Gallery() {
                       src={img.src}
                       alt={img.title}
                       fill
-                      sizes="(max-width: 1024px) 50vw, (max-width: 1599px) 33vw, 20vw"
+                      sizes="(max-width: 1024px) 46vw, (max-width: 1599px) 400px, 20vw"
                       className={styles.gridImage}
                     />
                     <span className={styles.imageOverlay}>
                       <span className={styles.categoryTag}>{img.category}</span>
-                      <h4>{img.title}</h4>
+                      <h2>{img.title}</h2>
                       <p>{img.note}</p>
                       <span className={styles.zoomHint}><ZoomIn size={15} /> View</span>
                     </span>
@@ -258,7 +258,7 @@ export default function Gallery() {
                     <span className={styles.lightboxCount}>{lightboxIndex + 1} / {visible.length}</span>
                   )}
                 </span>
-                <h4>{lightbox.title}</h4>
+                <h2>{lightbox.title}</h2>
                 <p>{lightbox.note}</p>
               </figcaption>
             </m.div>

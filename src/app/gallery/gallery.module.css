@@ -175,7 +175,7 @@
 
 .imageButton:focus-visible .imageOverlay { opacity: 1; }
 
-.imageOverlay h4 {
+.imageOverlay :is(h2, h3, h4) {
   color: var(--white);
   font-size: 1.05rem;
   font-weight: 600;
@@ -373,7 +373,7 @@
   color: var(--text-muted);
 }
 
-.lightboxCaption h4 {
+.lightboxCaption :is(h2, h3, h4) {
   font-size: 1.1rem;
   color: var(--primary);
   margin: 0;
@@ -404,7 +404,7 @@
   .cardWide { grid-column: span 2; }
   .cardTall { order: -1; } /* tall photos lead, so the full set packs 5×2 */
   .imageOverlay { padding: 30px; }
-  .imageOverlay h4 { font-size: 1.2rem; }
+  .imageOverlay :is(h2, h3, h4) { font-size: 1.2rem; }
   .imageOverlay p { font-size: 0.92rem; }
 
   .ctaBox { padding: 72px 80px; }
@@ -474,7 +474,7 @@
   .cardTall { grid-row: span 2; }
 
   .imageOverlay { padding: 12px; gap: 6px; }
-  .imageOverlay h4 { font-size: 0.92rem; line-height: 1.3; }
+  .imageOverlay :is(h2, h3, h4) { font-size: 0.92rem; line-height: 1.3; }
   .categoryTag { font-size: 0.75rem; letter-spacing: 1px; padding: 2px 8px; }
 
   .galleryNote { margin-top: 28px; }
@@ -513,7 +513,7 @@
   .filterBar { margin: 0 -0.875rem 18px; padding: 2px 0.875rem 6px; scroll-padding-inline: 0.875rem; }
   .imageGrid { grid-auto-rows: 128px; gap: 8px; }
   .imageOverlay { padding: 10px; }
-  .imageOverlay h4 { font-size: 0.85rem; }
+  .imageOverlay :is(h2, h3, h4) { font-size: 0.85rem; }
   .categoryTag { display: none; }
   .ctaBox { padding: 32px 18px; }
 }
@@ -535,7 +535,7 @@
   .cardWide { grid-column: span 2; }
   .cardTall { grid-row: span 2; }
   .imageOverlay { padding: 10px; }
-  .imageOverlay h4 { font-size: 0.88rem; }
+  .imageOverlay :is(h2, h3, h4) { font-size: 0.88rem; }
 
   .lightbox {
     padding: 12px max(76px, calc(env(safe-area-inset-right) + 64px)) 12px max(76px, calc(env(safe-area-inset-left) + 64px));

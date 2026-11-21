@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useId } from "react";
 import { X, Send, MessageCircle, CheckCircle, ShieldCheck, Truck, Package } from "lucide-react";
 import styles from "./RapidRFQModal.module.css";
 import { PHONE_PRIMARY, PHONE_SECONDARY, whatsappUrl } from '@/data/contact';
@@ -33,6 +33,48 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
     if (initialIndustry) setFormData(prev => ({ ...prev, industry: initialIndustry }));
     if (initialSize) setFormData(prev => ({ ...prev, preferredSize: initialSize }));
   }, [initialIndustry, initialSize]);
+
+  // Dialog behaviour: focus moves into the modal, Tab cycles inside it, Escape closes it,
+  // the page behind cannot scroll, and focus returns to the button that opened it.
+  const dialogRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
+  const uid = useId();
+  const titleId = `${uid}-title`;
+  const fid = (name) => `${uid}-${name}`;
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const trigger = document.activeElement;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusables = () => [...(dialogRef.current?.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled])'
+    ) || [])];
+    // Start on the first form field, or the close button once the form is replaced by the success state.
+    const first = dialogRef.current?.querySelector('form input:not([tabindex="-1"])') || focusables()[0];
+    first?.focus();
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') { e.preventDefault(); onCloseRef.current?.(); return; }
+      if (e.key !== 'Tab') return;
+      const items = focusables();
+      if (!items.length) return;
+      const firstEl = items[0], lastEl = items[items.length - 1];
+      const inside = dialogRef.current.contains(document.activeElement);
+      if (e.shiftKey && (document.activeElement === firstEl || !inside)) {
+        e.preventDefault(); lastEl.focus();
+      } else if (!e.shiftKey && (document.activeElement === lastEl || !inside)) {
+        e.preventDefault(); firstEl.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      if (trigger && typeof trigger.focus === 'function') trigger.focus();
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -77,13 +119,20 @@ Please share your commercial terms and sample dispatch schedule.`;
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div
+        ref={dialogRef}
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.header}>
           <div>
-            <h3>Industrial Bulk RFQ & Commercial Terms</h3>
+            <h3 id={titleId}>Industrial Bulk RFQ & Commercial Terms</h3>
             <p>Direct Mine Supply • Sumanth Minerals (Lakshupalli, Andhra Pradesh)</p>
           </div>
-          <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+          <button className={styles.closeBtn} onClick={onClose} aria-label="Close quote request form">
             <X size={22} />
           </button>
         </div>
@@ -122,8 +171,8 @@ Please share your commercial terms and sample dispatch schedule.`;
 
               <div className={styles.formGrid}>
                 <div className={styles.inputGroup}>
-                  <label>Full Name *</label>
-                  <input 
+                  <label htmlFor={fid("name")}>Full Name *</label>
+                  <input id={fid("name")} autoComplete="name" 
                     type="text" 
                     required 
                     placeholder="e.g. Rajesh Kumar / Sarah Jenkins"
@@ -133,8 +182,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Company / Plant Name *</label>
-                  <input 
+                  <label htmlFor={fid("company")}>Company / Plant Name *</label>
+                  <input id={fid("company")} autoComplete="organization" 
                     type="text" 
                     required 
                     placeholder="e.g. Asian Float Glass Ltd."
@@ -144,8 +193,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Work Email *</label>
-                  <input 
+                  <label htmlFor={fid("email")}>Work Email *</label>
+                  <input id={fid("email")} autoComplete="email" 
                     type="email" 
                     required 
                     placeholder="procurement@company.com"
@@ -155,8 +204,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>WhatsApp / Mobile Number *</label>
-                  <input 
+                  <label htmlFor={fid("whatsapp")}>WhatsApp / Mobile Number *</label>
+                  <input id={fid("whatsapp")} autoComplete="tel" 
                     type="tel" 
                     required 
                     placeholder="+Country code and number"
@@ -166,8 +215,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Target Industry / Application</label>
-                  <select 
+                  <label htmlFor={fid("industry")}>Target Industry / Application</label>
+                  <select id={fid("industry")} 
                     value={formData.industry}
                     onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
                   >
@@ -180,8 +229,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Required Fraction / Size</label>
-                  <select 
+                  <label htmlFor={fid("size")}>Required Fraction / Size</label>
+                  <select id={fid("size")} 
                     value={formData.preferredSize}
                     onChange={(e) => setFormData({ ...formData, preferredSize: e.target.value })}
                   >
@@ -197,8 +246,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Estimated Volume (Metric Tons)</label>
-                  <select 
+                  <label htmlFor={fid("quantity")}>Estimated Volume (Metric Tons)</label>
+                  <select id={fid("quantity")} 
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                   >
@@ -211,8 +260,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label>Preferred Delivery Terms</label>
-                  <select 
+                  <label htmlFor={fid("delivery")}>Preferred Delivery Terms</label>
+                  <select id={fid("delivery")} 
                     value={formData.deliveryPort}
                     onChange={(e) => setFormData({ ...formData, deliveryPort: e.target.value })}
                   >
@@ -226,8 +275,8 @@ Please share your commercial terms and sample dispatch schedule.`;
               </div>
 
               <div className={styles.inputGroupFull}>
-                <label>Technical Specifications / Specific Chemical Tolerances (Optional)</label>
-                <textarea 
+                <label htmlFor={fid("message")}>Technical Specifications / Specific Chemical Tolerances (Optional)</label>
+                <textarea id={fid("message")} 
                   rows={2}
                   placeholder="Mention any custom mesh sizes, maximum Fe2O3 tolerance, or container packaging instructions..."
                   value={formData.message}

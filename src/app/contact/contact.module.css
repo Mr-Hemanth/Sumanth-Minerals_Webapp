@@ -66,7 +66,7 @@
   flex-shrink: 0;
 }
 
-.infoItem h4 {
+.infoItem :is(h2, h3, h4) {
   margin-bottom: 5px;
   font-size: 1.1rem;
 }
@@ -74,6 +74,7 @@
 .infoItem p {
   margin-bottom: 0;
   font-size: 0.95rem;
+  color: var(--text-muted); /* #55657a = 5.9:1 on white (WCAG AA) */
 }
 
 .infoItem p a {
@@ -110,8 +111,9 @@
   flex-shrink: 0;
 }
 
-.whatsappBox h4 {
+.whatsappBox :is(h2, h3, h4) {
   margin-bottom: 5px;
+  font-size: 1.2rem;
 }
 
 .whatsappBox p {

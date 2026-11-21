@@ -102,7 +102,7 @@ export default function Quality() {
                   <div key={step.title} className={styles.step}>
                     <div className={`${styles.stepIcon} icon-pop`}>{step.icon}</div>
                     <div className={styles.stepText}>
-                      <h4>{step.title}</h4>
+                      <h3>{step.title}</h3>
                       <p>{step.desc}</p>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export default function Quality() {
           <div className={`${styles.reportGrid} stagger`}>
             <div className={`${styles.reportCard} lift`}>
               <FileText size={36} className="icon-pop" />
-              <h4>Certified chemical analysis report</h4>
+              <h3>Certified chemical analysis report</h3>
               <p>Full spectrum breakdown of silica, iron, alumina, LOI, and trace alkali oxides verified by ICP-OES.</p>
               <div className={styles.reportActions}>
                 <button
@@ -189,7 +189,7 @@ export default function Quality() {
 
             <div className={`${styles.reportCard} lift`}>
               <Activity size={36} className="icon-pop" />
-              <h4>Complimentary lab test sample</h4>
+              <h3>Complimentary lab test sample</h3>
               <p>Verify our 99.27% silica quartz directly in your plant laboratory before placing commercial bulk orders.</p>
               <div className={styles.reportActions}>
                 <Link href="/request-sample" className="btn btn-primary btn-sm">

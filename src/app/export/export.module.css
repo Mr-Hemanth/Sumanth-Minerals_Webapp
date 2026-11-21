@@ -147,7 +147,7 @@
   transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, translate 0.35s var(--ease-spring);
 }
 
-.processStep h4 {
+.processStep :is(h2, h3, h4) {
   font-size: 1.1rem;
   margin-bottom: 12px;
   color: var(--primary);
@@ -285,7 +285,7 @@
   .processGrid { gap: 36px; }
   .processTrack { top: 60px; }
   .stepIcon { width: 80px; height: 80px; }
-  .processStep h4 { font-size: 1.2rem; }
+  .processStep :is(h2, h3, h4) { font-size: 1.2rem; }
   .processStep p { font-size: 0.95rem; }
 
   .packagingGrid { gap: 110px; }
@@ -299,7 +299,7 @@
   .pageHeader { padding: 150px 0 66px; }
   .processGrid { gap: 16px; }
   .processStep { padding: 0; }
-  .processStep h4 { font-size: 1rem; }
+  .processStep :is(h2, h3, h4) { font-size: 1rem; }
   .processStep p { font-size: 0.85rem; }
   .packagingGrid { gap: 56px; }
   .packagingImage { height: 380px; }
@@ -348,7 +348,7 @@
     text-align: left;
   }
   .stepIcon { grid-area: icon; margin: 0; }
-  .processStep h4 { grid-area: title; margin: 10px 0 6px; font-size: 1.1rem; }
+  .processStep :is(h2, h3, h4) { grid-area: title; margin: 10px 0 6px; font-size: 1.1rem; }
   .processStep p { grid-area: desc; font-size: 0.95rem; }
 
   .packagingGrid { gap: 40px; }
@@ -369,7 +369,7 @@
   .processStep { grid-template-columns: 52px 1fr; column-gap: 16px; }
   .stepIcon { width: 52px; height: 52px; border-radius: var(--radius-sm); box-shadow: 0 0 0 5px var(--white), var(--shadow-xs); }
   .stepIcon svg { width: 24px; height: 24px; }
-  .processStep h4 { margin: 4px 0 4px; font-size: 1.02rem; }
+  .processStep :is(h2, h3, h4) { margin: 4px 0 4px; font-size: 1.02rem; }
   .processStep p { font-size: 0.92rem; }
 
   .packagingGrid { grid-template-columns: 1fr; gap: 28px; }
@@ -396,7 +396,7 @@
   .processTrack { left: 21px; top: 22px; bottom: 22px; }
   .stepIcon { width: 44px; height: 44px; }
   .stepIcon svg { width: 20px; height: 20px; }
-  .processStep h4 { font-size: 0.97rem; margin-top: 2px; }
+  .processStep :is(h2, h3, h4) { font-size: 0.97rem; margin-top: 2px; }
   .processStep p { font-size: 0.88rem; }
   .marketBanner { padding: 32px 16px; }
 }
@@ -417,7 +417,7 @@
   .processStep { grid-template-columns: 44px 1fr; column-gap: 12px; }
   .stepIcon { width: 44px; height: 44px; box-shadow: var(--shadow-xs); }
   .stepIcon svg { width: 20px; height: 20px; }
-  .processStep h4 { font-size: 0.97rem; margin: 0 0 4px; }
+  .processStep :is(h2, h3, h4) { font-size: 0.97rem; margin: 0 0 4px; }
   .processStep p { font-size: 0.86rem; }
 
   .packagingGrid { grid-template-columns: 1.1fr 1fr; gap: 28px; }

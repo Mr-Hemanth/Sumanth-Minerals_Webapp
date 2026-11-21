@@ -100,7 +100,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+      <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
         <div className="container">
           <div className={styles.navContainer}>
 
@@ -110,7 +110,7 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Nav */}
-            <div className={styles.links}>
+            <nav className={styles.links} aria-label="Main">
               {PRIMARY_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -166,7 +166,7 @@ const Navbar = () => {
                   type="button"
                   className={styles.langBtn}
                   onClick={(e) => setLangOpen(v => (e.detail === 0 ? !v : true))}
-                  aria-label="Change language"
+                  aria-label={`Language: ${currentLang.name} (${lang.toUpperCase()})`}
                   aria-expanded={langOpen}
                   aria-haspopup="true"
                 >
@@ -176,6 +176,7 @@ const Navbar = () => {
                   <ChevronDown size={13} className={`${styles.chevron} ${langOpen ? styles.chevronOpen : ''}`} />
                 </button>
                 <div className={`${styles.langDropdown} ${langOpen ? styles.langDropdownOpen : ''}`}>
+                  <p className={styles.langNote}>Other languages: menu &amp; key sections only</p>
                   {LANGUAGES.map(l => (
                     <button
                       key={l.code}
@@ -196,7 +197,7 @@ const Navbar = () => {
               <Link href="/contact" className="btn btn-primary btn-sm">
                 {t('nav.quote', 'Get Quote')}
               </Link>
-            </div>
+            </nav>
 
             {/* Mobile Actions */}
             <div className={styles.mobileActions}>
@@ -207,7 +208,7 @@ const Navbar = () => {
                 type="button"
                 className={styles.menuBtn}
                 onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
+                aria-label="Menu"
                 aria-expanded={isOpen}
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -218,7 +219,7 @@ const Navbar = () => {
 
         {/* Reading progress */}
         <m.div className={styles.progressBar} style={{ scaleX: progress }} aria-hidden="true" />
-      </nav>
+      </header>
 
       {/* Mobile Overlay */}
       <div className={`${styles.mobileOverlay} ${isOpen ? styles.overlayVisible : ''}`} onClick={() => setIsOpen(false)} />
@@ -240,7 +241,7 @@ const Navbar = () => {
             </button>
           </div>
           <div className={styles.drawerDivider} />
-          <nav className={styles.drawerNav}>
+          <nav className={styles.drawerNav} aria-label="Mobile">
             {PRIMARY_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -270,7 +271,7 @@ const Navbar = () => {
           </div>
           <div className={styles.drawerDivider} />
           <div className={styles.drawerLangs}>
-            <p className={styles.drawerLangLabel}>Language</p>
+            <p className={styles.drawerLangLabel}>Language <span className={styles.drawerLangHint}>(menu &amp; key sections)</span></p>
             <div className={styles.drawerLangGrid}>
               {LANGUAGES.map(l => (
                 <button

@@ -6,8 +6,10 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        // Private areas: the admin dashboard, API endpoints and buyers' personal tracking links.
-        disallow: ['/adminsumanth', '/api/', '/track/'],
+        // API endpoints and buyers' personal tracking links. The admin area is deliberately
+        // NOT listed: robots.txt is public, so listing it would advertise the path. It is kept
+        // out of search by login + noindex meta + X-Robots-Tag header (next.config.mjs).
+        disallow: ['/api/', '/track/'],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

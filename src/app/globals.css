@@ -104,7 +104,7 @@
   --z-overlay:        900;
   --z-nav:            1000;
   --z-modal:          1200;
-  --z-float:          1300;
+  --z-float:          1100; /* floating buttons + mobile bar: above the nav, below any modal */
   --z-preloader:      2000;
 
   /* ─── Radius ─── */

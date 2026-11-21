@@ -4,8 +4,8 @@ import styles from './downloads.module.css';
 import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: "Quartz Lab Report & Technical Data Downloads",
-  description: "Download the Sumanth Minerals quartz lab analysis report (99.27% SiO₂) and request technical data sheets, MSDS and batch-specific test certificates for our quartz grades.",
+  title: "Quartz Lab Report & Data Downloads",
+  description: "Download the Sumanth Minerals quartz lab report (99.27% SiO₂) and request technical data sheets, MSDS and batch test certificates for our quartz grades.",
   path: '/downloads',
 });
 

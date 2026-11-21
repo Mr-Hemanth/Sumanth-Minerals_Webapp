@@ -91,7 +91,7 @@ export default function Export() {
             {STEPS.map((step, i) => (
               <m.div key={i} className={styles.processStep} variants={staggerItem}>
                 <div className={styles.stepIcon}>{step.icon}</div>
-                <h4>{`${String(i + 1).padStart(2, '0')} · ${step.title}`}</h4>
+                <h3>{`${String(i + 1).padStart(2, '0')} · ${step.title}`}</h3>
                 <p>{step.desc}</p>
               </m.div>
             ))}

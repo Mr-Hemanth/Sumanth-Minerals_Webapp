@@ -237,7 +237,7 @@ export default function Home() {
               <div key={i} className={styles.trustCard}>
                 <div className={styles.trustIcon}>{item.icon}</div>
                 <div>
-                  <h4>{item.title}</h4>
+                  <h2>{item.title}</h2>
                   <p>{item.desc}</p>
                 </div>
               </div>

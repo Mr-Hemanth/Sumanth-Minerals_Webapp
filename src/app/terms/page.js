@@ -3,7 +3,7 @@ import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: "Terms of Service",
-  description: "Terms of use for the Sumanth Minerals website and enquiry services.",
+  description: "Terms of use for the Sumanth Minerals website, enquiry and sample request forms, product information, and how we handle quotes and correspondence.",
   path: '/terms',
 });
 

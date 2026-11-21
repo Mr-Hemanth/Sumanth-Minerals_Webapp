@@ -89,21 +89,21 @@ export default function Contact() {
                 <div className={styles.infoItem}>
                   <MapPin size={24} />
                   <div>
-                    <h4>Office</h4>
+                    <h3>Office</h3>
                     <p>Saroja Skyland, 402, Maruthi Nagar, Ananthapur Road, Gooty – 515401, Andhra Pradesh, India</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
                   <MapPin size={24} />
                   <div>
-                    <h4>Mine</h4>
+                    <h3>Mine</h3>
                     <p>Lakshupalli, Medimakula Palli, Peddavaduguru, Andhra Pradesh – 515405, India</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
                   <Phone size={24} />
                   <div>
-                    <h4>{dict?.nav?.contact || 'Phone & WhatsApp'}</h4>
+                    <h3>{dict?.nav?.contact || 'Phone & WhatsApp'}</h3>
                     <p><a href={`tel:${PHONE_PRIMARY.tel}`}>{PHONE_PRIMARY.display}</a> (Sales & WhatsApp)</p>
                     <p><a href={`tel:${PHONE_SECONDARY.tel}`}>{PHONE_SECONDARY.display}</a></p>
                   </div>
@@ -111,7 +111,7 @@ export default function Contact() {
                 <div className={styles.infoItem}>
                   <Mail size={24} />
                   <div>
-                    <h4>{dict?.contact?.email_addr || 'Email Inquiries'}</h4>
+                    <h3>{dict?.contact?.email_addr || 'Email Inquiries'}</h3>
                     <p><a href="mailto:sales@sumanthminerals.com">sales@sumanthminerals.com</a></p>
                     <p><a href="mailto:exports@sumanthminerals.com">exports@sumanthminerals.com</a></p>
                   </div>
@@ -119,7 +119,7 @@ export default function Contact() {
                 <div className={styles.infoItem}>
                   <FileText size={24} />
                   <div>
-                    <h4>GST Number</h4>
+                    <h3>GST Number</h3>
                     <p>{GSTIN}</p>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export default function Contact() {
               <div className={`${styles.whatsappBox} reveal`}>
                 <MessageSquare size={24} />
                 <div>
-                  <h4>{dict?.contact?.instant_assist || 'Instant Assistance'}</h4>
+                  <h3>{dict?.contact?.instant_assist || 'Instant Assistance'}</h3>
                   <p>{dict?.contact?.chat_wa || 'Chat with us on WhatsApp for quick responses.'}</p>
                   <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className={styles.waLink}>Start Chat</a>
                 </div>
@@ -141,31 +141,31 @@ export default function Contact() {
                 <h3>{dict?.contact?.request_quote || 'Request a Bulk Quote'}</h3>
                 <div className={styles.formGrid}>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.full_name || 'Full Name'} *</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Enter your name" />
+                    <label htmlFor="contact-name">{dict?.contact?.full_name || 'Full Name'} *</label>
+                    <input type="text" id="contact-name" autoComplete="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Enter your name" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.company_name || 'Company Name'} *</label>
-                    <input type="text" name="company" value={formData.company} onChange={handleChange} required placeholder="Company / Organization" />
+                    <label htmlFor="contact-company">{dict?.contact?.company_name || 'Company Name'} *</label>
+                    <input type="text" id="contact-company" autoComplete="organization" name="company" value={formData.company} onChange={handleChange} required placeholder="Company / Organization" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.email_addr || 'Email Address'} *</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="email@example.com" />
+                    <label htmlFor="contact-email">{dict?.contact?.email_addr || 'Email Address'} *</label>
+                    <input type="email" id="contact-email" autoComplete="email" name="email" value={formData.email} onChange={handleChange} required placeholder="email@example.com" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.wa_num || 'WhatsApp Number'} *</label>
-                    <input type="text" name="whatsapp" value={formData.whatsapp} onChange={handleChange} required placeholder="+1 234 567 890" />
+                    <label htmlFor="contact-whatsapp">{dict?.contact?.wa_num || 'WhatsApp Number'} *</label>
+                    <input type="tel" id="contact-whatsapp" autoComplete="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange} required placeholder="+1 234 567 890" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.industry || 'Industry / Application'} *</label>
-                    <select name="industry" required value={formData.industry} onChange={handleChange} className={styles.select}>
+                    <label htmlFor="contact-industry">{dict?.contact?.industry || 'Industry / Application'} *</label>
+                    <select id="contact-industry" name="industry" required value={formData.industry} onChange={handleChange} className={styles.select}>
                       <option value="">Select Industry</option>
                       {INDUSTRIES.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.preferred_size || 'Preferred Quartz Size'} *</label>
-                    <select name="preferredSize" required value={formData.preferredSize} onChange={handleChange} className={styles.select}>
+                    <label htmlFor="contact-preferredSize">{dict?.contact?.preferred_size || 'Preferred Quartz Size'} *</label>
+                    <select id="contact-preferredSize" name="preferredSize" required value={formData.preferredSize} onChange={handleChange} className={styles.select}>
                       <option value="">Select Size</option>
                       <option value="Lumps">Quartz Lumps</option>
                       <option value="0-12mm">Quartz Grit 0–12 mm</option>
@@ -175,16 +175,16 @@ export default function Contact() {
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.quantity || 'Required Quantity (Tons)'} *</label>
-                    <input type="text" name="quantity" value={formData.quantity} onChange={handleChange} required placeholder="e.g. 500 Tons" />
+                    <label htmlFor="contact-quantity">{dict?.contact?.quantity || 'Required Quantity (Tons)'} *</label>
+                    <input type="text" id="contact-quantity" name="quantity" value={formData.quantity} onChange={handleChange} required placeholder="e.g. 500 Tons" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.dest_port || 'Destination Port / Country'} *</label>
-                    <input type="text" name="country" value={formData.country} onChange={handleChange} required placeholder="e.g. United Arab Emirates" />
+                    <label htmlFor="contact-country">{dict?.contact?.dest_port || 'Destination Port / Country'} *</label>
+                    <input type="text" id="contact-country" autoComplete="country-name" name="country" value={formData.country} onChange={handleChange} required placeholder="e.g. United Arab Emirates" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>{dict?.contact?.packaging || 'Packaging Requirement'}</label>
-                    <select name="packaging" value={formData.packaging} onChange={handleChange} className={styles.select}>
+                    <label htmlFor="contact-packaging">{dict?.contact?.packaging || 'Packaging Requirement'}</label>
+                    <select id="contact-packaging" name="packaging" value={formData.packaging} onChange={handleChange} className={styles.select}>
                       <option value="Jumbo Bags">Jumbo Bags (1-1.25 Ton)</option>
                       <option value="Small Bags">50kg Bags (Palletized)</option>
                       <option value="Loose Bulk">Loose Bulk</option>
@@ -192,8 +192,8 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className={styles.formGroup}>
-                  <label>{dict?.contact?.message || 'Additional Message'}</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Specific chemical requirements or delivery timelines..."></textarea>
+                  <label htmlFor="contact-message">{dict?.contact?.message || 'Additional Message'}</label>
+                  <textarea id="contact-message" name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Specific chemical requirements or delivery timelines..."></textarea>
                 </div>
                 
                 {status.message && (

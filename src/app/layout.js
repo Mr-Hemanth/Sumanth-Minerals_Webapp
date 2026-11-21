@@ -9,8 +9,8 @@ import MobileActionBar from '@/components/MobileActionBar';
 import PageTransition from '@/components/PageTransition';
 import { SITE_URL, organizationJsonLd, JsonLd } from '@/lib/seo';
 
-const HOME_TITLE = 'Quartz Lumps & Quartz Grit Supplier in India | 99.27% SiO₂ | Sumanth Minerals';
-const HOME_DESC = 'Mine-owner supplier of 99.27% SiO₂ quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Anantapur, Andhra Pradesh, India. Lab-tested. Bulk supply and export.';
+const HOME_TITLE = 'Quartz Lumps & Quartz Grit Supplier India | Sumanth Minerals';
+const HOME_DESC = 'Mine-owner supplier of 99.27% SiO₂ quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Anantapur, Andhra Pradesh. Lab-tested, bulk supply and export.';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -78,8 +78,11 @@ export default function RootLayout({ children }) {
           </PageTransition>
           <HideOnAdmin>
             <Footer />
-            <WhatsAppButton />
-            <BackToTop />
+            {/* Floating buttons sit in a landmark so screen-reader users can find them (axe "region"). */}
+            <aside aria-label="Quick actions">
+              <WhatsAppButton />
+              <BackToTop />
+            </aside>
             <MobileActionBar />
           </HideOnAdmin>
           </MotionProvider>

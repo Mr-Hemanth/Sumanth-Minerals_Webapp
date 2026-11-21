@@ -68,21 +68,21 @@ export default function RequestSample() {
               <div className={styles.step}>
                 <Package size={24} />
                 <div>
-                  <h4>Standard 1kg Packet</h4>
+                  <h2>Standard 1kg Packet</h2>
                   <p>We provide complimentary 1kg samples for industrial testing.</p>
                 </div>
               </div>
               <div className={styles.step}>
                 <Truck size={24} />
                 <div>
-                  <h4>Global Air Freight</h4>
+                  <h2>Global Air Freight</h2>
                   <p>Samples are shipped via DHL/FedEx. Buyer handles shipping costs.</p>
                 </div>
               </div>
               <div className={styles.step}>
                 <CheckCircle size={24} />
                 <div>
-                  <h4>Analysis Report</h4>
+                  <h2>Analysis Report</h2>
                   <p>Every sample includes a matching lab analysis certificate.</p>
                 </div>
               </div>

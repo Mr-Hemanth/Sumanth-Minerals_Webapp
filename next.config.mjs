@@ -27,7 +27,7 @@ const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
@@ -50,6 +50,9 @@ const nextConfig = {
   images: {
     // AVIF is ~30-50% smaller than WebP for photos; browsers without AVIF get WebP.
     formats: ['image/avif', 'image/webp'],
+    // Default steps jump 384 -> 640; 480 fits ~350-450px card slots (2x on phones,
+    // 1x in 3-column desktop grids) without sending a 640px file.
+    imageSizes: [32, 48, 64, 96, 128, 256, 384, 480],
     // 50 for the hero (sits under an ~85% dark overlay), 75 default for everything else.
     qualities: [50, 60, 75],
     // Product/mine photos rarely change: keep optimised copies for 31 days.

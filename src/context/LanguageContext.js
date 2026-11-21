@@ -13,9 +13,14 @@ const loaders = {
 
 const LanguageContext = createContext({ lang: 'en', dict: en, switchLang: () => {} });
 
-const applyDocumentLang = (lang) => {
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+// Only the navigation and a few key sections are translated; page bodies stay in English.
+// So the document keeps lang="en" and left-to-right layout in every mode. Flipping the
+// whole page to RTL made the English paragraphs render right-aligned (audit BUG-02).
+// Arabic strings still display correctly in an LTR page (the browser's bidi algorithm
+// orders each Arabic run right-to-left on its own).
+const applyDocumentLang = () => {
+  document.documentElement.lang = 'en';
+  document.documentElement.dir = 'ltr';
 };
 
 export const LanguageProvider = ({ children }) => {

@@ -84,25 +84,25 @@ export default function About() {
           </m.div>
           <div className={`${styles.lifecycleGrid} stagger`}>
             <div className={styles.step}>
-              <div className={styles.stepNumber}>01</div>
+              <div className={styles.stepNumber} data-n="01" aria-hidden="true" />
               <History size={40} />
               <h3>Exploration</h3>
               <p>Rigorous geological surveying to identify high-yield quartz veins with &gt;99% silica potential.</p>
             </div>
             <div className={styles.step}>
-              <div className={styles.stepNumber}>02</div>
+              <div className={styles.stepNumber} data-n="02" aria-hidden="true" />
               <TrendingUp size={40} />
               <h3>Extraction</h3>
               <p>Systematic open-cast mining using advanced machinery to minimize waste and ensure worker safety.</p>
             </div>
             <div className={styles.step}>
-              <div className={styles.stepNumber}>03</div>
+              <div className={styles.stepNumber} data-n="03" aria-hidden="true" />
               <Factory size={40} />
               <h3>Processing</h3>
               <p>Multi-stage crushing, magnetic separation, and screening to achieve precise industrial grades.</p>
             </div>
             <div className={styles.step}>
-              <div className={styles.stepNumber}>04</div>
+              <div className={styles.stepNumber} data-n="04" aria-hidden="true" />
               <Globe size={40} />
               <h3>Logistics</h3>
               <p>Seamless transport to international ports for bulk shipping to global industrial hubs.</p>
@@ -123,21 +123,21 @@ export default function About() {
               <div className={`${styles.valueItem} reveal`}>
                 <ShieldCheck size={24} />
                 <div>
-                  <h4>Uncompromising Quality</h4>
+                  <h3>Uncompromising Quality</h3>
                   <p>We never dilute our grades. Every shipment is guaranteed to match its technical spec sheet.</p>
                 </div>
               </div>
               <div className={`${styles.valueItem} reveal`}>
                 <Target size={24} />
                 <div>
-                  <h4>Customer Centricity</h4>
+                  <h3>Customer Centricity</h3>
                   <p>Our logistics team works around your production schedule to ensure zero downtime.</p>
                 </div>
               </div>
               <div className={`${styles.valueItem} reveal`}>
                 <Users size={24} />
                 <div>
-                  <h4>Local Empowerment</h4>
+                  <h3>Local Empowerment</h3>
                   <p>We hire locally from the villages around our Peddavaduguru mine.</p>
                 </div>
               </div>
@@ -154,15 +154,15 @@ export default function About() {
             <div className={`${styles.infraGrid} stagger`}>
               <div className={styles.infraItem}>
                 <Award size={32} />
-                <h4>GST Registered</h4>
+                <h3>GST Registered</h3>
               </div>
               <div className={styles.infraItem}>
                 <Globe size={32} />
-                <h4>Export-Ready</h4>
+                <h3>Export-Ready</h3>
               </div>
               <div className={styles.infraItem}>
                 <Target size={32} />
-                <h4>Lab Verified</h4>
+                <h3>Lab Verified</h3>
               </div>
             </div>
           </m.div>

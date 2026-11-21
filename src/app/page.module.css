@@ -257,7 +257,7 @@
 .trustCard:nth-child(4n+2) .trustIcon { background: var(--sky-glass);      color: var(--sky); }
 .trustCard:nth-child(4n+3) .trustIcon { background: var(--scrub-glass);    color: var(--scrub); }
 
-.trustCard h4 {
+.trustCard :is(h2, h3, h4) {
   font-size: 1rem;
   margin-bottom: 0.4rem;
   color: var(--text-primary);
@@ -1097,7 +1097,7 @@
   .statLabel { font-size: 1rem; }
 
   .trustCard { padding: 2.75rem 2.5rem; gap: 1.5rem; }
-  .trustCard h4 { font-size: 1.1rem; }
+  .trustCard :is(h2, h3, h4) { font-size: 1.1rem; }
   .trustCard p { font-size: 0.92rem; }
 
   .aboutGrid { grid-template-columns: 1.1fr 1fr; gap: 110px; }
@@ -1231,7 +1231,7 @@
   .trustCard:nth-child(-n+2) { border-bottom: 1px solid var(--border-light); }
   .trustIcon { width: 40px; height: 40px; }
   .trustIcon svg { width: 20px; height: 20px; }
-  .trustCard h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .trustCard :is(h2, h3, h4) { font-size: 0.95rem; margin-bottom: 0.25rem; }
   .trustCard p { font-size: 0.8rem; line-height: 1.45; }
 
   /* About: shorter photo, one-column checklist, full-width stacked buttons */

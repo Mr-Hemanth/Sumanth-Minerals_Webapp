@@ -12,8 +12,8 @@ const faqJsonLd = {
 };
 
 export const metadata = pageMetadata({
-  title: "Quartz Supply FAQ – Grades, MOQ, Payment & Shipping",
-  description: "Answers on quartz grades and chemistry (SiO₂, Fe₂O₃), custom sizes, minimum order quantity, payment terms, lead times and export shipping from Sumanth Minerals, India.",
+  title: "Quartz FAQ – Grades, MOQ & Shipping",
+  description: "Answers on quartz grades and chemistry (SiO₂, Fe₂O₃), custom sizes, minimum order, payment terms, lead times and export shipping from Sumanth Minerals.",
   path: '/faq',
 });
 
