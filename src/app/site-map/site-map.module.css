@@ -1,0 +1,30 @@
+.page { background: #fff; }
+
+.header {
+  background: linear-gradient(135deg, #001220 0%, #002040 60%, #003366 100%);
+  color: #fff;
+  padding: 150px 0 70px;
+  text-align: center;
+}
+.header h1 { font-size: clamp(2rem, 5vw, 3rem); color: #fff; margin-bottom: 0.75rem; }
+.header p { color: rgba(255,255,255,0.82); font-size: 1.1rem; margin: 0; }
+
+.body { padding: 70px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; }
+
+.group h2 {
+  font-size: 1.25rem; color: var(--text-primary);
+  padding-bottom: 0.6rem; margin-bottom: 1rem; border-bottom: 3px solid var(--laterite);
+}
+.group ul { list-style: none; padding: 0; margin: 0; }
+.group li { margin-bottom: 1.1rem; }
+.group a { color: var(--sky); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.group li p { margin: 0.25rem 0 0; color: var(--text-muted); font-size: 0.93rem; line-height: 1.6; }
+
+.xml { margin-top: 3rem; color: var(--text-muted); font-size: 0.9rem; }
+.xml a { color: var(--sky); text-decoration: underline; }
+
+@media (max-width: 900px) {
+  .header { padding: 120px 0 50px; }
+  .body { padding: 50px 0; }
+}
