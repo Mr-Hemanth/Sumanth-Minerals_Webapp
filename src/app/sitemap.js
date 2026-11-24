@@ -2,12 +2,14 @@ import { SITE_URL } from '@/lib/seo';
 
 // Bump when page content changes meaningfully; a fixed date is more honest to
 // search engines than "now" on every deploy.
-const UPDATED = '2026-11-20';
+const UPDATED = '2026-11-24';
 const img = (file) => `${SITE_URL}/${file}`;
 
 const ROUTES = [
   { path: '', priority: 1, changeFrequency: 'weekly', images: ['hero-stockpile.jpg', 'quartz_lumps.jpg'] },
   { path: '/products', priority: 0.9, changeFrequency: 'monthly', images: ['quartz_lumps.jpg', 'quartz_0_12.jpg', 'quartz_12_30.jpg', 'quartz_30_80.jpg'] },
+  { path: '/quartz-lumps', priority: 0.9, changeFrequency: 'monthly', images: ['quartz_lumps.jpg'] },
+  { path: '/quartz-grit', priority: 0.9, changeFrequency: 'monthly', images: ['quartz_0_12.jpg', 'quartz_12_30.jpg', 'quartz_30_80.jpg'] },
   { path: '/quality', priority: 0.9, changeFrequency: 'monthly', images: ['lab-certificate.png'] },
   { path: '/request-sample', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' },

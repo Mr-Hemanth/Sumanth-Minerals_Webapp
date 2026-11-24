@@ -69,6 +69,8 @@ const Footer = () => {
               <h3>{dict?.footer?.resources || 'Products & Info'}</h3>
               <ul>
                 <li><Link href="/products">Quartz Grades</Link></li>
+                <li><Link href="/quartz-lumps">Quartz Lumps</Link></li>
+                <li><Link href="/quartz-grit">Quartz Grit</Link></li>
                 <li><Link href="/quality">Quality Control</Link></li>
                 <li><Link href="/export">Export & Logistics</Link></li>
                 <li><Link href="/faq">FAQ</Link></li>

@@ -164,7 +164,7 @@ export default function Products() {
             </nav>
             <h1 className="rise">High-Purity Quartz Grades</h1>
             <p className="rise" style={{ "--rise-delay": "0.1s" }}>
-              Quartz lumps and quartz grit in three sizes (0–12, 12–30 and 30–80 mm), direct from our own mine.
+              <Link href="/quartz-lumps" className={styles.headerLink}>Quartz lumps</Link> and <Link href="/quartz-grit" className={styles.headerLink}>quartz grit</Link> in three sizes (0–12, 12–30 and 30–80 mm), direct from our own mine.
             </p>
             <div className={`${styles.headerBadges} rise`} style={{ "--rise-delay": "0.2s" }}>
               <span className={styles.hBadge}><FlaskConical size={13} /> 99.27% SiO₂</span>

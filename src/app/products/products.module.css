@@ -650,3 +650,5 @@
   .breadcrumb a, .downloadBtn { min-height: 44px; }
   .specItem:active { background: var(--gold-glass); }
 }
+
+.headerLink { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
