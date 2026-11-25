@@ -15,7 +15,7 @@ export const OG_IMAGE = {
   url: '/opengraph-image',
   width: 1200,
   height: 630,
-  alt: 'Sumanth Minerals – 99.27% SiO₂ quartz lumps and grit, direct from our mine in Andhra Pradesh, India',
+  alt: 'Sumanth Minerals – B-Grade and M-Grade quartz lumps and grit, direct from our mine in Andhra Pradesh, India',
 };
 
 export function pageMetadata({ title, description, path, keywords }) {
@@ -50,7 +50,7 @@ export const organizationJsonLd = {
       logo: `${SITE_URL}/icon-512.png`,
       image: `${SITE_URL}/hero-stockpile.jpg`,
       description:
-        'Mine owner and supplier of 99.27% SiO2 silica vein quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India.',
+        'Mine owner and supplier of B-Grade and M-Grade vein quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India. Transport arranged to the buyer’s plant or port.',
       foundingDate: '2019-02-18',
       taxID: GSTIN,
       email: EMAIL_SALES,
@@ -69,7 +69,7 @@ export const organizationJsonLd = {
         { '@type': 'ContactPoint', contactType: 'sales', telephone: PHONE_PRIMARY.tel, email: EMAIL_SALES, availableLanguage: ['English'] },
         { '@type': 'ContactPoint', contactType: 'sales', telephone: PHONE_SECONDARY.tel },
       ],
-      knowsAbout: ['Quartz lumps', 'Quartz grit', 'Silica quartz', 'Vein quartz', 'Quartz for ferro silicon', 'Quartz for glass and ceramics'],
+      knowsAbout: ['B-Grade quartz', 'M-Grade quartz', 'Quartz lumps', 'Quartz grit', 'Silica quartz', 'Vein quartz', 'Quartz for ferro silicon', 'Quartz for glass and ceramics'],
     },
     {
       '@type': 'WebSite',

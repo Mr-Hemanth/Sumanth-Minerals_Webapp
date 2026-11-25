@@ -1,8 +1,8 @@
 import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: "Quartz Lab Report – 99.27% SiO₂",
-  description: "Independent lab analysis of our silica quartz: 99.27% SiO₂, 0.30% Fe₂O₃, 0.25% Al₂O₃ (IS 1917, ICP-OES). See the full composition and download the report.",
+  title: "Quartz Quality & Lab Analysis",
+  description: "How we check our B-Grade and M-Grade quartz: independent Lucid Laboratories analysis (IS 1917, ICP-OES), full composition and a free report download.",
   path: '/quality',
 });
 

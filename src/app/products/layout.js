@@ -2,7 +2,7 @@ import { pageMetadata, breadcrumbJsonLd, JsonLd } from '@/lib/seo';
 
 export const metadata = pageMetadata({
   title: "Quartz Lumps & Grit 0–12, 12–30, 30–80 mm",
-  description: "99.27% SiO₂ quartz lumps and screened quartz grit (0–12, 12–30, 30–80 mm) direct from our Andhra Pradesh mine, for ferro-silicon, glass and ceramics.",
+  description: "B-Grade and M-Grade quartz lumps and screened grit (0–12, 12–30, 30–80 mm) from our Andhra Pradesh mine. Transport arranged to your plant or port.",
   path: '/products',
 });
 

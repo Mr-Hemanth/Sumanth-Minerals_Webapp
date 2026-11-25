@@ -33,7 +33,9 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["192.168.0.104"],
+  // Development only: lets phones/tablets on the office Wi-Fi open the local
+  // preview (next dev -H 0.0.0.0). Ignored by production builds.
+  allowedDevOrigins: ['192.168.0.104', '192.168.0.105', '192.168.0.*'],
   poweredByHeader: false, // don't advertise the framework/version
 
   async headers() {

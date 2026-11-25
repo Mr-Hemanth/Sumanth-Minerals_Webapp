@@ -1101,3 +1101,59 @@ img, video, iframe, svg { max-width: 100%; }
   .pulse-dot::after { animation: none; }
   .text-shimmer { background-position: 50% 0; }
 }
+
+/* ============================================================
+   TEXT EFFECTS & MICRO-ANIMATIONS (Nov 2026)
+   All transform/opacity/background only (cheap on phones), and all
+   switched off under prefers-reduced-motion.
+   ============================================================ */
+
+/* Headline words slide up from behind a mask, one after another */
+.split-words .w { display: inline-block; overflow: clip; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.split-words .w > span { display: inline-block; animation: wordUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes wordUp { from { translate: 0 105%; } to { translate: 0 0; } }
+
+/* Warm laterite-to-gold light sweep across key words as they scroll in */
+.text-sweep {
+  background: linear-gradient(100deg, var(--laterite-dark) 20%, var(--laterite) 40%, var(--gold-dark) 50%, var(--laterite) 60%, var(--laterite-dark) 80%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pop-in for a headline figure (hero "B & M") */
+.pop-in { display: inline-block; animation: popIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) var(--pop-delay, 0.5s) both; }
+@keyframes popIn { from { scale: 0.6; opacity: 0; } to { scale: 1; opacity: 1; } }
+
+/* Mouse-following glow on cards (position set by components/Spotlight.js) */
+.spotlight { position: relative; isolation: isolate; }
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(181, 64, 28, 0.10), transparent 60%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .spotlight:hover::after { opacity: 1; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .text-sweep { animation: shimmerText linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
+    /* Section heading underline draws itself as the heading scrolls in */
+    .section-title h2::after { animation: underlineDraw linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+  }
+}
+@keyframes underlineDraw { from { scale: 0 1; } to { scale: 1 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .split-words .w > span, .pop-in { animation: none; }
+  .text-sweep { background-position: 50% 0; }
+}

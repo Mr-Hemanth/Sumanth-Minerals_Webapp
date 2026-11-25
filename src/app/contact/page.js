@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, FileText } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, FileText, Truck } from 'lucide-react';
 import styles from './contact.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { PHONE_PRIMARY, PHONE_SECONDARY, GSTIN, whatsappUrl } from '@/data/contact';
@@ -19,7 +19,7 @@ export default function Contact() {
     message: '',
     industry: '',
     preferredSize: '',
-    packaging: 'Jumbo Bags',
+    packaging: 'Loose Bulk',
     fax: '' // honeypot — must stay empty
   });
 
@@ -55,7 +55,7 @@ export default function Contact() {
           message: '',
           industry: '',
           preferredSize: '',
-          packaging: 'Jumbo Bags',
+          packaging: 'Loose Bulk',
           fax: ''
         });
       } else {
@@ -117,6 +117,13 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className={styles.infoItem}>
+                  <Truck size={24} />
+                  <div>
+                    <h3>Transport</h3>
+                    <p>We arrange delivery of B-Grade and M-Grade quartz to your plant anywhere in India, or to the port for export.</p>
+                  </div>
+                </div>
+                <div className={styles.infoItem}>
                   <FileText size={24} />
                   <div>
                     <h3>GST Number</h3>
@@ -154,7 +161,7 @@ export default function Contact() {
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="contact-whatsapp">{dict?.contact?.wa_num || 'WhatsApp Number'} *</label>
-                    <input type="tel" id="contact-whatsapp" autoComplete="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange} required placeholder="+1 234 567 890" />
+                    <input type="tel" id="contact-whatsapp" autoComplete="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange} required placeholder="+91 98765 43210" />
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="contact-industry">{dict?.contact?.industry || 'Industry / Application'} *</label>
@@ -176,24 +183,24 @@ export default function Contact() {
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="contact-quantity">{dict?.contact?.quantity || 'Required Quantity (Tons)'} *</label>
-                    <input type="text" id="contact-quantity" name="quantity" value={formData.quantity} onChange={handleChange} required placeholder="e.g. 500 Tons" />
+                    <input type="text" id="contact-quantity" name="quantity" value={formData.quantity} onChange={handleChange} required placeholder="e.g. 500 MT" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="contact-country">{dict?.contact?.dest_port || 'Destination Port / Country'} *</label>
-                    <input type="text" id="contact-country" autoComplete="country-name" name="country" value={formData.country} onChange={handleChange} required placeholder="e.g. United Arab Emirates" />
+                    <label htmlFor="contact-country">Delivery City / State *</label>
+                    <input type="text" id="contact-country" autoComplete="country-name" name="country" value={formData.country} onChange={handleChange} required placeholder="e.g. Hyderabad, Telangana (or export port)" />
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="contact-packaging">{dict?.contact?.packaging || 'Packaging Requirement'}</label>
                     <select id="contact-packaging" name="packaging" value={formData.packaging} onChange={handleChange} className={styles.select}>
+                      <option value="Loose Bulk">Loose in truck (we arrange transport)</option>
                       <option value="Jumbo Bags">Jumbo Bags (1-1.25 Ton)</option>
                       <option value="Small Bags">50kg Bags (Palletized)</option>
-                      <option value="Loose Bulk">Loose Bulk</option>
                     </select>
                   </div>
                 </div>
                 <div className={styles.formGroup}>
                   <label htmlFor="contact-message">{dict?.contact?.message || 'Additional Message'}</label>
-                  <textarea id="contact-message" name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Specific chemical requirements or delivery timelines..."></textarea>
+                  <textarea id="contact-message" name="message" value={formData.message} onChange={handleChange} rows="4" placeholder="Grade (B or M), delivery timeline, or any specification..."></textarea>
                 </div>
                 
                 {status.message && (

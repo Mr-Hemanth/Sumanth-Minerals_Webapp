@@ -4,8 +4,8 @@ export const faqData = [
     category: 'Product & Quality',
     questions: [
       {
-        q: 'What is the silica content of your quartz?',
-        a: 'Independent analysis by Lucid Laboratories Pvt. Ltd. (Report LL/25-26/009401/1, Nov 2025) shows 99.27% SiO2, 0.30% Fe2O3 and 0.25% Al2O3. The full report is on our Downloads page, and we can arrange batch testing for your order.'
+        q: 'Which quartz grades do you supply?',
+        a: 'We supply two grades: B-Grade (milky-white to light-grey quartz with only light natural staining) and M-Grade (mixed-colour quartz, including pieces with natural reddish-brown iron staining). Both come as lumps or as 0-12, 12-30 and 30-80 mm grit. Tell us your application and we will recommend the grade.'
       },
       {
         q: 'Can you provide custom sizes?',
@@ -13,7 +13,7 @@ export const faqData = [
       },
       {
         q: 'Is your quartz suitable for solar glass or semiconductor use?',
-        a: 'No. Those applications need far lower iron and trace-element levels than natural vein quartz provides. Our quartz (99.27% SiO2, 0.30% Fe2O3) is suited to ferro-silicon and silicomanganese, ceramics and tiles, refractories, coloured glass, engineered stone and filtration. Send us your specification and we will tell you honestly whether it fits.'
+        a: 'No. Those applications need far lower iron and trace-element levels than natural vein quartz provides. Natural vein quartz like ours is suited to ferro-silicon and silicomanganese, ceramics and tiles, refractories, coloured glass, engineered stone and filtration. Send us your specification and we will tell you honestly whether it fits.'
       }
     ]
   },
@@ -27,6 +27,14 @@ export const faqData = [
       {
         q: 'What are your payment terms for global buyers?',
         a: 'We typically work with 100% Irrevocable Letter of Credit (L/C) at sight or a 30% advance T/T with the balance against scanned shipping documents.'
+      },
+      {
+        q: 'Do you arrange transport?',
+        a: 'Yes. We arrange road transport from our mine to your plant anywhere in India, or to the port for export orders. Share your delivery location and quantity and we will quote a delivered price.'
+      },
+      {
+        q: 'Is your quartz lab tested?',
+        a: 'Yes. Our quartz has been independently analysed by Lucid Laboratories Pvt. Ltd. (Report LL/25-26/009401/1, Nov 2025). The full report is on our Quality and Downloads pages, and we can arrange batch testing for your order.'
       },
       {
         q: 'How long does it take from order to port delivery?',

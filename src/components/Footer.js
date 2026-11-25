@@ -18,7 +18,7 @@ const Footer = () => {
           <div className={styles.topBanner}>
             <div className={styles.bannerText}>
               <FlaskConical size={20} className={styles.bannerIcon} />
-              <span>Lab Certified by <strong>Lucid Laboratories Pvt. Ltd.</strong> | Report No: LL/25-26/009401/1 | SiO₂ Purity: <strong>99.27%</strong></span>
+              <span><strong>B-Grade &amp; M-Grade quartz</strong> | Lab-tested by Lucid Laboratories Pvt. Ltd. | <strong>Transport arranged</strong> to your plant or port</span>
             </div>
             <Link href="/quality" className={styles.bannerCta}>
               View Certificate <ArrowRight size={14} />
@@ -38,7 +38,7 @@ const Footer = () => {
                 <Logo tone="light" />
               </Link>
               <p className={styles.brandDesc}>
-                {dict?.footer?.desc || 'Premier producer and exporter of 99.27% high-purity silica quartz from our owned mine at Lakshupalli, Anantapur District. We serve global glass, ceramic, and metallurgical industries with uncompromising quality.'}
+                {dict?.footer?.desc || 'Mine owner supplying B-Grade and M-Grade quartz lumps and grit from Lakshupalli, Anantapur District, with transport arranged to your plant or port.'}
               </p>
               <div className={styles.gstNo} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', marginBottom: '1rem' }}>
                 GST No: {GSTIN}
@@ -46,7 +46,7 @@ const Footer = () => {
 
               <div className={styles.certBadges}>
                 <span className={styles.certBadge}>
-                  <Shield size={13} /> Lab-Tested 99.27% SiO₂
+                  <Shield size={13} /> B-Grade & M-Grade
                 </span>
                 <span className={styles.certBadge}>
                   <Shield size={13} /> GST Registered

@@ -18,7 +18,7 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
     preferredSize: initialSize || "12–30 mm",
     quantity: "500",
     packaging: "1 Ton Jumbo Bags (FIBC)",
-    deliveryPort: "Ex-Mine Pithead (Lakshupalli, AP)",
+    deliveryPort: "Delivered to Domestic Factory",
     message: "",
     fax: "" // honeypot — must stay empty
   });
@@ -120,7 +120,7 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
   };
 
   const getWhatsAppURL = () => {
-    const text = `Hello Sumanth Minerals, I would like to request a bulk quote for High-Purity Quartz (99.27% SiO2):
+    const text = `Hello Sumanth Minerals, I would like to request a bulk quote for quartz (B-Grade / M-Grade):
 - Company: ${formData.company || "Procurement Desk"}
 - Industry: ${formData.industry}
 - Fraction/Size: ${formData.preferredSize}
@@ -189,7 +189,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                   <input id={fid("name")} autoComplete="name" 
                     type="text" 
                     required 
-                    placeholder="e.g. Rajesh Kumar / Sarah Jenkins"
+                    placeholder="e.g. Rajesh Kumar"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
@@ -200,7 +200,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                   <input id={fid("company")} autoComplete="organization" 
                     type="text" 
                     required 
-                    placeholder="e.g. Asian Float Glass Ltd."
+                    placeholder="e.g. ABC Ceramics Pvt. Ltd."
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                   />
@@ -211,7 +211,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                   <input id={fid("email")} autoComplete="email" 
                     type="email" 
                     required 
-                    placeholder="procurement@company.com"
+                    placeholder="purchase@yourcompany.in"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
@@ -222,7 +222,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                   <input id={fid("whatsapp")} autoComplete="tel" 
                     type="tel" 
                     required 
-                    placeholder="+Country code and number"
+                    placeholder="+91 98765 43210"
                     value={formData.whatsapp}
                     onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                   />
@@ -279,11 +279,11 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.deliveryPort}
                     onChange={(e) => setFormData({ ...formData, deliveryPort: e.target.value })}
                   >
+                    <option value="Delivered to Domestic Factory">Delivered to your plant in India (we arrange transport)</option>
                     <option value="Ex-Mine Pithead (Lakshupalli, AP)">Ex-Mine Pithead (Lakshupalli, Andhra Pradesh)</option>
-                    <option value="FOB Krishnapatnam Port">FOB Krishnapatnam Port (Deep-Water Export)</option>
-                    <option value="FOB Chennai Port">FOB Chennai Port</option>
+                    <option value="FOB Krishnapatnam Port">FOB Krishnapatnam Port (Export)</option>
+                    <option value="FOB Chennai Port">FOB Chennai Port (Export)</option>
                     <option value="CIF International Port">CIF International Port (Specify below)</option>
-                    <option value="Delivered to Domestic Factory">Delivered to Domestic Plant (India)</option>
                   </select>
                 </div>
               </div>

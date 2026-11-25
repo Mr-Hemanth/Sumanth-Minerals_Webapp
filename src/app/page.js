@@ -15,13 +15,14 @@ import Magnetic from '@/components/Magnetic';
 import MiningProcessWorkflow from '@/components/MiningProcessWorkflow';
 import RapidRFQModal from '@/components/RapidRFQModal';
 import CountUp from '@/components/CountUp';
+import SplitWords from '@/components/SplitWords';
 // Static imports: hashed file names (cached forever) and a built-in blur placeholder.
 import heroImg from '../../public/hero-stockpile.jpg';
 import lumpsImg from '../../public/quartz_lumps.jpg';
 import fineImg from '../../public/quartz_0_12.jpg';
 import mediumImg from '../../public/quartz_12_30.jpg';
 import coarseImg from '../../public/quartz_30_80.jpg';
-import { CHEMISTRY as C } from '@/data/specs';
+import { GRADE_INFO, CHEMISTRY as C } from '@/data/specs';
 
 const fadeUp = {
   initial: { opacity: 0, y: 40 },
@@ -51,41 +52,42 @@ export default function Home() {
     setRfqOpen(true);
   };
 
-  const chemicalData = [
-    { label: 'SiO₂ (Silica)', value: C.SiO2, highlight: true },
-    { label: 'Fe₂O₃ (Iron Oxide)', value: C.Fe2O3 },
-    { label: 'Al₂O₃ (Alumina)', value: C.Al2O3 },
-    { label: 'CaO (Calcium)', value: C.CaO },
-    { label: 'MgO (Magnesium)', value: C.MgO },
-    { label: 'K₂O (Potassium)', value: C.K2O },
+  // The two grades are the headline; their descriptions come from our mine photos (src/data/specs.js).
+  const gradeRows = [
+    ...GRADE_INFO.map((g) => ({ label: g.name, value: g.look, highlight: true })),
+    { label: 'Forms', value: 'Lumps (size as required) and grit 0–12, 12–30, 30–80 mm' },
+    { label: 'Supply', value: '25,000 MT a month · 70,000 MT ready stock' },
+    { label: 'Transport', value: 'Arranged to your plant or port' },
   ];
 
   const industries = [
     { icon: <Flame size={28} />, name: 'Ferrosilicon', grade: 'Lumps / 30–80 mm', desc: 'Quartz lumps and coarse grit as the silica source for ferrosilicon smelting.' },
     { icon: <Microscope size={28} />, name: 'Silicon Metal', grade: 'Lumps', desc: 'Lump quartz for silicon metal smelting. We share full chemistry so you can check it against your furnace spec.' },
     { icon: <Activity size={28} />, name: 'Ferroalloys', grade: 'Lumps / 30–80 mm', desc: 'Silica feed for silicomanganese and other ferroalloy production.' },
-    { icon: <BrickWall size={28} />, name: 'Refractories', grade: '12–30 / 30–80 mm', desc: '99.27% SiO₂ and a 1713°C fusion point for silica bricks and furnace linings.' },
+    { icon: <BrickWall size={28} />, name: 'Refractories', grade: '12–30 / 30–80 mm', desc: 'Hard vein quartz with a 1713°C fusion point for silica bricks, ramming mass and furnace linings.' },
     { icon: <Droplets size={28} />, name: 'Ceramics & Vitrified Tiles', grade: '0–12 / 12–30 mm', desc: 'Silica for tile bodies, glazes and sanitaryware.' },
     { icon: <Layers size={28} />, name: 'Glass Manufacturing', grade: '0–12 mm', desc: 'Batch silica for container and coloured glass.' },
     { icon: <Hammer size={28} />, name: 'Foundry & Steel Casting', grade: '0–12 mm', desc: 'Quartz grit for moulding, core and investment casting.' },
     { icon: <Cog size={28} />, name: 'Quartz Powder & Silica Processing', grade: 'Lumps / Grit', desc: 'Consistent feedstock for grinding into quartz powder and micronised silica.' },
     { icon: <Pickaxe size={28} />, name: 'Industrial Mineral Processing', grade: 'Lumps / Grit', desc: 'Raw quartz in the size your crushing or beneficiation plant needs.' },
     { icon: <Mountain size={28} />, name: 'Silica Sand Manufacturing', grade: 'Lumps / 0–12 mm', desc: 'Feed for crushing and washing into graded silica sand.' },
-    { icon: <Ship size={28} />, name: 'Quartz Exporters', grade: 'All sizes', desc: 'Mine-direct supply with 40,000 MT of ready stock to fill your export orders.' },
-    { icon: <Truck size={28} />, name: 'Traders & Distributors', grade: 'All sizes', desc: 'Steady volumes of up to 15,000 MT a month, direct from the mine, for resale.' },
+    { icon: <Ship size={28} />, name: 'Quartz Exporters', grade: 'All sizes', desc: 'Mine-direct supply with 70,000 MT of ready stock to fill your export orders.' },
+    { icon: <Truck size={28} />, name: 'Traders & Distributors', grade: 'All sizes', desc: 'Steady volumes of up to 25,000 MT a month, direct from the mine, for resale.' },
   ];
 
   const trustPoints = [
     { icon: <Mountain size={36} />, title: 'Our own mine', desc: 'Quartz comes straight from our mine at Lakshupalli, Peddavaduguru. No traders in between.' },
     { icon: <FlaskConical size={36} />, title: 'Lab report shared', desc: 'Full Lucid Laboratories analysis (Report LL/25-26/009401/1) available to download.' },
     { icon: <Award size={36} />, title: 'Lumps & Graded Grit', desc: 'Quartz lumps plus grit in 0–12 mm, 12–30 mm and 30–80 mm. Custom sizes available.' },
-    { icon: <Truck size={36} />, title: 'Port-Ready Export', desc: 'Chennai, Krishnapatnam, Ennore & Vizag ports within efficient trucking distance.' },
+    { icon: <Truck size={36} />, title: 'Transport arranged', desc: 'We arrange trucks to your plant anywhere in India, or to Chennai, Krishnapatnam, Ennore and Vizag ports for export.' },
   ];
 
   const features = [
     'Our own mine at Lakshupalli, Peddavaduguru — no traders in between',
-    '15,000 MT mined every month',
-    '40,000 MT of ready stock available for dispatch',
+    '25,000 MT mined every month',
+    '70,000 MT of ready stock available for dispatch',
+    'B-Grade and M-Grade quartz, in lumps and all grit sizes',
+    'Transport arranged to your plant or port',
     'Lumps sized to your requirement, plus 0–12, 12–30 and 30–80 mm grit',
     'GST-registered firm, office in Gooty, Andhra Pradesh',
   ];
@@ -96,7 +98,7 @@ export default function Home() {
       type: 'Quartz Lumps — size as required',
       image: lumpsImg,
       tone: 'toneLump',
-      specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, `LOI: ${C.LOI}`],
+      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Transport arranged'],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Crushing Feed'],
     },
     {
@@ -104,7 +106,7 @@ export default function Home() {
       type: 'Quartz Grit — Fine',
       image: fineImg,
       tone: 'toneFine',
-      specs: [`SiO₂: ${C.SiO2}`, `Fe₂O₃: ${C.Fe2O3}`, 'Mohs: 7.0'],
+      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Fine angular grit'],
       uses: ['Container Glass', 'Industrial Fillers', 'Foundry Sand', 'Investment Casting'],
     },
     {
@@ -112,7 +114,7 @@ export default function Home() {
       type: 'Quartz Grit — Medium',
       image: mediumImg,
       tone: 'toneCeramic',
-      specs: [`SiO₂: ${C.SiO2}`, `Al₂O₃: ${C.Al2O3}`, 'Mohs: 7.0'],
+      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Sharp-edged chips'],
       uses: ['Vitrified Tiles', 'Sanitaryware', 'Artistic Glass', 'Silicon Carbide'],
     },
     {
@@ -120,7 +122,7 @@ export default function Home() {
       type: 'Quartz Grit — Coarse',
       image: coarseImg,
       tone: 'toneCoarse',
-      specs: [`SiO₂: ${C.SiO2}`, 'Fusion Pt: 1713°C', `LOI: ${C.LOI}`],
+      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Coarse angular pieces'],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Water Filtration'],
     },
   ];
@@ -168,15 +170,15 @@ export default function Home() {
             </span>
 
             <div className={styles.heroTitle}>
-              <h1 className="rise" style={{ "--rise-delay": "0.12s" }}>
-                {dict?.hero?.title || (
+              <h1>
+                {dict?.hero?.title ? <SplitWords text={dict.hero.title} delay={0.12} /> : (
                   <>Unmatched Purity.<br /><span className={styles.heroTitleAccent}>Global Industrial Scale.</span></>
                 )}
               </h1>
             </div>
 
             <p className={`${styles.heroSubtitle} rise`} style={{ "--rise-delay": "0.2s" }}>
-              {dict?.hero?.subtitle || 'Direct mine-to-manufacturer supply of 99.27% pure silica quartz from our mine at Lakshupalli, Anantapur District. Lab-certified, precision-graded, and export-ready for global industrial manufacturers.'}
+              {dict?.hero?.subtitle || 'B-Grade and M-Grade quartz direct from our mine at Lakshupalli, Anantapur District. Lab-tested, precision-graded, with transport arranged to your plant or port.'}
             </p>
 
             <div className={`${styles.heroCtas} rise`} style={{ "--rise-delay": "0.28s" }}>
@@ -198,17 +200,17 @@ export default function Home() {
 
             <div className={`${styles.heroStats} rise`} style={{ "--rise-delay": "0.36s" }}>
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={99.27} decimals={2} suffix="%" delay={0.5} /></div>
-                <div className={styles.statLabel}>SiO₂, lab-tested</div>
+                <div className={styles.statNumber}><span className={`pop-in ${styles.heroTitleAccent}`}>B &amp; M</span></div>
+                <div className={styles.statLabel}>Quartz grades</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={15000} suffix=" MT" delay={0.6} /></div>
+                <div className={styles.statNumber}><CountUp to={25000} suffix=" MT" delay={0.6} /></div>
                 <div className={styles.statLabel}>Mined per month</div>
               </div>
               <div className={styles.statDivider} />
               <div className={styles.statItem}>
-                <div className={styles.statNumber}><CountUp to={40000} suffix=" MT" delay={0.7} /></div>
+                <div className={styles.statNumber}><CountUp to={70000} suffix=" MT" delay={0.7} /></div>
                 <div className={styles.statLabel}>Ready to dispatch</div>
               </div>
             </div>
@@ -234,7 +236,7 @@ export default function Home() {
           {/* CSS scroll reveal (global .stagger) instead of framer, so the hover lift and reveal never fight */}
           <div className={`${styles.trustGrid} stagger`}>
             {trustPoints.map((item, i) => (
-              <div key={i} className={styles.trustCard}>
+              <div key={i} className={`${styles.trustCard} spotlight`}>
                 <div className={styles.trustIcon}>{item.icon}</div>
                 <div>
                   <h2>{item.title}</h2>
@@ -323,10 +325,13 @@ export default function Home() {
         <div className="container">
           <div className={styles.chemGrid}>
             <m.div className={styles.chemContent} {...fadeUp}>
-              <span className="section-label">Verified Lab Data</span>
-              <h2>Lab-tested chemistry</h2>
+              <span className="section-label">Our Grades</span>
+              <h2><span className="text-sweep">B-Grade</span> and <span className="text-sweep">M-Grade</span> quartz</h2>
               <p>
-                Our quartz has been independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad (IS 1917 methods and ICP-OES), confirming 99.27% SiO₂. The full report is available to download.
+                We mine natural vein quartz and sort it into two grades, <strong>B-Grade</strong> and <strong>M-Grade</strong>, each available as lumps or graded grit. Our quartz has been independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad, and the full report is free to download.
+              </p>
+              <p>
+                <strong>We also arrange transport</strong> to your plant anywhere in India, or to the port for export.
               </p>
               <div className={styles.certDetails}>
                 <div className={styles.certItem}>
@@ -361,10 +366,10 @@ export default function Home() {
             >
               <div className={styles.tableHeader}>
                 <FlaskConical size={18} />
-                <span>Chemical Analysis Report</span>
-                <span className={styles.certTag}>Lab-tested</span>
+                <span>Our Quartz Grades</span>
+                <span className={styles.certTag}>B &amp; M</span>
               </div>
-              {chemicalData.map((row, i) => (
+              {gradeRows.map((row, i) => (
                 <m.div
                   key={i}
                   className={`${styles.tableRow} ${row.highlight ? styles.rowHighlight : ''}`}
@@ -373,25 +378,12 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07, duration: 0.5 }}
                 >
-                  <span className={styles.rowLabel}>{row.label}</span>
-                  <span className={`${styles.rowValue} ${row.highlight ? `${styles.valueHighlight} text-shimmer` : ''}`}>
-                    {row.value}
-                  </span>
-                  {row.highlight && (
-                    <div className={styles.purityBar}>
-                      <m.div
-                        className={styles.purityFill}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '99.27%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
-                      />
-                    </div>
-                  )}
+                  <span className={`${styles.rowLabel} ${row.highlight ? `${styles.gradeName} text-sweep` : ''}`}>{row.label}</span>
+                  <span className={styles.rowValue}>{row.value}</span>
                 </m.div>
               ))}
               <div className={styles.tableFooter}>
-                * Tested by Lucid Laboratories Pvt. Ltd. | Report No: LL/25-26/009401/1
+                * Full lab analysis: Lucid Laboratories Pvt. Ltd., Report No. LL/25-26/009401/1 (Quality page)
               </div>
             </m.div>
           </div>
@@ -408,7 +400,7 @@ export default function Home() {
             <span className="section-label">Our Products</span>
             <h2>Precision-Graded Quartz</h2>
             <p>
-              Quartz lumps and quartz grit in three sizes, all from the same vein at 99.27% SiO₂ (Lucid Laboratories).
+              Quartz lumps and quartz grit in three sizes, each available in B-Grade and M-Grade, with transport arranged to your site.
             </p>
           </m.div>
 
@@ -419,7 +411,7 @@ export default function Home() {
             {products.map((p) => (
               <article
                 key={p.size}
-                className={`${styles.productCard} ${styles[p.tone]}`}
+                className={`${styles.productCard} ${styles[p.tone]} spotlight`}
               >
                 <div className={styles.productImageBox}>
                   <Image
@@ -487,7 +479,7 @@ export default function Home() {
           </m.div>
           <div className={`${styles.industriesGrid} stagger`}>
             {industries.map((ind) => (
-              <div key={ind.name} className={styles.industryCard}>
+              <div key={ind.name} className={`${styles.industryCard} spotlight`}>
                 <div className={styles.industryIcon}>{ind.icon}</div>
                 <h3>{ind.name}</h3>
                 <p>{ind.desc}</p>
@@ -553,7 +545,7 @@ export default function Home() {
                 <div className={styles.globeRing} />
                 <div className={styles.globePing} />
                 <div className={styles.exportStat}>
-                  <strong>40,000 MT</strong>
+                  <strong>70,000 MT</strong>
                   <span>Ready Stock</span>
                 </div>
                 <div className={styles.exportStat2}>

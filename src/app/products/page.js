@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Download, CheckCircle2, Factory, ShieldCheck, ChevronRight, FlaskConical, ArrowRight } from 'lucide-react';
+import { Download, CheckCircle2, Factory, ShieldCheck, ChevronRight, FlaskConical, ArrowRight, Truck } from 'lucide-react';
 import Image from 'next/image';
 import styles from './products.module.css';
 import { CHEMISTRY as C, PHYSICAL as P } from '@/data/specs';
@@ -19,14 +19,14 @@ const products = [
     name: 'Quartz Lumps',
     type: 'Lump Quartz / Run-of-Mine',
     image: lumpsImg,
-    description: 'Natural vein quartz lumps direct from our Lakshupalli mine, supplied in sizes to suit your furnace or crushing plant. With 99.27% SiO₂ and low LOI (0.10%), they suit ferro-silicon, silicomanganese and refractory production, or further crushing at your end.',
+    description: 'Natural vein quartz lumps direct from our Lakshupalli mine: milky-white to light-grey translucent rock, some pieces carrying natural reddish-brown iron staining on the surface. Available in B-Grade and M-Grade, sized to suit your furnace or crushing plant, for ferro-silicon, silicomanganese, refractories or further crushing at your end.',
     specifications: [
       { label: 'Size Range', value: 'As per buyer requirement' },
-      { label: 'SiO₂ Purity', value: C.SiO2 },
-      { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
-      { label: 'Al₂O₃', value: C.Al2O3 },
-      { label: 'LOI', value: C.LOI },
+      { label: 'Grades', value: 'B-Grade & M-Grade' },
+      { label: 'SiO₂ (lab tested)', value: C.SiO2 },
+      { label: 'Appearance', value: 'White to grey, natural staining' },
       { label: 'Fusion Point', value: '1713°C' },
+      { label: 'Transport', value: 'Arranged to your plant or port' },
     ],
     applications: [
       { label: 'Ferro-Silicon', desc: 'Silica source for ferro-silicon smelting' },
@@ -41,14 +41,14 @@ const products = [
     name: 'Quartz Grit 0–12 mm',
     type: 'Fine Grit / Industrial Filler',
     image: fineImg,
-    description: 'Fine quartz grit, screened on vibrating sieves to keep oversize out. Suited to coloured glass batches, industrial fillers and foundry use where consistent particle size matters.',
+    description: 'Fine, angular quartz grit: a mix of white, grey and buff chips, screened on vibrating sieves to keep oversize out. Available in B-Grade and M-Grade for coloured glass batches, industrial fillers and foundry use where consistent particle size matters.',
     specifications: [
       { label: 'Size Range', value: '0–12 mm' },
-      { label: 'SiO₂ Purity', value: C.SiO2 },
-      { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
-      { label: 'Al₂O₃', value: C.Al2O3 },
+      { label: 'Grades', value: 'B-Grade & M-Grade' },
+      { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
+      { label: 'Transport', value: 'Arranged to your plant or port' },
     ],
     applications: [
       { label: 'Container Glass', desc: 'Green and amber bottle and jar glass' },
@@ -63,14 +63,14 @@ const products = [
     name: 'Quartz Grit 12–30 mm',
     type: 'Medium Grit / Ceramic Grade',
     image: mediumImg,
-    description: 'Our standard grit size for ceramic and glass manufacturing. The 12–30 mm fraction balances handling, purity (99.27% SiO₂) and thermal stability for kilns and furnaces.',
+    description: 'Our standard grit size for ceramic and glass manufacturing: sharp-edged white and grey quartz chips with natural warm tints on some pieces. Available in B-Grade and M-Grade, the 12–30 mm fraction is easy to handle and feed into kilns and furnaces.',
     specifications: [
       { label: 'Size Range', value: '12–30 mm' },
-      { label: 'SiO₂ Purity', value: C.SiO2 },
-      { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
-      { label: 'Al₂O₃', value: C.Al2O3 },
+      { label: 'Grades', value: 'B-Grade & M-Grade' },
+      { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
+      { label: 'Transport', value: 'Arranged to your plant or port' },
     ],
     applications: [
       { label: 'Vitrified Tiles', desc: 'Floor and wall tiles requiring uniform firing' },
@@ -86,16 +86,15 @@ const products = [
     name: 'Quartz Grit 30–80 mm',
     type: 'Coarse Grit / Metallurgical Grade',
     image: coarseImg,
-    description: 'Coarse quartz grit for metallurgical use. Its 99.27% SiO₂ content and low LOI (0.10%) suit ferro-silicon, silicomanganese and refractory production in electric arc and submerged arc furnaces.',
+    description: 'Coarse, angular quartz pieces for metallurgical use: grey-white rock, many pieces with natural reddish-brown iron staining. Available in B-Grade and M-Grade for ferro-silicon, silicomanganese and refractory production in submerged arc furnaces.',
     specifications: [
       { label: 'Size Range', value: '30–80 mm' },
-      { label: 'SiO₂ Purity', value: C.SiO2 },
-      { label: 'Fe₂O₃ Content', value: C.Fe2O3 },
-      { label: 'TiO₂', value: C.TiO2 },
+      { label: 'Grades', value: 'B-Grade & M-Grade' },
+      { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Fusion Point', value: '1713°C' },
-      { label: 'LOI', value: C.LOI },
       { label: 'Specific Gravity', value: '2.65' },
       { label: 'Thermal Stability', value: 'High' },
+      { label: 'Transport', value: 'Arranged to your plant or port' },
     ],
     applications: [
       { label: 'Ferro-Silicon', desc: 'Reducing agent in steel and alloy smelting' },
@@ -167,9 +166,10 @@ export default function Products() {
               <Link href="/quartz-lumps" className={styles.headerLink}>Quartz lumps</Link> and <Link href="/quartz-grit" className={styles.headerLink}>quartz grit</Link> in three sizes (0–12, 12–30 and 30–80 mm), direct from our own mine.
             </p>
             <div className={`${styles.headerBadges} rise`} style={{ "--rise-delay": "0.2s" }}>
-              <span className={styles.hBadge}><FlaskConical size={13} /> 99.27% SiO₂</span>
-              <span className={styles.hBadge}><ShieldCheck size={13} /> Lab Certified</span>
-              <span className={styles.hBadge}><Factory size={13} /> 15,000 MT/Month</span>
+              <span className={styles.hBadge}><FlaskConical size={13} /> B-Grade &amp; M-Grade</span>
+              <span className={styles.hBadge}><Truck size={13} /> Transport arranged</span>
+              <span className={styles.hBadge}><ShieldCheck size={13} /> {C.SiO2} SiO₂ lab tested</span>
+              <span className={styles.hBadge}><Factory size={13} /> 25,000 MT/Month</span>
             </div>
           </div>
         </div>
@@ -271,9 +271,9 @@ export default function Products() {
           <m.div className="section-title" {...fadeUp}>
             <span className="section-label">Grade Comparison</span>
             <h2>Side-by-Side Specifications</h2>
-            <p>Lumps and all three grit sizes come from the same vein, analysed at 99.27% SiO₂ by Lucid Laboratories.</p>
+            <p>Lumps and all three grit sizes come from the same vein and are available in B-Grade and M-Grade. Lab analysis by Lucid Laboratories shows {C.SiO2} SiO₂; the full report is on the <Link href="/quality">Quality page</Link>.</p>
           </m.div>
-          <m.div className={styles.tableWrap} {...fadeUp}>
+          <m.div className={styles.tableWrap} {...fadeUp} tabIndex={0} role="region" aria-label="Grade comparison table">
             <table className={styles.compareTable}>
               <thead>
                 <tr>
@@ -287,19 +287,18 @@ export default function Products() {
               <tbody>
                 {[
                   ['Size', 'As required', '0–12 mm', '12–30 mm', '30–80 mm'],
-                  ['SiO₂ Purity', C.SiO2, C.SiO2, C.SiO2, C.SiO2],
-                  ['Fe₂O₃', C.Fe2O3, C.Fe2O3, C.Fe2O3, C.Fe2O3],
-                  ['Al₂O₃', C.Al2O3, C.Al2O3, C.Al2O3, C.Al2O3],
+                  ['Grades', 'B & M', 'B & M', 'B & M', 'B & M'],
+                  ['SiO₂ (lab tested)', C.SiO2, C.SiO2, C.SiO2, C.SiO2],
                   ['Fusion Point', P.fusionPoint, P.fusionPoint, P.fusionPoint, P.fusionPoint],
-                  ['LOI', C.LOI, C.LOI, C.LOI, C.LOI],
                   ['Hardness (Mohs)', '7.0', '7.0', '7.0', '7.0'],
                   ['Specific Gravity', '2.65', '2.65', '2.65', '2.65'],
                   ['MOQ (FCL)', '25–28 MT', '25–28 MT', '25–28 MT', '25–28 MT'],
+                  ['Transport', 'Arranged', 'Arranged', 'Arranged', 'Arranged'],
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? styles.evenRow : ''}>
                     <td className={styles.paramCell}>{row[0]}</td>
                     {row.slice(1).map((v, j) => (
-                      <td key={j} className={v.includes('99.27') ? styles.highlightCell : ''}>{v}</td>
+                      <td key={j} className={i === 1 ? styles.highlightCell : ''}>{v}</td>
                     ))}
                   </tr>
                 ))}

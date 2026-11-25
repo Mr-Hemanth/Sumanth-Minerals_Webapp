@@ -15,7 +15,7 @@ export default function RequestSample() {
     industry: INDUSTRIES[0],
     monthlyRequirement: '',
     preferredSize: '12-30mm',
-    country: '',
+    country: 'India',
     address: '',
     fax: '' // honeypot — must stay empty
   });
@@ -38,7 +38,7 @@ export default function RequestSample() {
         setFormData({ 
           name: '', jobTitle: '', company: '', website: '', 
           email: '', whatsapp: '', industry: INDUSTRIES[0], 
-          monthlyRequirement: '', preferredSize: '12-30mm', country: '', address: '', fax: ''
+          monthlyRequirement: '', preferredSize: '12-30mm', country: 'India', address: '', fax: ''
         });
       } else {
         const result = await res.json().catch(() => ({}));
@@ -56,7 +56,7 @@ export default function RequestSample() {
       <section className={styles.pageHeader}>
         <div className="container">
           <h1 className="rise">Request a Product Sample</h1>
-          <p className="rise" style={{ "--rise-delay": "0.1s" }}>Evaluate Sumanth Minerals&rsquo; certified 99.27% silica quartz purity in your own laboratory.</p>
+          <p className="rise" style={{ "--rise-delay": "0.1s" }}>Test our B-Grade or M-Grade quartz in your own laboratory before you order.</p>
         </div>
       </section>
 
@@ -100,7 +100,7 @@ export default function RequestSample() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-name">Full Name</label>
-                    <input id="rs-name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="John Doe" />
+                    <input id="rs-name" type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="e.g. Rajesh Kumar" />
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-job">Job Title / Designation</label>
@@ -111,22 +111,22 @@ export default function RequestSample() {
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-company">Company Name</label>
-                    <input id="rs-company" type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} placeholder="Company Ltd" />
+                    <input id="rs-company" type="text" required value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} placeholder="e.g. ABC Ceramics Pvt. Ltd." />
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-website">Company Website</label>
-                    <input id="rs-website" type="url" value={formData.website} onChange={(e) => setFormData({...formData, website: e.target.value})} placeholder="https://www.company.com" />
+                    <input id="rs-website" type="url" value={formData.website} onChange={(e) => setFormData({...formData, website: e.target.value})} placeholder="https://www.yourcompany.in" />
                   </div>
                 </div>
 
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-email">Business Email</label>
-                    <input id="rs-email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="john@company.com" />
+                    <input id="rs-email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="purchase@yourcompany.in" />
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-phone">WhatsApp / Phone</label>
-                    <input id="rs-phone" type="tel" required value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} placeholder="+1 234 567 890" />
+                    <input id="rs-phone" type="tel" required value={formData.whatsapp} onChange={(e) => setFormData({...formData, whatsapp: e.target.value})} placeholder="+91 98765 43210" />
                   </div>
                 </div>
 
@@ -139,7 +139,7 @@ export default function RequestSample() {
                   </div>
                   <div className={styles.formGroup}>
                     <label htmlFor="rs-monthly">Monthly Requirement (Tons)</label>
-                    <input id="rs-monthly" type="text" value={formData.monthlyRequirement} onChange={(e) => setFormData({...formData, monthlyRequirement: e.target.value})} placeholder="e.g. 500 Tons" />
+                    <input id="rs-monthly" type="text" value={formData.monthlyRequirement} onChange={(e) => setFormData({...formData, monthlyRequirement: e.target.value})} placeholder="e.g. 500 MT" />
                   </div>
                 </div>
 
@@ -155,12 +155,12 @@ export default function RequestSample() {
 
                 <div className={styles.formGroup}>
                   <label htmlFor="rs-address">Shipping Address (Complete with PIN/ZIP)</label>
-                  <textarea id="rs-address" required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3" placeholder="Full delivery address..."></textarea>
+                  <textarea id="rs-address" required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} rows="3" placeholder="Full delivery address with PIN code"></textarea>
                 </div>
 
                 <div className={styles.formGroup}>
                   <label htmlFor="rs-country">Country</label>
-                  <input id="rs-country" type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} placeholder="United States" />
+                  <input id="rs-country" type="text" required value={formData.country} onChange={(e) => setFormData({...formData, country: e.target.value})} placeholder="India" />
                 </div>
                 
                 {status.message && (

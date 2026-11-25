@@ -3,7 +3,7 @@ export default function manifest() {
   return {
     name: 'Sumanth Minerals – Quartz Supplier',
     short_name: 'Sumanth Minerals',
-    description: 'Mine-owner supplier of 99.27% SiO₂ quartz lumps and quartz grit from Andhra Pradesh, India.',
+    description: 'Mine-owner supplier of B-Grade and M-Grade quartz lumps and grit from Andhra Pradesh, India.',
     start_url: '/',
     scope: '/',
     display: 'standalone',

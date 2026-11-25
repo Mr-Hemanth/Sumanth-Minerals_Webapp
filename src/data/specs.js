@@ -35,3 +35,24 @@ export const PHYSICAL = {
   specificGravity: '2.65',
   fusionPoint: '1713°C',
 };
+
+// The grades we sell, shown in headlines, badges and product specs across the site.
+// The owner has not yet published per-grade chemistry, so grades are shown by name;
+// the full Lucid lab report (above) stays on the Quality and Downloads pages.
+export const GRADES = ['B-Grade', 'M-Grade'];
+// Visual descriptions, written from our own mine photographs (public/quartz_*.jpg).
+// Edit here if the owner refines how the two grades are defined.
+export const GRADE_INFO = [
+  {
+    name: 'B-Grade',
+    look: 'Milky-white to light-grey translucent quartz, with only light natural staining on some surfaces.',
+  },
+  {
+    name: 'M-Grade',
+    look: 'Mixed-colour quartz: white and grey pieces together with pieces carrying natural reddish-brown iron staining.',
+  },
+];
+export const GRADES_LABEL = 'B-Grade & M-Grade';
+
+// We arrange road transport for buyers (owner confirmed, Nov 2026).
+export const TRANSPORT = 'We arrange transport to your plant or port';

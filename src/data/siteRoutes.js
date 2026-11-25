@@ -14,7 +14,7 @@ export const SITE_SECTIONS = [
       {
         path: '',
         name: 'Home',
-        summary: 'Quartz lumps and grit, 99.27% SiO₂, direct from our Andhra Pradesh mine.',
+        summary: 'B-Grade and M-Grade quartz lumps and grit, with transport arranged to your plant or port.',
         updated: '2026-11-21',
         priority: 1,
         changeFrequency: 'weekly',

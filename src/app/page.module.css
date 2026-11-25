@@ -291,7 +291,22 @@
   overflow: hidden;
 }
 
-.aboutPhoto { object-fit: cover; }
+/* Zoomed in on the big white quartz stone in the middle of the photo, so the
+   darker stained rocks around the edges are cropped away. `scale` (not
+   `transform`) keeps the .img-zoom hover and the scroll drift below working. */
+.aboutPhoto {
+  object-fit: cover;
+  object-position: 50% 68%;
+  scale: 1.45;
+  transform-origin: 50% 50%;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Slow push-in as the section scrolls into view (stays focused on the stone) */
+    .aboutPhoto { animation: stoneFocus linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
+  }
+}
+@keyframes stoneFocus { from { scale: 1.75; } to { scale: 1.45; } }
 
 .aboutImageOverlay {
   position: absolute;
@@ -493,11 +508,23 @@
 }
 
 .rowValue {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
   color: var(--text-secondary);
+  text-align: right;
+  max-width: 62%;
 }
+
+/* B-Grade / M-Grade: the headline rows of the grades panel */
+.gradeName {
+  flex-shrink: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--laterite);
+}
+.rowHighlight .rowValue { color: var(--text-primary); }
 
 /* The 99.27% figure: bigger, and given the global gold `text-shimmer` in the JSX */
 .valueHighlight {

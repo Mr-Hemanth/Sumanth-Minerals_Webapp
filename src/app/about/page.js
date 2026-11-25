@@ -28,9 +28,9 @@ export default function About() {
 
   const stats = [
     { label: 'Incorporated', value: '2019' },
-    { label: 'Production', value: '15,000 MT/Mo' },
-    { label: 'Ready Stock', value: '40,000 MT' },
-    { label: 'SiO₂ (Lab-Tested)', value: '99.27%' }
+    { label: 'Production', value: '25,000 MT/Mo' },
+    { label: 'Ready Stock', value: '70,000 MT' },
+    { label: 'Quartz grades', value: 'B & M' }
   ];
 
   return (
@@ -54,7 +54,7 @@ export default function About() {
                 Sumanth Minerals was incorporated on 18 February 2019. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
               </p>
               <p>
-                We supply quartz lumps and graded grit straight from our own mine, backed by independent lab analysis.
+                We supply B-Grade and M-Grade quartz lumps and graded grit straight from our own mine, backed by independent lab analysis, and we arrange transport to your plant or port.
               </p>
             </div>
             <m.div 
@@ -66,7 +66,7 @@ export default function About() {
             >
               {stats.map((stat, i) => (
                 <m.div key={i} className={styles.statBox} variants={staggerItem}>
-                  <h3 className={stat.value === '99.27%' ? 'text-shimmer' : undefined}>{stat.value}</h3>
+                  <h3 className={stat.value === 'B & M' ? 'text-shimmer' : undefined}>{stat.value}</h3>
                   <p>{stat.label}</p>
                 </m.div>
               ))}
@@ -150,7 +150,7 @@ export default function About() {
         <div className="container">
           <m.div className={styles.infraBox} {...fadeInUp}>
             <h2>Strategic Infrastructure</h2>
-            <p>With 15,000 MT of monthly capacity and 40,000 MT of ready stock, material from our Lakshupalli mine is crushed, screened and graded to size before dispatch.</p>
+            <p>With 25,000 MT of monthly capacity and 70,000 MT of ready stock, material from our Lakshupalli mine is crushed, screened and graded to size before dispatch.</p>
             <div className={`${styles.infraGrid} stagger`}>
               <div className={styles.infraItem}>
                 <Award size={32} />

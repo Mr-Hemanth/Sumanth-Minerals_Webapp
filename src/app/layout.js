@@ -10,7 +10,7 @@ import PageTransition from '@/components/PageTransition';
 import { SITE_URL, organizationJsonLd, JsonLd } from '@/lib/seo';
 
 const HOME_TITLE = 'Quartz Lumps & Quartz Grit Supplier India | Sumanth Minerals';
-const HOME_DESC = 'Mine-owner supplier of 99.27% SiO₂ quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Anantapur, Andhra Pradesh. Lab-tested, bulk supply and export.';
+const HOME_DESC = 'B-Grade & M-Grade quartz lumps and grit (0–12, 12–30, 30–80 mm), direct from our Anantapur mine. Lab-tested, bulk supply, transport arranged to your plant or port.';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -58,6 +58,7 @@ export const viewport = {
 import { LanguageProvider } from '@/context/LanguageContext';
 import HideOnAdmin from '@/components/HideOnAdmin';
 import MotionProvider from '@/components/MotionProvider';
+import Spotlight from '@/components/Spotlight';
 
 // Self-hosted at build time: no request to Google, preloaded, and size-adjusted
 // fallbacks so text does not jump when the web font arrives.
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
         <JsonLd data={organizationJsonLd} />
         <LanguageProvider>
           <MotionProvider>
+          <Spotlight />
           <a href="#main-content" className="skip-link">Skip to content</a>
           <HideOnAdmin><Navbar /></HideOnAdmin>
           <PageTransition>

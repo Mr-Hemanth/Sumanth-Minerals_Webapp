@@ -77,7 +77,7 @@ export default function Quality() {
             Quality Assurance & Lab Analysis
           </h1>
           <p className="rise" style={{ "--rise-delay": "0.1s" }}>
-            Certified 99.27% silica by Lucid Laboratories Pvt. Ltd. — the same report sheet travels with your container.
+            Our B-Grade and M-Grade quartz is independently analysed by Lucid Laboratories Pvt. Ltd. The same report travels with your consignment.
           </p>
           <div className={`${styles.headerChips} rise`} style={{ "--rise-delay": "0.2s" }}>
             <span>IS 1917 Methods</span>
@@ -119,7 +119,7 @@ export default function Quality() {
             >
               <div className={styles.compositionHead}>
                 <h3>Chemical Composition</h3>
-                <span className={styles.purityPill}>99.27% SiO₂</span>
+                <span className={styles.purityPill}>Lab sample analysis</span>
               </div>
 
               <div className={styles.table}>
@@ -190,7 +190,7 @@ export default function Quality() {
             <div className={`${styles.reportCard} lift`}>
               <Activity size={36} className="icon-pop" />
               <h3>Complimentary lab test sample</h3>
-              <p>Verify our 99.27% silica quartz directly in your plant laboratory before placing commercial bulk orders.</p>
+              <p>Test our B-Grade or M-Grade quartz in your own plant laboratory before placing bulk orders.</p>
               <div className={styles.reportActions}>
                 <Link href="/request-sample" className="btn btn-primary btn-sm">
                   Request 5kg / 10kg Sample
