@@ -54,5 +54,5 @@ export const GRADE_INFO = [
 ];
 export const GRADES_LABEL = 'B-Grade & M-Grade';
 
-// We arrange road transport for buyers (owner confirmed, Nov 2026).
-export const TRANSPORT = 'We arrange transport to your plant or port';
+// Transport is optional: offered when the buyer needs it (owner confirmed, Nov 2026).
+export const TRANSPORT = 'Transport to your plant or port, if required';

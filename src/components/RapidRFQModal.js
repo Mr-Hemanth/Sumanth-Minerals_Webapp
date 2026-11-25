@@ -18,7 +18,7 @@ export default function RapidRFQModal({ isOpen, onClose, initialIndustry = "", i
     preferredSize: initialSize || "12–30 mm",
     quantity: "500",
     packaging: "1 Ton Jumbo Bags (FIBC)",
-    deliveryPort: "Delivered to Domestic Factory",
+    deliveryPort: "Ex-Mine Pithead (Lakshupalli, AP)",
     message: "",
     fax: "" // honeypot — must stay empty
   });
@@ -265,7 +265,7 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                   >
-                    <option value="5-25 (Test Sample)">Sample Parcel (5kg to 25kg)</option>
+                    <option value="10-25 kg (Test Sample)">Sample Parcel (10 kg to 25 kg)</option>
                     <option value="50-200">50 – 200 MT (Trial Commercial Lot)</option>
                     <option value="500">500 MT (Standard Shipment)</option>
                     <option value="1000">1,000 MT</option>
@@ -279,8 +279,8 @@ Please share your commercial terms and sample dispatch schedule.`;
                     value={formData.deliveryPort}
                     onChange={(e) => setFormData({ ...formData, deliveryPort: e.target.value })}
                   >
+                    <option value="Ex-Mine Pithead (Lakshupalli, AP)">Ex-Mine: collect from our mine (Lakshupalli, AP)</option>
                     <option value="Delivered to Domestic Factory">Delivered to your plant in India (we arrange transport)</option>
-                    <option value="Ex-Mine Pithead (Lakshupalli, AP)">Ex-Mine Pithead (Lakshupalli, Andhra Pradesh)</option>
                     <option value="FOB Krishnapatnam Port">FOB Krishnapatnam Port (Export)</option>
                     <option value="FOB Chennai Port">FOB Chennai Port (Export)</option>
                     <option value="CIF International Port">CIF International Port (Specify below)</option>

@@ -45,7 +45,7 @@ export default function ProductLanding({ name, path, h1, lead, image, imageAlt, 
           <p className={styles.lead}>{lead}</p>
           <ul className={styles.badges}>
             <li className={styles.badgeStrong}><FlaskConical size={14} aria-hidden="true" /> B-Grade &amp; M-Grade</li>
-            <li><Truck size={14} aria-hidden="true" /> Transport arranged</li>
+            <li><Truck size={14} aria-hidden="true" /> Transport if required</li>
             <li><FlaskConical size={14} aria-hidden="true" /> {C.SiO2} SiO₂ lab tested</li>
             <li><Factory size={14} aria-hidden="true" /> 25,000 MT per month, own mine</li>
           </ul>

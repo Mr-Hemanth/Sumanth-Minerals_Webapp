@@ -26,7 +26,7 @@ const products = [
       { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Appearance', value: 'White to grey, natural staining' },
       { label: 'Fusion Point', value: '1713°C' },
-      { label: 'Transport', value: 'Arranged to your plant or port' },
+      { label: 'Transport', value: 'Available if required' },
     ],
     applications: [
       { label: 'Ferro-Silicon', desc: 'Silica source for ferro-silicon smelting' },
@@ -48,7 +48,7 @@ const products = [
       { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
-      { label: 'Transport', value: 'Arranged to your plant or port' },
+      { label: 'Transport', value: 'Available if required' },
     ],
     applications: [
       { label: 'Container Glass', desc: 'Green and amber bottle and jar glass' },
@@ -70,7 +70,7 @@ const products = [
       { label: 'SiO₂ (lab tested)', value: C.SiO2 },
       { label: 'Hardness (Mohs)', value: '7.0' },
       { label: 'Specific Gravity', value: '2.65' },
-      { label: 'Transport', value: 'Arranged to your plant or port' },
+      { label: 'Transport', value: 'Available if required' },
     ],
     applications: [
       { label: 'Vitrified Tiles', desc: 'Floor and wall tiles requiring uniform firing' },
@@ -94,7 +94,7 @@ const products = [
       { label: 'Fusion Point', value: '1713°C' },
       { label: 'Specific Gravity', value: '2.65' },
       { label: 'Thermal Stability', value: 'High' },
-      { label: 'Transport', value: 'Arranged to your plant or port' },
+      { label: 'Transport', value: 'Available if required' },
     ],
     applications: [
       { label: 'Ferro-Silicon', desc: 'Reducing agent in steel and alloy smelting' },
@@ -167,7 +167,7 @@ export default function Products() {
             </p>
             <div className={`${styles.headerBadges} rise`} style={{ "--rise-delay": "0.2s" }}>
               <span className={styles.hBadge}><FlaskConical size={13} /> B-Grade &amp; M-Grade</span>
-              <span className={styles.hBadge}><Truck size={13} /> Transport arranged</span>
+              <span className={styles.hBadge}><Truck size={13} /> Transport if required</span>
               <span className={styles.hBadge}><ShieldCheck size={13} /> {C.SiO2} SiO₂ lab tested</span>
               <span className={styles.hBadge}><Factory size={13} /> 25,000 MT/Month</span>
             </div>
@@ -196,7 +196,7 @@ export default function Products() {
                     alt={`${product.name} — ${product.type}`}
                     fill
                     sizes="(max-width: 992px) 100vw, 45vw"
-                    className={styles.productImage}
+                    className={`${styles.productImage} ${product.id === 0 ? styles.lumpsFocus : ''}`}
                   />
 
                   <div className={styles.downloadOverlay}>
@@ -293,7 +293,7 @@ export default function Products() {
                   ['Hardness (Mohs)', '7.0', '7.0', '7.0', '7.0'],
                   ['Specific Gravity', '2.65', '2.65', '2.65', '2.65'],
                   ['MOQ (FCL)', '25–28 MT', '25–28 MT', '25–28 MT', '25–28 MT'],
-                  ['Transport', 'Arranged', 'Arranged', 'Arranged', 'Arranged'],
+                  ['Transport', 'If required', 'If required', 'If required', 'If required'],
                 ].map((row, i) => (
                   <tr key={i} className={i % 2 === 0 ? styles.evenRow : ''}>
                     <td className={styles.paramCell}>{row[0]}</td>

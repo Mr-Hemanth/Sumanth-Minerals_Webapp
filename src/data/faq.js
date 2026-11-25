@@ -30,7 +30,7 @@ export const faqData = [
       },
       {
         q: 'Do you arrange transport?',
-        a: 'Yes. We arrange road transport from our mine to your plant anywhere in India, or to the port for export orders. Share your delivery location and quantity and we will quote a delivered price.'
+        a: 'Yes, if you need it. Transport is optional: you can collect from the mine, or we can arrange road transport to your plant anywhere in India, or to the port for export orders. Share your delivery location and quantity and we will quote a delivered price.'
       },
       {
         q: 'Is your quartz lab tested?',

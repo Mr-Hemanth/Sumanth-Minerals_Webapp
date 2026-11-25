@@ -193,7 +193,7 @@ export default function Quality() {
               <p>Test our B-Grade or M-Grade quartz in your own plant laboratory before placing bulk orders.</p>
               <div className={styles.reportActions}>
                 <Link href="/request-sample" className="btn btn-primary btn-sm">
-                  Request 5kg / 10kg Sample
+                  Request a 10–25 kg Sample
                 </Link>
                 <button type="button" className={styles.textBtn} onClick={() => openRFQ("Quality Trial Batch", "")}>
                   Ask about testing →

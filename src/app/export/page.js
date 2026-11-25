@@ -11,7 +11,7 @@ const STEPS = [
   { icon: <Clock size={30} />, title: 'Inquiry & Quote', desc: 'Technical discussion of your requirement. Contact our sales team for pricing based on size, volume and destination.' },
   { icon: <ShieldCheck size={30} />, title: 'Quality Approval', desc: 'Pre-shipment inspection and lab reports shared for buyer approval.' },
   { icon: <Package size={30} />, title: 'Custom Packaging', desc: 'Jumbo bags or custom packaging options to ensure material integrity.' },
-  { icon: <Truck size={30} />, title: 'Transport Arranged', desc: 'We arrange trucks from our mine to the port, and coordinate with shipping lines for timely dispatch.' },
+  { icon: <Truck size={30} />, title: 'Transport if Required', desc: 'If you need it, we arrange trucks from our mine to the port and coordinate with shipping lines for timely dispatch.' },
   { icon: <Globe size={30} />, title: 'Global Delivery', desc: 'Real-time tracking and documentation support for customs clearance.' }
 ];
 
@@ -19,7 +19,7 @@ const PACKAGING_NOTES = [
   { label: 'Jumbo Bags', desc: '1 MT / 1.25 MT UV-stabilized PP bags with moisture-barrier inner liners.' },
   { label: 'Small Bags', desc: '25 kg / 50 kg bags stretch-wrapped on pallets for easy warehouse handling.' },
   { label: 'Container Load', desc: '25–28 MT per 20 ft FCL with optimized stuffing plans.' },
-  { label: 'Transport', desc: 'We arrange road transport to Krishnapatnam, Chennai, Ennore or Vizag port, or direct to your plant in India.' },
+  { label: 'Transport', desc: 'Available if required: road transport to Krishnapatnam, Ennore, Chennai or Vizag port, or direct to your plant in India.' },
 ];
 
 

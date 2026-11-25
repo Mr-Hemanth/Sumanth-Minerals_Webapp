@@ -5,7 +5,7 @@ import gritImg from '../../../public/quartz_12_30.jpg';
 
 export const metadata = pageMetadata({
   title: 'B & M Grade Quartz Grit, 0–12 to 30–80 mm',
-  description: 'B-Grade and M-Grade quartz grit in 0–12, 12–30 and 30–80 mm from our Andhra Pradesh mine. For glass, tiles and ferro-silicon, with transport arranged.',
+  description: 'B-Grade and M-Grade quartz grit in 0–12, 12–30 and 30–80 mm from our Andhra Pradesh mine. For glass, tiles and ferro-silicon. Transport if required.',
   path: '/quartz-grit',
 });
 
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'Do you arrange transport?',
-    a: 'Yes. We arrange road transport from the mine to your plant anywhere in India, or to the port for export. Tell us your delivery location for a delivered price.',
+    a: 'Yes, if you need it. You can collect from the mine, or we can arrange road transport to your plant anywhere in India, or to the port for export. Tell us your delivery location for a delivered price.',
   },
   {
     q: 'What is the minimum order for export?',
@@ -48,7 +48,7 @@ export default function QuartzGritPage() {
       intro={[
         `Sumanth Minerals crushes and screens quartz grit from its own vein quartz deposit at Lakshupalli, Anantapur District, Andhra Pradesh. Every size comes from the same source, so the chemistry stays consistent from one lot to the next.`,
         `The grit is sharp and angular: a mix of white, grey and buff quartz chips, with natural warm tints on some pieces. Every size comes in B-Grade and M-Grade. Quartz has a Mohs hardness of ${P.mohs} and a specific gravity of about ${P.specificGravity}, which makes it a hard, stable raw material for glass, ceramics, foundry and metallurgical use.`,
-        `We supply around 25,000 MT a month across all sizes. Tell us your size, grade and quantity and we will send a sample with the lab report, then a delivered price: we arrange the transport.`,
+        `We supply around 25,000 MT a month across all sizes. Tell us your size, grade and quantity and we will send a sample with the lab report, then a price, ex-mine or delivered if you need transport.`,
       ]}
       sizesTitle="Standard grit sizes"
       sizes={[

@@ -56,8 +56,8 @@ export default function Home() {
   const gradeRows = [
     ...GRADE_INFO.map((g) => ({ label: g.name, value: g.look, highlight: true })),
     { label: 'Forms', value: 'Lumps (size as required) and grit 0–12, 12–30, 30–80 mm' },
-    { label: 'Supply', value: '25,000 MT a month · 70,000 MT ready stock' },
-    { label: 'Transport', value: 'Arranged to your plant or port' },
+    { label: 'Supply', value: '25,000 MT a month & 70,000 MT ready stock' },
+    { label: 'Transport', value: 'Available if required, to your plant or port' },
   ];
 
   const industries = [
@@ -79,7 +79,7 @@ export default function Home() {
     { icon: <Mountain size={36} />, title: 'Our own mine', desc: 'Quartz comes straight from our mine at Lakshupalli, Peddavaduguru. No traders in between.' },
     { icon: <FlaskConical size={36} />, title: 'Lab report shared', desc: 'Full Lucid Laboratories analysis (Report LL/25-26/009401/1) available to download.' },
     { icon: <Award size={36} />, title: 'Lumps & Graded Grit', desc: 'Quartz lumps plus grit in 0–12 mm, 12–30 mm and 30–80 mm. Custom sizes available.' },
-    { icon: <Truck size={36} />, title: 'Transport arranged', desc: 'We arrange trucks to your plant anywhere in India, or to Chennai, Krishnapatnam, Ennore and Vizag ports for export.' },
+    { icon: <Truck size={36} />, title: 'Transport if required', desc: 'Collect from the mine yourself, or we can arrange trucks to your plant anywhere in India, or to Krishnapatnam, Ennore, Chennai and Vizag ports.' },
   ];
 
   const features = [
@@ -87,7 +87,7 @@ export default function Home() {
     '25,000 MT mined every month',
     '70,000 MT of ready stock available for dispatch',
     'B-Grade and M-Grade quartz, in lumps and all grit sizes',
-    'Transport arranged to your plant or port',
+    'Transport to your plant or port, if required',
     'Lumps sized to your requirement, plus 0–12, 12–30 and 30–80 mm grit',
     'GST-registered firm, office in Gooty, Andhra Pradesh',
   ];
@@ -98,7 +98,7 @@ export default function Home() {
       type: 'Quartz Lumps — size as required',
       image: lumpsImg,
       tone: 'toneLump',
-      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Transport arranged'],
+      specs: ['B-Grade & M-Grade', `SiO₂: ${C.SiO2}`, 'Transport if required'],
       uses: ['Ferro-Silicon', 'Silicomanganese', 'Refractories', 'Crushing Feed'],
     },
     {
@@ -127,12 +127,14 @@ export default function Home() {
     },
   ];
 
+  // Nearest port first (road distance from our mine). Sorted in code so the
+  // order stays right if a distance is edited.
   const ports = [
-    { name: 'Chennai Port', route: 'South East Asia & Europe Gateway', distance: '~400 km by road' },
     { name: 'Krishnapatnam Port', route: 'Deep-water bulk vessel hub', distance: '~330 km by road' },
     { name: 'Ennore Port', route: 'North Indian & Middle East route', distance: '~390 km by road' },
+    { name: 'Chennai Port', route: 'South East Asia & Europe Gateway', distance: '~400 km by road' },
     { name: 'Vizag (VOPT)', route: 'East Asian industrial zones', distance: '~800 km by road' },
-  ];
+  ].sort((a, b) => parseInt(a.distance.replace(/\D/g, ''), 10) - parseInt(b.distance.replace(/\D/g, ''), 10));
 
 
   return (
@@ -178,7 +180,7 @@ export default function Home() {
             </div>
 
             <p className={`${styles.heroSubtitle} rise`} style={{ "--rise-delay": "0.2s" }}>
-              {dict?.hero?.subtitle || 'B-Grade and M-Grade quartz direct from our mine at Lakshupalli, Anantapur District. Lab-tested, precision-graded, with transport arranged to your plant or port.'}
+              {dict?.hero?.subtitle || 'B-Grade and M-Grade quartz direct from our mine at Lakshupalli, Anantapur District. Lab-tested, precision-graded, with transport available if required.'}
             </p>
 
             <div className={`${styles.heroCtas} rise`} style={{ "--rise-delay": "0.28s" }}>
@@ -331,7 +333,7 @@ export default function Home() {
                 We mine natural vein quartz and sort it into two grades, <strong>B-Grade</strong> and <strong>M-Grade</strong>, each available as lumps or graded grit. Our quartz has been independently analysed by <strong>Lucid Laboratories Pvt. Ltd.</strong>, Hyderabad, and the full report is free to download.
               </p>
               <p>
-                <strong>We also arrange transport</strong> to your plant anywhere in India, or to the port for export.
+                <strong>Need transport?</strong> If required, we can arrange delivery to your plant anywhere in India, or to the port for export.
               </p>
               <div className={styles.certDetails}>
                 <div className={styles.certItem}>
@@ -400,7 +402,7 @@ export default function Home() {
             <span className="section-label">Our Products</span>
             <h2>Precision-Graded Quartz</h2>
             <p>
-              Quartz lumps and quartz grit in three sizes, each available in B-Grade and M-Grade, with transport arranged to your site.
+              Quartz lumps and quartz grit in three sizes, each available in B-Grade and M-Grade, with transport available if required.
             </p>
           </m.div>
 

@@ -18,7 +18,7 @@ const Footer = () => {
           <div className={styles.topBanner}>
             <div className={styles.bannerText}>
               <FlaskConical size={20} className={styles.bannerIcon} />
-              <span><strong>B-Grade &amp; M-Grade quartz</strong> | Lab-tested by Lucid Laboratories Pvt. Ltd. | <strong>Transport arranged</strong> to your plant or port</span>
+              <span><strong>B-Grade &amp; M-Grade quartz</strong> | Lab-tested by Lucid Laboratories Pvt. Ltd. | <strong>Transport if required</strong> to your plant or port</span>
             </div>
             <Link href="/quality" className={styles.bannerCta}>
               View Certificate <ArrowRight size={14} />
@@ -38,7 +38,7 @@ const Footer = () => {
                 <Logo tone="light" />
               </Link>
               <p className={styles.brandDesc}>
-                {dict?.footer?.desc || 'Mine owner supplying B-Grade and M-Grade quartz lumps and grit from Lakshupalli, Anantapur District, with transport arranged to your plant or port.'}
+                {dict?.footer?.desc || 'Mine owner supplying B-Grade and M-Grade quartz lumps and grit from Lakshupalli, Anantapur District, with transport available if required.'}
               </p>
               <div className={styles.gstNo} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', marginBottom: '1rem' }}>
                 GST No: {GSTIN}

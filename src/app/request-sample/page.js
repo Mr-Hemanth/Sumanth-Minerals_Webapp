@@ -68,8 +68,8 @@ export default function RequestSample() {
               <div className={styles.step}>
                 <Package size={24} />
                 <div>
-                  <h2>Standard 1kg Packet</h2>
-                  <p>We provide complimentary 1kg samples for industrial testing.</p>
+                  <h2>10–25 kg Sample</h2>
+                  <p>We send complimentary samples of 10–25 kg, enough for proper testing in your plant or lab.</p>
                 </div>
               </div>
               <div className={styles.step}>

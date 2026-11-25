@@ -9,7 +9,7 @@
   "hero": {
     "badge": "ESTABLISHED 2019 • SUPPLYING ALL OVER INDIA",
     "title": "Quartz lumps and grit, direct from our mine.",
-    "subtitle": "B-Grade and M-Grade quartz from our own mine at Lakshupalli, Andhra Pradesh, for manufacturers across India. 25,000 MT mined a month, 70,000 MT ready to dispatch, and transport arranged to your plant.",
+    "subtitle": "B-Grade and M-Grade quartz from our own mine at Lakshupalli, Andhra Pradesh, for manufacturers across India. 25,000 MT mined a month, 70,000 MT ready to dispatch, and transport to your plant if required.",
     "stat_silica": "Silica (SiO2)",
     "stat_production": "Tons / Month",
     "stat_ports": "Global Ports"
@@ -49,7 +49,7 @@
     "success": "Thank you! Your inquiry has been sent successfully."
   },
   "footer": {
-    "desc": "Mine-direct supplier of B-Grade and M-Grade quartz lumps and grit from Lakshupalli, Andhra Pradesh, with transport arranged.",
+    "desc": "Mine-direct supplier of B-Grade and M-Grade quartz lumps and grit from Lakshupalli, Andhra Pradesh. Transport available if required.",
     "company": "Company",
     "resources": "Resources",
     "get_in_touch": "Get in Touch",

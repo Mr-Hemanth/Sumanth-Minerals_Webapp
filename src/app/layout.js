@@ -10,7 +10,7 @@ import PageTransition from '@/components/PageTransition';
 import { SITE_URL, organizationJsonLd, JsonLd } from '@/lib/seo';
 
 const HOME_TITLE = 'Quartz Lumps & Quartz Grit Supplier India | Sumanth Minerals';
-const HOME_DESC = 'B-Grade & M-Grade quartz lumps and grit (0–12, 12–30, 30–80 mm), direct from our Anantapur mine. Lab-tested, bulk supply, transport arranged to your plant or port.';
+const HOME_DESC = 'B-Grade & M-Grade quartz lumps and grit (0–12, 12–30, 30–80 mm), direct from our Anantapur mine. Lab-tested, bulk supply, transport available if required.';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),

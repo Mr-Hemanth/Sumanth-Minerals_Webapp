@@ -14,7 +14,7 @@ export const SITE_SECTIONS = [
       {
         path: '',
         name: 'Home',
-        summary: 'B-Grade and M-Grade quartz lumps and grit, with transport arranged to your plant or port.',
+        summary: 'B-Grade and M-Grade quartz lumps and grit, with transport available if required.',
         updated: '2026-11-21',
         priority: 1,
         changeFrequency: 'weekly',

@@ -54,7 +54,7 @@ export default function About() {
                 Sumanth Minerals was incorporated on 18 February 2019. Our mine is at Lakshupalli, Peddavaduguru (Anantapur District, Andhra Pradesh), with our office in Gooty. We supply graded vein quartz directly from the mine to manufacturers in India and abroad.
               </p>
               <p>
-                We supply B-Grade and M-Grade quartz lumps and graded grit straight from our own mine, backed by independent lab analysis, and we arrange transport to your plant or port.
+                We supply B-Grade and M-Grade quartz lumps and graded grit straight from our own mine, backed by independent lab analysis, and we can arrange transport to your plant or port if required.
               </p>
             </div>
             <m.div 

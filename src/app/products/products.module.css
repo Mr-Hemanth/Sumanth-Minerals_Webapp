@@ -652,3 +652,12 @@
 }
 
 .headerLink { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Quartz Lumps photo: zoom onto the big white stone so the brown, stained
+   rocks around the edges are cropped away. `scale` (not `transform`) keeps the
+   .img-zoom hover effect working on top. */
+.productImage.lumpsFocus {
+  object-position: 50% 68%;
+  scale: 1.45;
+  transform-origin: 50% 50%;
+}

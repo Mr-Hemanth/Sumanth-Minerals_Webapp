@@ -120,7 +120,7 @@ export default function Contact() {
                   <Truck size={24} />
                   <div>
                     <h3>Transport</h3>
-                    <p>We arrange delivery of B-Grade and M-Grade quartz to your plant anywhere in India, or to the port for export.</p>
+                    <p>Available if required: we can arrange delivery to your plant anywhere in India, or to the port for export. You can also collect from the mine.</p>
                   </div>
                 </div>
                 <div className={styles.infoItem}>
@@ -192,7 +192,7 @@ export default function Contact() {
                   <div className={styles.formGroup}>
                     <label htmlFor="contact-packaging">{dict?.contact?.packaging || 'Packaging Requirement'}</label>
                     <select id="contact-packaging" name="packaging" value={formData.packaging} onChange={handleChange} className={styles.select}>
-                      <option value="Loose Bulk">Loose in truck (we arrange transport)</option>
+                      <option value="Loose Bulk">Loose in truck</option>
                       <option value="Jumbo Bags">Jumbo Bags (1-1.25 Ton)</option>
                       <option value="Small Bags">50kg Bags (Palletized)</option>
                     </select>

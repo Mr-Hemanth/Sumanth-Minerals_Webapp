@@ -50,7 +50,7 @@ export const organizationJsonLd = {
       logo: `${SITE_URL}/icon-512.png`,
       image: `${SITE_URL}/hero-stockpile.jpg`,
       description:
-        'Mine owner and supplier of B-Grade and M-Grade vein quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India. Transport arranged to the buyer’s plant or port.',
+        'Mine owner and supplier of B-Grade and M-Grade vein quartz lumps and quartz grit (0–12, 12–30, 30–80 mm) from Lakshupalli, Peddavaduguru, Anantapur District, Andhra Pradesh, India. Transport to the buyer’s plant or port available if required.',
       foundingDate: '2019-02-18',
       taxID: GSTIN,
       email: EMAIL_SALES,

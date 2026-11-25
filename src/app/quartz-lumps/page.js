@@ -5,7 +5,7 @@ import lumpsImg from '../../../public/quartz_lumps.jpg';
 
 export const metadata = pageMetadata({
   title: 'B & M Grade Quartz Lumps Supplier India',
-  description: 'B-Grade and M-Grade quartz lumps direct from our Andhra Pradesh mine. Lab tested, 25,000 MT a month, transport arranged to your plant or port.',
+  description: 'B-Grade and M-Grade quartz lumps direct from our Andhra Pradesh mine. Lab tested, 25,000 MT a month, transport available if required.',
   path: '/quartz-lumps',
 });
 
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: 'Do you arrange transport?',
-    a: 'Yes. We arrange road transport from the mine to your plant anywhere in India, or to the port for export. Tell us your delivery location for a delivered price.',
+    a: 'Yes, if you need it. You can collect from the mine, or we can arrange road transport to your plant anywhere in India, or to the port for export. Tell us your delivery location for a delivered price.',
   },
   {
     q: 'Do you export quartz lumps?',
@@ -48,14 +48,14 @@ export default function QuartzLumpsPage() {
       intro={[
         `Sumanth Minerals owns and works its own quartz mine at Lakshupalli in Anantapur District, Andhra Pradesh. Because you buy from the mine and not a trader, you get the same source on every lot, a lab report you can check, and one company answerable for quality and dispatch.`,
         `The lumps are milky-white to light-grey translucent vein quartz, some with natural reddish-brown iron staining on the surface. We sort them into B-Grade and M-Grade, so you can choose the grade that suits ferro-silicon and silicomanganese furnaces, refractory making, or crushing into grit and powder.`,
-        `We produce around 25,000 MT a month and keep about 70,000 MT of ready stock, so large and repeat orders can move quickly, and we arrange the transport to your plant or port. Ask for a sample before you order; we send it with the lab report.`,
+        `We produce around 25,000 MT a month and keep about 70,000 MT of ready stock, so large and repeat orders can move quickly, and we can arrange transport to your plant or port if required. Ask for a sample before you order; we send it with the lab report.`,
       ]}
       sizesTitle="Sizes and supply"
       sizes={[
         { title: 'Lumps to your size', text: 'Run-of-mine or sized lumps to suit your furnace charge or crusher feed. Tell us the size range you need.' },
         { title: 'Quartz grit 0–12, 12–30, 30–80 mm', text: 'Screened standard fractions from the same deposit, for glass, ceramics and metallurgy.' },
         { title: 'Custom crushing', text: 'Custom crushing and grading for bulk orders above 500 tons.' },
-        { title: 'Transport arranged', text: 'We arrange trucks to your plant anywhere in India, or to the port for export container loads (typically 25–28 tons).' },
+        { title: 'Transport if required', text: 'Collect from the mine, or we can arrange trucks to your plant anywhere in India, or to the port for export container loads (typically 25–28 tons).' },
       ]}
       uses={[
         { title: 'Ferro-silicon', text: 'silica source for ferro-silicon smelting in submerged arc furnaces.' },
