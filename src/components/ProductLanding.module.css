@@ -49,7 +49,7 @@
 .table td { font-weight: 700; color: var(--scrub); text-align: right; }
 .table thead th:last-child { text-align: right; }
 
-.pdf { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--sky); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.pdf { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; color: var(--sky); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 .uses { list-style: none; padding: 0; margin: 0 0 1.5rem; }
 .uses li { padding: 0.8rem 0 0.8rem 1.4rem; border-bottom: 1px solid #eef1f5; color: var(--text-secondary); line-height: 1.65; position: relative; }
